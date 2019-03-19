@@ -80,10 +80,6 @@ void utils::SlightRow::process(void) {
     qmap[0] = false;
     size_t sepmap_idx = 0;
 
-    // cout << "Input: " << m_input << endl;
-    // cout << "Sepmap size: " << sepmap_size << endl;
-    // cout << "Qmap size: " << m_input.size() << endl;
-
     for (size_t i = 0; i < m_input.size(); ++i) {
         if (m_input.at(i) == m_sep) {
             sepmap[sepmap_idx] = i;
@@ -97,23 +93,13 @@ void utils::SlightRow::process(void) {
         }
     }
 
-    // for (size_t m = 0; m < sepmap_size; ++m) {
-    //     cout << "Sep" << m << " = " << sepmap[m] << endl;
-    // }
-
-    // for (size_t n = 0; n < m_input.size(); ++n) {
-    //     cout << "Q" << n << " = " << qmap[n] << endl;
-    // }
-
     for (size_t j = 0; j < sepmap_size; ++j) {
         if (qmap[sepmap[j]] == false) {
             if (sepmap[j] - cursor > 0) {
                 cell = m_input.substr(cursor, sepmap[j] - cursor);
                 m_cells.push_back(cell);
-                // cout << "Cell: " << cell << endl;
             } else {
                 m_cells.push_back("0");
-                // cout << "Cell: " << "0" << endl;
             }
             cursor = sepmap[j] + 1;
         }
@@ -122,7 +108,6 @@ void utils::SlightRow::process(void) {
     if (cursor < m_input.size()) {
         cell = m_input.substr(cursor, m_input.size() - cursor);
         m_cells.push_back(cell);
-        // cout << "Additional cell: " << cell << endl;
     } else if (cursor == m_input.size() && m_input.at(cursor - 1) == m_sep) {
         m_cells.push_back("0");
     }     
@@ -131,8 +116,6 @@ void utils::SlightRow::process(void) {
     delete[] qmap;
 
     m_cell_count = m_cells.size();
-
-    // cout << "Cell count: " << m_cell_count << endl;
 
     m_processed = true;
 }

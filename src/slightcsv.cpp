@@ -38,9 +38,6 @@ using std::cin;
 
 #define VERBOSE 0
 
-// template <class T>
-// void convertCell(string &cell_str, T &cell_value);
-
 utils::SlightCSV::SlightCSV(void) {
     m_csvp = new SlightCSVPrivate;
     this->reset();
@@ -134,7 +131,7 @@ size_t utils::SlightCSV::loadData(void) {
                     last_sep_idx = i;
                 }
             } else {
-                // cout << "Escaped line ending found." << endl;
+                // escaped line ending
             }
         }
     }
@@ -152,11 +149,10 @@ size_t utils::SlightCSV::loadData(void) {
             row[cnt] = 0;
             string rows = row;
             delete[] row;
-            // cout << "Row to process: " << rows << endl;
             processLine(rows, row_id);
             ++row_id;
         } else {
-            // cout << "Row is empty. Moving on." << endl;
+            // row is empty
         }
         fseek(in_file, 1L, SEEK_CUR);
         cursor = rnmap.at(j) + 1;
@@ -169,50 +165,12 @@ size_t utils::SlightCSV::loadData(void) {
         row[cnt] = 0;
         string rows = row;
         delete[] row;
-        // cout << "Row to process: " << rows << endl;
         processLine(rows, row_id);
         ++row_id;
 
     }
 
     fclose(in_file);
-
-
-
-    // char in_char;
-    // string in_line;
-    // bool is_escaped = false;
-
-    // while (in_char = fgetc(in_file), in_char != EOF) {
-    //     if (in_char == '\"') {
-    //         is_escaped ^= true;
-    //     }
-    //     if ((in_char != '\r' && in_char != '\n') || is_escaped) {
-    //         in_line.append((char*)&in_char);
-    //     } else {
-    //         processLine(in_line);
-    //     }
-    // }
-
-    // fclose(in_file);
-    // processLine(in_line);
-
-
-
-    // char in_char;
-    // string in_line;
-
-    // while (in_char = fgetc(in_file), in_char != EOF) {
-
-    //     if (in_char != '\r' && in_char != '\n') {
-    //         in_line.append((char*)&in_char);
-    //     } else {
-    //         processLine(in_line);
-    //     }
-    // }
-
-    // fclose(in_file);
-    // processLine(in_line);
     
     m_csvp->m_row_count = m_csvp->m_data_matrix.getRowCount();
     retval = m_csvp->m_row_count;
@@ -304,22 +262,9 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
         throw slightcsv_format_cellcnt_error();
     }
     
-    // if (row.isHeader()) {
-    //     if (t_row_id != 1) {
-    //         throw slightcsv_format_header_error();
-    //     }
-    //     #if VERBOSE == 1
-    //     clog << "Text (potentially header) detected in row: " << t_row_id << "." << endl;
-    //     #endif
-    //     //t_input.clear();
-    //     return;
-    // }
-    
     vector<string> cells;
     size_t res = row.getCells(cells);
     
     m_csvp->m_data_matrix.addCells(cells);
-
-    //t_input.clear();
 
 }
