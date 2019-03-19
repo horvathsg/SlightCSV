@@ -193,29 +193,44 @@ size_t utils::SlightCSV::getRowCount(void) const {
     return m_csvp->m_data_matrix.getRowCount();
 }
 
-// void utils::SlightCSV::getDataMatrix(SlightMatrix &t_target_data_matrix) {
-//     if (!m_csvp->m_row_count || !m_csvp->m_col_count) {
-//         throw slightcsv_data_error();
-//     }
-//     t_target_data_matrix = m_csvp->m_data_matrix;
-// }
-
-template <class T>
-void utils::SlightCSV::getDataColumn(vector<T> &t_target_column, size_t t_col_nr) const {
+void utils::SlightCSV::setHeaderCount(size_t t_header_count) {
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
-    if (t_col_nr >= m_csvp->m_data_matrix.getColumnCount()) {
+    m_csvp->m_data_matrix.setHeaderCount(t_header_count);
+}
+
+size_t utils::SlightCSV::getHeaderCount(void) const {
+    return m_csvp->m_data_matrix.getHeaderCount();
+}
+
+template <class T>
+void utils::SlightCSV::getColumn(vector<T> &t_target_column, size_t t_column_index) const {
+    if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
+        throw slightcsv_data_error();
+    }
+    if (t_column_index >= m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_index_error();
     }
 
-    m_csvp->m_data_matrix.getColumn(t_target_column, t_col_nr);
+    m_csvp->m_data_matrix.getColumn(t_target_column, t_column_index);
 }
 
-template void utils::SlightCSV::getDataColumn(vector<int> &t_target_column, size_t t_col_nr) const;
-template void utils::SlightCSV::getDataColumn(vector<float> &t_target_column, size_t t_col_nr) const;
-template void utils::SlightCSV::getDataColumn(vector<double> &t_target_column, size_t t_col_nr) const;
-template void utils::SlightCSV::getDataColumn(vector<string> &t_target_column, size_t t_col_nr) const;
+template void utils::SlightCSV::getColumn(vector<int> &t_target_column, size_t t_column_index) const;
+template void utils::SlightCSV::getColumn(vector<float> &t_target_column, size_t t_column_index) const;
+template void utils::SlightCSV::getColumn(vector<double> &t_target_column, size_t t_column_index) const;
+template void utils::SlightCSV::getColumn(vector<string> &t_target_column, size_t t_column_index) const;
+
+void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index) const {
+    if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
+        throw slightcsv_data_error();
+    }
+    if (t_row_index >= m_csvp->m_data_matrix.getRowCount()) {
+        throw slightcsv_index_error();
+    }
+
+    m_csvp->m_data_matrix.getRow(t_target_row, t_row_index);
+}
 
 void utils::SlightCSV::unloadData(void) {
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
@@ -249,10 +264,17 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
     if (!m_csvp->m_csv_format_detect_done) {
         size_t cap = m_csvp->m_data_matrix.getCapacity();
         m_csvp->m_data_matrix.setCapacity(cap * row.getCellCount());
-        //cout << "Capacity: " << m_csvp->m_data_matrix.getCapacity() << endl;
-        //m_csvp->m_data_matrix.reserveMemory();
         m_csvp->m_data_matrix.setColumnCount(row.getCellCount());
         m_csvp->m_csv_format_detect_done = true;
+    }
+
+    if (row.getIsHeader()) {
+        size_t header_count = m_csvp->m_data_matrix.getHeaderCount();
+        if (t_row_id == header_count) {
+            m_csvp->m_data_matrix.setHeaderCount(++header_count);
+        } else {
+            throw slightcsv_format_header_error();
+        }
     }
 
     if (row.getCellCount() != m_csvp->m_data_matrix.getColumnCount()) {
@@ -261,8 +283,7 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
     }
     
     vector<string> cells;
-    size_t res = row.getCells(cells);
-    
+    row.getCells(cells);
     m_csvp->m_data_matrix.addCells(cells);
 
 }

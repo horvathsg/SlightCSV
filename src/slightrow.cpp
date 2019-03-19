@@ -71,6 +71,7 @@ void utils::SlightRow::process(void) {
         throw slightrow_separator_error();
     }
 
+    // prepare separator map, quote map and other variables
     string cell;
     size_t cursor = 0;
     char q = '\"';
@@ -80,6 +81,7 @@ void utils::SlightRow::process(void) {
     qmap[0] = false;
     size_t sepmap_idx = 0;
 
+    // generate separator map and quote map
     for (size_t i = 0; i < m_input.size(); ++i) {
         if (m_input.at(i) == m_sep) {
             sepmap[sepmap_idx] = i;
@@ -93,6 +95,7 @@ void utils::SlightRow::process(void) {
         }
     }
 
+    // process row
     for (size_t j = 0; j < sepmap_size; ++j) {
         if (qmap[sepmap[j]] == false) {
             if (sepmap[j] - cursor > 0) {
@@ -105,6 +108,7 @@ void utils::SlightRow::process(void) {
         }
     }
 
+    // process remainder after last separator
     if (cursor < m_input.size()) {
         cell = m_input.substr(cursor, m_input.size() - cursor);
         m_cells.push_back(cell);
@@ -112,10 +116,13 @@ void utils::SlightRow::process(void) {
         m_cells.push_back("0");
     }     
 
+    // free memory
     delete[] sepmap;
     delete[] qmap;
 
     m_cell_count = m_cells.size();
+
+    m_is_header = this->checkIsHeader();
 
     m_processed = true;
 }
@@ -141,4 +148,24 @@ void utils::SlightRow::reset(void) {
     m_sep = 0;
     m_cell_count = 0;
     m_cells.clear();
+}
+
+bool utils::SlightRow::getIsHeader(void) const {
+    if (!m_processed) {
+        throw slightrow_process_error();
+    }
+    return m_is_header;
+}
+
+bool utils::SlightRow::checkIsHeader(void) const {
+    float num_chars = 0;
+    for (string::const_iterator it = m_input.begin(); it != m_input.end(); ++it) {
+        if (*it >= 48 && *it <= 57) {
+            ++num_chars;
+        }
+    }
+    if (num_chars / m_input.size() > 0.1f) {
+        return false;
+    }
+    return true;
 }

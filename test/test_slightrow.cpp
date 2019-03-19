@@ -653,3 +653,78 @@ TEST(slightrow, escape_quotes_6) {
     row.getCells(vect);
     CHECK_EQUAL(22, vect.size());
 }
+
+TEST(slightrow, get_is_header_exception) {
+    string ex = "";
+    try {
+        SlightRow row;
+        row.getIsHeader();
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Row not processed.", ex);
+}
+
+TEST(slightrow, get_is_header_true_alpha_only) {
+    string ex = "";
+    bool is_header = false;
+    string str = "this,is,a,header";
+    try {
+        SlightRow row;
+        row.setInput(str);
+        row.setSeparator(',');
+        row.process();
+        is_header = row.getIsHeader();
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL(true, is_header);
+}
+
+TEST(slightrow, get_is_header_true_mixed_1) {
+    string ex = "";
+    bool is_header = false;
+    string str = "this 41,is 5,a 5,header4,even,if,it,contains,some,numbers";
+    try {
+        SlightRow row;
+        row.setInput(str);
+        row.setSeparator(',');
+        row.process();
+        is_header = row.getIsHeader();
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL(true, is_header);
+}
+
+TEST(slightrow, get_is_header_false_mixed_2) {
+    string ex = "";
+    bool is_header = true;
+    string str = "this 41,is 5,not44,a 5,header4";
+    try {
+        SlightRow row;
+        row.setInput(str);
+        row.setSeparator(',');
+        row.process();
+        is_header = row.getIsHeader();
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL(false, is_header);
+}
+
+TEST(slightrow, get_is_header_false_nums_only) {
+    string ex = "";
+    bool is_header = true;
+    string str = "4534354,345345345,43534534,34534,534543,342,2,2,2,2";
+    try {
+        SlightRow row;
+        row.setInput(str);
+        row.setSeparator(',');
+        row.process();
+        is_header = row.getIsHeader();
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL(false, is_header);
+}

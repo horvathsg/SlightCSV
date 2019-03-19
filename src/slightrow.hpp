@@ -38,14 +38,17 @@ namespace utils {
             void process(void);
             size_t getCellCount(void) const;
             size_t getCells(vector<string> &t_target) const;
+            bool getIsHeader(void) const;
             void reset(void);
 
-        private:            
-            bool m_processed;
+        private:
+            bool checkIsHeader(void) const;
             string m_input;
             char m_sep;
-            size_t m_cell_count;
+            bool m_processed;
             vector<string> m_cells;
+            size_t m_cell_count;
+            bool m_is_header;
 
     };
 

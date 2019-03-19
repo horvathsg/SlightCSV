@@ -755,3 +755,98 @@ TEST(slightmatrix, reset) {
     CHECK_EQUAL(0, row_cnt);
     CHECK_EQUAL(0, cap);
 }
+
+TEST(slightmatrix, set_get_header_count_valid_1) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    size_t header_cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        header_cnt = sm.getHeaderCount();
+        valid = sm.validate();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(0, header_cnt);
+}
+
+TEST(slightmatrix, set_get_header_count_valid_2) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    size_t header_cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        sm.setHeaderCount(2);
+        header_cnt = sm.getHeaderCount();
+        valid = sm.validate();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(2, header_cnt);
+}
+
+TEST(slightmatrix, set_get_header_count_invalid) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = true;
+    size_t header_cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        sm.setHeaderCount(3);
+        header_cnt = sm.getHeaderCount();
+        valid = sm.validate();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(false, valid);
+    CHECK_EQUAL(3, header_cnt);
+}

@@ -37,6 +37,8 @@ namespace utils {
             size_t getColumnCount(void) const;
             void addCell(string t_cell);
             void addCells(vector<string> t_cells);
+            void setHeaderCount(size_t t_header_count);
+            size_t getHeaderCount(void) const;
             bool validate(void) const;
             size_t getRowCount(void) const;
             string getCell(size_t t_row_index, size_t t_column_index) const;
@@ -50,6 +52,7 @@ namespace utils {
             vector<string> m_data;
             size_t m_row_count;
             size_t m_column_count;
+            size_t m_header_count;
 
     };
 

@@ -41,9 +41,11 @@ namespace utils {
             size_t loadData(void);
             size_t getColumnCount(void) const;
             size_t getRowCount(void) const;
-            //void getDataMatrix(SlightMatrix &t_target_data_matrix);
+            void setHeaderCount(size_t t_header_count);
+            size_t getHeaderCount(void) const;
             template <class T>
-            void getDataColumn(vector<T> &t_target_column, size_t t_col_nr) const;
+            void getColumn(vector<T> &t_target_column, size_t t_colunm_index) const;
+            void getRow(vector<string> &t_target_row, size_t t_row_index) const;
             void unloadData(void);
             void reset(void);
 

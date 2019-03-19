@@ -63,8 +63,19 @@ void utils::SlightMatrix::addCells(vector<string> t_cells) {
     updateRowCount();
 }
 
+void utils::SlightMatrix::setHeaderCount(size_t t_header_count) {
+    m_header_count = t_header_count;
+}
+
+size_t utils::SlightMatrix::getHeaderCount(void) const {
+    return m_header_count;
+}
+
 bool utils::SlightMatrix::validate(void) const {
     if (!m_column_count) {
+        return false;
+    }
+    if (m_header_count >= m_row_count) {
         return false;
     }
     return (m_data.size() % m_column_count == 0) && (m_data.size() == m_row_count * m_column_count) ? true : false;
@@ -137,6 +148,7 @@ template void utils::SlightMatrix::getColumn(vector<double> &t_target, size_t in
 void utils::SlightMatrix::reset(void) {
     m_row_count = 0;
     m_column_count = 0;
+    m_header_count = 0;
     m_data.clear();
     m_data.shrink_to_fit();
 }
