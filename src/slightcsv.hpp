@@ -65,7 +65,7 @@ namespace utils {
     };
 
     class slightcsv_separator_error: public slightcsv_error {
-        
+
         const char* what() const throw() {
             return "Wrong or missing separator.";
         }

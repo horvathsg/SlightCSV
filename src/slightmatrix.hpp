@@ -61,12 +61,6 @@ namespace utils {
         }
     };
 
-    class slightmatrix_alloc_error: public slightmatrix_error {
-        const char* what() const throw() {
-            return "Failed to allocate memory.";
-        }
-    };
-
     class slightmatrix_column_error: public slightmatrix_error {
         const char* what() const throw() {
             return "Invalid column count or index.";
