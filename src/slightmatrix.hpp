@@ -19,9 +19,11 @@
 
 #include <string>
 #include <vector>
+#include <exception>
 
 using std::string;
 using std::vector;
+using std::exception;
 
 namespace utils {
 
@@ -29,29 +31,58 @@ namespace utils {
 
         public:
             SlightMatrix(void);
-            void setReserveRowCount(size_t t_res_row_count);
-            void setReserveColumnCount(size_t t_res_column_count);
-            void reserveMemory(void);
+            void setCapacity(size_t t_cell_count);
+            size_t getCapacity(void);
             void setColumnCount(size_t t_column_count);
             size_t getColumnCount(void);
             void addCell(string t_cell);
             void addCells(vector<string> t_cells);
-            void finalize(void);
+            bool validate(void);
             size_t getRowCount(void);
-            string getCell(size_t t_row, size_t t_column);
-            void getRow(vector<string> &t_target, size_t t_index);
+            string getCell(size_t t_row_index, size_t t_column_index);
+            void getRow(vector<string> &t_target, size_t t_row_index);
             template <class T>
-            void getColumn(vector<T> &t_target, size_t t_index);
+            void getColumn(vector<T> &t_target, size_t t_column_index);
             void reset(void);
 
         private:
             void updateRowCount(void);
             vector<string> m_data;
-            size_t m_res_row_count;
-            size_t m_res_column_count;
             size_t m_row_count;
             size_t m_column_count;
 
+    };
+
+    class slightmatrix_error: public exception {};
+
+    class slightmatrix_parameter_error: public slightmatrix_error {
+        const char* what() const throw() {
+            return "Invalid parameter.";
+        }
+    };
+
+    class slightmatrix_alloc_error: public slightmatrix_error {
+        const char* what() const throw() {
+            return "Failed to allocate memory.";
+        }
+    };
+
+    class slightmatrix_column_error: public slightmatrix_error {
+        const char* what() const throw() {
+            return "Invalid column count or index.";
+        }
+    };
+
+    class slightmatrix_row_error: public slightmatrix_error {
+        const char* what() const throw() {
+            return "Invalid row count or index.";
+        }
+    };
+
+    class slightmatrix_matrix_error: public slightmatrix_error {
+        const char* what() const throw() {
+            return "Invalid matrix (rows incomplete or column count not set).";
+        }
     };
 
 } // utils

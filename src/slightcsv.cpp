@@ -136,7 +136,8 @@ size_t utils::SlightCSV::loadData(void) {
         }
     }
 
-    m_csvp->m_data_matrix.setReserveRowCount(row_count);
+    //m_csvp->m_data_matrix.setReserveRowCount(row_count);
+    m_csvp->m_data_matrix.setCapacity(row_count);
 
     fseek(in_file, 0L, SEEK_SET);
 
@@ -250,8 +251,10 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
     row.process();
 
     if (!m_csvp->m_csv_format_detect_done) {
-        m_csvp->m_data_matrix.setReserveColumnCount(row.getCellCount());
-        m_csvp->m_data_matrix.reserveMemory();
+        size_t cap = m_csvp->m_data_matrix.getCapacity();
+        m_csvp->m_data_matrix.setCapacity(cap * row.getCellCount());
+        //cout << "Capacity: " << m_csvp->m_data_matrix.getCapacity() << endl;
+        //m_csvp->m_data_matrix.reserveMemory();
         m_csvp->m_data_matrix.setColumnCount(row.getCellCount());
         m_csvp->m_col_count = m_csvp->m_data_matrix.getColumnCount();
         m_csvp->m_csv_format_detect_done = true;

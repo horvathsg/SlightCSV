@@ -34,16 +34,19 @@ utils::SlightMatrix::SlightMatrix(void) {
     reset();
 }
 
-void utils::SlightMatrix::setReserveRowCount(size_t t_res_row_count) {
-    m_res_row_count = t_res_row_count;
+void utils::SlightMatrix::setCapacity(size_t t_cell_count) {
+    if (!t_cell_count) {
+        throw slightmatrix_parameter_error();
+    }
+    try {
+        m_data.reserve(t_cell_count);
+    } catch (exception &e) {
+        throw slightmatrix_alloc_error();
+    }
 }
 
-void utils::SlightMatrix::setReserveColumnCount(size_t t_res_column_count) {
-    m_res_column_count = t_res_column_count;
-}
-
-void utils::SlightMatrix::reserveMemory(void) {
-    m_data.reserve(m_res_row_count * m_res_column_count);
+size_t utils::SlightMatrix::getCapacity(void) {
+    return m_data.capacity();
 }
 
 void utils::SlightMatrix::setColumnCount(size_t t_column_count) {
@@ -55,42 +58,96 @@ size_t utils::SlightMatrix::getColumnCount(void) {
 }
 
 void utils::SlightMatrix::addCell(string t_cell) {
-    m_data.push_back(t_cell);
+    try {
+        m_data.push_back(t_cell);
+    } catch (exception &e) {
+        throw slightmatrix_alloc_error();
+    }
+    updateRowCount();
 }
 
 void utils::SlightMatrix::addCells(vector<string> t_cells) {
-    m_data.insert(m_data.end(), t_cells.begin(), t_cells.end());
+    try {
+        m_data.insert(m_data.end(), t_cells.begin(), t_cells.end());
+    } catch (exception &e) {
+        throw slightmatrix_alloc_error();
+    }
+    updateRowCount();
 }
 
-void utils::SlightMatrix::finalize(void) {
-
+bool utils::SlightMatrix::validate(void) {
+    if (!m_column_count) {
+        return false;
+    }
+    return (m_data.size() % m_column_count == 0) && (m_data.size() == m_row_count * m_column_count) ? true : false;
 }
 
 size_t utils::SlightMatrix::getRowCount(void) {
-    updateRowCount();
     return m_row_count;
 }
 
-string utils::SlightMatrix::getCell(size_t t_row, size_t t_column) {
-    return m_data.at(t_row * m_column_count + t_column);
+string utils::SlightMatrix::getCell(size_t t_row_index, size_t t_column_index) {
+    if (!validate()) {
+        throw slightmatrix_matrix_error();
+    }
+    if (t_row_index >= m_row_count) {
+        throw slightmatrix_row_error();
+    }
+    if (t_column_index >= m_column_count) {
+        throw slightmatrix_column_error();
+    }
+    return m_data.at(t_row_index * m_column_count + t_column_index);
 }
 
-void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_index) {
-    t_target.clear();
-    for (size_t i = 0; i < m_column_count; ++i) {
-        string cell = getCell(t_index, i);
-        t_target.push_back(cell);
+void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_row_index) {
+    if (!validate()) {
+        throw slightmatrix_matrix_error();
     }
+    if (t_row_index >= m_row_count) {
+        throw slightmatrix_row_error();
+    }
+    
+    vector<string>::const_iterator first = m_data.begin() + t_row_index * m_column_count;
+    vector<string>::const_iterator last = m_data.begin() + (t_row_index + 1) * m_column_count - 1;
+
+    t_target.clear();
+
+    try {
+        t_target.reserve(m_row_count);
+        for (vector<string>::const_iterator it = first; it <= last; ++it) {
+            t_target.push_back(*it);
+        }
+    } catch (exception &e) {
+        throw slightmatrix_alloc_error();
+    }    
+
+    // for (size_t i = 0; i < m_column_count; ++i) {
+    //     string cell = getCell(t_index, i);
+    //     t_target.push_back(cell);
+    // }
 }
 
 template <class T>
-void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_index) {
+void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index) {
+    if (!validate()) {
+        throw slightmatrix_matrix_error();
+    }
+    if (t_column_index >= m_column_count) {
+        throw slightmatrix_column_error();
+    }
+
     t_target.clear();
-    for (size_t i = 0; i < m_row_count; ++i) {
-        string cell = getCell(i, t_index);
-        T cell_value;
-        convertCell(cell, cell_value);
-        t_target.push_back(cell_value);
+
+    try {
+        t_target.reserve(m_column_count);
+        for (size_t i = 0; i < m_row_count; ++i) {
+            string cell = getCell(i, t_column_index);
+            T cell_value;
+            convertCell(cell, cell_value);
+            t_target.push_back(cell_value);
+        }
+    } catch (exception &e) {
+        throw slightmatrix_alloc_error();
     }
 }
 
@@ -103,10 +160,17 @@ void utils::SlightMatrix::reset(void) {
     m_row_count = 0;
     m_column_count = 0;
     m_data.clear();
-    m_data.reserve(1);
+    try {
+        m_data.shrink_to_fit();
+    } catch (exception &e) {
+        throw slightmatrix_alloc_error();
+    }
 }
 
 void utils::SlightMatrix::updateRowCount(void) {
+    if (!m_column_count) {
+        return;
+    }
     m_row_count = m_data.size() % m_column_count == 0 ? 
         ((size_t)(m_data.size() / m_column_count)) : 
         ((size_t)(m_data.size() / m_column_count)) + 1;

@@ -13,14 +13,14 @@ using std::to_string;
 
 int main(int argc, char *argv[]) {
 
-    SlightCSV csv_parser;
-    csv_parser.setFileName("../test/Crimes_-_2001_to_present.csv");
-    csv_parser.setSeparator(',');
-    StopWatch watch;
-    watch.start();
-    csv_parser.loadData();
-    watch.stop();
-    cout << "Loaded CSV row count: " << csv_parser.getRowCount() << "." << endl;
+    // SlightCSV csv_parser;
+    // csv_parser.setFileName("../test/Crimes_-_2001_to_present.csv");
+    // csv_parser.setSeparator(',');
+    // StopWatch watch;
+    // watch.start();
+    // csv_parser.loadData();
+    // watch.stop();
+    // cout << "Loaded CSV row count: " << csv_parser.getRowCount() << "." << endl;
     
     // SlightMatrix sm;
     // //sm.getColumnCount();
@@ -37,5 +37,10 @@ int main(int argc, char *argv[]) {
 
     // cout << sm.getRowCount() << endl;
     
+    SlightMatrix sm;
+    for (size_t i = 1;; i += 1000) {
+        sm.setCapacity(i);
+    }
+
     exit(EXIT_SUCCESS);
 }
