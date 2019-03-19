@@ -14,12 +14,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-project(slightcsv)
+project(slightcsv_demo_prog)
 
-cmake_minimum_required(VERSION 3.10)
+#set(CMAKE_BUILD_TYPE Debug)
 
-add_subdirectory(src)
-
-add_subdirectory(test)
-
-add_subdirectory(src/demo)
+set(DEMO_SOURCES main.cpp stopwatch.hpp stopwatch.cpp)
+#target_include_directories(demo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+add_executable(demo ${DEMO_SOURCES})
+link_directories(${CMAKE_SOURCE_DIR}/lib)
+target_link_libraries(demo PRIVATE slightcsv)
+target_include_directories(demo PUBLIC ${CMAKE_SOURCE_DIR}/inc)
+INSTALL(TARGETS demo
+RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin
+)

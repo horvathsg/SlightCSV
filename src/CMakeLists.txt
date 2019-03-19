@@ -14,9 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-project(slightcsv_prog)
+project(slightcsv_lib)
 
-add_library(slightcsv SHARED slightcsv.hpp slightcsvprivate.hpp slightcsv.cpp slightrow.hpp slightrow.cpp slightmatrix.hpp slightmatrix.cpp)
+#set(CMAKE_BUILD_TYPE Debug)
+
+set(SLIGHTCSV_SOURCES slightcsv.hpp slightcsvprivate.hpp slightcsv.cpp slightrow.hpp slightrow.cpp slightmatrix.hpp slightmatrix.cpp)
+add_library(slightcsv SHARED ${SLIGHTCSV_SOURCES})
 target_include_directories(slightcsv PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(slightcsv PROPERTIES PUBLIC_HEADER slightcsv.hpp)
 INSTALL(TARGETS slightcsv
@@ -24,19 +27,12 @@ LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/lib
 PUBLIC_HEADER DESTINATION ${CMAKE_SOURCE_DIR}/inc/slightcsv
 )
 
+#set(DEMO_SOURCES main.cpp stopwatch.hpp stopwatch.cpp)
+#target_include_directories(demo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/demo)
+#add_executable(demo ${DEMO_SOURCES})
 #link_directories(${CMAKE_SOURCE_DIR}/lib)
-#add_executable(main main.cpp stopwatch.hpp stopwatch.cpp slightmatrix.hpp slightmatrix.cpp)
-#target_link_libraries(main PRIVATE slightcsv)
-#target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/inc)
-#INSTALL(TARGETS main
-#RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin
-#)
-
-#set(CMAKE_BUILD_TYPE Debug)
-#link_directories(${CMAKE_SOURCE_DIR}/lib)
-#add_executable(main main.cpp stopwatch.hpp stopwatch.cpp slightcsv.hpp slightcsvprivate.hpp slightcsv.cpp slightrow.hpp slightrow.cpp)
-#target_link_libraries(main PRIVATE slightcsv)
-#target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/inc)
-#INSTALL(TARGETS main
+#target_link_libraries(demo PRIVATE slightcsv)
+#target_include_directories(demo PUBLIC ${CMAKE_SOURCE_DIR}/inc)
+#INSTALL(TARGETS demo
 #RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin
 #)

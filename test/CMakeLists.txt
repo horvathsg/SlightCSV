@@ -16,22 +16,13 @@
 
 project(slightcsv_test_prog)
 
-if(DEFINED ENV{CPPUTEST_HOME})
-    message(STATUS "Using CppUTest home: $ENV{CPPUTEST_HOME}")
-    set(CPPUTEST_INCLUDE_DIRS $ENV{CPPUTEST_HOME}/include)
-    set(CPPUTEST_LIBRARIES $ENV{CPPUTEST_HOME}/lib)
-    set(CPPUTEST_LDFLAGS CppUTest CppUTestExt)
-else()
-    find_package(PkgConfig REQUIRED)
-    pkg_search_module(CPPUTEST REQUIRED cpputest>=3.8)
-    message(STATUS "Found CppUTest version ${CPPUTEST_VERSION}")
-endif()
+set(CPPUTEST_INC_DIR /usr/include/CppUTest)
+set(CPPUTEST_LIB_DIR /usr/lib/x86_64-linux-gnu)
+set(CPPUTEST_LIBS CppUTest CppUTestExt)
 
-include_directories(/usr/include/CppUTest)
-link_directories(/usr/lib/x86_64-linux-gnu)
-
-link_directories(${CMAKE_SOURCE_DIR}/lib)
+include_directories(${CPPUTEST_INC_DIR})
+link_directories(${CMAKE_SOURCE_DIR}/lib ${CPPUTEST_LIB_DIR})
 add_executable(slightcsv_test main.cpp test.cpp)
-target_link_libraries(slightcsv_test PRIVATE slightcsv CppUTest CppUTestExt)
+target_link_libraries(slightcsv_test PRIVATE slightcsv ${CPPUTEST_LIBS})
 target_include_directories(slightcsv_test PUBLIC ${CMAKE_SOURCE_DIR}/inc ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_command(TARGET slightcsv_test COMMAND ./slightcsv_test POST_BUILD)
