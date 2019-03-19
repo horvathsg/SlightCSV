@@ -32,17 +32,17 @@ namespace utils {
         public:
             SlightMatrix(void);
             void setCapacity(size_t t_cell_count);
-            size_t getCapacity(void);
+            size_t getCapacity(void) const;
             void setColumnCount(size_t t_column_count);
-            size_t getColumnCount(void);
+            size_t getColumnCount(void) const;
             void addCell(string t_cell);
             void addCells(vector<string> t_cells);
-            bool validate(void);
-            size_t getRowCount(void);
-            string getCell(size_t t_row_index, size_t t_column_index);
-            void getRow(vector<string> &t_target, size_t t_row_index);
+            bool validate(void) const;
+            size_t getRowCount(void) const;
+            string getCell(size_t t_row_index, size_t t_column_index) const;
+            void getRow(vector<string> &t_target, size_t t_row_index) const;
             template <class T>
-            void getColumn(vector<T> &t_target, size_t t_column_index);
+            void getColumn(vector<T> &t_target, size_t t_column_index) const;
             void reset(void);
 
         private:

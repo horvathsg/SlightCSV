@@ -24,13 +24,13 @@ LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/lib
 PUBLIC_HEADER DESTINATION ${CMAKE_SOURCE_DIR}/inc/slightcsv
 )
 
-link_directories(${CMAKE_SOURCE_DIR}/lib)
-add_executable(main main.cpp stopwatch.hpp stopwatch.cpp slightmatrix.hpp slightmatrix.cpp)
-target_link_libraries(main PRIVATE slightcsv)
-target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/inc)
-INSTALL(TARGETS main
-RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin
-)
+#link_directories(${CMAKE_SOURCE_DIR}/lib)
+#add_executable(main main.cpp stopwatch.hpp stopwatch.cpp slightmatrix.hpp slightmatrix.cpp)
+#target_link_libraries(main PRIVATE slightcsv)
+#target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/inc)
+#INSTALL(TARGETS main
+#RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin
+#)
 
 #set(CMAKE_BUILD_TYPE Debug)
 #link_directories(${CMAKE_SOURCE_DIR}/lib)

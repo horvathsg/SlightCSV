@@ -35,15 +35,15 @@ namespace utils {
             SlightCSV(void);
             ~SlightCSV(void);
             void setFileName(string t_filename);
-            string getFileName(void);
+            string getFileName(void) const;
             void setSeparator(char t_separator);
-            char getSeparator(void);
+            char getSeparator(void) const;
             size_t loadData(void);
-            size_t getColumnCount(void);
-            size_t getRowCount(void);
+            size_t getColumnCount(void) const;
+            size_t getRowCount(void) const;
             //void getDataMatrix(SlightMatrix &t_target_data_matrix);
             template <class T>
-            void getDataColumn(vector<T> &t_target_column, size_t t_col_nr);
+            void getDataColumn(vector<T> &t_target_column, size_t t_col_nr) const;
             void unloadData(void);
             void reset(void);
 

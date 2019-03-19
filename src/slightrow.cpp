@@ -41,7 +41,7 @@ void utils::SlightRow::setInput(string &t_input) {
     m_processed = false;
 }
 
-string utils::SlightRow::getInput(void) {
+string utils::SlightRow::getInput(void) const {
     if (!m_input.size()) {
         throw slightrow_input_error();
     }
@@ -56,7 +56,7 @@ void utils::SlightRow::setSeparator(char t_sep) {
     m_processed = false;
 }
 
-char utils::SlightRow::getSeparator(void) {
+char utils::SlightRow::getSeparator(void) const {
     if (m_sep == 0) {
         throw slightrow_separator_error();
     }
@@ -120,14 +120,14 @@ void utils::SlightRow::process(void) {
     m_processed = true;
 }
 
-size_t utils::SlightRow::getCellCount(void) {
+size_t utils::SlightRow::getCellCount(void) const {
     if (!m_processed) {
         throw slightrow_process_error();
     }
     return m_cell_count;
 }
 
-size_t utils::SlightRow::getCells(vector<string> &t_target) {
+size_t utils::SlightRow::getCells(vector<string> &t_target) const {
     if (!m_processed) {
         throw slightrow_process_error();
     }

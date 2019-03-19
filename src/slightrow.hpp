@@ -32,12 +32,12 @@ namespace utils {
         public:
             SlightRow(void);
             void setInput(string &t_input);
-            string getInput(void);
+            string getInput(void) const;
             void setSeparator(char t_sep);
-            char getSeparator(void);
+            char getSeparator(void) const;
             void process(void);
-            size_t getCellCount(void);
-            size_t getCells(vector<string> &t_target);
+            size_t getCellCount(void) const;
+            size_t getCells(vector<string> &t_target) const;
             void reset(void);
 
         private:            
