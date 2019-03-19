@@ -173,24 +173,24 @@ size_t utils::SlightCSV::loadData(void) {
 
     fclose(in_file);
     
-    m_csvp->m_row_count = m_csvp->m_data_matrix.getRowCount();
-    retval = m_csvp->m_row_count;
+    //m_csvp->m_row_count = m_csvp->m_data_matrix.getRowCount();
+    retval = m_csvp->m_data_matrix.getRowCount();
 
     return retval;
 }
 
 size_t utils::SlightCSV::getColumnCount(void) {
-    if (!m_csvp->m_row_count || !m_csvp->m_col_count) {
+    if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
-    return m_csvp->m_col_count;
+    return m_csvp->m_data_matrix.getColumnCount();
 }
 
 size_t utils::SlightCSV::getRowCount(void) {
-    if (!m_csvp->m_row_count || !m_csvp->m_col_count) {
+    if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
-    return m_csvp->m_row_count;
+    return m_csvp->m_data_matrix.getRowCount();
 }
 
 // void utils::SlightCSV::getDataMatrix(SlightMatrix &t_target_data_matrix) {
@@ -202,10 +202,10 @@ size_t utils::SlightCSV::getRowCount(void) {
 
 template <class T>
 void utils::SlightCSV::getDataColumn(vector<T> &t_target_column, size_t t_col_nr) {
-    if (!m_csvp->m_row_count || !m_csvp->m_col_count) {
+    if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
-    if (t_col_nr >= m_csvp->m_col_count) {
+    if (t_col_nr >= m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_index_error();
     }
 
@@ -218,19 +218,15 @@ template void utils::SlightCSV::getDataColumn(vector<double> &t_target_column, s
 template void utils::SlightCSV::getDataColumn(vector<string> &t_target_column, size_t t_col_nr);
 
 void utils::SlightCSV::unloadData(void) {
-    if (!m_csvp->m_row_count || !m_csvp->m_col_count) {
+    if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
     m_csvp->m_data_matrix.reset();
-    m_csvp->m_col_count = 0;
-    m_csvp->m_row_count = 0;
     m_csvp->m_csv_format_detect_done = false;
 }
 
 void utils::SlightCSV::reset(void) {
     m_csvp->m_data_matrix.reset();
-    m_csvp->m_col_count = 0;
-    m_csvp->m_row_count = 0;
     m_csvp->m_filename.clear();
     m_csvp->m_separator = 0;
     m_csvp->m_csv_format_detect_done = false;
@@ -256,11 +252,10 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
         //cout << "Capacity: " << m_csvp->m_data_matrix.getCapacity() << endl;
         //m_csvp->m_data_matrix.reserveMemory();
         m_csvp->m_data_matrix.setColumnCount(row.getCellCount());
-        m_csvp->m_col_count = m_csvp->m_data_matrix.getColumnCount();
         m_csvp->m_csv_format_detect_done = true;
     }
 
-    if (row.getCellCount() != m_csvp->m_col_count) {
+    if (row.getCellCount() != m_csvp->m_data_matrix.getColumnCount()) {
         // cout << "Cell count " << row.getCellCount() << " in row " << t_row_id << endl;
         throw slightcsv_format_cellcnt_error();
     }

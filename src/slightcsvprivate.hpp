@@ -35,8 +35,6 @@ namespace utils {
             char m_separator;
             bool m_csv_format_detect_done;
             SlightMatrix m_data_matrix;
-            size_t m_col_count;
-            size_t m_row_count;
 
     };
 
