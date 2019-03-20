@@ -14,19 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "CppUTest/TestHarness.h"
-
-#include <string>
-#include <vector>
-#include <exception>
-
-#include "slightrow.hpp"
-
-using std::string;
-using std::vector;
-using std::exception;
-using utils::SlightRow;
-
 TEST_GROUP(slightrow) {
 };
 
@@ -857,3 +844,6 @@ TEST(slightrow, set_escape_process_ok_3) {
     CHECK_EQUAL(7, cnt);
     CHECK_EQUAL("\"row,with\"", cell);
 }
+
+
+

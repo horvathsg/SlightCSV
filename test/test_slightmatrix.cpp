@@ -14,19 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "CppUTest/TestHarness.h"
-
-#include <string>
-#include <vector>
-#include <exception>
-
-#include "slightmatrix.hpp"
-
-using std::string;
-using std::vector;
-using std::exception;
-using utils::SlightMatrix;
-
 TEST_GROUP(slightmatrix) {
 };
 

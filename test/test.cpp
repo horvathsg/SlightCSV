@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "test_include.hpp"
+
 #include "test_slightrow.cpp"
-
 #include "test_slightmatrix.cpp"
-
 #include "test_slightcsv.cpp"
