@@ -19,12 +19,14 @@
 
 #include <string>
 #include <vector>
+#include <set>
 
 #include "slightmatrix.hpp"
 
 using std::string;
 using std::vector;
 using utils::SlightMatrix;
+using std::set;
 
 namespace utils {
     
@@ -36,6 +38,7 @@ namespace utils {
             char m_escape;
             bool m_csv_format_detect_done;
             SlightMatrix m_data_matrix;
+            set<char> m_strip_chars;
 
     };
 

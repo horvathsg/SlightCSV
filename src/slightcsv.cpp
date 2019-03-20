@@ -89,6 +89,20 @@ char utils::SlightCSV::getEscape(void) const {
     return m_csvp->m_escape;
 }
 
+void utils::SlightCSV::setStripChars(set<char> &t_strip_chars) {
+    if (!t_strip_chars.size()) {
+        throw slightcsv_strip_error();
+    }
+    m_csvp->m_strip_chars = t_strip_chars;
+}
+
+void utils::SlightCSV::getStripChars(set<char> &t_target) {
+    if (!m_csvp->m_strip_chars.size()) {
+        throw slightcsv_strip_error();
+    }
+    t_target = m_csvp->m_strip_chars;
+}
+
 size_t utils::SlightCSV::loadData(void) {
 
     if (!m_csvp->m_filename.size()) {
@@ -187,16 +201,19 @@ size_t utils::SlightCSV::loadData(void) {
 
     // fclose(in_file);
     
-    char esc = m_csvp->m_escape;
-
     char in_char;
     string in_line = "";
     bool is_escaped = false;
     size_t row_id = 0;
 
     while (in_char = fgetc(in_file), in_char != EOF) {
-        if (esc) {
-            if (in_char == esc) {
+        if (m_csvp->m_strip_chars.size()) {
+            if (m_csvp->m_strip_chars.count(in_char)) {
+                continue;
+            }
+        }
+        if (m_csvp->m_escape) {
+            if (in_char == m_csvp->m_escape) {
                 is_escaped ^= true;
             }
         }

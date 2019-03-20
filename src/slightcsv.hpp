@@ -20,10 +20,12 @@
 #include <string>
 #include <vector>
 #include <exception>
+#include <set>
 
 using std::string;
 using std::vector;
 using std::exception;
+using std::set;
 
 namespace utils {
 
@@ -40,6 +42,8 @@ namespace utils {
             char getSeparator(void) const;
             void setEscape(char t_escape);
             char getEscape(void) const;
+            void setStripChars(set<char> &t_strip_chars);
+            void getStripChars(set<char> &t_target);
             size_t loadData(void);
             size_t getColumnCount(void) const;
             size_t getRowCount(void) const;
@@ -52,10 +56,12 @@ namespace utils {
             template <class T>
             void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index) const;
             template <class T>
-            void getColumn(vector<T> &t_target_column, size_t t_colunm_index, size_t t_start_cell_index, size_t t_cell_count) const;
+            void getColumn(vector<T> &t_target_column, size_t t_colunm_index, size_t t_start_cell_index, 
+            size_t t_cell_count) const;
             void getRow(vector<string> &t_target_row, size_t t_row_index) const;
             void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index) const;
-            void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index, size_t t_cell_count) const;
+            void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index, size_t 
+            t_cell_count) const;
             void unloadData(void);
             void reset(void);
 
@@ -88,6 +94,14 @@ namespace utils {
 
         const char* what() const throw() {
             return "Escape character not set.";
+        }
+
+    };
+
+    class slightcsv_strip_error: public slightcsv_error {
+
+        const char* what() const throw() {
+            return "Strip character not set.";
         }
 
     };
