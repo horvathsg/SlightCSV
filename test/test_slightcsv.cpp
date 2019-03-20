@@ -723,6 +723,118 @@ TEST(slightcsv,get_row_ok_verify_4000_ok) {
     CHECK_EQUAL("0", vect.at(29));
 };
 
+TEST(slightcsv,get_row_overload_1_ok) {
+    SlightCSV csv_parser;
+    string ex = "";
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getRow(vect, 4000, 1);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(29, cnt);
+    CHECK_EQUAL("0,3", vect.at(0));
+    CHECK_EQUAL("0", vect.at(28));
+};
+
+TEST(slightcsv,get_row_overload_2_ok) {
+    SlightCSV csv_parser;
+    string ex = "";
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getRow(vect, 4000, 2, 28);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(28, cnt);
+    CHECK_EQUAL("0", vect.at(0));
+    CHECK_EQUAL("0", vect.at(27));
+};
+
+TEST(slightcsv,get_row_overload_3_ok) {
+    SlightCSV csv_parser;
+    string ex = "";
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getRow(vect, 4000, 1, 1);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, cnt);
+    CHECK_EQUAL("0,3", vect.at(0));
+};
+
+TEST(slightcsv,get_row_overload_4_ok) {
+    SlightCSV csv_parser;
+    string ex = "";
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getRow(vect, 8640, 29, 1);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, cnt);
+    CHECK_EQUAL("0", vect.at(0));
+};
+
+TEST(slightcsv,get_row_overload_5_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getRow(vect, 8640, 30);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv,get_row_overload_6_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getRow(vect, 8640, 29, 2);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
 TEST(slightcsv,get_cell_noload) {
     SlightCSV csv_parser;
     string t = "";

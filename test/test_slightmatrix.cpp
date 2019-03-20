@@ -472,6 +472,7 @@ TEST(slightmatrix, getrow_1_ok) {
     vector<string> cells;
     bool valid = false;
     vector<string> row;
+    size_t cnt = 0;
     try {
         SlightMatrix sm;
         sm.setColumnCount(3);
@@ -481,6 +482,7 @@ TEST(slightmatrix, getrow_1_ok) {
         sm.addCells(cells);
         valid = sm.validate();
         sm.getRow(row, 0);
+        cnt = row.size();
     } catch (exception &e) {
         msg = e.what();
     }
@@ -540,6 +542,198 @@ TEST(slightmatrix, getrow_3_invalid_row_id) {
     }
     CHECK_EQUAL("Invalid row count or index.", msg);
     CHECK_EQUAL(true, valid);
+}
+
+TEST(slightmatrix, getrow_4_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<string> row;
+    size_t cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(3);
+        cells.push_back("abc");
+        cells.push_back("def");
+        cells.push_back("ghi");
+        cells.push_back("jkl");
+        cells.push_back("mno");
+        cells.push_back("pqr");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getRow(row, 1, 1);
+        cnt = row.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(2, cnt);
+    CHECK_EQUAL("mno", row.at(0));
+    CHECK_EQUAL("pqr", row.at(1));
+}
+
+TEST(slightmatrix, getrow_5_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<string> row;
+    size_t cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(3);
+        cells.push_back("abc");
+        cells.push_back("def");
+        cells.push_back("ghi");
+        cells.push_back("jkl");
+        cells.push_back("mno");
+        cells.push_back("pqr");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getRow(row, 1, 2);
+        cnt = row.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(1, cnt);
+    CHECK_EQUAL("pqr", row.at(0));
+}
+
+TEST(slightmatrix, getrow_6_range_error) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<string> row;
+    size_t cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(3);
+        cells.push_back("abc");
+        cells.push_back("def");
+        cells.push_back("ghi");
+        cells.push_back("jkl");
+        cells.push_back("mno");
+        cells.push_back("pqr");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getRow(row, 1, 3);
+        cnt = row.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid column count or index.", msg);
+}
+
+TEST(slightmatrix, getrow_7_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<string> row;
+    size_t cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(3);
+        cells.push_back("abc");
+        cells.push_back("def");
+        cells.push_back("ghi");
+        cells.push_back("jkl");
+        cells.push_back("mno");
+        cells.push_back("pqr");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getRow(row, 1, 1, 2);
+        cnt = row.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(2, cnt);
+    CHECK_EQUAL("mno", row.at(0));
+    CHECK_EQUAL("pqr", row.at(1));
+}
+
+TEST(slightmatrix, getrow_8_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<string> row;
+    size_t cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(3);
+        cells.push_back("abc");
+        cells.push_back("def");
+        cells.push_back("ghi");
+        cells.push_back("jkl");
+        cells.push_back("mno");
+        cells.push_back("pqr");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getRow(row, 1, 1, 1);
+        cnt = row.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(1, cnt);
+    CHECK_EQUAL("mno", row.at(0));
+}
+
+TEST(slightmatrix, getrow_9_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<string> row;
+    size_t cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(3);
+        cells.push_back("abc");
+        cells.push_back("def");
+        cells.push_back("ghi");
+        cells.push_back("jkl");
+        cells.push_back("mno");
+        cells.push_back("pqr");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getRow(row, 1, 2, 1);
+        cnt = row.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(1, cnt);
+    CHECK_EQUAL("pqr", row.at(0));
+}
+
+TEST(slightmatrix, getrow_10_ex) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<string> row;
+    size_t cnt = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(3);
+        cells.push_back("abc");
+        cells.push_back("def");
+        cells.push_back("ghi");
+        cells.push_back("jkl");
+        cells.push_back("mno");
+        cells.push_back("pqr");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getRow(row, 1, 2, 2);
+        cnt = row.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid column count or index.", msg);
 }
 
 TEST(slightmatrix, getcolumn_1_string_ok) {

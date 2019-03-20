@@ -251,6 +251,37 @@ void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index) 
     m_csvp->m_data_matrix.getRow(t_target_row, t_row_index);
 }
 
+void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index) const {
+    if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
+        throw slightcsv_data_error();
+    }
+    if (t_row_index >= m_csvp->m_data_matrix.getRowCount()) {
+        throw slightcsv_index_error();
+    }
+    if (t_start_cell_index > m_csvp->m_data_matrix.getColumnCount() - 1) {
+        throw slightcsv_index_error();
+    }
+    m_csvp->m_data_matrix.getRow(t_target_row, t_row_index, t_start_cell_index);
+}
+
+void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index, 
+size_t t_cell_count) const {
+
+    if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
+        throw slightcsv_data_error();
+    }
+    if (t_row_index >= m_csvp->m_data_matrix.getRowCount()) {
+        throw slightcsv_index_error();
+    }
+    if (t_start_cell_index > m_csvp->m_data_matrix.getColumnCount() - 1) {
+        throw slightcsv_index_error();
+    }
+    if (t_start_cell_index + t_cell_count > m_csvp->m_data_matrix.getColumnCount()) {
+        throw slightcsv_index_error();
+    }
+    m_csvp->m_data_matrix.getRow(t_target_row, t_row_index, t_start_cell_index, t_cell_count);
+}
+
 void utils::SlightCSV::unloadData(void) {
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();

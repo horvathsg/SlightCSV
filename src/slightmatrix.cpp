@@ -106,15 +106,40 @@ template void utils::SlightMatrix::getCell(float &t_value, size_t t_row_index, s
 template void utils::SlightMatrix::getCell(double &t_value, size_t t_row_index, size_t t_column_index) const;
 
 void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_row_index) const {
+    if (t_row_index >= m_row_count) {
+        throw slightmatrix_row_error();
+    }
+    this->getRow(t_target, t_row_index, 0, m_column_count);
+}
+
+void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_row_index, size_t t_start_cell_index) const {
+    if (t_row_index >= m_row_count) {
+        throw slightmatrix_row_error();
+    }
+    if (t_start_cell_index > m_column_count - 1) {
+        throw slightmatrix_column_error();
+    }
+    this->getRow(t_target, t_row_index, t_start_cell_index, m_column_count - t_start_cell_index);
+}
+
+void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_row_index, size_t t_start_cell_index, 
+size_t t_cell_count) const {
+
     if (!validate()) {
         throw slightmatrix_matrix_error();
     }
     if (t_row_index >= m_row_count) {
         throw slightmatrix_row_error();
     }
+    if (t_start_cell_index > m_column_count - 1) {
+        throw slightmatrix_column_error();
+    }
+    if (t_start_cell_index + t_cell_count > m_column_count) {
+        throw slightmatrix_column_error();
+    }
     
-    vector<string>::const_iterator first = m_data.begin() + t_row_index * m_column_count;
-    vector<string>::const_iterator last = m_data.begin() + (t_row_index + 1) * m_column_count - 1;
+    vector<string>::const_iterator first = m_data.begin() + t_row_index * m_column_count + t_start_cell_index;
+    vector<string>::const_iterator last = first + t_cell_count - 1;
 
     t_target.clear();
     t_target.reserve(m_row_count);
