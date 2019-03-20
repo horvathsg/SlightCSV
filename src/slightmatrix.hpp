@@ -36,7 +36,7 @@ namespace utils {
             void setColumnCount(size_t t_column_count);
             size_t getColumnCount(void) const;
             void addCell(string t_cell);
-            void addCells(vector<string> t_cells);
+            void addCells(vector<string> &t_cells);
             void setHeaderCount(size_t t_header_count);
             size_t getHeaderCount(void) const;
             bool validate(void) const;

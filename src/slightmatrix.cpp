@@ -58,7 +58,7 @@ void utils::SlightMatrix::addCell(string t_cell) {
     updateRowCount();
 }
 
-void utils::SlightMatrix::addCells(vector<string> t_cells) {
+void utils::SlightMatrix::addCells(vector<string> &t_cells) {
     m_data.insert(m_data.end(), t_cells.begin(), t_cells.end());
     updateRowCount();
 }
