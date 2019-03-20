@@ -489,6 +489,155 @@ TEST(slightcsv,get_column_after_unload_load) {
     CHECK_EQUAL(1, vect.at(13));
 };
 
+TEST(slightcsv,get_column_overload_1_ok) {
+    SlightCSV csv_parser;
+    string ex;
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getColumn(vect, 1, 0);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(cnt, 8641);
+    CHECK_EQUAL("tst", vect.at(0));
+    CHECK_EQUAL("0,1", vect.at(8633));
+    CHECK_EQUAL("0", vect.at(8640));
+};
+
+TEST(slightcsv,get_column_overload_2_ok) {
+    SlightCSV csv_parser;
+    string ex;
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getColumn(vect, 1, 8640);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, cnt);
+    CHECK_EQUAL("0", vect.at(0));
+};
+
+TEST(slightcsv,get_column_overload_3_ex) {
+    SlightCSV csv_parser;
+    string ex;
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getColumn(vect, 1, 8641);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv,get_column_overload_4_ok) {
+    SlightCSV csv_parser;
+    string ex;
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getColumn(vect, 1, 0, 1);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, cnt);
+    CHECK_EQUAL("tst", vect.at(0));
+};
+
+TEST(slightcsv,get_column_overload_5_ok) {
+    SlightCSV csv_parser;
+    string ex;
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getColumn(vect, 1, 0, 5);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(5, cnt);
+    CHECK_EQUAL("tst", vect.at(0));
+};
+
+TEST(slightcsv,get_column_overload_6_ok) {
+    SlightCSV csv_parser;
+    string ex;
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getColumn(vect, 1, 8638, 2);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(2, cnt);
+    CHECK_EQUAL("0", vect.at(0));
+    CHECK_EQUAL("0", vect.at(1));
+};
+
+TEST(slightcsv,get_column_overload_7_ex) {
+    SlightCSV csv_parser;
+    string ex;
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getColumn(vect, 1, 8638, 4);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv,get_column_overload_8_ex) {
+    SlightCSV csv_parser;
+    string ex;
+    vector<string> vect;
+    size_t cnt = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.loadData();
+        csv_parser.getColumn(vect, 1, 0, 8642);
+        cnt = vect.size();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
 TEST(slightcsv,unload_noload) {
     SlightCSV csv_parser;
     string t = "";

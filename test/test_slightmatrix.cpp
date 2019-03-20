@@ -898,6 +898,278 @@ TEST(slightmatrix, getcolumn_3_int_ok) {
     CHECK_EQUAL(45, c);
 }
 
+TEST(slightmatrix, getcolumn_overload_1_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<int> column;
+    size_t size = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getColumn(column, 3, 0);
+        size = column.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(3, size);
+    CHECK_EQUAL(25, column.at(0));
+    CHECK_EQUAL(100, column.at(1));
+    CHECK_EQUAL(45, column.at(2));
+}
+
+TEST(slightmatrix, getcolumn_overload_2_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<int> column;
+    size_t size = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getColumn(column, 3, 0, 3);
+        size = column.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(3, size);
+    CHECK_EQUAL(25, column.at(0));
+    CHECK_EQUAL(100, column.at(1));
+    CHECK_EQUAL(45, column.at(2));
+}
+
+TEST(slightmatrix, getcolumn_overload_3_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<int> column;
+    size_t size = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getColumn(column, 3, 1);
+        size = column.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(2, size);
+    CHECK_EQUAL(100, column.at(0));
+    CHECK_EQUAL(45, column.at(1));
+}
+
+TEST(slightmatrix, getcolumn_overload_4_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<int> column;
+    size_t size = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getColumn(column, 3, 2);
+        size = column.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(1, size);
+    CHECK_EQUAL(45, column.at(0));
+}
+
+TEST(slightmatrix, getcolumn_overload_5_ex) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<int> column;
+    size_t size = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getColumn(column, 3, 3);
+        size = column.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid row count or index.", msg);
+}
+
+TEST(slightmatrix, getcolumn_overload_6_ex) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<int> column;
+    size_t size = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getColumn(column, 3, 1, 3);
+        size = column.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid row count or index.", msg);
+}
+
+TEST(slightmatrix, getcolumn_overload_7_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<int> column;
+    size_t size = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getColumn(column, 3, 1, 2);
+        size = column.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(2, size);
+    CHECK_EQUAL(100, column.at(0));
+    CHECK_EQUAL(45, column.at(1));
+}
+
+TEST(slightmatrix, getcolumn_overload_8_ok) {
+    string msg = "";
+    vector<string> cells;
+    bool valid = false;
+    vector<int> column;
+    size_t size = 0;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        valid = sm.validate();
+        sm.getColumn(column, 3, 2, 1);
+        size = column.size();
+    } catch (exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("", msg);
+    CHECK_EQUAL(true, valid);
+    CHECK_EQUAL(1, size);
+    CHECK_EQUAL(45, column.at(0));
+}
+
 TEST(slightmatrix, reset) {
     string msg = "";
     vector<string> cells;

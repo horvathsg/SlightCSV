@@ -46,7 +46,11 @@ namespace utils {
             template <class T>
             void getCell(T &t_value, size_t t_row_index, size_t t_column_index) const;
             template <class T>
-            void getColumn(vector<T> &t_target_column, size_t t_colunm_index) const;
+            void getColumn(vector<T> &t_target_column, size_t t_column_index) const;
+            template <class T>
+            void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index) const;
+            template <class T>
+            void getColumn(vector<T> &t_target_column, size_t t_colunm_index, size_t t_start_cell_index, size_t t_cell_count) const;
             void getRow(vector<string> &t_target_row, size_t t_row_index) const;
             void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index) const;
             void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index, size_t t_cell_count) const;

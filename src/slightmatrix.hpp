@@ -48,6 +48,10 @@ namespace utils {
             void getRow(vector<string> &t_target, size_t t_row_index, size_t t_start_cell_index, size_t t_cell_count) const;
             template <class T>
             void getColumn(vector<T> &t_target, size_t t_column_index) const;
+            template <class T>
+            void getColumn(vector<T> &t_target, size_t t_column_index, size_t t_start_cell_index) const;
+            template <class T>
+            void getColumn(vector<T> &t_target, size_t t_column_index, size_t t_start_cell_index, size_t t_cell_count) const;
             void reset(void);
 
         private:
