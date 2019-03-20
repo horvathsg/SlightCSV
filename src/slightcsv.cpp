@@ -66,6 +66,7 @@ void utils::SlightCSV::setSeparator(char t_separator) {
         throw slightcsv_separator_error();
     }
     m_csvp->m_separator = t_separator;
+    m_csvp->m_row.setSeparator(t_separator);
 }
 
 char utils::SlightCSV::getSeparator(void) const {
@@ -80,6 +81,7 @@ void utils::SlightCSV::setEscape(char t_escape) {
         throw slightcsv_escape_error();
     }
     m_csvp->m_escape = t_escape;
+    m_csvp->m_row.setEscape(t_escape);
 }
 
 char utils::SlightCSV::getEscape(void) const {
@@ -122,10 +124,10 @@ size_t utils::SlightCSV::loadData(void) {
         throw slightcsv_filename_error();
     }
 
-    // size_t file_size;
-    // fseek(in_file, 0L, SEEK_END);
-    // file_size = ftell(in_file);
-    // fseek(in_file, 0L, SEEK_SET);
+    size_t file_size;
+    fseek(in_file, 0L, SEEK_END);
+    m_csvp->m_file_size = ftell(in_file);
+    fseek(in_file, 0L, SEEK_SET);
 
     // vector<size_t> rnmap;
     // char q = '\"';
@@ -401,6 +403,8 @@ void utils::SlightCSV::unloadData(void) {
     }
     m_csvp->m_data_matrix.reset();
     m_csvp->m_csv_format_detect_done = false;
+    m_csvp->m_row.clear();
+    m_csvp->m_file_size = 0;
 }
 
 void utils::SlightCSV::reset(void) {
@@ -410,6 +414,8 @@ void utils::SlightCSV::reset(void) {
     m_csvp->m_escape = 0;
     m_csvp->m_strip_chars.clear();
     m_csvp->m_csv_format_detect_done = false;
+    m_csvp->m_row.reset();
+    m_csvp->m_file_size = 0;
 }
 
 void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
@@ -421,22 +427,17 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
         return;
     }
 
-    SlightRow row;
-    row.setInput(t_input);
-    row.setSeparator(m_csvp->m_separator);
-    if (m_csvp->m_escape) {
-        row.setEscape(m_csvp->m_escape);
-    }
-    row.process();
+    m_csvp->m_row.clear();
+    m_csvp->m_row.setInput(t_input);
+    m_csvp->m_row.process();
 
     if (!m_csvp->m_csv_format_detect_done) {
-        //size_t cap = m_csvp->m_data_matrix.getCapacity();
-        //m_csvp->m_data_matrix.setCapacity(cap * row.getCellCount());
-        m_csvp->m_data_matrix.setColumnCount(row.getCellCount());
+        m_csvp->m_data_matrix.setCapacity(m_csvp->m_file_size / t_input.size() * m_csvp->m_row.getCellCount());
+        m_csvp->m_data_matrix.setColumnCount(m_csvp->m_row.getCellCount());
         m_csvp->m_csv_format_detect_done = true;
     }
 
-    if (row.getIsHeader()) {
+    if (m_csvp->m_row.getIsHeader()) {
         size_t header_count = m_csvp->m_data_matrix.getHeaderCount();
         if (t_row_id == header_count) {
             m_csvp->m_data_matrix.setHeaderCount(++header_count);
@@ -445,14 +446,14 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
         }
     }
 
-    if (row.getCellCount() != m_csvp->m_data_matrix.getColumnCount()) {
+    if (m_csvp->m_row.getCellCount() != m_csvp->m_data_matrix.getColumnCount()) {
         // cout << "Cell count " << row.getCellCount() << " in row " << t_row_id << endl;
         // cout << "Input: " << t_input << endl;
         throw slightcsv_format_cellcnt_error();
     }
     
     vector<string> cells;
-    row.getCells(cells);
+    m_csvp->m_row.getCells(cells);
     m_csvp->m_data_matrix.addCells(cells);
 
 }

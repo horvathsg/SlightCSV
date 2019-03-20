@@ -41,6 +41,7 @@ namespace utils {
             size_t getCellCount(void) const;
             size_t getCells(vector<string> &t_target) const;
             bool getIsHeader(void) const;
+            void clear(void);
             void reset(void);
 
         private:

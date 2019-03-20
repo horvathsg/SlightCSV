@@ -189,14 +189,18 @@ size_t utils::SlightRow::getCells(vector<string> &t_target) const {
     return m_cells.size();
 }
 
-void utils::SlightRow::reset(void) {
+void utils::SlightRow::clear(void) {
     m_processed = false;
     m_input.clear();
-    m_sep = 0;
-    m_esc = 0;
     m_cell_count = 0;
     m_cells.clear();
     m_is_header = false;
+}
+
+void utils::SlightRow::reset(void) {
+    this->clear();
+    m_sep = 0;
+    m_esc = 0;
 }
 
 bool utils::SlightRow::getIsHeader(void) const {
