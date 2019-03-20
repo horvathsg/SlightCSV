@@ -231,7 +231,7 @@ TEST(slightrow, get_cell_cnt_ok_4_lenok_hassep_hasendsep) {
     CHECK_EQUAL(5, cnt);
 }
 
-TEST(slightrow, get_cell_cnt_ok_18_lenok_hassep_noendsep) {
+TEST(slightrow, get_cell_cnt_ok_18_lenok_hassep_hasendsep) {
     SlightRow row;
     string exs = "";
     string str = "another,example,of,a,string,with,a,slightly,different,line,ending,character,.,will,it,blend?,";
