@@ -88,91 +88,117 @@ size_t utils::SlightCSV::loadData(void) {
     size_t retval = 0;
 
     FILE *in_file;
-    size_t file_size;
     
     in_file = fopen(m_csvp->m_filename.c_str(), "rb");
     if (!in_file) {
         throw slightcsv_filename_error();
     }
 
-    fseek(in_file, 0L, SEEK_END);
-    file_size = ftell(in_file);
-    fseek(in_file, 0L, SEEK_SET);
+    // size_t file_size;
+    // fseek(in_file, 0L, SEEK_END);
+    // file_size = ftell(in_file);
+    // fseek(in_file, 0L, SEEK_SET);
 
-    vector<size_t> rnmap;
-    char q = '\"';
-    int in_char;
-    size_t cursor = 0;
-    string rows;
+    // vector<size_t> rnmap;
+    // char q = '\"';
+    // int in_char;
+    // size_t cursor = 0;
+    // string rows;
 
-    vector<bool> qmap(file_size);
+    // vector<bool> qmap(file_size);
 
-    qmap[0] = false;
+    // qmap[0] = false;
 
-    size_t row_count = 0;
-    size_t last_sep_idx = 0;
+    // size_t row_count = 0;
+    // size_t last_sep_idx = 0;
 
-    for (size_t i = 0; i < file_size; ++i) {
-        in_char = fgetc(in_file);
-        if (in_char == EOF) {
-            throw slightcsv_read_error();
+    // for (size_t i = 0; i < file_size; ++i) {
+    //     in_char = fgetc(in_file);
+    //     if (in_char == EOF) {
+    //         throw slightcsv_read_error();
+    //     }
+    //     if (i) {
+    //         qmap[i] = qmap[i-1];
+    //     }
+    //     if (in_char == q) {
+    //         qmap[i] = qmap[i]^true;
+    //     }
+    //     if (in_char == '\r' || in_char == '\n') {
+    //         if (qmap[i] == false) {
+    //             rnmap.push_back(i);
+    //             if (i - last_sep_idx > 1) {
+    //                 ++row_count;
+    //                 last_sep_idx = i;
+    //             }
+    //         } else {
+    //             // escaped line ending
+    //         }
+    //     }
+    // }
+
+    // //m_csvp->m_data_matrix.setReserveRowCount(row_count);
+    // m_csvp->m_data_matrix.setCapacity(row_count);
+
+    // fseek(in_file, 0L, SEEK_SET);
+
+    // size_t row_id = 0;
+
+    // for (size_t j = 0; j < rnmap.size(); ++j) {
+    //     if (rnmap.at(j) - cursor > 0) {
+    //         char *row = new char[rnmap.at(j) - cursor + 1];
+    //         size_t cnt = fread(row, sizeof(char), rnmap.at(j) - cursor, in_file);
+    //         row[cnt] = 0;
+    //         string rows = row;
+    //         delete[] row;
+    //         processLine(rows, row_id);
+    //         ++row_id;
+    //     } else {
+    //         // row is empty
+    //     }
+    //     fseek(in_file, 1L, SEEK_CUR);
+    //     cursor = rnmap.at(j) + 1;
+    // }
+
+    // if (cursor < file_size) {
+
+    //     char *row = new char[file_size - cursor + 1];
+    //     size_t cnt = fread(row, sizeof(char), file_size - cursor, in_file);
+    //     row[cnt] = 0;
+    //     string rows = row;
+    //     delete[] row;
+    //     processLine(rows, row_id);
+    //     ++row_id;
+
+    // }
+
+    // fclose(in_file);
+    
+
+    char in_char;
+    string in_line = "";
+    bool is_escaped = false;
+    size_t row_id = 0;
+
+    while (in_char = fgetc(in_file), in_char != EOF) {
+        if (in_char == '\"') {
+            is_escaped ^= true;
         }
-        if (i) {
-            qmap[i] = qmap[i-1];
-        }
-        if (in_char == q) {
-            qmap[i] = qmap[i]^true;
-        }
-        if (in_char == '\r' || in_char == '\n') {
-            if (qmap[i] == false) {
-                rnmap.push_back(i);
-                if (i - last_sep_idx > 1) {
-                    ++row_count;
-                    last_sep_idx = i;
-                }
-            } else {
-                // escaped line ending
+        if ((in_char != '\r' && in_char != '\n') || is_escaped) {
+            in_line.append((char*)&in_char);
+        } else {
+            if (in_line.size()) {
+                processLine(in_line, row_id);
+                in_line.clear();
+                ++row_id;
             }
         }
     }
 
-    //m_csvp->m_data_matrix.setReserveRowCount(row_count);
-    m_csvp->m_data_matrix.setCapacity(row_count);
-
-    fseek(in_file, 0L, SEEK_SET);
-
-    size_t row_id = 0;
-
-    for (size_t j = 0; j < rnmap.size(); ++j) {
-        if (rnmap.at(j) - cursor > 0) {
-            char *row = new char[rnmap.at(j) - cursor + 1];
-            size_t cnt = fread(row, sizeof(char), rnmap.at(j) - cursor, in_file);
-            row[cnt] = 0;
-            string rows = row;
-            delete[] row;
-            processLine(rows, row_id);
-            ++row_id;
-        } else {
-            // row is empty
-        }
-        fseek(in_file, 1L, SEEK_CUR);
-        cursor = rnmap.at(j) + 1;
-    }
-
-    if (cursor < file_size) {
-
-        char *row = new char[file_size - cursor + 1];
-        size_t cnt = fread(row, sizeof(char), file_size - cursor, in_file);
-        row[cnt] = 0;
-        string rows = row;
-        delete[] row;
-        processLine(rows, row_id);
-        ++row_id;
-
-    }
+    processLine(in_line, row_id);
 
     fclose(in_file);
-    
+
+
     //m_csvp->m_row_count = m_csvp->m_data_matrix.getRowCount();
     retval = m_csvp->m_data_matrix.getRowCount();
 
@@ -365,8 +391,8 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
     row.process();
 
     if (!m_csvp->m_csv_format_detect_done) {
-        size_t cap = m_csvp->m_data_matrix.getCapacity();
-        m_csvp->m_data_matrix.setCapacity(cap * row.getCellCount());
+        //size_t cap = m_csvp->m_data_matrix.getCapacity();
+        //m_csvp->m_data_matrix.setCapacity(cap * row.getCellCount());
         m_csvp->m_data_matrix.setColumnCount(row.getCellCount());
         m_csvp->m_csv_format_detect_done = true;
     }
