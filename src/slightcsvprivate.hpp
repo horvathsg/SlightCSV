@@ -33,6 +33,7 @@ namespace utils {
         public:
             string m_filename;
             char m_separator;
+            char m_escape;
             bool m_csv_format_detect_done;
             SlightMatrix m_data_matrix;
 

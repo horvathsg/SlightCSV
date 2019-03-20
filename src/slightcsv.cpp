@@ -75,6 +75,20 @@ char utils::SlightCSV::getSeparator(void) const {
     return m_csvp->m_separator;
 }
 
+void utils::SlightCSV::setEscape(char t_escape) {
+    if (!t_escape) {
+        throw slightcsv_escape_error();
+    }
+    m_csvp->m_escape = t_escape;
+}
+
+char utils::SlightCSV::getEscape(void) const {
+    if (!m_csvp->m_escape) {
+        throw slightcsv_escape_error();
+    }
+    return m_csvp->m_escape;
+}
+
 size_t utils::SlightCSV::loadData(void) {
 
     if (!m_csvp->m_filename.size()) {
@@ -173,6 +187,7 @@ size_t utils::SlightCSV::loadData(void) {
 
     // fclose(in_file);
     
+    char esc = m_csvp->m_escape;
 
     char in_char;
     string in_line = "";
@@ -180,11 +195,13 @@ size_t utils::SlightCSV::loadData(void) {
     size_t row_id = 0;
 
     while (in_char = fgetc(in_file), in_char != EOF) {
-        if (in_char == '\"') {
-            is_escaped ^= true;
+        if (esc) {
+            if (in_char == esc) {
+                is_escaped ^= true;
+            }
         }
         if ((in_char != '\r' && in_char != '\n') || is_escaped) {
-            in_line.append((char*)&in_char);
+            in_line += in_char;
         } else {
             if (in_line.size()) {
                 processLine(in_line, row_id);
@@ -373,6 +390,7 @@ void utils::SlightCSV::reset(void) {
     m_csvp->m_data_matrix.reset();
     m_csvp->m_filename.clear();
     m_csvp->m_separator = 0;
+    m_csvp->m_escape = 0;
     m_csvp->m_csv_format_detect_done = false;
 }
 
@@ -388,6 +406,9 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
     SlightRow row;
     row.setInput(t_input);
     row.setSeparator(m_csvp->m_separator);
+    if (m_csvp->m_escape) {
+        row.setEscape(m_csvp->m_escape);
+    }
     row.process();
 
     if (!m_csvp->m_csv_format_detect_done) {
@@ -408,6 +429,7 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
 
     if (row.getCellCount() != m_csvp->m_data_matrix.getColumnCount()) {
         // cout << "Cell count " << row.getCellCount() << " in row " << t_row_id << endl;
+        // cout << "Input: " << t_input << endl;
         throw slightcsv_format_cellcnt_error();
     }
     

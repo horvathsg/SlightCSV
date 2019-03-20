@@ -35,6 +35,8 @@ namespace utils {
             string getInput(void) const;
             void setSeparator(char t_sep);
             char getSeparator(void) const;
+            void setEscape(char t_esc);
+            char getEscape(void) const;
             void process(void);
             size_t getCellCount(void) const;
             size_t getCells(vector<string> &t_target) const;
@@ -45,6 +47,7 @@ namespace utils {
             bool checkIsHeader(void) const;
             string m_input;
             char m_sep;
+            char m_esc;
             bool m_processed;
             vector<string> m_cells;
             size_t m_cell_count;
@@ -66,6 +69,14 @@ namespace utils {
 
         const char* what() const throw() {
             return "Separator is not defined or empty.";
+        }
+
+    };
+
+    class slightrow_escape_error: public slightrow_error {
+
+        const char* what() const throw() {
+            return "Escape character not set.";
         }
 
     };

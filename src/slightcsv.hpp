@@ -38,6 +38,8 @@ namespace utils {
             string getFileName(void) const;
             void setSeparator(char t_separator);
             char getSeparator(void) const;
+            void setEscape(char t_escape);
+            char getEscape(void) const;
             size_t loadData(void);
             size_t getColumnCount(void) const;
             size_t getRowCount(void) const;
@@ -78,6 +80,14 @@ namespace utils {
 
         const char* what() const throw() {
             return "Wrong or missing separator.";
+        }
+
+    };
+
+    class slightcsv_escape_error: public slightcsv_error {
+
+        const char* what() const throw() {
+            return "Escape character not set.";
         }
 
     };

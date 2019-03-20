@@ -1075,3 +1075,135 @@ TEST(slightcsv,get_cell_double_8628_28) {
     double d = 0.95;
     CHECK_EQUAL(d, t);
 };
+
+TEST(slightcsv, get_empty_escape_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    try {
+        csv_parser.getEscape();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Escape character not set.", ex);
+};
+
+TEST(slightcsv, set_empty_escape_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    try {
+        csv_parser.setEscape(0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Escape character not set.", ex);
+};
+
+TEST(slightcsv, set_get_escape_ok) {
+    SlightCSV csv_parser;
+    string ex = "";
+    char esc = '\"';
+    char c = 0;
+    try {
+        csv_parser.setEscape(esc);
+        c = csv_parser.getEscape();
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(esc, c);
+};
+
+TEST(slightcsv, set_escape_process_ok_1) {
+    SlightCSV csv_parser;
+    string ex = "";
+    char esc = '\"';
+    char c = 0;
+    string cell;
+    size_t count = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setEscape(esc);
+        c = csv_parser.getEscape();
+        csv_parser.setFileName("../../test/env_data_sli.csv");
+        csv_parser.loadData();
+        count = csv_parser.getColumnCount();
+        csv_parser.getCell(cell, 0, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(esc, c);
+    CHECK_EQUAL(30, count);
+    CHECK_EQUAL("\"14;0,1\"", cell);
+};
+
+TEST(slightcsv, set_escape_process_ok_2) {
+    SlightCSV csv_parser;
+    string ex = "";
+    char esc = '\"';
+    char c = 0;
+    string cell;
+    size_t count = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setEscape(esc);
+        c = csv_parser.getEscape();
+        csv_parser.setFileName("../../test/env_data_sli.csv");
+        csv_parser.loadData();
+        count = csv_parser.getColumnCount();
+        csv_parser.getCell(cell, 1, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(esc, c);
+    CHECK_EQUAL(30, count);
+    CHECK_EQUAL("\"14;\"0,1", cell);
+};
+
+TEST(slightcsv, set_escape_process_ok_3) {
+    SlightCSV csv_parser;
+    string ex = "";
+    char esc = '\"';
+    char c = 0;
+    string cell;
+    size_t count = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setEscape(esc);
+        c = csv_parser.getEscape();
+        csv_parser.setFileName("../../test/env_data_sli.csv");
+        csv_parser.loadData();
+        count = csv_parser.getColumnCount();
+        csv_parser.getCell(cell, 2, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(esc, c);
+    CHECK_EQUAL(30, count);
+    CHECK_EQUAL("\"14\"", cell);
+};
+TEST(slightcsv, set_escape_process_ok_4) {
+    SlightCSV csv_parser;
+    string ex = "";
+    char esc = '\"';
+    char c = 0;
+    string cell;
+    size_t count = 0;
+    try {
+        csv_parser.setSeparator(';');
+        csv_parser.setEscape(esc);
+        c = csv_parser.getEscape();
+        csv_parser.setFileName("../../test/env_data_sli.csv");
+        csv_parser.loadData();
+        count = csv_parser.getColumnCount();
+        csv_parser.getCell(cell, 3, 29);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(esc, c);
+    CHECK_EQUAL(30, count);
+    CHECK_EQUAL("\"0\r\ndxl\"", cell);
+};

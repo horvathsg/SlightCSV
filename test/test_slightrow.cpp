@@ -566,9 +566,11 @@ TEST(slightrow, escape_quotes_1) {
     SlightRow row;
     string str = "test,test,\"test,test\"";
     char sep = ',';
+    char esc = '\"';
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
+    row.setEscape(esc);
     row.process();
     row.getCells(vect);
     CHECK_EQUAL(3, vect.size());
@@ -581,9 +583,11 @@ TEST(slightrow, escape_quotes_2) {
     SlightRow row;
     string str = "test,test,\"test,test\",";
     char sep = ',';
+    char esc = '\"';
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
+    row.setEscape(esc);
     row.process();
     row.getCells(vect);
     CHECK_EQUAL(4, vect.size());
@@ -597,9 +601,11 @@ TEST(slightrow, escape_quotes_3) {
     SlightRow row;
     string str = "test,,test,\"test,,test\",,";
     char sep = ',';
+    char esc = '\"';
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
+    row.setEscape(esc);
     row.process();
     row.getCells(vect);
     CHECK_EQUAL(6, vect.size());
@@ -615,9 +621,11 @@ TEST(slightrow, escape_quotes_4) {
     SlightRow row;
     string str = "test,,test,\"test,,test,,";
     char sep = ',';
+    char esc = '\"';
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
+    row.setEscape(esc);
     row.process();
     row.getCells(vect);
     CHECK_EQUAL(4, vect.size());
@@ -631,9 +639,11 @@ TEST(slightrow, escape_quotes_5) {
     SlightRow row;
     string str = "\"test,,test,\"test,\",test,\",";
     char sep = ',';
+    char esc = '\"';
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
+    row.setEscape(esc);
     row.process();
     row.getCells(vect);
     CHECK_EQUAL(3, vect.size());
@@ -646,9 +656,11 @@ TEST(slightrow, escape_quotes_6) {
     SlightRow row;
     string str = "11241824,JB166932,03/07/2016 09:00:00 AM,053XX W IRVING PARK RD,1130,DECEPTIVE PRACTICE,FRAUD OR CONFIDENCE GAME,AUTO / BOAT / RV DEALERSHIP,false,false,1634,016,38,15,11,,,2016,02/28/2018 04:16:24 PM,,,";
     char sep = ',';
+    char esc = '\"';
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
+    row.setEscape(esc);
     row.process();
     row.getCells(vect);
     CHECK_EQUAL(22, vect.size());
@@ -727,4 +739,121 @@ TEST(slightrow, get_is_header_false_nums_only) {
         ex = e.what();
     }
     CHECK_EQUAL(false, is_header);
+}
+
+TEST(slightrow, get_escape_empty) {
+    string ex = "";
+    try {
+        SlightRow row;
+        row.getEscape();
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Escape character not set.", ex);
+}
+
+TEST(slightrow, set_escape_empty) {
+    string ex = "";
+    try {
+        SlightRow row;
+        row.setEscape(0);
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Escape character not set.", ex);
+}
+
+TEST(slightrow, set_get_escape_ok) {
+    string ex = "";
+    char esc;
+    try {
+        SlightRow row;
+        row.setEscape('\"');
+        esc = row.getEscape();
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL('\"', esc);
+}
+
+TEST(slightrow, set_escape_process_ok_1) {
+    string ex = "";
+    char esc = '\'';
+    char sep = ',';
+    string str = "this,is,a,test,row,with\',escaped,\'characters";
+    size_t cnt = 0;
+    vector<string> cells;
+    string cell;
+    try {
+        SlightRow row;
+        row.setInput(str);
+        row.setSeparator(sep);
+        row.setEscape(esc);
+        row.process();
+        esc = row.getEscape();
+        cnt = row.getCellCount();
+        row.getCells(cells);
+        cell = cells.at(5);
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL('\'', esc);
+    CHECK_EQUAL(6, cnt);
+    CHECK_EQUAL("with\',escaped,\'characters", cell);
+}
+
+TEST(slightrow, set_escape_process_ok_2) {
+    string ex = "";
+    char esc = '\'';
+    char sep = ',';
+    string str = "this,is,a,test,row,with,\'escaped,\'characters";
+    size_t cnt = 0;
+    vector<string> cells;
+    string cell;
+    try {
+        SlightRow row;
+        row.setInput(str);
+        row.setSeparator(sep);
+        row.setEscape(esc);
+        row.process();
+        esc = row.getEscape();
+        cnt = row.getCellCount();
+        row.getCells(cells);
+        cell = cells.at(6);
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL('\'', esc);
+    CHECK_EQUAL(7, cnt);
+    CHECK_EQUAL("\'escaped,\'characters", cell);
+}
+
+TEST(slightrow, set_escape_process_ok_3) {
+    string ex = "";
+    char esc = '\"';
+    char sep = ',';
+    string str = "this,is,a,test,\"row,with\",escaped,characters";
+    size_t cnt = 0;
+    vector<string> cells;
+    string cell;
+    try {
+        SlightRow row;
+        row.setInput(str);
+        row.setSeparator(sep);
+        row.setEscape(esc);
+        row.process();
+        esc = row.getEscape();
+        cnt = row.getCellCount();
+        row.getCells(cells);
+        cell = cells.at(4);
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL('\"', esc);
+    CHECK_EQUAL(7, cnt);
+    CHECK_EQUAL("\"row,with\"", cell);
 }

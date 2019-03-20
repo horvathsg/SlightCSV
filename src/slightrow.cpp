@@ -63,6 +63,21 @@ char utils::SlightRow::getSeparator(void) const {
     return m_sep;
 }
 
+void utils::SlightRow::setEscape(char t_esc) {
+    if (t_esc == 0) {
+        throw slightrow_escape_error();
+    }
+    m_esc = t_esc;
+    m_processed = false;
+}
+
+char utils::SlightRow::getEscape(void) const {
+    if (m_esc == 0) {
+        throw slightrow_escape_error();
+    }
+    return m_esc;
+}
+
 void utils::SlightRow::process(void) {
     if (!m_input.size()) {
         throw slightrow_input_error();
@@ -126,11 +141,13 @@ void utils::SlightRow::process(void) {
     char c;
     for(size_t i = 0; i < m_input.size(); ++i) {
         c = m_input[i];
-        if (c == '\"') {
-            is_escaped ^= true;
+        if (m_esc) {
+            if (c == m_esc) {
+                is_escaped ^= true;
+            }
         }
         if (c != m_sep || is_escaped) {
-            cell.append((char*)&c);
+            cell += c;
         } else {
             if (cell.size() != 0) {
                 m_cells.push_back(cell);
@@ -176,6 +193,7 @@ void utils::SlightRow::reset(void) {
     m_processed = false;
     m_input.clear();
     m_sep = 0;
+    m_esc = 0;
     m_cell_count = 0;
     m_cells.clear();
 }
