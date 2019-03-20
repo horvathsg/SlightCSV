@@ -41,7 +41,8 @@ namespace utils {
             size_t getHeaderCount(void) const;
             bool validate(void) const;
             size_t getRowCount(void) const;
-            string getCell(size_t t_row_index, size_t t_column_index) const;
+            template <class T>
+            void getCell(T &t_value, size_t t_row_index, size_t t_column_index) const;
             void getRow(vector<string> &t_target, size_t t_row_index) const;
             template <class T>
             void getColumn(vector<T> &t_target, size_t t_column_index) const;

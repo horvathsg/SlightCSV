@@ -722,3 +722,95 @@ TEST(slightcsv,get_row_ok_verify_4000_ok) {
     CHECK_EQUAL("0,3", vect.at(1));
     CHECK_EQUAL("0", vect.at(29));
 };
+
+TEST(slightcsv,get_cell_noload) {
+    SlightCSV csv_parser;
+    string t = "";
+    try {
+        csv_parser.getCell(t, 0, 0);
+    } catch(exception &e) {
+        t = e.what();
+    }
+    CHECK_EQUAL("Data not loaded.", t);
+};
+
+TEST(slightcsv,get_cell_string_0_0) {
+    SlightCSV csv_parser;
+    csv_parser.setSeparator(';');
+    csv_parser.setFileName("../../test/env_data.csv");
+    csv_parser.loadData();
+    string ex = "";
+    string t = "";
+    try {
+        csv_parser.getCell(t, 0, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL("tst", t);
+};
+
+TEST(slightcsv,get_cell_int_8640_0) {
+    SlightCSV csv_parser;
+    csv_parser.setSeparator(';');
+    csv_parser.setFileName("../../test/env_data.csv");
+    csv_parser.loadData();
+    string ex = "";
+    int t = 0;
+    try {
+        csv_parser.getCell(t, 8640, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(10, t);
+};
+
+TEST(slightcsv,get_cell_int_8640_29) {
+    SlightCSV csv_parser;
+    csv_parser.setSeparator(';');
+    csv_parser.setFileName("../../test/env_data.csv");
+    csv_parser.loadData();
+    string ex = "";
+    int t = 0;
+    try {
+        csv_parser.getCell(t, 8640, 29);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(0, t);
+};
+
+TEST(slightcsv,get_cell_float_8628_28) {
+    SlightCSV csv_parser;
+    csv_parser.setSeparator(';');
+    csv_parser.setFileName("../../test/env_data.csv");
+    csv_parser.loadData();
+    string ex = "";
+    float t = 0;
+    try {
+        csv_parser.getCell(t, 8628, 28);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(0.95f, t);
+};
+
+TEST(slightcsv,get_cell_double_8628_28) {
+    SlightCSV csv_parser;
+    csv_parser.setSeparator(';');
+    csv_parser.setFileName("../../test/env_data.csv");
+    csv_parser.loadData();
+    string ex = "";
+    double t = 0;
+    try {
+        csv_parser.getCell(t, 8628, 28);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    double d = 0.95;
+    CHECK_EQUAL(d, t);
+};

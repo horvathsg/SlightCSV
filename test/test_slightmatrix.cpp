@@ -215,7 +215,7 @@ TEST(slightmatrix, add_get_cell_1) {
         sm.addCell("jkl");
         sm.addCell("mno");
         sm.addCell("pqr");
-        cell = sm.getCell(0, 0);
+        sm.getCell(cell, 0, 0);
         cnt = sm.getRowCount();
     } catch (exception &e) {
         msg = e.what();
@@ -235,7 +235,7 @@ TEST(slightmatrix, add_get_cell_2) {
         sm.addCell("abc");
         sm.addCell("def");
         sm.addCell("ghi");
-        cell = sm.getCell(0, 2);
+        sm.getCell(cell, 0, 2);
         cnt = sm.getRowCount();
     } catch (exception &e) {
         msg = e.what();
@@ -258,7 +258,7 @@ TEST(slightmatrix, add_get_cell_3) {
         sm.addCell("jkl");
         sm.addCell("mno");
         sm.addCell("pqr");
-        cell = sm.getCell(1, 0);
+        sm.getCell(cell, 1, 0);
         cnt = sm.getRowCount();
     } catch (exception &e) {
         msg = e.what();
@@ -281,7 +281,7 @@ TEST(slightmatrix, add_get_cell_4_invalid_column) {
         sm.addCell("jkl");
         sm.addCell("mno");
         sm.addCell("pqr");
-        cell = sm.getCell(1, 3);
+        sm.getCell(cell, 1, 3);
     } catch (exception &e) {
         msg = e.what();
     }
@@ -301,7 +301,7 @@ TEST(slightmatrix, add_get_cell_5_invalid_row) {
         sm.addCell("jkl");
         sm.addCell("mno");
         sm.addCell("pqr");
-        cell = sm.getCell(2, 0);
+        sm.getCell(cell, 2, 0);
     } catch (exception &e) {
         msg = e.what();
     }
@@ -320,7 +320,7 @@ TEST(slightmatrix, add_get_cells_1) {
         cells.push_back("def");
         cells.push_back("ghi");
         sm.addCells(cells);
-        cell = sm.getCell(0, 0);
+        sm.getCell(cell, 0, 0);
     } catch (exception &e) {
         msg = e.what();
     }
@@ -340,7 +340,7 @@ TEST(slightmatrix, add_get_cells_2) {
         cells.push_back("def");
         cells.push_back("ghi");
         sm.addCells(cells);
-        cell = sm.getCell(0, 2);
+        sm.getCell(cell, 0, 2);
     } catch (exception &e) {
         msg = e.what();
     }
@@ -363,7 +363,7 @@ TEST(slightmatrix, add_get_cells_3) {
         cells.push_back("mno");
         cells.push_back("pqr");
         sm.addCells(cells);
-        cell = sm.getCell(1, 0);
+        sm.getCell(cell, 1, 0);
     } catch (exception &e) {
         msg = e.what();
     }
@@ -383,7 +383,7 @@ TEST(slightmatrix, add_get_cells_4_invalid_column) {
         cells.push_back("def");
         cells.push_back("ghi");
         sm.addCells(cells);
-        cell = sm.getCell(0, 3);
+        sm.getCell(cell, 0, 3);
     } catch (exception &e) {
         msg = e.what();
     }
@@ -403,7 +403,7 @@ TEST(slightmatrix, add_get_cells_5_invalid_row) {
         cells.push_back("ghi");
         cells.push_back("jkl");
         sm.addCells(cells);
-        cell = sm.getCell(2, 0);
+        sm.getCell(cell, 2, 0);
     } catch (exception &e) {
         msg = e.what();
     }
