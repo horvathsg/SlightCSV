@@ -196,6 +196,7 @@ void utils::SlightRow::reset(void) {
     m_esc = 0;
     m_cell_count = 0;
     m_cells.clear();
+    m_is_header = false;
 }
 
 bool utils::SlightRow::getIsHeader(void) const {

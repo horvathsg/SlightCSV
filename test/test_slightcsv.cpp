@@ -1194,3 +1194,183 @@ TEST(slightcsv, set_escape_process_ok_4) {
     CHECK_EQUAL(30, count);
     CHECK_EQUAL("\"0\r\ndxl\"", cell);
 };
+
+TEST(slightcsv, get_empty_strip_chars_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    try {
+        csv_parser.getStripChars(ss);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Strip character set empty.", ex);
+};
+
+TEST(slightcsv, set_empty_strip_chars_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    try {
+        csv_parser.setStripChars(ss);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Strip character set empty.", ex);
+};
+
+TEST(slightcsv, get_set_strip_chars_ok_1) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    char c = 't';
+    ss.insert(c);
+    try {
+        csv_parser.setStripChars(ss);
+        csv_parser.getStripChars(ss);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, ss.count(c));
+};
+
+TEST(slightcsv, get_set_strip_chars_ok_2) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    char c = 't';
+    char d = 'z';
+    char e = 'x';
+    ss.insert(c);
+    ss.insert(d);
+    try {
+        csv_parser.setStripChars(ss);
+        csv_parser.getStripChars(ss);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, ss.count(c));
+    CHECK_EQUAL(1, ss.count(d));
+    CHECK_EQUAL(0, ss.count(e));
+};
+
+TEST(slightcsv, get_set_strip_chars_reset_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    char c = 't';
+    char d = 'z';
+    ss.insert(c);
+    ss.insert(d);
+    try {
+        csv_parser.setStripChars(ss);
+        csv_parser.reset();
+        csv_parser.getStripChars(ss);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Strip character set empty.", ex);
+};
+
+TEST(slightcsv, get_set_strip_process_ok_1) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    char c = 't';
+    ss.insert(c);
+    string cell = "";
+    try {
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.setSeparator(';');
+        csv_parser.setStripChars(ss);
+        csv_parser.getStripChars(ss);
+        csv_parser.loadData();
+        csv_parser.getCell(cell, 0, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, ss.count(c));
+    CHECK_EQUAL("s", cell);
+};
+
+TEST(slightcsv, get_set_strip_process_ok_2) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    char c = ',';
+    char d = '0';
+    ss.insert(c);
+    ss.insert(d);
+    string cell = "";
+    try {
+        csv_parser.setFileName("../../test/env_data_sli.csv");
+        csv_parser.setSeparator(';');
+        csv_parser.setEscape('\"');
+        csv_parser.setStripChars(ss);
+        csv_parser.getStripChars(ss);
+        csv_parser.loadData();
+        csv_parser.getCell(cell, 0, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, ss.count(c));
+    CHECK_EQUAL(1, ss.count(d));
+    CHECK_EQUAL("\"14;1\"", cell);
+};
+
+TEST(slightcsv, get_set_strip_process_ex_3) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    char c = '\"';
+    ss.insert(c);
+    string cell = "";
+    try {
+        csv_parser.setFileName("../../test/env_data_sli.csv");
+        csv_parser.setSeparator(';');
+        csv_parser.setEscape('\"');
+        csv_parser.setStripChars(ss);
+        csv_parser.getStripChars(ss);
+        csv_parser.loadData();
+        csv_parser.getCell(cell, 0, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("CSV format error (cell count mismatch in row).", ex);
+};
+
+TEST(slightcsv, get_set_strip_process_ok_4) {
+    SlightCSV csv_parser;
+    string ex = "";
+    set<char> ss;
+    char c = '\r';
+    char d = '\n';
+    ss.insert(c);
+    ss.insert(d);
+    string cell = "";
+    size_t row_cnt = 0;
+    size_t col_cnt = 0;
+    try {
+        csv_parser.setFileName("../../test/env_data_sli.csv");
+        csv_parser.setSeparator(';');
+        csv_parser.setEscape('\"');
+        csv_parser.setStripChars(ss);
+        csv_parser.getStripChars(ss);
+        csv_parser.loadData();
+        row_cnt = csv_parser.getRowCount();
+        col_cnt = csv_parser.getColumnCount();
+        csv_parser.getCell(cell, 0, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, ss.count(c));
+    CHECK_EQUAL(1, ss.count(d));
+    CHECK_EQUAL(1, row_cnt);
+    CHECK_EQUAL(117, col_cnt);
+    CHECK_EQUAL("\"14;0,1\"", cell);
+};

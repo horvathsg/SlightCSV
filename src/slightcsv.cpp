@@ -208,10 +208,10 @@ size_t utils::SlightCSV::loadData(void) {
 
     while (in_char = fgetc(in_file), in_char != EOF) {
         if (m_csvp->m_strip_chars.size()) {
-            if (m_csvp->m_strip_chars.count(in_char)) {
-                continue;
+                if (m_csvp->m_strip_chars.count(in_char)) {
+                    continue;
+                }
             }
-        }
         if (m_csvp->m_escape) {
             if (in_char == m_csvp->m_escape) {
                 is_escaped ^= true;
@@ -408,6 +408,7 @@ void utils::SlightCSV::reset(void) {
     m_csvp->m_filename.clear();
     m_csvp->m_separator = 0;
     m_csvp->m_escape = 0;
+    m_csvp->m_strip_chars.clear();
     m_csvp->m_csv_format_detect_done = false;
 }
 

@@ -101,7 +101,7 @@ namespace utils {
     class slightcsv_strip_error: public slightcsv_error {
 
         const char* what() const throw() {
-            return "Strip character not set.";
+            return "Strip character set empty.";
         }
 
     };
