@@ -24,6 +24,8 @@ add_executable(demo ${DEMO_SOURCES})
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 target_link_libraries(demo PRIVATE slightcsv)
 target_include_directories(demo PUBLIC ${CMAKE_SOURCE_DIR}/inc)
-INSTALL(TARGETS demo
-RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin
-)
+set_target_properties(demo PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+#INSTALL(TARGETS demo
+#RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin
+#)

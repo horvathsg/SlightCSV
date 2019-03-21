@@ -27,8 +27,12 @@ add_library(slightcsv SHARED ${SLIGHTCSV_SOURCES})
 target_include_directories(slightcsv PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(slightcsv PROPERTIES PUBLIC_HEADER slightcsv.hpp)
 #target_compile_options(slightcsv PUBLIC -Wall -Wextra)
-
-INSTALL(TARGETS slightcsv
-LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/lib
-PUBLIC_HEADER DESTINATION ${CMAKE_SOURCE_DIR}/inc/slightcsv
+set_target_properties(slightcsv PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+add_custom_command(TARGET slightcsv
+    COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/slightcsv.hpp ${CMAKE_SOURCE_DIR}/inc/slightcsv
 )
+
+#INSTALL(TARGETS slightcsv
+#LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/lib
+#PUBLIC_HEADER DESTINATION ${CMAKE_SOURCE_DIR}/inc/slightcsv
+#)
