@@ -18,7 +18,7 @@ project(slightcsv_demo_prog)
 
 #set(CMAKE_BUILD_TYPE Debug)
 
-set(DEMO_SOURCES main.cpp stopwatch.hpp stopwatch.cpp)
+set(DEMO_SOURCES main.cpp)
 #target_include_directories(demo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(demo ${DEMO_SOURCES})
 link_directories(${CMAKE_SOURCE_DIR}/lib)

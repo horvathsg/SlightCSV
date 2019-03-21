@@ -493,7 +493,7 @@ TEST(slightcsv,get_column_overload_1_ok) {
     CHECK_EQUAL("", ex);
     CHECK_EQUAL(cnt, 8641);
     CHECK_EQUAL("tst", vect.at(0));
-    CHECK_EQUAL("0,1", vect.at(8633));
+    CHECK_EQUAL("0.1", vect.at(8633));
     CHECK_EQUAL("0", vect.at(8640));
 };
 
@@ -855,7 +855,7 @@ TEST(slightcsv,get_row_ok_verify_4000_ok) {
     } catch(exception &e) {
     }
     CHECK_EQUAL("14", vect.at(0));
-    CHECK_EQUAL("0,3", vect.at(1));
+    CHECK_EQUAL("0.3", vect.at(1));
     CHECK_EQUAL("0", vect.at(29));
 };
 
@@ -875,7 +875,7 @@ TEST(slightcsv,get_row_overload_1_ok) {
     }
     CHECK_EQUAL("", ex);
     CHECK_EQUAL(29, cnt);
-    CHECK_EQUAL("0,3", vect.at(0));
+    CHECK_EQUAL("0.3", vect.at(0));
     CHECK_EQUAL("0", vect.at(28));
 };
 
@@ -915,7 +915,7 @@ TEST(slightcsv,get_row_overload_3_ok) {
     }
     CHECK_EQUAL("", ex);
     CHECK_EQUAL(1, cnt);
-    CHECK_EQUAL("0,3", vect.at(0));
+    CHECK_EQUAL("0.3", vect.at(0));
 };
 
 TEST(slightcsv,get_row_overload_4_ok) {

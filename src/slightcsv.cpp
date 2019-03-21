@@ -20,21 +20,14 @@
 
 #include <iostream>
 #include <cstdio>
-#include <algorithm>
-#include <bitset>
+// #include <algorithm>
 
 using std::string;
 using std::vector;
+using std::cout;
 using std::clog;
 using std::endl;
-using std::stof;
-using std::stod;
-using std::stoi;
-using std::replace;
-using std::fread;
-
-using std::cout;
-using std::cin;
+// using std::fread;
 
 #define VERBOSE 0
 

@@ -22,10 +22,7 @@
 
 using std::string;
 using std::vector;
-using std::replace;
-using std::stof;
-using std::stod;
-using std::stoi;
+// using std::replace;
 
 template <class T>
 void convertCell(string &cell_str, T &cell_value);
@@ -208,8 +205,6 @@ void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index, 
     for (size_t i = t_start_cell_index; i < t_start_cell_index + t_cell_count; ++i) {
         T cell;
         getCell(cell, i, t_column_index);
-        //T cell_value;
-        //convertCell(cell, cell_value);
         t_target.push_back(cell);
     }
 }
@@ -223,8 +218,9 @@ void utils::SlightMatrix::reset(void) {
     m_row_count = 0;
     m_column_count = 0;
     m_header_count = 0;
-    m_data.clear();
-    m_data.shrink_to_fit();
+    // m_data.clear();
+    // m_data.shrink_to_fit();
+    vector<string>().swap(m_data);
 }
 
 void utils::SlightMatrix::updateRowCount(void) {
@@ -243,30 +239,15 @@ void convertCell(string &cell_str, T &cell_value) {
 
 template <>
 void convertCell(string &cell_str, float &cell_value) {
-    replace(cell_str.begin(), cell_str.end(), char(44), char(46));
-    try {
-        cell_value = stof(cell_str);
-    } catch (...) {
-        cell_value = 0;
-    }   
+    cell_value = atof(cell_str.c_str());  
 }
 
 template <>
 void convertCell(string &cell_str, double &cell_value) {
-    replace(cell_str.begin(), cell_str.end(), char(44), char(46));
-    try {
-        cell_value = stod(cell_str);
-    } catch (...) {
-        cell_value = 0;
-    }
+    cell_value = atof(cell_str.c_str());
 }
 
 template <>
 void convertCell(string &cell_str, int &cell_value) {
-    replace(cell_str.begin(), cell_str.end(), char(44), char(46));
-    try {
-        cell_value = stoi(cell_str);
-    } catch (...) {
-        cell_value = 0;
-    }
+    cell_value = atoi(cell_str.c_str());
 }

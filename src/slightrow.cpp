@@ -20,12 +20,11 @@
 
 #include <string>
 #include <vector>
-#include <algorithm>
+// #include <algorithm>
 
 using std::string;
 using std::vector;
-using std::count;
-
+// using std::count;
 using std::cout;
 using std::endl;
 
@@ -199,6 +198,7 @@ void utils::SlightRow::clear(void) {
 
 void utils::SlightRow::reset(void) {
     this->clear();
+    vector<string>().swap(m_cells);
     m_sep = 0;
     m_esc = 0;
 }
