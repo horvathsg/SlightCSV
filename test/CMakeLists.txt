@@ -16,13 +16,29 @@
 
 project(slightcsv_test_prog)
 
+# CppUTest paths
 set(CPPUTEST_INC_DIR /usr/include/CppUTest)
 set(CPPUTEST_LIB_DIR /usr/lib/x86_64-linux-gnu)
 set(CPPUTEST_LIBS CppUTest CppUTestExt)
 
+# slightcsv_test build
 include_directories(${CPPUTEST_INC_DIR})
 link_directories(${CMAKE_SOURCE_DIR}/lib ${CPPUTEST_LIB_DIR})
 add_executable(slightcsv_test main.cpp test.cpp)
 target_link_libraries(slightcsv_test PRIVATE slightcsv ${CPPUTEST_LIBS})
 target_include_directories(slightcsv_test PUBLIC ${CMAKE_SOURCE_DIR}/inc ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_command(TARGET slightcsv_test COMMAND ./slightcsv_test POST_BUILD)
+
+# slightcsv code coverage report
+set(OBJECT_DIR ${CMAKE_SOURCE_DIR}/build/src/CMakeFiles/slightcsv.dir)
+add_custom_target(codecov
+    COMMAND mkdir -p codecov
+    WORKING_DIRECTORY ${OBJECT_DIR}
+)
+add_custom_command(TARGET codecov
+    # COMMAND gcov slightcsv.cpp.cpp -o .
+    COMMAND lcov -c --directory . --output-file codecov/codecov.info
+    COMMAND genhtml codecov/codecov.info --output-directory codecov
+    WORKING_DIRECTORY ${OBJECT_DIR}
+)
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${OBJECT_DIR}/codecov)

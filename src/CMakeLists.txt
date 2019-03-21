@@ -18,6 +18,9 @@ project(slightcsv_lib)
 
 #set(CMAKE_BUILD_TYPE Debug)
 
+SET(GCC_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
 set(SLIGHTCSV_SOURCES slightcsv.hpp slightcsvprivate.hpp slightcsv.cpp slightrow.hpp slightrow.cpp slightmatrix.hpp slightmatrix.cpp)
 add_library(slightcsv SHARED ${SLIGHTCSV_SOURCES})
 target_include_directories(slightcsv PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
@@ -26,13 +29,3 @@ INSTALL(TARGETS slightcsv
 LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/lib
 PUBLIC_HEADER DESTINATION ${CMAKE_SOURCE_DIR}/inc/slightcsv
 )
-
-#set(DEMO_SOURCES main.cpp stopwatch.hpp stopwatch.cpp)
-#target_include_directories(demo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/demo)
-#add_executable(demo ${DEMO_SOURCES})
-#link_directories(${CMAKE_SOURCE_DIR}/lib)
-#target_link_libraries(demo PRIVATE slightcsv)
-#target_include_directories(demo PUBLIC ${CMAKE_SOURCE_DIR}/inc)
-#INSTALL(TARGETS demo
-#RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin
-#)
