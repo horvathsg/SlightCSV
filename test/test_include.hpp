@@ -17,10 +17,6 @@
 #ifndef _TEST_INCLUDE_HPP
 #define _TEST_INCLUDE_HPP
 
-#include <string>
-#include <vector>
-#include <exception>
-
 #include "slightrow.hpp"
 #include "slightmatrix.hpp"
 #include "slightcsv.hpp"
@@ -29,6 +25,9 @@
 
 using std::string;
 using std::vector;
+using std::set;
+using std::map;
+using std::pair;
 using std::exception;
 using utils::SlightRow;
 using utils::SlightMatrix;

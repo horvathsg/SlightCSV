@@ -18,24 +18,7 @@
 #include "slightcsvprivate.hpp"
 #include "slightrow.hpp"
 
-#include <iostream>
 #include <cstdio>
-#include <string>
-#include <vector>
-#include <set>
-#include <map>
-// #include <algorithm>
-
-using std::string;
-using std::vector;
-using std::set;
-using std::map;
-using std::cout;
-using std::clog;
-using std::endl;
-// using std::fread;
-
-#define VERBOSE 0
 
 utils::SlightCSV::SlightCSV(void) {
     m_csvp = new SlightCSVPrivate;
@@ -141,80 +124,6 @@ size_t utils::SlightCSV::loadData(void) {
     fseek(in_file, 0L, SEEK_END);
     m_csvp->m_file_size = ftell(in_file);
     fseek(in_file, 0L, SEEK_SET);
-
-    // vector<size_t> rnmap;
-    // char q = '\"';
-    // int in_char;
-    // size_t cursor = 0;
-    // string rows;
-
-    // vector<bool> qmap(file_size);
-
-    // qmap[0] = false;
-
-    // size_t row_count = 0;
-    // size_t last_sep_idx = 0;
-
-    // for (size_t i = 0; i < file_size; ++i) {
-    //     in_char = fgetc(in_file);
-    //     if (in_char == EOF) {
-    //         throw slightcsv_read_error();
-    //     }
-    //     if (i) {
-    //         qmap[i] = qmap[i-1];
-    //     }
-    //     if (in_char == q) {
-    //         qmap[i] = qmap[i]^true;
-    //     }
-    //     if (in_char == '\r' || in_char == '\n') {
-    //         if (qmap[i] == false) {
-    //             rnmap.push_back(i);
-    //             if (i - last_sep_idx > 1) {
-    //                 ++row_count;
-    //                 last_sep_idx = i;
-    //             }
-    //         } else {
-    //             // escaped line ending
-    //         }
-    //     }
-    // }
-
-    // //m_csvp->m_data_matrix.setReserveRowCount(row_count);
-    // m_csvp->m_data_matrix.setCapacity(row_count);
-
-    // fseek(in_file, 0L, SEEK_SET);
-
-    // size_t row_id = 0;
-
-    // for (size_t j = 0; j < rnmap.size(); ++j) {
-    //     if (rnmap.at(j) - cursor > 0) {
-    //         char *row = new char[rnmap.at(j) - cursor + 1];
-    //         size_t cnt = fread(row, sizeof(char), rnmap.at(j) - cursor, in_file);
-    //         row[cnt] = 0;
-    //         string rows = row;
-    //         delete[] row;
-    //         processLine(rows, row_id);
-    //         ++row_id;
-    //     } else {
-    //         // row is empty
-    //     }
-    //     fseek(in_file, 1L, SEEK_CUR);
-    //     cursor = rnmap.at(j) + 1;
-    // }
-
-    // if (cursor < file_size) {
-
-    //     char *row = new char[file_size - cursor + 1];
-    //     size_t cnt = fread(row, sizeof(char), file_size - cursor, in_file);
-    //     row[cnt] = 0;
-    //     string rows = row;
-    //     delete[] row;
-    //     processLine(rows, row_id);
-    //     ++row_id;
-
-    // }
-
-    // fclose(in_file);
     
     char in_char;
     string in_line = "";
@@ -253,8 +162,6 @@ size_t utils::SlightCSV::loadData(void) {
 
     fclose(in_file);
 
-
-    //m_csvp->m_row_count = m_csvp->m_data_matrix.getRowCount();
     retval = m_csvp->m_data_matrix.getRowCount();
 
     return retval;
@@ -440,9 +347,6 @@ void utils::SlightCSV::reset(void) {
 void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
 
     if (!t_input.size()) {
-        #if VERBOSE == 1
-        clog << "Row " << t_row_id << " empty." << endl;
-        #endif
         return;
     }
 
@@ -466,8 +370,6 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
     }
 
     if (m_csvp->m_row.getCellCount() != m_csvp->m_data_matrix.getColumnCount()) {
-        // cout << "Cell count " << row.getCellCount() << " in row " << t_row_id << endl;
-        // cout << "Input: " << t_input << endl;
         throw slightcsv_format_cellcnt_error();
     }
     

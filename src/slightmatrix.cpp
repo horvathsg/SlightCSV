@@ -16,13 +16,10 @@
 
 #include "slightmatrix.hpp"
 
-#include <string>
-#include <vector>
 #include <algorithm>
 
-using std::string;
-using std::vector;
-// using std::replace;
+using std::atof;
+using std::atoi;
 
 template <class T>
 void convertCell(string &cell_str, T &cell_value);

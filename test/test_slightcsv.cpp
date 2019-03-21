@@ -1374,3 +1374,147 @@ TEST(slightcsv, get_set_strip_process_ok_4) {
     CHECK_EQUAL(117, col_cnt);
     CHECK_EQUAL("\"14;0,1\"", cell);
 };
+
+TEST(slightcsv, get_empty_rep_chars_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    map<char, char> rmap;
+    try {
+        csv_parser.getReplaceChars(rmap);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Replace character map empty.", ex);
+};
+
+TEST(slightcsv, set_empty_rep_chars_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    map<char, char> rmap;
+    try {
+        csv_parser.setReplaceChars(rmap);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Replace character map empty.", ex);
+};
+
+TEST(slightcsv, get_set_rep_chars_ok_1) {
+    SlightCSV csv_parser;
+    string ex = "";
+    map<char, char> setmap;
+    char from = 't';
+    char to = 'd';
+    char c = 0;
+    pair<char, char> p(from, to);
+    setmap.insert(p);
+    map<char, char> getmap;
+    size_t cnt = 0;
+    try {
+        csv_parser.setReplaceChars(setmap);
+        csv_parser.getReplaceChars(getmap);
+        cnt = getmap.size();
+        c = getmap.find(from)->second;
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(1, cnt);
+    CHECK_EQUAL('d', c);
+};
+
+TEST(slightcsv, get_set_rep_chars_ok_2) {
+    SlightCSV csv_parser;
+    string ex = "";
+    map<char, char> setmap;
+    char from1 = 't';
+    char to1 = 'd';
+    setmap.insert(pair<char, char>(from1, to1));
+    char from2 = 's';
+    char to2 = 'r';
+    setmap.insert(pair<char, char>(from2, to2));
+    char c = 0;
+    char d = 0;
+    map<char, char> getmap;
+    size_t cnt = 0;
+    try {
+        csv_parser.setReplaceChars(setmap);
+        csv_parser.getReplaceChars(getmap);
+        cnt = getmap.size();
+        c = getmap.find(from1)->second;
+        d = getmap.find(from2)->second;
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(2, cnt);
+    CHECK_EQUAL('d', c);
+    CHECK_EQUAL('r', d);
+};
+
+TEST(slightcsv, get_set_rep_chars_ok_3) {
+    SlightCSV csv_parser;
+    string ex = "";
+    map<char, char> setmap;
+    char from1 = 't';
+    char to1 = 'd';
+    setmap.insert(pair<char, char>(from1, to1));
+    char from2 = 's';
+    char to2 = 'r';
+    setmap.insert(pair<char, char>(from2, to2));
+    map<char, char> getmap;
+    size_t cnt = 0;
+    char c = 0;
+    char d = 0;
+    string cell = "";
+    try {
+        csv_parser.setFileName("../../test/env_data.csv");
+        csv_parser.setSeparator(';');
+        csv_parser.setReplaceChars(setmap);
+        csv_parser.getReplaceChars(getmap);
+        csv_parser.loadData();
+        cnt = getmap.size();
+        c = getmap.find(from1)->second;
+        d = getmap.find(from2)->second;
+        csv_parser.getCell(cell, 0, 0);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(2, cnt);
+    CHECK_EQUAL('d', c);
+    CHECK_EQUAL('r', d);
+    CHECK_EQUAL("drd", cell);
+};
+
+TEST(slightcsv, complex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_sli.csv";
+    char sep = ';';
+    char esc = '\"';
+    set<char> stripset;
+    char strip = 'l';
+    stripset.insert(strip);
+    map<char, char> setmap;
+    char from1 = 'd';
+    char to1 = 'x';
+    setmap.insert(pair<char, char>(from1, to1));
+    vector<string> row1;
+    vector<string> row2;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.setEscape(esc);
+        csv_parser.setStripChars(stripset);
+        csv_parser.setReplaceChars(setmap);
+        csv_parser.loadData();
+        csv_parser.getRow(row1, 0);
+        csv_parser.getRow(row2, 3);
+    } catch(exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL("\"14;0,1\"", row1.at(0));
+    CHECK_EQUAL("\"0\r\nxx\"", row2.at(29));
+};

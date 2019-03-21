@@ -16,18 +16,6 @@
 
 #include "slightrow.hpp"
 
-#include <iostream>
-
-#include <string>
-#include <vector>
-// #include <algorithm>
-
-using std::string;
-using std::vector;
-// using std::count;
-using std::cout;
-using std::endl;
-
 utils::SlightRow::SlightRow(void) {
     this->reset();
 }
@@ -84,56 +72,6 @@ void utils::SlightRow::process(void) {
     if (m_sep == 0) {
         throw slightrow_separator_error();
     }
-
-    // // prepare separator map, quote map and other variables
-    // string cell;
-    // size_t cursor = 0;
-    // char q = '\"';
-    // size_t sepmap_size = count(m_input.begin(), m_input.end(), m_sep);
-    // size_t *sepmap = new size_t[sepmap_size];
-    // bool *qmap = new bool[m_input.size()];
-    // qmap[0] = false;
-    // size_t sepmap_idx = 0;
-
-    // // generate separator map and quote map
-    // for (size_t i = 0; i < m_input.size(); ++i) {
-    //     if (m_input.at(i) == m_sep) {
-    //         sepmap[sepmap_idx] = i;
-    //         ++sepmap_idx;
-    //     }
-    //     if (i) {
-    //         qmap[i] = qmap[i-1];
-    //     } 
-    //     if (m_input.at(i) == q) {
-    //         qmap[i] ^= true;
-    //     }
-    // }
-
-    // // process row
-    // for (size_t j = 0; j < sepmap_size; ++j) {
-    //     if (qmap[sepmap[j]] == false) {
-    //         if (sepmap[j] - cursor > 0) {
-    //             cell = m_input.substr(cursor, sepmap[j] - cursor);
-    //             m_cells.push_back(cell);
-    //         } else {
-    //             m_cells.push_back("0");
-    //         }
-    //         cursor = sepmap[j] + 1;
-    //     }
-    // }
-
-    // // process remainder after last separator
-    // if (cursor < m_input.size()) {
-    //     cell = m_input.substr(cursor, m_input.size() - cursor);
-    //     m_cells.push_back(cell);
-    // } else if (cursor == m_input.size() && m_input.at(cursor - 1) == m_sep) {
-    //     m_cells.push_back("0");
-    // }     
-
-    // // free memory
-    // delete[] sepmap;
-    // delete[] qmap;
-
 
     string cell = "";
     bool is_escaped = false;
