@@ -22,7 +22,7 @@ TEST(slightcsv,get_empty_filename) {
     string t = "";
     try {
         csv_parser.getFileName();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing filename.", t);
@@ -33,7 +33,7 @@ TEST(slightcsv,set_empty_filename) {
     string t = "";
     try {
         csv_parser.setFileName(t);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing filename.", t);
@@ -51,7 +51,7 @@ TEST(slightcsv,get_empty_separator) {
     string t = "";
     try {
         csv_parser.getSeparator();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing separator.", t);
@@ -63,7 +63,7 @@ TEST(slightcsv,set_empty_separator) {
     string t = "";
     try {
         csv_parser.setSeparator(c);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing separator.", t);
@@ -81,7 +81,7 @@ TEST(slightcsv,load_data_with_no_filename_and_separator) {
     string t = "";
     try {
         csv_parser.loadData();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing filename.", t);
@@ -93,7 +93,7 @@ TEST(slightcsv,load_data_with_no_separator) {
     try {
         csv_parser.setFileName("abc.def");
         csv_parser.loadData();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing separator.", t);
@@ -106,7 +106,7 @@ TEST(slightcsv,load_data_with_wrong_filename) {
         csv_parser.setFileName("abc.def");
         csv_parser.setSeparator(';');
         csv_parser.loadData();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing filename.", t);
@@ -119,7 +119,7 @@ TEST(slightcsv,load_data_ok) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.setSeparator(';');
         t = csv_parser.loadData();
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(8641, t);
 };
@@ -129,7 +129,7 @@ TEST(slightcsv,get_column_count_nofile_nosep_noload) {
     string t = "";
     try {
         t = csv_parser.getColumnCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -141,7 +141,7 @@ TEST(slightcsv,get_column_count_nosep_noload) {
     try {
         csv_parser.setFileName("../../test/env_data.csv");
         t = csv_parser.getColumnCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -154,7 +154,7 @@ TEST(slightcsv,get_column_count_noload) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.setSeparator(';');
         t = csv_parser.getColumnCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -168,7 +168,7 @@ TEST(slightcsv,get_column_count_ok) {
         csv_parser.setSeparator(';');
         csv_parser.loadData();
         t = csv_parser.getColumnCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(30, t);
 };
@@ -178,7 +178,7 @@ TEST(slightcsv,get_row_count_nofile_nosep_noload) {
     string t = "";
     try {
         t = csv_parser.getRowCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -190,7 +190,7 @@ TEST(slightcsv,get_row_count_nosep_noload) {
     try {
         csv_parser.setFileName("../../test/env_data.csv");
         t = csv_parser.getRowCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -203,7 +203,7 @@ TEST(slightcsv,get_row_count_noload) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.setSeparator(';');
         t = csv_parser.getRowCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -217,7 +217,7 @@ TEST(slightcsv,get_row_count_ok) {
         csv_parser.setSeparator(';');
         csv_parser.loadData();
         t = csv_parser.getRowCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(8641, t);
 };
@@ -228,7 +228,7 @@ TEST(slightcsv,get_column_nofile_nosep_noload) {
     vector<string> vect;
     try {
         csv_parser.getColumn(vect, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -241,7 +241,7 @@ TEST(slightcsv,get_column_nofile_noload) {
     try {
         csv_parser.setSeparator(';');
         csv_parser.getColumn(vect, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -255,7 +255,7 @@ TEST(slightcsv,get_column_noload) {
         csv_parser.setSeparator(';');
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.getColumn(vect, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -270,7 +270,7 @@ TEST(slightcsv,get_column_string_ok) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(8641, vect.size());
 };
@@ -284,7 +284,7 @@ TEST(slightcsv,get_column_string_ok_verify_0_0) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL("10", vect.at(1));
 };
@@ -298,7 +298,7 @@ TEST(slightcsv,get_column_string_ok_verify_0_6000) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL("10", vect.at(6001));
 };
@@ -312,7 +312,7 @@ TEST(slightcsv,get_column_string_ok_verify_0_8639) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL("10", vect.at(8640));
 };
@@ -326,7 +326,7 @@ TEST(slightcsv,get_column_string_ok_verify_29_0) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 29);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL("0", vect.at(1));
 };
@@ -340,7 +340,7 @@ TEST(slightcsv,get_column_string_ok_verify_29_4000) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 29);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL("0", vect.at(4001));
 };
@@ -354,7 +354,7 @@ TEST(slightcsv,get_column_string_ok_verify_29_8639) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 29);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL("0", vect.at(8640));
 };
@@ -368,7 +368,7 @@ TEST(slightcsv,get_column_float_ok_verify_1_33) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(0.4f, vect.at(34));
 };
@@ -382,7 +382,7 @@ TEST(slightcsv,get_column_float_ok_verify_28_8632) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(0.1f, vect.at(8633));
 };
@@ -396,7 +396,7 @@ TEST(slightcsv,get_column_double_ok_verify_28_8632) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     double d = 0.1;
     CHECK_EQUAL(d, vect.at(8633));
@@ -411,7 +411,7 @@ TEST(slightcsv,get_column_int_ok_verify_28_8632) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(0, vect.at(8633));
 };
@@ -425,7 +425,7 @@ TEST(slightcsv,get_column_int_ok_verify_4_11) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 4);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(0, vect.at(12));
 };
@@ -439,7 +439,7 @@ TEST(slightcsv,get_column_int_ok_verify_28_12) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(1, vect.at(13));
 };
@@ -454,7 +454,7 @@ TEST(slightcsv,get_column_after_unload) {
         csv_parser.loadData();
         csv_parser.unloadData();
         csv_parser.getColumn(vect, 28);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -471,7 +471,7 @@ TEST(slightcsv,get_column_after_unload_load) {
         csv_parser.unloadData();
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL(1, vect.at(13));
 };
@@ -487,7 +487,7 @@ TEST(slightcsv,get_column_overload_1_ok) {
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 0);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -508,7 +508,7 @@ TEST(slightcsv,get_column_overload_2_ok) {
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 8640);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -527,7 +527,7 @@ TEST(slightcsv,get_column_overload_3_ex) {
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 8641);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Bad row or column index.", ex);
@@ -544,7 +544,7 @@ TEST(slightcsv,get_column_overload_4_ok) {
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 0, 1);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -563,7 +563,7 @@ TEST(slightcsv,get_column_overload_5_ok) {
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 0, 5);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -582,7 +582,7 @@ TEST(slightcsv,get_column_overload_6_ok) {
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 8638, 2);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -602,7 +602,7 @@ TEST(slightcsv,get_column_overload_7_ex) {
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 8638, 4);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Bad row or column index.", ex);
@@ -619,7 +619,7 @@ TEST(slightcsv,get_column_overload_8_ex) {
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 0, 8642);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Bad row or column index.", ex);
@@ -631,7 +631,7 @@ TEST(slightcsv,unload_noload) {
     vector<int> vect;
     try {
         csv_parser.unloadData();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -649,7 +649,7 @@ TEST(slightcsv,get_filename_after_reset) {
         csv_parser.loadData();
         csv_parser.reset();
         csv_parser.getFileName();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing filename.", t);
@@ -667,7 +667,7 @@ TEST(slightcsv,get_separator_after_reset) {
         csv_parser.loadData();
         csv_parser.reset();
         csv_parser.getSeparator();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Wrong or missing separator.", t);
@@ -685,7 +685,7 @@ TEST(slightcsv,get_column_after_reset) {
         csv_parser.loadData();
         csv_parser.reset();
         csv_parser.getColumn(vect, 1);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -700,7 +700,7 @@ TEST(slightcsv, header_auto_detect_1) {
         csv_parser.setSeparator(';');
         csv_parser.loadData();
         header_cnt = csv_parser.getHeaderCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("", t);
@@ -717,7 +717,7 @@ TEST(slightcsv, header_auto_detect_1_override) {
         csv_parser.loadData();
         csv_parser.setHeaderCount(0);
         header_cnt = csv_parser.getHeaderCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("", t);
@@ -733,7 +733,7 @@ TEST(slightcsv, header_auto_detect_0) {
         csv_parser.setSeparator(';');
         csv_parser.loadData();
         header_cnt = csv_parser.getHeaderCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("", t);
@@ -750,7 +750,7 @@ TEST(slightcsv, header_auto_detect_0_override) {
         csv_parser.loadData();
         csv_parser.setHeaderCount(1);
         header_cnt = csv_parser.getHeaderCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("", t);
@@ -766,7 +766,7 @@ TEST(slightcsv, header_auto_detect_2) {
         csv_parser.setSeparator(';');
         csv_parser.loadData();
         header_cnt = csv_parser.getHeaderCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("", t);
@@ -783,7 +783,7 @@ TEST(slightcsv, header_auto_detect_2_override) {
         csv_parser.loadData();
         csv_parser.setHeaderCount(0);
         header_cnt = csv_parser.getHeaderCount();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("", t);
@@ -799,7 +799,7 @@ TEST(slightcsv,get_row_ok_verify_0_ok) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL("tst", vect.at(0));
     CHECK_EQUAL("tst", vect.at(1));
@@ -817,7 +817,7 @@ TEST(slightcsv,get_row_ok_verify_0_8641_ex) {
         csv_parser.loadData();
         cnt = csv_parser.getRowCount();
         csv_parser.getRow(vect, cnt);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Bad row or column index.", t);
@@ -834,7 +834,7 @@ TEST(slightcsv,get_row_ok_verify_last_ok) {
         csv_parser.loadData();
         cnt = csv_parser.getRowCount();
         csv_parser.getRow(vect, cnt - 1);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("", t);
@@ -852,7 +852,7 @@ TEST(slightcsv,get_row_ok_verify_4000_ok) {
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 4000);
-    } catch(exception &e) {
+    } catch(const exception &e) {
     }
     CHECK_EQUAL("14", vect.at(0));
     CHECK_EQUAL("0.3", vect.at(1));
@@ -870,7 +870,7 @@ TEST(slightcsv,get_row_overload_1_ok) {
         csv_parser.loadData();
         csv_parser.getRow(vect, 4000, 1);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -890,7 +890,7 @@ TEST(slightcsv,get_row_overload_2_ok) {
         csv_parser.loadData();
         csv_parser.getRow(vect, 4000, 2, 28);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -910,7 +910,7 @@ TEST(slightcsv,get_row_overload_3_ok) {
         csv_parser.loadData();
         csv_parser.getRow(vect, 4000, 1, 1);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -929,7 +929,7 @@ TEST(slightcsv,get_row_overload_4_ok) {
         csv_parser.loadData();
         csv_parser.getRow(vect, 8640, 29, 1);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -948,7 +948,7 @@ TEST(slightcsv,get_row_overload_5_ex) {
         csv_parser.loadData();
         csv_parser.getRow(vect, 8640, 30);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Bad row or column index.", ex);
@@ -965,7 +965,7 @@ TEST(slightcsv,get_row_overload_6_ex) {
         csv_parser.loadData();
         csv_parser.getRow(vect, 8640, 29, 2);
         cnt = vect.size();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Bad row or column index.", ex);
@@ -976,7 +976,7 @@ TEST(slightcsv,get_cell_noload) {
     string t = "";
     try {
         csv_parser.getCell(t, 0, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         t = e.what();
     }
     CHECK_EQUAL("Data not loaded.", t);
@@ -991,7 +991,7 @@ TEST(slightcsv,get_cell_string_0_0) {
     string t = "";
     try {
         csv_parser.getCell(t, 0, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1007,7 +1007,7 @@ TEST(slightcsv,get_cell_int_8640_0) {
     int t = 0;
     try {
         csv_parser.getCell(t, 8640, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1023,7 +1023,7 @@ TEST(slightcsv,get_cell_int_8640_29) {
     int t = 0;
     try {
         csv_parser.getCell(t, 8640, 29);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1039,7 +1039,7 @@ TEST(slightcsv,get_cell_float_8628_28) {
     float t = 0;
     try {
         csv_parser.getCell(t, 8628, 28);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1055,7 +1055,7 @@ TEST(slightcsv,get_cell_double_8628_28) {
     double t = 0;
     try {
         csv_parser.getCell(t, 8628, 28);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1068,7 +1068,7 @@ TEST(slightcsv, get_empty_escape_ex) {
     string ex = "";
     try {
         csv_parser.getEscape();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Escape character not set.", ex);
@@ -1079,7 +1079,7 @@ TEST(slightcsv, set_empty_escape_ex) {
     string ex = "";
     try {
         csv_parser.setEscape(0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Escape character not set.", ex);
@@ -1093,7 +1093,7 @@ TEST(slightcsv, set_get_escape_ok) {
     try {
         csv_parser.setEscape(esc);
         c = csv_parser.getEscape();
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1115,7 +1115,7 @@ TEST(slightcsv, set_escape_process_ok_1) {
         csv_parser.loadData();
         count = csv_parser.getColumnCount();
         csv_parser.getCell(cell, 0, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1139,7 +1139,7 @@ TEST(slightcsv, set_escape_process_ok_2) {
         csv_parser.loadData();
         count = csv_parser.getColumnCount();
         csv_parser.getCell(cell, 1, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1163,7 +1163,7 @@ TEST(slightcsv, set_escape_process_ok_3) {
         csv_parser.loadData();
         count = csv_parser.getColumnCount();
         csv_parser.getCell(cell, 2, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1186,7 +1186,7 @@ TEST(slightcsv, set_escape_process_ok_4) {
         csv_parser.loadData();
         count = csv_parser.getColumnCount();
         csv_parser.getCell(cell, 3, 29);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1201,7 +1201,7 @@ TEST(slightcsv, get_empty_strip_chars_ex) {
     set<char> ss;
     try {
         csv_parser.getStripChars(ss);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Strip character set empty.", ex);
@@ -1213,7 +1213,7 @@ TEST(slightcsv, set_empty_strip_chars_ex) {
     set<char> ss;
     try {
         csv_parser.setStripChars(ss);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Strip character set empty.", ex);
@@ -1228,7 +1228,7 @@ TEST(slightcsv, get_set_strip_chars_ok_1) {
     try {
         csv_parser.setStripChars(ss);
         csv_parser.getStripChars(ss);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1247,7 +1247,7 @@ TEST(slightcsv, get_set_strip_chars_ok_2) {
     try {
         csv_parser.setStripChars(ss);
         csv_parser.getStripChars(ss);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1268,7 +1268,7 @@ TEST(slightcsv, get_set_strip_chars_reset_ex) {
         csv_parser.setStripChars(ss);
         csv_parser.reset();
         csv_parser.getStripChars(ss);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Strip character set empty.", ex);
@@ -1288,7 +1288,7 @@ TEST(slightcsv, get_set_strip_process_ok_1) {
         csv_parser.getStripChars(ss);
         csv_parser.loadData();
         csv_parser.getCell(cell, 0, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1313,7 +1313,7 @@ TEST(slightcsv, get_set_strip_process_ok_2) {
         csv_parser.getStripChars(ss);
         csv_parser.loadData();
         csv_parser.getCell(cell, 0, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1337,7 +1337,7 @@ TEST(slightcsv, get_set_strip_process_ex_3) {
         csv_parser.getStripChars(ss);
         csv_parser.loadData();
         csv_parser.getCell(cell, 0, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("CSV format error (cell count mismatch in row).", ex);
@@ -1364,7 +1364,7 @@ TEST(slightcsv, get_set_strip_process_ok_4) {
         row_cnt = csv_parser.getRowCount();
         col_cnt = csv_parser.getColumnCount();
         csv_parser.getCell(cell, 0, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1381,7 +1381,7 @@ TEST(slightcsv, get_empty_rep_chars_ex) {
     map<char, char> rmap;
     try {
         csv_parser.getReplaceChars(rmap);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Replace character map empty.", ex);
@@ -1393,7 +1393,7 @@ TEST(slightcsv, set_empty_rep_chars_ex) {
     map<char, char> rmap;
     try {
         csv_parser.setReplaceChars(rmap);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("Replace character map empty.", ex);
@@ -1415,7 +1415,7 @@ TEST(slightcsv, get_set_rep_chars_ok_1) {
         csv_parser.getReplaceChars(getmap);
         cnt = getmap.size();
         c = getmap.find(from)->second;
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1443,7 +1443,7 @@ TEST(slightcsv, get_set_rep_chars_ok_2) {
         cnt = getmap.size();
         c = getmap.find(from1)->second;
         d = getmap.find(from2)->second;
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1477,7 +1477,7 @@ TEST(slightcsv, get_set_rep_chars_ok_3) {
         c = getmap.find(from1)->second;
         d = getmap.find(from2)->second;
         csv_parser.getCell(cell, 0, 0);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
@@ -1511,7 +1511,7 @@ TEST(slightcsv, complex) {
         csv_parser.loadData();
         csv_parser.getRow(row1, 0);
         csv_parser.getRow(row2, 3);
-    } catch(exception &e) {
+    } catch(const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);

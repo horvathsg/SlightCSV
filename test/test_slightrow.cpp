@@ -22,7 +22,7 @@ TEST(slightrow, get_input_wo_set) {
     string exs = "";
     try {
         string s = row.getInput();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Input string is not defined or empty.", exs);
@@ -34,7 +34,7 @@ TEST(slightrow, set_input_empty) {
     string str = "";
     try {
         row.setInput(str);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Input string is not defined or empty.", exs);
@@ -47,7 +47,7 @@ TEST(slightrow, set_get_input) {
     try {
         row.setInput(str);
         str = row.getInput();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("this;is;a;test\n", str);
@@ -59,7 +59,7 @@ TEST(slightrow, get_separator_wo_set) {
     char c = 0;
     try {
         c = row.getSeparator();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Separator is not defined or empty.", exs);
@@ -71,7 +71,7 @@ TEST(slightrow, set_separator_empty) {
     char c = 0;
     try {
         row.setSeparator(c);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Separator is not defined or empty.", exs);
@@ -84,7 +84,7 @@ TEST(slightrow, set_get_separator) {
     try {
         row.setSeparator(c);
         c = row.getSeparator();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(',', c);
@@ -95,7 +95,7 @@ TEST(slightrow, process_noin_nosep) {
     string exs = "";
     try {
         row.process();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Input string is not defined or empty.", exs);
@@ -108,7 +108,7 @@ TEST(slightrow, process_nosep) {
     try {
         row.setInput(str);
         row.process();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Separator is not defined or empty.", exs);
@@ -121,7 +121,7 @@ TEST(slightrow, process_noin) {
     try {
         row.setSeparator(sep);
         row.process();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Input string is not defined or empty.", exs);
@@ -136,7 +136,7 @@ TEST(slightrow, process_ok) {
         row.setInput(str);
         row.setSeparator(sep);
         row.process();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("", exs);
@@ -149,7 +149,7 @@ TEST(slightrow, get_cell_cnt_noproc_noin_nosep) {
     char sep = ';';
     try {
         row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Row not processed.", exs);
@@ -163,7 +163,7 @@ TEST(slightrow, get_cell_cnt_noin_nosep) {
     try {
         row.process();
         row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Input string is not defined or empty.", exs);
@@ -178,7 +178,7 @@ TEST(slightrow, get_cell_cnt_nosep) {
         row.setInput(str);
         row.process();
         row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Separator is not defined or empty.", exs);
@@ -195,7 +195,7 @@ TEST(slightrow, get_cell_cnt_ok_4_lenok_hassep_noendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(4, cnt);
@@ -212,7 +212,7 @@ TEST(slightrow, get_cell_cnt_ok_4_lenok_hassep_hasendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(5, cnt);
@@ -229,7 +229,7 @@ TEST(slightrow, get_cell_cnt_ok_18_lenok_hassep_hasendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(17, cnt);
@@ -246,7 +246,7 @@ TEST(slightrow, get_cell_cnt_ok_19_lenok_hassep_hasendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(20, cnt);
@@ -263,7 +263,7 @@ TEST(slightrow, get_cell_cnt_ok_22_lenok_hasssep_noendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(22, cnt);
@@ -280,7 +280,7 @@ TEST(slightrow, get_cell_cnt_ok_22_lenok_hasssep_hasendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(23, cnt);
@@ -297,7 +297,7 @@ TEST(slightrow, get_cell_cnt_ok_1_lenok_nosep_noendsep_1) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(1, cnt);
@@ -314,7 +314,7 @@ TEST(slightrow, get_cell_cnt_ok_0_nolen_hassep_hasendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(19, cnt);
@@ -331,7 +331,7 @@ TEST(slightrow, get_cell_cnt_ok_0_nolen_hassep_noendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(19, cnt);
@@ -348,7 +348,7 @@ TEST(slightrow, get_cell_cnt_ok_0_nolen_hassep_noend_hasendsep) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(2, cnt);
@@ -365,7 +365,7 @@ TEST(slightrow, get_cell_cnt_ok_1_lenok_nosep_noendsep_2) {
         row.setSeparator(sep);
         row.process();
         cnt = row.getCellCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(1 , cnt);
@@ -380,7 +380,7 @@ TEST(slightrow, getcells_noin_nosep_noproc) {
     vector<string> vect;
     try {
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Row not processed." , exs);
@@ -396,7 +396,7 @@ TEST(slightrow, getcells_nosep_noproc) {
     try {
         row.setInput(str);
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Row not processed." , exs);
@@ -413,7 +413,7 @@ TEST(slightrow, getcells_noproc) {
         row.setInput(str);
         row.setSeparator(sep);
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Row not processed." , exs);
@@ -431,7 +431,7 @@ TEST(slightrow, getcells_ok_1) {
         row.setSeparator(sep);
         row.process();
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(1, vect.size());
@@ -450,7 +450,7 @@ TEST(slightrow, getcells_ok_2) {
         row.setSeparator(sep);
         row.process();
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(31, vect.size());
@@ -475,7 +475,7 @@ TEST(slightrow, reset_1) {
         row.process();
         row.reset();
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Row not processed.", exs);
@@ -495,7 +495,7 @@ TEST(slightrow, reset_2) {
         row.reset();
         row.process();
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Input string is not defined or empty.", exs);
@@ -517,7 +517,7 @@ TEST(slightrow, reset_3) {
         row.setInput(str2);
         row.process();
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL("Separator is not defined or empty.", exs);
@@ -541,7 +541,7 @@ TEST(slightrow, reset_4) {
         row.setSeparator(sep2);
         row.process();
         row.getCells(vect);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         exs = e.what();
     }
     CHECK_EQUAL(6, vect.size());

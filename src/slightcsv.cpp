@@ -113,14 +113,11 @@ size_t utils::SlightCSV::loadData(void) {
 
     size_t retval = 0;
 
-    FILE *in_file;
-    
-    in_file = fopen(m_csvp->m_filename.c_str(), "rb");
+    FILE *in_file = fopen(m_csvp->m_filename.c_str(), "rb");
     if (!in_file) {
         throw slightcsv_filename_error();
     }
 
-    size_t file_size;
     fseek(in_file, 0L, SEEK_END);
     m_csvp->m_file_size = ftell(in_file);
     fseek(in_file, 0L, SEEK_SET);

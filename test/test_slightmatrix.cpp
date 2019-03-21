@@ -21,7 +21,7 @@ TEST(slightmatrix, construct) {
     string msg = "";
     try {
         SlightMatrix sm;
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -33,7 +33,7 @@ TEST(slightmatrix, get_init_capacity) {
     try {
         SlightMatrix sm;
         cnt = sm.getCapacity();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -45,7 +45,7 @@ TEST(slightmatrix, set_capacity_0) {
     try {
         SlightMatrix sm;
         sm.setCapacity(0);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid parameter.", msg);
@@ -58,7 +58,7 @@ TEST(slightmatrix, set_get_capacity_1000) {
         SlightMatrix sm;
         sm.setCapacity(1000);
         cnt = sm.getCapacity();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -71,7 +71,7 @@ TEST(slightmatrix, get_column_count_init) {
     try {
         SlightMatrix sm;
         cnt = sm.getColumnCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -85,7 +85,7 @@ TEST(slightmatrix, get_set_column_count_30) {
         SlightMatrix sm;
         sm.setColumnCount(30);
         cnt = sm.getColumnCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -98,7 +98,7 @@ TEST(slightmatrix, get_row_count_init) {
     try {
         SlightMatrix sm;
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -112,7 +112,7 @@ TEST(slightmatrix, get_row_count_0_0) {
         SlightMatrix sm;
         sm.setColumnCount(3);
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -127,7 +127,7 @@ TEST(slightmatrix, get_row_count_1_1) {
         sm.setColumnCount(3);
         sm.addCell("test");
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -144,7 +144,7 @@ TEST(slightmatrix, get_row_count_1_3) {
         sm.addCell("test");
         sm.addCell("test");
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -162,7 +162,7 @@ TEST(slightmatrix, get_row_count_2_4) {
         sm.addCell("test");
         sm.addCell("test");
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -182,7 +182,7 @@ TEST(slightmatrix, add_cell_6_empty) {
         sm.addCell("");
         sm.addCell("");
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -204,7 +204,7 @@ TEST(slightmatrix, add_get_cell_1) {
         sm.addCell("pqr");
         sm.getCell(cell, 0, 0);
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -224,7 +224,7 @@ TEST(slightmatrix, add_get_cell_2) {
         sm.addCell("ghi");
         sm.getCell(cell, 0, 2);
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -247,7 +247,7 @@ TEST(slightmatrix, add_get_cell_3) {
         sm.addCell("pqr");
         sm.getCell(cell, 1, 0);
         cnt = sm.getRowCount();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -269,7 +269,7 @@ TEST(slightmatrix, add_get_cell_4_invalid_column) {
         sm.addCell("mno");
         sm.addCell("pqr");
         sm.getCell(cell, 1, 3);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid column count or index.", msg);
@@ -289,7 +289,7 @@ TEST(slightmatrix, add_get_cell_5_invalid_row) {
         sm.addCell("mno");
         sm.addCell("pqr");
         sm.getCell(cell, 2, 0);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid row count or index.", msg);
@@ -308,7 +308,7 @@ TEST(slightmatrix, add_get_cells_1) {
         cells.push_back("ghi");
         sm.addCells(cells);
         sm.getCell(cell, 0, 0);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -328,7 +328,7 @@ TEST(slightmatrix, add_get_cells_2) {
         cells.push_back("ghi");
         sm.addCells(cells);
         sm.getCell(cell, 0, 2);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -351,7 +351,7 @@ TEST(slightmatrix, add_get_cells_3) {
         cells.push_back("pqr");
         sm.addCells(cells);
         sm.getCell(cell, 1, 0);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -371,7 +371,7 @@ TEST(slightmatrix, add_get_cells_4_invalid_column) {
         cells.push_back("ghi");
         sm.addCells(cells);
         sm.getCell(cell, 0, 3);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid column count or index.", msg);
@@ -391,7 +391,7 @@ TEST(slightmatrix, add_get_cells_5_invalid_row) {
         cells.push_back("jkl");
         sm.addCells(cells);
         sm.getCell(cell, 2, 0);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid matrix (rows incomplete or column count not set).", msg);
@@ -410,7 +410,7 @@ TEST(slightmatrix, validate_invalid_1_missing_cells) {
         cells.push_back("jkl");
         sm.addCells(cells);
         valid = sm.validate();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -428,7 +428,7 @@ TEST(slightmatrix, validate_invalid_2_column_cnt_not_set) {
         cells.push_back("ghi");
         sm.addCells(cells);
         valid = sm.validate();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -447,7 +447,7 @@ TEST(slightmatrix, validate_valid) {
         cells.push_back("ghi");
         sm.addCells(cells);
         valid = sm.validate();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -470,7 +470,7 @@ TEST(slightmatrix, getrow_1_ok) {
         valid = sm.validate();
         sm.getRow(row, 0);
         cnt = row.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -497,7 +497,7 @@ TEST(slightmatrix, getrow_2_ok) {
         sm.addCells(cells);
         valid = sm.validate();
         sm.getRow(row, 1);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -524,7 +524,7 @@ TEST(slightmatrix, getrow_3_invalid_row_id) {
         sm.addCells(cells);
         valid = sm.validate();
         sm.getRow(row, 2);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid row count or index.", msg);
@@ -550,7 +550,7 @@ TEST(slightmatrix, getrow_4_ok) {
         valid = sm.validate();
         sm.getRow(row, 1, 1);
         cnt = row.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -579,7 +579,7 @@ TEST(slightmatrix, getrow_5_ok) {
         valid = sm.validate();
         sm.getRow(row, 1, 2);
         cnt = row.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -607,7 +607,7 @@ TEST(slightmatrix, getrow_6_range_error) {
         valid = sm.validate();
         sm.getRow(row, 1, 3);
         cnt = row.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid column count or index.", msg);
@@ -632,7 +632,7 @@ TEST(slightmatrix, getrow_7_ok) {
         valid = sm.validate();
         sm.getRow(row, 1, 1, 2);
         cnt = row.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -661,7 +661,7 @@ TEST(slightmatrix, getrow_8_ok) {
         valid = sm.validate();
         sm.getRow(row, 1, 1, 1);
         cnt = row.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -689,7 +689,7 @@ TEST(slightmatrix, getrow_9_ok) {
         valid = sm.validate();
         sm.getRow(row, 1, 2, 1);
         cnt = row.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -717,7 +717,7 @@ TEST(slightmatrix, getrow_10_ex) {
         valid = sm.validate();
         sm.getRow(row, 1, 2, 2);
         cnt = row.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid column count or index.", msg);
@@ -742,7 +742,7 @@ TEST(slightmatrix, getcolumn_1_string_ok) {
         sm.getColumn(column, 0);
         size = column.size();
         str = column.at(0);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -766,7 +766,7 @@ TEST(slightmatrix, getcolumn_2_string_invalid) {
         sm.addCells(cells);
         valid = sm.validate();
         sm.getColumn(column, 4);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid column count or index.", msg);
@@ -798,7 +798,7 @@ TEST(slightmatrix, getcolumn_3_float_ok) {
         size = column.size();
         a = column.at(0);
         b = column.at(1);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -833,7 +833,7 @@ TEST(slightmatrix, getcolumn_3_double_ok) {
         size = column.size();
         a = column.at(0);
         b = column.at(1);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -874,7 +874,7 @@ TEST(slightmatrix, getcolumn_3_int_ok) {
         a = column.at(0);
         b = column.at(1);
         c = column.at(2);
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -910,7 +910,7 @@ TEST(slightmatrix, getcolumn_overload_1_ok) {
         valid = sm.validate();
         sm.getColumn(column, 3, 0);
         size = column.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -946,7 +946,7 @@ TEST(slightmatrix, getcolumn_overload_2_ok) {
         valid = sm.validate();
         sm.getColumn(column, 3, 0, 3);
         size = column.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -982,7 +982,7 @@ TEST(slightmatrix, getcolumn_overload_3_ok) {
         valid = sm.validate();
         sm.getColumn(column, 3, 1);
         size = column.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -1017,7 +1017,7 @@ TEST(slightmatrix, getcolumn_overload_4_ok) {
         valid = sm.validate();
         sm.getColumn(column, 3, 2);
         size = column.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -1051,7 +1051,7 @@ TEST(slightmatrix, getcolumn_overload_5_ex) {
         valid = sm.validate();
         sm.getColumn(column, 3, 3);
         size = column.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid row count or index.", msg);
@@ -1082,7 +1082,7 @@ TEST(slightmatrix, getcolumn_overload_6_ex) {
         valid = sm.validate();
         sm.getColumn(column, 3, 1, 3);
         size = column.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("Invalid row count or index.", msg);
@@ -1113,7 +1113,7 @@ TEST(slightmatrix, getcolumn_overload_7_ok) {
         valid = sm.validate();
         sm.getColumn(column, 3, 1, 2);
         size = column.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -1148,7 +1148,7 @@ TEST(slightmatrix, getcolumn_overload_8_ok) {
         valid = sm.validate();
         sm.getColumn(column, 3, 2, 1);
         size = column.size();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -1195,7 +1195,7 @@ TEST(slightmatrix, reset) {
         col_cnt = sm.getColumnCount();
         row_cnt = sm.getRowCount();
         cap = sm.getCapacity();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -1232,7 +1232,7 @@ TEST(slightmatrix, set_get_header_count_valid_1) {
         sm.addCells(cells);
         header_cnt = sm.getHeaderCount();
         valid = sm.validate();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -1264,7 +1264,7 @@ TEST(slightmatrix, set_get_header_count_valid_2) {
         sm.setHeaderCount(2);
         header_cnt = sm.getHeaderCount();
         valid = sm.validate();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
@@ -1296,7 +1296,7 @@ TEST(slightmatrix, set_get_header_count_invalid) {
         sm.setHeaderCount(3);
         header_cnt = sm.getHeaderCount();
         valid = sm.validate();
-    } catch (exception &e) {
+    } catch (const exception &e) {
         msg = e.what();
     }
     CHECK_EQUAL("", msg);
