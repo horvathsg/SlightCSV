@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <map>
 
 #include "slightmatrix.hpp"
 #include "slightrow.hpp"
@@ -29,6 +30,7 @@ using std::vector;
 using utils::SlightMatrix;
 using utils::SlightRow;
 using std::set;
+using std::map;
 
 namespace utils {
     
@@ -41,6 +43,7 @@ namespace utils {
             bool m_csv_format_detect_done;
             SlightMatrix m_data_matrix;
             set<char> m_strip_chars;
+            map<char, char> m_rep_chars;
             SlightRow m_row;
             size_t m_file_size;
 

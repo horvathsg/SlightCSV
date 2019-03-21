@@ -21,11 +21,13 @@
 #include <vector>
 #include <exception>
 #include <set>
+#include <map>
 
 using std::string;
 using std::vector;
 using std::exception;
 using std::set;
+using std::map;
 
 namespace utils {
 
@@ -43,7 +45,9 @@ namespace utils {
             void setEscape(char t_escape);
             char getEscape(void) const;
             void setStripChars(set<char> &t_strip_chars);
-            void getStripChars(set<char> &t_target);
+            void getStripChars(set<char> &t_target) const;
+            void setReplaceChars(map<char, char> &t_rep_chars);
+            void getReplaceChars(map<char, char> &t_target) const;
             size_t loadData(void);
             size_t getColumnCount(void) const;
             size_t getRowCount(void) const;
@@ -102,6 +106,14 @@ namespace utils {
 
         const char* what() const throw() {
             return "Strip character set empty.";
+        }
+
+    };
+
+    class slightcsv_replace_error: public slightcsv_error {
+
+        const char* what() const throw() {
+            return "Replace character map empty.";
         }
 
     };

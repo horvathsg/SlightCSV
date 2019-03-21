@@ -20,10 +20,16 @@
 
 #include <iostream>
 #include <cstdio>
+#include <string>
+#include <vector>
+#include <set>
+#include <map>
 // #include <algorithm>
 
 using std::string;
 using std::vector;
+using std::set;
+using std::map;
 using std::cout;
 using std::clog;
 using std::endl;
@@ -91,11 +97,25 @@ void utils::SlightCSV::setStripChars(set<char> &t_strip_chars) {
     m_csvp->m_strip_chars = t_strip_chars;
 }
 
-void utils::SlightCSV::getStripChars(set<char> &t_target) {
+void utils::SlightCSV::getStripChars(set<char> &t_target) const {
     if (!m_csvp->m_strip_chars.size()) {
         throw slightcsv_strip_error();
     }
     t_target = m_csvp->m_strip_chars;
+}
+
+void utils::SlightCSV::setReplaceChars(map<char, char> &t_rep_chars) {
+    if (!t_rep_chars.size()) {
+        throw slightcsv_replace_error();
+    }
+    m_csvp->m_rep_chars = t_rep_chars;
+}
+
+void utils::SlightCSV::getReplaceChars(map<char, char> &t_target) const {
+    if (!m_csvp->m_rep_chars.size()) {
+        throw slightcsv_replace_error();
+    }
+    t_target = m_csvp->m_rep_chars;
 }
 
 size_t utils::SlightCSV::loadData(void) {
@@ -213,6 +233,12 @@ size_t utils::SlightCSV::loadData(void) {
             }
         }
         if ((in_char != '\r' && in_char != '\n') || is_escaped) {
+            if (m_csvp->m_rep_chars.size()) {
+                map<char, char>::const_iterator it = m_csvp->m_rep_chars.find(in_char);
+                if (it != m_csvp->m_rep_chars.end()) {
+                    in_char = it->second;
+                }
+            }
             in_line += in_char;
         } else {
             if (in_line.size()) {
