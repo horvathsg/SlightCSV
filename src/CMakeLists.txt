@@ -29,7 +29,12 @@ set_target_properties(slightcsv PROPERTIES PUBLIC_HEADER slightcsv.hpp)
 #target_compile_options(slightcsv PUBLIC -Wall -Wextra)
 set_target_properties(slightcsv PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 add_custom_command(TARGET slightcsv
-    COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/slightcsv.hpp ${CMAKE_SOURCE_DIR}/inc/slightcsv
+    COMMAND cp src/slightcsv.hpp inc/slightcsv
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+add_custom_command(TARGET slightcsv
+    COMMAND doxygen slightcsv
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/doc
 )
 
 #INSTALL(TARGETS slightcsv

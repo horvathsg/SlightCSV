@@ -29,64 +29,6 @@ using std::exception;
 using std::set;
 using std::map;
 
-/// \mainpage SlightCSV - simple, lightweight CSV parser library
-///
-/// \section sec_intro Introduction
-///
-/// SlightCSV is a CSV parser library written in C++. Its main purpose is to facilitate the programmatic processing of
-/// CSV files.
-///
-/// \subsection subsec_features Features
-///
-/// - Customizable delimiter and escape characters.
-/// - Flexible character manipulation capabilities (stripping, replacement).
-/// - Automatic handling of macOS, Linux and Windows line endings.
-/// - Query methods for getting cell, row and column data with automatic type conversion capabilities.
-/// - Able to load large files (> 1 GB) in reasonable time.
-/// - Custom exception classes inheriting from std::exception.
-/// - C++98 compatibility.
-///
-/// \subsection subsec_addition In addition
-///
-/// - Detailed documentation (Doxygen)
-/// - Unit and integration tests with 90+ % code coverage (CppUTest)
-/// - Example code
-///
-/// \section sec_start Getting started
-///
-/// \subsection subsec_dep Dependencies
-///
-/// Besides C++ Standard Library, SlightCSV has no external dependencies. However, the following tools are used to support
-/// build management, code quality and documentation.
-///
-/// - CMake
-/// - CppUTest
-/// - Doxygen
-///
-/// It is recommended to install those missing before proceeding (it is of course possible to use and build the library
-/// without those).
-///
-/// \subsection subsec_struct Project structure
-///
-/// The structure inside the project root directory is as follows.
-///
-/// - bin: demo application build output
-/// - build: build directory
-/// - doc: Doxygen configuration and output
-/// - inc: public header output
-/// - lib: shared library output directory
-/// - src: library and demo application sources
-/// - test: unit and integration tests
-///
-/// In order to use the pre-built shared library, you just need the public header (slightcsv.hpp) from inc and the 
-/// library (libslightcsv.so) from lib.
-///
-/// \subsection subsec_config Configuration
-///
-/// If you would like to build the library from source, then it is recommended to:
-///
-/// - set
-
 /// The namespace used by all SlightCSV classes and methods.
 namespace utils {
 
@@ -128,9 +70,10 @@ namespace utils {
 
             /// Method to set the escape character. It is used to escape other characters in the file to be processed. 
             /// Escaped delimiter and new line characters are not processed and are propagated to processed "cells". 
-            /// Setting or not setting the escape character may trigger exceptions as it may lead to invalid format 
-            /// (e.g. cell count mismatch in row). Order of execution: strip, escape, replace. Optional. If used, set it 
-            /// before triggering data loading.
+            /// Setting (or not setting) the escape character not in accordance with the file format may trigger 
+            /// exceptions (e.g. cell count mismatch in row). Order of execution: strip, escape, replace. Characters 
+            /// enclosed between escape characters will be escaped even if escape characters are stripped or replaced. 
+            /// Method is optional. If used, set it before triggering data loading.
             /// \param t_escape character to be used to escape a group of characters in the input.
             /// \see getEscape()
             void setEscape(char t_escape);
@@ -141,7 +84,9 @@ namespace utils {
             char getEscape(void) const;
 
             /// Method to define a set of character(s) to be stripped from the input of the parser. Order of execution: 
-            /// strip, escape, replace. Optional. If used, set it before triggering data loading.
+            /// strip, escape, replace. Escape characters may be stripped, but characters enclosed between escape characters
+            /// will be escaped and present in the output. Stripped characters won't be seen by replace. Optional method.
+            /// If used, set it before triggering data loading.
             /// \param t_strip_chars a set of characters previously populated with characters to be stripped.
             /// \see getStripChars()
             void setStripChars(set<char> &t_strip_chars);
@@ -154,7 +99,9 @@ namespace utils {
 
             /// Method to define a map of character pair(s) to be replaced in the input of the parser. The map's "key" 
             /// character is replaced by the "value" character in the input. Order of execution: strip, escape, 
-            /// replace. Optional. If used, set it before triggering data loading.
+            /// replace. Escape characters may be replaced, but characters enclosed between escape characters
+            /// will be escaped and present in the output. Stripped characters won't be seen by the method. Optional method.
+            /// If used, set it before triggering data loading.
             /// \param t_rep_chars a map of "replacee" and "replacer" characters.
             /// \see getReplaceChars()
             void setReplaceChars(map<char, char> &t_rep_chars);
@@ -267,12 +214,13 @@ namespace utils {
             t_cell_count) const;
 
             /// Method to unload data structure from memory. Settings (filename, delimiter, character manipulation
-            /// settings) are preserved. Data queries cannot be made until loading a data structure.
+            /// settings) are preserved. Data queries cannot be made until loading a data structure. Optional,
+            /// library will not leak if not used. 
             /// \see loadData()
             void unloadData(void);
 
             /// Method to reset the library to its initial state. Unloads any data structure loaded previously and
-            /// resets settings to their initial state.
+            /// resets settings to their initial state. Optional, library will not leak if not used.
             void reset(void);
 
         private:
