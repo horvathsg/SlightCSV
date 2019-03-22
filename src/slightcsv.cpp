@@ -21,11 +21,13 @@
 #include <cstdio>
 
 utils::SlightCSV::SlightCSV(void) {
+    // allocate object holding data members dynamically
     m_csvp = new SlightCSVPrivate;
     this->reset();
 }
 
 utils::SlightCSV::~SlightCSV(void) {
+    // de-allocate data member object
     delete m_csvp;
 }
 
@@ -47,6 +49,7 @@ void utils::SlightCSV::setSeparator(char t_separator) {
     if (!t_separator) {
         throw slightcsv_separator_error();
     }
+    // TODO: store value in one place only (SlightRow would be a more logical choice as it directly needs the delimiter) 
     m_csvp->m_separator = t_separator;
     m_csvp->m_row.setSeparator(t_separator);
 }
@@ -62,6 +65,7 @@ void utils::SlightCSV::setEscape(char t_escape) {
     if (!t_escape) {
         throw slightcsv_escape_error();
     }
+    // TODO: store value in one place only (even though it is needed for file and row-level parsing as well)
     m_csvp->m_escape = t_escape;
     m_csvp->m_row.setEscape(t_escape);
 }
@@ -113,52 +117,77 @@ size_t utils::SlightCSV::loadData(void) {
 
     size_t retval = 0;
 
+    // open file for processing
     FILE *in_file = fopen(m_csvp->m_filename.c_str(), "rb");
     if (!in_file) {
         throw slightcsv_filename_error();
     }
 
+    // get file size in order to support resource allocation (row count not known in advance)
     fseek(in_file, 0L, SEEK_END);
     m_csvp->m_file_size = ftell(in_file);
     fseek(in_file, 0L, SEEK_SET);
     
+    // set up variables to be used in parsing cycle
     char in_char;
     string in_line = "";
     bool is_escaped = false;
     size_t row_id = 0;
 
+    // parse the file character by character
     while (in_char = fgetc(in_file), in_char != EOF) {
+        // if there is at least one character to be stripped
         if (m_csvp->m_strip_chars.size()) {
+                // if the incoming character is present in the strip set
                 if (m_csvp->m_strip_chars.count(in_char)) {
+                    // don't put it in the buffer
                     continue;
                 }
             }
+        // if the escape character is set
         if (m_csvp->m_escape) {
+            // if the incoming character matches the escape character
             if (in_char == m_csvp->m_escape) {
+                // set escaped state by a XOR
+                // this is an efficient way of keeping track of escape state without using expensive "maps"
                 is_escaped ^= true;
             }
         }
+        // if incoming character is not newline, or if the character is escaped
         if ((in_char != '\r' && in_char != '\n') || is_escaped) {
+            // if there are any characters to be replaced
             if (m_csvp->m_rep_chars.size()) {
+                // check if the incoming character needs to be replaced
                 map<char, char>::const_iterator it = m_csvp->m_rep_chars.find(in_char);
+                // if incoming character needs to be replaced
                 if (it != m_csvp->m_rep_chars.end()) {
+                    // replace "replacee" with "replacer"
                     in_char = it->second;
                 }
             }
+            // add character to line buffer
             in_line += in_char;
+        // if incoming character is newline, and it is not escaped
         } else {
+            // if incoming line is not empty (might be if two new lines follow each other, e.g. \r\n)
             if (in_line.size()) {
+                // submit line for processing with row id
                 processLine(in_line, row_id);
+                // clear line buffer
                 in_line.clear();
+                // increment row id
                 ++row_id;
             }
         }
     }
-
+    // submit remaining characters for processing with row id (needed because there might be no new line character at the 
+    // end of the last row to trigger processing)
     processLine(in_line, row_id);
 
+    // close file
     fclose(in_file);
 
+    // set return value (number if rows processed)
     retval = m_csvp->m_data_matrix.getRowCount();
 
     return retval;
@@ -216,7 +245,6 @@ void utils::SlightCSV::getColumn(vector<T> &t_target_column, size_t t_column_ind
     if (t_column_index >= m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_index_error();
     }
-
     m_csvp->m_data_matrix.getColumn(t_target_column, t_column_index);
 }
 
@@ -347,16 +375,27 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
         return;
     }
 
+    // clear row
     m_csvp->m_row.clear();
+    
+    // set row input
     m_csvp->m_row.setInput(t_input);
+    
+    // process row
     m_csvp->m_row.process();
 
+    // determine column count from the first row processed
+    // reserve memory for the estimated number of cells (based on file size, row size and cell count in row)
     if (!m_csvp->m_csv_format_detect_done) {
         m_csvp->m_data_matrix.setCapacity(m_csvp->m_file_size / t_input.size() * m_csvp->m_row.getCellCount());
         m_csvp->m_data_matrix.setColumnCount(m_csvp->m_row.getCellCount());
         m_csvp->m_csv_format_detect_done = true;
     }
 
+    // check if row is header
+    // multiple headers are allowed, but only at the beginning of the file
+    // if a non-header comes after a header, more headers are not allowed (exception is thrown)
+    // TODO: add approximate row number to the exception text (what)
     if (m_csvp->m_row.getIsHeader()) {
         size_t header_count = m_csvp->m_data_matrix.getHeaderCount();
         if (t_row_id == header_count) {
@@ -366,12 +405,17 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
         }
     }
 
+    // if cell count is not consistent, an exception is thrown
+    // TODO: add approximate row number to the exception text (what)
     if (m_csvp->m_row.getCellCount() != m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_format_cellcnt_error();
     }
     
+    // get parsed cells from row
     vector<string> cells;
     m_csvp->m_row.getCells(cells);
+    
+    // add cells to data matrix
     m_csvp->m_data_matrix.addCells(cells);
 
 }

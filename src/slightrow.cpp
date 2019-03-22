@@ -76,6 +76,7 @@ void utils::SlightRow::process(void) {
     string cell = "";
     bool is_escaped = false;
     char c;
+    
     for(size_t i = 0; i < m_input.size(); ++i) {
         c = m_input[i];
         if (m_esc) {
