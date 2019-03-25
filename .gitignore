@@ -1,0 +1,16 @@
+/bin/*
+/build/*
+/doc/*
+!/doc/slightcsv
+
+/inc/*
+!/inc/slightcsv
+/inc/slightcsv/*
+
+/lib/*
+
+/src/.vscode
+
+/.vscode
+
+/*.code-workspace
