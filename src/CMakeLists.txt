@@ -32,7 +32,11 @@ add_custom_command(TARGET slightcsv
     COMMAND cp src/slightcsv.hpp inc/slightcsv
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
-add_custom_command(TARGET slightcsv
+
+# Documentation generation
+add_custom_target(docs
+)
+add_custom_command(TARGET docs
     COMMAND doxygen slightcsv
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/doc
 )
