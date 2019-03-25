@@ -93,11 +93,11 @@ void utils::SlightRow::process(void) {
                 is_escaped ^= true;
             }
         }
-        // if character is not separator or it is escaped
+        // if character is not delimiter or it is escaped
         if (c != m_sep || is_escaped) {
             // add character to cell buffer
             cell += c;
-        // if character is separator and it is not escaped
+        // if character is delimiter and it is not escaped
         } else {
             // if cell buffer size is not zero
             if (cell.size() != 0) {

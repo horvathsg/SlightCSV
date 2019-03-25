@@ -395,7 +395,7 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
     // check if row is header
     // multiple headers are allowed, but only at the beginning of the file
     // if a non-header comes after a header, more headers are not allowed (exception is thrown)
-    // TODO: add approximate row number to the exception text (what)
+    // TODO: make approximate row number available in the exception
     if (m_csvp->m_row.getIsHeader()) {
         size_t header_count = m_csvp->m_data_matrix.getHeaderCount();
         if (t_row_id == header_count) {
@@ -406,7 +406,7 @@ void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
     }
 
     // if cell count is not consistent, an exception is thrown
-    // TODO: add approximate row number to the exception text (what)
+    // TODO: make approximate row number available in the exception
     if (m_csvp->m_row.getCellCount() != m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_format_cellcnt_error();
     }

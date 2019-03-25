@@ -36,12 +36,12 @@ namespace utils {
             SlightMatrix(void);
 
             /// Method to allocate and reserve memory for the given number of cells in the data store. It reserves memory
-            /// only for the cells, not for the strings representing cell contents.
+            /// only for cells, not for strings representing cell contents.
             /// \param t_cell_count number of cells to reserve memory for.
             /// \see getCapacity()
             void setCapacity(size_t t_cell_count);
 
-            /// Method to query the amount of memory reserved for the data matrix.
+            /// Method to query the amount of cells memory is reserved for in the data matrix.
             /// \return number of cells memory is reserved for.
             /// \see setCapacity()
             size_t getCapacity(void) const;
@@ -59,14 +59,14 @@ namespace utils {
             size_t getColumnCount(void) const;
 
             /// Method to add single cells (in a continuous manner) to the data matrix. The cell is added at the end of the
-            /// vector holding cells. Column and row mapping is determined automatically (depends on matrix format).
+            /// vector holding cells. Column and row mapping is determined automatically (based on column count).
             /// \param t_cell string contents of the cell to add.
             /// \see addCells()
             /// \see getCell()
             void addCell(string t_cell);
 
             /// Method to add multiple cells (vector of cells) to the data matrix. Cells are added at the end of the
-            /// vector holding cells. Column and row mapping is determined automatically (depends on matrix format).
+            /// vector holding cells. Column and row mapping is determined automatically (based on column count).
             /// \param t_cells contents of the cells to add.
             /// \see addCell()
             /// \see getCell()
@@ -77,7 +77,7 @@ namespace utils {
             /// \see getHeaderCount()
             void setHeaderCount(size_t t_header_count);
 
-            /// Method to get the (previously set) number of header rows the data matrix contains.
+            /// Method to get the (automatically detected or previously set) number of header rows the data matrix contains.
             /// \return number of header rows the data matrix contains.
             /// \see setHeaderCount()
             size_t getHeaderCount(void) const;
@@ -88,8 +88,8 @@ namespace utils {
             /// with cells).
             bool validate(void) const;
 
-            /// Method the get the number of rows the data matrix consists of. The value depends on the number of columns set
-            /// and the number of cells added.
+            /// Method the get the number of rows the data matrix consists of. The value depends on the number of 
+            /// columns set and the number of cells added.
             /// \return the number of rows the data matrix consists of.
             /// \see setColumnCount()
             /// \see getColumnCount()

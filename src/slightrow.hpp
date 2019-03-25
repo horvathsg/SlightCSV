@@ -35,7 +35,7 @@ namespace utils {
             SlightRow(void);
 
             /// Method to set the input string of the row. Changing the input string invalidates any previous processing
-            /// results.
+            /// results (it is necessary to process the row again before querying results).
             /// \param t_input input string of the row.
             /// \see getInput()
             void setInput(string &t_input);
@@ -46,7 +46,8 @@ namespace utils {
             string getInput(void) const;
 
             /// Method to set the delimiter character to be used when extracting cells from the row. Changing the 
-            /// delimiter character invalidates any previous processins results.
+            /// delimiter character invalidates any previous processins results (it is necessary to process the row 
+            /// again before querying results).
             /// \param t_sep delimiter character.
             /// \see getSeparator()
             void setSeparator(char t_sep);
@@ -57,7 +58,8 @@ namespace utils {
             char getSeparator(void) const;
 
             /// Method to set the escape character to be used when extracting cells from the row. Changing the 
-            /// escape character invalidates any previous processins results.
+            /// escape character invalidates any previous processins results (it is necessary to process the row 
+            /// again before querying results).
             /// \param t_esc escape character.
             /// \see getEscape()
             void setEscape(char t_esc);
@@ -79,7 +81,7 @@ namespace utils {
             size_t getCellCount(void) const;
 
             /// Method to get the cells found in the processed row.
-            /// \param t_target buffer to add cells to.
+            /// \param t_target target variable to add cells to.
             /// \see getCellCount()
             /// \see getIsHeader()
             size_t getCells(vector<string> &t_target) const;

@@ -134,9 +134,9 @@ size_t t_cell_count) const {
         throw slightmatrix_column_error();
     }
 
-    // set iterator to first item of row
+    // set iterator to first character of row
     vector<string>::const_iterator first = m_data.begin() + t_row_index * m_column_count + t_start_cell_index;
-    // set iterator to last item of row
+    // set iterator to last character of row
     vector<string>::const_iterator last = first + t_cell_count - 1;
 
     // clear and fill target
