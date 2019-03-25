@@ -49,11 +49,13 @@ size_t utils::SlightMatrix::getColumnCount(void) const {
 
 void utils::SlightMatrix::addCell(string t_cell) {
     m_data.push_back(t_cell);
+    // after adding cell, re-calculate row count
     updateRowCount();
 }
 
 void utils::SlightMatrix::addCells(vector<string> &t_cells) {
     m_data.insert(m_data.end(), t_cells.begin(), t_cells.end());
+    // after adding cells, re-calculate row count
     updateRowCount();
 }
 
@@ -131,10 +133,13 @@ size_t t_cell_count) const {
     if (t_start_cell_index + t_cell_count > m_column_count) {
         throw slightmatrix_column_error();
     }
-    
+
+    // set iterator to first item of row
     vector<string>::const_iterator first = m_data.begin() + t_row_index * m_column_count + t_start_cell_index;
+    // set iterator to last item of row
     vector<string>::const_iterator last = first + t_cell_count - 1;
 
+    // clear and fill target
     t_target.clear();
     t_target.reserve(m_row_count);
     for (vector<string>::const_iterator it = first; it <= last; ++it) {
@@ -197,6 +202,7 @@ void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index, 
         throw slightmatrix_row_error();
     }
 
+    // clear and fill target
     t_target.clear();
     t_target.reserve(m_column_count);
     for (size_t i = t_start_cell_index; i < t_start_cell_index + t_cell_count; ++i) {
@@ -215,8 +221,7 @@ void utils::SlightMatrix::reset(void) {
     m_row_count = 0;
     m_column_count = 0;
     m_header_count = 0;
-    // m_data.clear();
-    // m_data.shrink_to_fit();
+    // empty vector and release memory
     vector<string>().swap(m_data);
 }
 

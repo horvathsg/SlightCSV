@@ -158,6 +158,8 @@ namespace utils {
             /// it is always possible to get the value as string.
             /// \param t_target_column vector to hold the values of the cells in the column.
             /// \param t_column_index index (starting from 0) of the column to be returned.
+            /// \see getRow()
+            /// \see getCell()
             template <class T>
             void getColumn(vector<T> &t_target_column, size_t t_column_index) const;
 
@@ -169,7 +171,9 @@ namespace utils {
             /// it is always possible to get the value as string.
             /// \param t_target_column vector to hold the values of the cells in the column.
             /// \param t_column_index index (starting from 0) of the column to be returned.
-            /// \param t_start_cell_index index (starting from 0) of the first vertical cell (filtering). 
+            /// \param t_start_cell_index index (starting from 0) of the first vertical cell (filtering).
+            /// \see getRow()
+            /// \see getCell()
             template <class T>
             void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index) const;
 
@@ -183,7 +187,8 @@ namespace utils {
             /// \param t_column_index index (starting from 0) of the column to be returned.
             /// \param t_start_cell_index index (starting from 0) of the first vertical cell (filtering)
             /// \param t_cell_count number of cells to return (beginning from the first vertical cell specified).
-            /// \see void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index) const
+            /// \see getRow()
+            /// \see getCell()
             template <class T>
             void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index, 
             size_t t_cell_count) const;
@@ -193,16 +198,22 @@ namespace utils {
             /// returns cells in a row as strings.
             /// \param t_target_row vector to hold the values of the cells in the row.
             /// \param t_row_index index (starting from 0) of the row to be returned.
+            /// \see getColumn()
+            /// \see getCell()
             void getRow(vector<string> &t_target_row, size_t t_row_index) const;
 
+            /// \overload
             /// Method to get the cells of a specific row. The row is represented in the form of a vector.
             /// The internal data structure stores cell values as strings. When using the method, the library
             /// returns cells in a row as strings.
             /// \param t_target_row vector to hold the values of the cells in the row.
             /// \param t_row_index index (starting from 0) of the row to be returned.
             /// \param t_start_cell_index index (starting from 0) of the first horizontal cell (filtering).
+            /// \see getColumn()
+            /// \see getCell()
             void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index) const;
 
+            /// \overload
             /// Method to get the cells of a specific row. The row is represented in the form of a vector.
             /// The internal data structure stores cell values as strings. When using the method, the library
             /// returns cells in a row as strings.
@@ -210,6 +221,8 @@ namespace utils {
             /// \param t_row_index index (starting from 0) of the row to be returned.
             /// \param t_start_cell_index index (starting from 0) of the first horizontal cell (filtering).
             /// \param t_cell_count number of cells to return (beginning from the first horizontal cell specified).
+            /// \see getColumn()
+            /// \see getCell()
             void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index, size_t 
             t_cell_count) const;
 
@@ -230,11 +243,10 @@ namespace utils {
 
     };
 
-    /// \cond
+    /// Base exception of the class (never gets thrown). Inheriting from std::exception.
     class slightcsv_error: public exception {};
-    /// \endcond
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - data cannot be loaded (file not found)
     /// - queried filename is empty (not set)
     /// - trying to set empty filename
@@ -246,7 +258,7 @@ namespace utils {
 
     };
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - queried delimiter character value is zero (not set)
     /// - trying to set delimiter character with zero value
     class slightcsv_separator_error: public slightcsv_error {
@@ -257,7 +269,7 @@ namespace utils {
 
     };
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - queried escape character value is zero (not set)
     /// - trying to set escape character with zero value
     class slightcsv_escape_error: public slightcsv_error {
@@ -279,7 +291,7 @@ namespace utils {
 
     };
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - queried replace character map is empty (not set)
     /// - trying to set empty replace character map
     class slightcsv_replace_error: public slightcsv_error {
@@ -290,7 +302,7 @@ namespace utils {
 
     };
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - the CSV file format is invalid (inconsistency in terms of cell quantity in a row)
     /// - settings of the parser cause the CSV file format to seem invalid (as a consequence of character manipulation 
     /// with escape, strip and replace)
@@ -302,7 +314,7 @@ namespace utils {
 
     };
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - intermediate header row is found after the beginning of the file
     class slightcsv_format_header_error: public slightcsv_error {
 
@@ -312,7 +324,7 @@ namespace utils {
 
     };
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - data query methods are called before loading a data structure
     class slightcsv_data_error: public slightcsv_error {
 
@@ -322,7 +334,7 @@ namespace utils {
 
     };
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - data query methods called with out-of-range row index
     /// - data query methods called with out-of-range column index
     class slightcsv_index_error: public slightcsv_error {
@@ -333,7 +345,7 @@ namespace utils {
 
     };
 
-    /// Exception inheriting from std::exception. It is thrown when:
+    /// Exception inheriting from slightcsv_error. It is thrown when:
     /// - file read error occurred before reaching the end of file (EOF)
     class slightcsv_read_error: public slightcsv_error {
 
