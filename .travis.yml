@@ -1,0 +1,20 @@
+language: cpp
+compiler: gcc
+dist: trusty
+sudo: require
+
+addons:
+ apt:
+  update: true
+  packages:
+   - cpputest
+   - doxygen
+   - lcov
+
+before_install:
+ - cd build
+
+script:
+ - cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+ - make clean
+ - make
