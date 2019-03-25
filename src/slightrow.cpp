@@ -24,8 +24,9 @@ void utils::SlightRow::setInput(string &t_input) {
     if (!t_input.size()) {
         throw slightrow_input_error();
     }
+    // clear processing results related fields
+    this->clearResults();
     m_input = t_input;
-    m_processed = false;
 }
 
 string utils::SlightRow::getInput(void) const {
@@ -39,8 +40,9 @@ void utils::SlightRow::setSeparator(char t_sep) {
     if (t_sep == 0) {
         throw slightrow_separator_error();
     }
+    // clear processing results related fields
+    this->clearResults();
     m_sep = t_sep;
-    m_processed = false;
 }
 
 char utils::SlightRow::getSeparator(void) const {
@@ -54,8 +56,9 @@ void utils::SlightRow::setEscape(char t_esc) {
     if (t_esc == 0) {
         throw slightrow_escape_error();
     }
+    // clear processing results related fields
+    this->clearResults();
     m_esc = t_esc;
-    m_processed = false;
 }
 
 char utils::SlightRow::getEscape(void) const {
@@ -73,37 +76,54 @@ void utils::SlightRow::process(void) {
         throw slightrow_separator_error();
     }
 
+    // define and declare variables used for processing row contents
     string cell = "";
     bool is_escaped = false;
     char c;
     
+    // iterate through all characters of input string
     for(size_t i = 0; i < m_input.size(); ++i) {
         c = m_input[i];
+        // if escape character is defined (not zero)
         if (m_esc) {
+            // if current character is escape character
             if (c == m_esc) {
+                // set escaped state by a XOR
+                // this is an efficient way of keeping track of escape state without using expensive "maps"
                 is_escaped ^= true;
             }
         }
+        // if character is not separator or it is escaped
         if (c != m_sep || is_escaped) {
+            // add character to cell buffer
             cell += c;
+        // if character is separator and it is not escaped
         } else {
+            // if cell buffer size is not zero
             if (cell.size() != 0) {
+                // insert cell buffer at the end of cells vector
                 m_cells.push_back(cell);
+                // clear cell buffer
                 cell.clear();
+            // if cell buffer size is zero (empty field)
             } else {
+                // insert zero at the end of cells vector
                 m_cells.push_back("0");
             }
         }
     }
 
+    // if there is remainder in cell buffer (row ending characters after last separator)
     if (cell.size()) {
+        // insert it at the end of cells vector
         m_cells.push_back(cell);
     }
 
+    // if last character in row is separator and it is not escaped
     if (m_input[m_input.size() - 1] == m_sep && !is_escaped) {
+        // insert zero at the end of cells vector
         m_cells.push_back("0");
     }
-
 
     m_cell_count = m_cells.size();
 
@@ -127,12 +147,16 @@ size_t utils::SlightRow::getCells(vector<string> &t_target) const {
     return m_cells.size();
 }
 
-void utils::SlightRow::clear(void) {
+void utils::SlightRow::clearResults(void) {
     m_processed = false;
-    m_input.clear();
     m_cell_count = 0;
     m_cells.clear();
     m_is_header = false;
+}
+
+void utils::SlightRow::clear(void) {
+    this->clearResults();
+    m_input.clear();
 }
 
 void utils::SlightRow::reset(void) {
@@ -149,15 +173,24 @@ bool utils::SlightRow::getIsHeader(void) const {
     return m_is_header;
 }
 
+// TODO: examine the possibility of merging header verification with cells extraction in order to save one iteration
+// TODO: enhance header detection algorithm
+// TODO: make API capable of turning of automatic header detection in order to prevent problems that may arise from false
+// positives.
 bool utils::SlightRow::checkIsHeader(void) const {
     float num_chars = 0;
+    // iterate through all characters of the input string
     for (string::const_iterator it = m_input.begin(); it != m_input.end(); ++it) {
+        // if character is numeric, increase counter
         if (*it >= 48 && *it <= 57) {
             ++num_chars;
         }
     }
+    // if the ratio of numeric characters is at least 10 percents
     if (num_chars / m_input.size() > 0.1f) {
+        // the row is not considered a header
         return false;
     }
+    // otherwise the row is considered a header
     return true;
 }
