@@ -36,15 +36,19 @@ int main(int argc, char *argv[]) {
 
     // set filename
     scsv.setFileName("../test/env_data.csv");
+    
     // set delimiter character (semicolon)
     scsv.setSeparator(';');
+    
     // set escape character (double quote)
     scsv.setEscape('\"');
+    
     // set characters to be stripped (stip spaces and underscores)
     set<char> to_strip;
     to_strip.insert(' ');
     to_strip.insert('_');
     scsv.setStripChars(to_strip);
+    
     // set characters to be replaced (replace 'a' with 'b' and 'c' with 'd')
     map<char, char> to_replace;
     pair<char, char> to_replace1('a', 'b');
