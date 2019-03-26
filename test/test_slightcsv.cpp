@@ -1520,3 +1520,18 @@ TEST(slightcsv, complex) {
     CHECK_EQUAL("\"14;0,1\"", row1.at(0));
     CHECK_EQUAL("\"0\r\nxx\"", row2.at(29));
 };
+
+TEST(slightcsv, format_header_err) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short_dh.csv";
+    char sep = ';';
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("CSV format error (intermediate header).", ex);
+};
