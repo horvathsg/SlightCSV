@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/horvathsg/SlightCSV.svg?branch=master)](https://travis-ci.org/horvathsg/SlightCSV)
+
  # Introduction
 
  SlightCSV is a CSV parser library written in C++. Its main purpose is to facilitate the programmatic processing of
