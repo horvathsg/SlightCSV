@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/horvathsg/SlightCSV.svg?branch=master)](https://travis-ci.org/horvathsg/SlightCSV)
+[![Coverage Status](https://coveralls.io/repos/github/horvathsg/SlightCSV/badge.svg?branch=master)](https://coveralls.io/github/horvathsg/SlightCSV?branch=master)
 
  # Introduction
 
