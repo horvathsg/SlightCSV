@@ -1,4 +1,4 @@
-// SlightCSV - simple, lightweight CSV parser library
+// SlightCSV - simple, lightweight CSV parser library written in C++
 // Copyright (C) 2018 Simon Horvath <horvathsg@gmail.com>
 
 // This program is free software: you can redistribute it and/or modify
