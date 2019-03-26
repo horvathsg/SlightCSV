@@ -24,10 +24,26 @@ set(CPPUTEST_LIBS CppUTest CppUTestExt)
 # slightcsv_test build
 include_directories(${CPPUTEST_INC_DIR})
 link_directories(${CMAKE_SOURCE_DIR}/lib ${CPPUTEST_LIB_DIR})
-add_executable(slightcsv_test main.cpp test.cpp)
+add_executable(slightcsv_test main.cpp test_slightcsv.cpp)
 target_link_libraries(slightcsv_test PRIVATE slightcsv ${CPPUTEST_LIBS})
 target_include_directories(slightcsv_test PUBLIC ${CMAKE_SOURCE_DIR}/inc ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_command(TARGET slightcsv_test COMMAND ./slightcsv_test POST_BUILD)
+
+# slightmatrix_test build
+include_directories(${CPPUTEST_INC_DIR})
+link_directories(${CMAKE_SOURCE_DIR}/lib ${CPPUTEST_LIB_DIR})
+add_executable(slightmatrix_test main.cpp test_slightmatrix.cpp)
+target_link_libraries(slightmatrix_test PRIVATE slightcsv ${CPPUTEST_LIBS})
+target_include_directories(slightmatrix_test PUBLIC ${CMAKE_SOURCE_DIR}/inc ${CMAKE_CURRENT_SOURCE_DIR})
+add_custom_command(TARGET slightmatrix_test COMMAND ./slightmatrix_test POST_BUILD)
+
+# slightrow_test build
+include_directories(${CPPUTEST_INC_DIR})
+link_directories(${CMAKE_SOURCE_DIR}/lib ${CPPUTEST_LIB_DIR})
+add_executable(slightrow_test main.cpp test_slightrow.cpp)
+target_link_libraries(slightrow_test PRIVATE slightcsv ${CPPUTEST_LIBS})
+target_include_directories(slightrow_test PUBLIC ${CMAKE_SOURCE_DIR}/inc ${CMAKE_CURRENT_SOURCE_DIR})
+add_custom_command(TARGET slightrow_test COMMAND ./slightrow_test POST_BUILD)
 
 # slightcsv code coverage report
 set(OBJECT_DIR ${CMAKE_SOURCE_DIR}/build/src/CMakeFiles/slightcsv.dir)
