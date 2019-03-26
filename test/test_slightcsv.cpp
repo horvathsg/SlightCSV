@@ -1535,3 +1535,256 @@ TEST(slightcsv, format_header_err) {
     }
     CHECK_EQUAL("CSV format error (intermediate header).", ex);
 };
+
+TEST(slightcsv, set_header_count_no_data_loaded_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.setHeaderCount(0);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Data not loaded.", ex);
+};
+
+TEST(slightcsv, get_cell_bad_row_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    string cell = "";
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getCell(cell, 865, 0);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv, get_cell_bad_column_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    string cell = "";
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getCell(cell, 0, 30);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv, get_column_2p_bad_column_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> column;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getColumn(column, 30);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv, get_column_3p_data_not_loaded_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> column;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        // data not loaded
+        csv_parser.getColumn(column, 29, 0);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Data not loaded.", ex);
+};
+
+TEST(slightcsv, get_column_3p_bad_column_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> column;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getColumn(column, 30, 0);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv, get_column_4p_data_not_loaded_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> column;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        // data not loaded
+        csv_parser.getColumn(column, 29, 0, 10);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Data not loaded.", ex);
+};
+
+TEST(slightcsv, get_column_4p_bad_column_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> column;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getColumn(column, 30, 0, 1);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv, get_column_4p_bad_start_cell_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> column;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getColumn(column, 29, 865, 1);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv, get_row_2p_data_not_loaded_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> row;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        // data not loaded
+        csv_parser.getRow(row, 0);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Data not loaded.", ex);
+};
+
+TEST(slightcsv, get_row_3p_data_not_loaded_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> row;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        // data not loaded
+        csv_parser.getRow(row, 0, 0);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Data not loaded.", ex);
+};
+
+TEST(slightcsv, get_row_4p_data_not_loaded_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> row;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        // data not loaded
+        csv_parser.getRow(row, 0, 0, 30);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Data not loaded.", ex);
+};
+
+TEST(slightcsv, get_row_3p_bad_row_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> row;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getRow(row, 865, 0);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv, get_row_4p_bad_row_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> row;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getRow(row, 865, 0, 30);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
+
+TEST(slightcsv, get_row_4p_bad_start_cell_index_ex) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/env_data_short.csv";
+    char sep = ';';
+    vector<string> row;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.loadData();
+        csv_parser.getRow(row, 864, 30, 1);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("Bad row or column index.", ex);
+};
