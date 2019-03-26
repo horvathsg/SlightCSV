@@ -1305,3 +1305,263 @@ TEST(slightmatrix, set_get_header_count_invalid) {
     CHECK_EQUAL(false, valid);
     CHECK_EQUAL(3, header_cnt);
 }
+
+TEST(slightmatrix, set_get_row_bad_row_index_ex_1) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        sm.getRow(cells, 3, 0);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid row count or index.", msg);
+}
+
+TEST(slightmatrix, set_get_row_invalid_matrix_ex) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        // one cell missing from last row
+        sm.addCells(cells);
+        sm.getRow(cells, 0, 0, 4);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid matrix (rows incomplete or column count not set).", msg);
+}
+
+TEST(slightmatrix, set_get_row_bad_row_index_ex_2) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        sm.getRow(cells, 3, 0, 4);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid row count or index.", msg);
+}
+
+TEST(slightmatrix, set_get_row_bad_column_index_ex_1) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        sm.getRow(cells, 1, 4, 1);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid column count or index.", msg);
+}
+
+TEST(slightmatrix, set_get_column_invalid_matrix_ex_1) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        // one cell missing from last row
+        sm.addCells(cells);
+        sm.getColumn(cells, 0);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid matrix (rows incomplete or column count not set).", msg);
+}
+
+TEST(slightmatrix, set_get_column_invalid_matrix_ex_2) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        // one cell missing from last row
+        sm.addCells(cells);
+        sm.getColumn(cells, 0, 0, 3);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid matrix (rows incomplete or column count not set).", msg);
+}
+
+TEST(slightmatrix, set_get_column_invalid_matrix_ex_3) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        // one cell missing from last row
+        sm.addCells(cells);
+        sm.getColumn(cells, 0, 0);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid matrix (rows incomplete or column count not set).", msg);
+}
+
+TEST(slightmatrix, set_get_column_bad_column_index_ex_1) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        sm.getColumn(cells, 4);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid column count or index.", msg);
+}
+
+TEST(slightmatrix, set_get_column_bad_column_index_ex_2) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        sm.getColumn(cells, 4, 0, 3);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid column count or index.", msg);
+}
+
+TEST(slightmatrix, set_get_column_bad_row_index_ex_3) {
+    string msg = "";
+    vector<string> cells;
+    try {
+        SlightMatrix sm;
+        sm.setColumnCount(4);
+        cells.push_back("0");
+        cells.push_back("1");
+        cells.push_back("2");
+        cells.push_back("25");
+        cells.push_back("3");
+        cells.push_back("35");
+        cells.push_back("-5");
+        cells.push_back("100");
+        cells.push_back("50");
+        cells.push_back("51");
+        cells.push_back("49");
+        cells.push_back("45");
+        sm.addCells(cells);
+        sm.getColumn(cells, 3, 3, 1);
+    } catch (const exception &e) {
+        msg = e.what();
+    }
+    CHECK_EQUAL("Invalid row count or index.", msg);
+}
