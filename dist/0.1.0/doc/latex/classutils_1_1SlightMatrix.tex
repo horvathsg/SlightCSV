@@ -30,7 +30,7 @@ bool \hyperlink{classutils_1_1SlightMatrix_a536e733a179ee3eaeb5c75986cc477d3}{va
 \item 
 size\+\_\+t \hyperlink{classutils_1_1SlightMatrix_af171e463492b423251369cd7b8799a97}{get\+Row\+Count} (void) const
 \item 
-{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell} (T \&t\+\_\+value, size\+\_\+t t\+\_\+row\+\_\+index, size\+\_\+t t\+\_\+column\+\_\+index) const
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell} (T \&t\+\_\+value, size\+\_\+t t\+\_\+row\+\_\+index, size\+\_\+t t\+\_\+column\+\_\+index) const
 \item 
 void \hyperlink{classutils_1_1SlightMatrix_ad236d7e2d1991624d221f0e077f4356e}{get\+Row} (vector$<$ string $>$ \&t\+\_\+target\+\_\+row, size\+\_\+t t\+\_\+row\+\_\+index) const
 \item 
@@ -67,7 +67,7 @@ Method to add single cells (in a continuous manner) to the data matrix. The cell
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_a9df60a5b5f534a17f025d22bb1a50e0e}{add\+Cells()} 
 
-\hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightMatrix_a9df60a5b5f534a17f025d22bb1a50e0e}\label{classutils_1_1SlightMatrix_a9df60a5b5f534a17f025d22bb1a50e0e}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!add\+Cells@{add\+Cells}}
@@ -83,7 +83,7 @@ Method to add multiple cells (vector of cells) to the data matrix. Cells are add
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_a06f6b4d49818f6f1befea6109ad7b5f6}{add\+Cell()} 
 
-\hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightMatrix_addbfd1ec641100a7cda0b4f6e39ae676}\label{classutils_1_1SlightMatrix_addbfd1ec641100a7cda0b4f6e39ae676}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Capacity@{get\+Capacity}}
@@ -97,12 +97,12 @@ number of cells memory is reserved for.
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_a60585fa6bfe89f8fb2e477f6811c6741}{set\+Capacity()} 
 \end{DoxySeeAlso}
-\mbox{\Hypertarget{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}\label{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}} 
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}\label{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Cell@{get\+Cell}}
 \index{get\+Cell@{get\+Cell}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
 \subsubsection{\texorpdfstring{get\+Cell()}{getCell()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-void utils\+::\+Slight\+Matrix\+::get\+Cell (\begin{DoxyParamCaption}\item[{T \&}]{t\+\_\+value,  }\item[{size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{size\+\_\+t}]{t\+\_\+column\+\_\+index }\end{DoxyParamCaption}) const}
+template void utils\+::\+Slight\+Matrix\+::get\+Cell (\begin{DoxyParamCaption}\item[{T \&}]{t\+\_\+value,  }\item[{size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{size\+\_\+t}]{t\+\_\+column\+\_\+index }\end{DoxyParamCaption}) const}
 
 Method to get the contents of a specific cell. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type supplied as the first parameter of the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
 \begin{DoxyParams}{Parameters}
@@ -139,7 +139,7 @@ Method to get the cells of a specific column. The column is represented in the f
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_ad236d7e2d1991624d221f0e077f4356e}{get\+Row()} 
 
-\hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightMatrix_a641588a2717602d141001e05ed10ea0c}\label{classutils_1_1SlightMatrix_a641588a2717602d141001e05ed10ea0c}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Column@{get\+Column}}
@@ -160,7 +160,7 @@ This is an overloaded member function, provided for convenience. It differs from
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_ad236d7e2d1991624d221f0e077f4356e}{get\+Row()} 
 
-\hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightMatrix_a4257bae1614d59a9f94afe6b12ce7ef7}\label{classutils_1_1SlightMatrix_a4257bae1614d59a9f94afe6b12ce7ef7}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Column@{get\+Column}}
@@ -183,7 +183,7 @@ This is an overloaded member function, provided for convenience. It differs from
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_ad236d7e2d1991624d221f0e077f4356e}{get\+Row()} 
 
-\hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightMatrix_aa08a3c2d096ac82b1688b1edc5bb71fd}\label{classutils_1_1SlightMatrix_aa08a3c2d096ac82b1688b1edc5bb71fd}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Column\+Count@{get\+Column\+Count}}
@@ -225,7 +225,7 @@ Method to get the cells of a specific row. The row is represented in the form of
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_a66ed3d47be2a408a4f2fc0bcbb0d53f5}{get\+Column()} 
 
-\hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightMatrix_a180518083776f29f5796ad67e788f9fa}\label{classutils_1_1SlightMatrix_a180518083776f29f5796ad67e788f9fa}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Row@{get\+Row}}
@@ -245,7 +245,7 @@ This is an overloaded member function, provided for convenience. It differs from
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_a66ed3d47be2a408a4f2fc0bcbb0d53f5}{get\+Column()} 
 
-\hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightMatrix_ada228ea3f65e143162ee51437c6bffa1}\label{classutils_1_1SlightMatrix_ada228ea3f65e143162ee51437c6bffa1}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Row@{get\+Row}}
@@ -267,7 +267,7 @@ This is an overloaded member function, provided for convenience. It differs from
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightMatrix_a66ed3d47be2a408a4f2fc0bcbb0d53f5}{get\+Column()} 
 
-\hyperlink{classutils_1_1SlightMatrix_ae611736cad271a84df5ec2f8d4fca50d}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightMatrix_ac6757baf9bab12a6a92dae96015e39a1}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightMatrix_af171e463492b423251369cd7b8799a97}\label{classutils_1_1SlightMatrix_af171e463492b423251369cd7b8799a97}} 
 \index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Row\+Count@{get\+Row\+Count}}
@@ -333,6 +333,7 @@ Method to set the number of header rows the data matrix contains.
 
 Method to validate cell format and contents. Data query methods automatically call this method and only return results on valid data matrices. A valid matrix (1) has its column count set, (2) has less header rows than total rows and (3) does not contain a last row which has missing cells (all rows are filled with cells). 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/hsg/\+Documents/projects/slightcsv/src/slightmatrix.\+hpp\end{DoxyCompactItemize}
+/home/hsg/\+Documents/projects/slightcsv/src/slightmatrix.\+hpp\item 
+/home/hsg/\+Documents/projects/slightcsv/src/slightmatrix.\+cpp\end{DoxyCompactItemize}

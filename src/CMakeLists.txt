@@ -38,6 +38,7 @@ add_custom_target(docs
 )
 add_custom_command(TARGET docs
     COMMAND doxygen slightcsv
+    COMMAND cat badges.md intro.md > ../README.md
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/doc
 )
 

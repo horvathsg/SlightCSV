@@ -18,6 +18,7 @@ Slight\+C\+SV is a C\+SV parser library written in C++. Its main purpose is to f
 \begin{DoxyItemize}
 \item Detailed documentation (Doxygen).
 \item Automated unit and integration testing (Cpp\+U\+Test, gcov, lcov).
+\item Pre-\/compiled binaries for multiple platforms.
 \item Example code.
 \end{DoxyItemize}
 
@@ -43,7 +44,7 @@ It is recommended to install those missing before proceeding.
 
 \subsection*{Platform}
 
-At the present time, the development platform is Linux. While it is possible to build and use the library on Windows, various stages of the build pipeline might fail because of missing headers and/or libraries (namely automated testing, documentation generation and code coverage report generation).
+Binaries for 32/64 bit Linux/\+Windows are supplied in the dist directory. At the present time, the development platform is Linux. While it is possible to build and use the library on other platforms, various stages of the build pipeline might fail because of missing headers and/or libraries (namely automated testing, documentation generation and code coverage report generation). Those issues may be resolved by building and/or installing missing components.
 
 \subsection*{Project structure}
 
@@ -51,36 +52,54 @@ The structure inside the project root directory is as follows.
 
 
 \begin{DoxyItemize}
-\item bin\+: demo application build output.
+\item bin\+: demo application output directory.
 \item build\+: build directory.
-\item doc\+: Doxygen configuration and output.
-\item inc\+: public header output (in subdirectory slightcsv).
+\item dist\+: distribution directory.
+\item doc\+: Doxygen configuration and output directory.
+\item inc\+: public header output directory.
 \item lib\+: shared library output directory.
-\item src\+: library and demo application sources.
-\item test\+: unit and integration tests.
+\item platform\+: platform toolchains directory.
+\item src\+: library and demo application source directory.
+\item test\+: unit and integration tests directory.
 \end{DoxyItemize}
 
-In order to use the pre-\/built shared library, you just need the public header (\hyperlink{slightcsv_8hpp_source}{slightcsv.\+hpp}) from inc and the library (libslightcsv.\+so or libslightcsv.\+dll on Windows) from lib.
+In order to use the pre-\/built shared library, you need to include the public header (\hyperlink{slightcsv_8hpp_source}{slightcsv.\+hpp}) from inc and the library (libslightcsv.\+so or libslightcsv.\+dll on Windows) from lib.
 
-\subsection*{Configuration and building}
+\subsection*{Usage}
+
+\subsubsection*{Using the supplied binaries}
+
+Binaries for the following platforms are located in the dist directory\+:
+
+
+\begin{DoxyItemize}
+\item Linux 32 bit x86 (Linux32)
+\item Linux 64 bit x86-\/64 (Linux64)
+\item Windows 32 bit x86 (Windows32)
+\item Windows 64 bit x86-\/64 (Windows64)
+\end{DoxyItemize}
+
+Public header and documentation are also available in the dist folder. Using the library is a matter of including the public header in your source file(s) and linking your application to the appropriate platform binary.
+
+\subsubsection*{Building from source}
 
 For building the library from source\+:
 
 
 \begin{DoxyItemize}
-\item Have dependencies installed and available in the environment.
+\item Have dependencies installed and available in your environment.
 \item Edit C\+Make config file (C\+Make\+Lists.\+txt) in test and set Cpp\+U\+Test path variables.
 \item Run \char`\"{}cmake .. -\/\+D\+C\+M\+A\+K\+E\+\_\+\+B\+U\+I\+L\+D\+\_\+\+T\+Y\+P\+E=\+D\+E\+B\+U\+G\char`\"{} or \char`\"{}cmake .. -\/\+D\+C\+M\+A\+K\+E\+\_\+\+B\+U\+I\+L\+D\+\_\+\+T\+Y\+P\+E=\+R\+E\+L\+E\+A\+S\+E\char`\"{} in build directory for C\+Make to generate build configuration files. In D\+E\+B\+UG, the library is built with debug symbols included while in R\+E\+L\+E\+A\+SE, those are not present (R\+E\+L\+E\+A\+SE builds use compiler optimization as well).
 \item Run \char`\"{}make clean\char`\"{} in build directory to cleanup.
-\item Run \char`\"{}make\char`\"{} in build directory to build the library. After issuing the command, artifacts are built and/or run in the following order\+: Slight\+C\+SV build, tests build, tests run, demo build. At the end of each stage, output files are placed in their respective directories (shared library file in lib, public header file in inc/slightcsv and executable demo application in bin).
+\item Run \char`\"{}make\char`\"{} in build directory to build all artifacts. After issuing the command, artifacts are built and/or run in the following order\+: Slight\+C\+SV build, tests build, tests run, demo build. At the end of each stage, output files are placed in their respective target directories (shared library file in lib, public header file in inc/slightcsv and executable demo application in bin).
 \item Install sections are commented out in C\+Make\textquotesingle{}s config files. If you would like to use \char`\"{}make install\char`\"{}, uncomment those rows and set target paths according to your preference.
 \item Documentation may be generated by issuing command \char`\"{}make docs\char`\"{}. Documentation is generated into the doc folder.
 \item Code coverage report may be generated by issuing command \char`\"{}make codecov\char`\"{}. Report index file can be found at\+: build/src/\+C\+Make\+Files/slightcsv.\+dir/codecov/index.html.
 \end{DoxyItemize}
 
-\subsection*{Usage}
+\subsubsection*{Code example}
 
-After including the public header in your project, you can start with the following simple example. For additional methods and parameters, please refer to the Doxygen documentation located in the doc folder.
+The following simple example provides an overview of the usage of the library. For additional methods and parameters, please refer to the Doxygen documentation located in the distribution\textquotesingle{}s doc folder.
 
 
 \begin{DoxyCode}
@@ -105,15 +124,19 @@ After including the public header in your project, you can start with the follow
 
     \textcolor{comment}{// set filename}
     scsv.\hyperlink{classutils_1_1SlightCSV_a9567504e450440a9564053c8ab6f6ff9}{setFileName}(\textcolor{stringliteral}{"../test/env\_data.csv"});
+
     \textcolor{comment}{// set delimiter character (semicolon)}
     scsv.setSeparator(\textcolor{charliteral}{';'});
+
     \textcolor{comment}{// set escape character (double quote)}
     scsv.setEscape(\textcolor{charliteral}{'\(\backslash\)"'});
+
     \textcolor{comment}{// set characters to be stripped (stip spaces and underscores)}
     set<char> to\_strip;
     to\_strip.insert(\textcolor{charliteral}{' '});
     to\_strip.insert(\textcolor{charliteral}{'\_'});
     scsv.setStripChars(to\_strip);
+
     \textcolor{comment}{// set characters to be replaced (replace 'a' with 'b' and 'c' with 'd')}
     map<char, char> to\_replace;
     pair<char, char> to\_replace1(\textcolor{charliteral}{'a'}, \textcolor{charliteral}{'b'});
@@ -159,9 +182,9 @@ Features to be implemented in the future\+:
 
 
 \begin{DoxyItemize}
-\item C++11 compliant multithreading for even faster processing
-\item support for U\+T\+F-\/8 character encoding
-\item Extended transformation and conversion support for rows and columns
+\item C++11 compliant multithreading for even faster processing.
+\item Support for U\+T\+F-\/8 character encoding.
+\item Extended transformation and conversion support for rows and columns.
 \end{DoxyItemize}
 
 Ideas, contributions, issues and comments are welcome! 

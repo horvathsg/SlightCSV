@@ -43,7 +43,7 @@ void \hyperlink{classutils_1_1SlightCSV_a3d704d8bbce22b1731e383db4fc96429}{set\+
 \item 
 size\+\_\+t \hyperlink{classutils_1_1SlightCSV_a781ae99927f2b8d704add6a2a53e0051}{get\+Header\+Count} (void) const
 \item 
-{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}{get\+Cell} (T \&t\+\_\+value, size\+\_\+t t\+\_\+row\+\_\+index, size\+\_\+t t\+\_\+column\+\_\+index) const
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}{get\+Cell} (T \&t\+\_\+value, size\+\_\+t t\+\_\+row\+\_\+index, size\+\_\+t t\+\_\+column\+\_\+index) const
 \item 
 {\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightCSV_a56b9814d42283eb075bcfe3a9ca887e7}{get\+Column} (vector$<$ T $>$ \&t\+\_\+target\+\_\+column, size\+\_\+t t\+\_\+column\+\_\+index) const
 \item 
@@ -67,12 +67,12 @@ void \hyperlink{classutils_1_1SlightCSV_abc28f1e33cc67dd5d4380254070ecf97}{reset
 The \char`\"{}main\char`\"{} class of the library. Provides methods for setting up the library, triggering data processing and getting the results. 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}\label{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}} 
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}\label{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}} 
 \index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Cell@{get\+Cell}}
 \index{get\+Cell@{get\+Cell}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
 \subsubsection{\texorpdfstring{get\+Cell()}{getCell()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-void utils\+::\+Slight\+C\+S\+V\+::get\+Cell (\begin{DoxyParamCaption}\item[{T \&}]{t\+\_\+value,  }\item[{size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{size\+\_\+t}]{t\+\_\+column\+\_\+index }\end{DoxyParamCaption}) const}
+template void utils\+::\+Slight\+C\+S\+V\+::get\+Cell (\begin{DoxyParamCaption}\item[{T \&}]{t\+\_\+value,  }\item[{size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{size\+\_\+t}]{t\+\_\+column\+\_\+index }\end{DoxyParamCaption}) const}
 
 Method to get the contents of a specific cell. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type supplied as the first parameter of the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
 \begin{DoxyParams}{Parameters}
@@ -105,7 +105,7 @@ Method to get the cells of a specific column. The column is represented in the f
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightCSV_ad4b0243488827303cd22d5efd41d96b6}{get\+Row()} 
 
-\hyperlink{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightCSV_a31db986196c89fa8b5b4f119fe548b0b}\label{classutils_1_1SlightCSV_a31db986196c89fa8b5b4f119fe548b0b}} 
 \index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Column@{get\+Column}}
@@ -126,7 +126,7 @@ This is an overloaded member function, provided for convenience. It differs from
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightCSV_ad4b0243488827303cd22d5efd41d96b6}{get\+Row()} 
 
-\hyperlink{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightCSV_a153cbb5059533c2103ec7ade57e4e414}\label{classutils_1_1SlightCSV_a153cbb5059533c2103ec7ade57e4e414}} 
 \index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Column@{get\+Column}}
@@ -149,7 +149,7 @@ This is an overloaded member function, provided for convenience. It differs from
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightCSV_ad4b0243488827303cd22d5efd41d96b6}{get\+Row()} 
 
-\hyperlink{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightCSV_a5dcd159ef127b63942bce5498beb8dae}\label{classutils_1_1SlightCSV_a5dcd159ef127b63942bce5498beb8dae}} 
 \index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Column\+Count@{get\+Column\+Count}}
@@ -229,7 +229,7 @@ Method to get the cells of a specific row. The row is represented in the form of
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightCSV_a56b9814d42283eb075bcfe3a9ca887e7}{get\+Column()} 
 
-\hyperlink{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightCSV_ad57a5c42bc8de6afa3d4324e52f20e2c}\label{classutils_1_1SlightCSV_ad57a5c42bc8de6afa3d4324e52f20e2c}} 
 \index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Row@{get\+Row}}
@@ -249,7 +249,7 @@ This is an overloaded member function, provided for convenience. It differs from
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightCSV_a56b9814d42283eb075bcfe3a9ca887e7}{get\+Column()} 
 
-\hyperlink{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightCSV_a7527573dea0d6e5dc5dcfd4eab005a2b}\label{classutils_1_1SlightCSV_a7527573dea0d6e5dc5dcfd4eab005a2b}} 
 \index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Row@{get\+Row}}
@@ -271,7 +271,7 @@ This is an overloaded member function, provided for convenience. It differs from
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classutils_1_1SlightCSV_a56b9814d42283eb075bcfe3a9ca887e7}{get\+Column()} 
 
-\hyperlink{classutils_1_1SlightCSV_a4408a8e8d32a579a0f5e33a1083e7fb8}{get\+Cell()} 
+\hyperlink{classutils_1_1SlightCSV_a916d9b0b7faedc7c9af20e475c4b4cb6}{get\+Cell()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classutils_1_1SlightCSV_a5286060190553fe7eceb973bba22ae22}\label{classutils_1_1SlightCSV_a5286060190553fe7eceb973bba22ae22}} 
 \index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Row\+Count@{get\+Row\+Count}}
@@ -424,6 +424,7 @@ Method to unload data structure from memory. Settings (filename, delimiter, char
 \end{DoxySeeAlso}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/hsg/\+Documents/projects/slightcsv/src/slightcsv.\+hpp\end{DoxyCompactItemize}
+/home/hsg/\+Documents/projects/slightcsv/src/slightcsv.\+hpp\item 
+/home/hsg/\+Documents/projects/slightcsv/src/slightcsv.\+cpp\end{DoxyCompactItemize}
