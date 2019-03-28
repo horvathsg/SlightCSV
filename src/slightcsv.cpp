@@ -31,7 +31,7 @@ utils::SlightCSV::~SlightCSV(void) {
     delete m_csvp;
 }
 
-void utils::SlightCSV::setFileName(string t_filename) {
+void utils::SlightCSV::setFileName(const string t_filename) {
     if (!t_filename.size()) {
         throw slightcsv_filename_error();
     }
@@ -45,7 +45,7 @@ string utils::SlightCSV::getFileName(void) const {
     return m_csvp->m_filename;
 }
 
-void utils::SlightCSV::setSeparator(char t_separator) {
+void utils::SlightCSV::setSeparator(const char t_separator) {
     if (!t_separator) {
         throw slightcsv_separator_error();
     }
@@ -61,7 +61,7 @@ char utils::SlightCSV::getSeparator(void) const {
     return m_csvp->m_separator;
 }
 
-void utils::SlightCSV::setEscape(char t_escape) {
+void utils::SlightCSV::setEscape(const char t_escape) {
     if (!t_escape) {
         throw slightcsv_escape_error();
     }
@@ -77,7 +77,7 @@ char utils::SlightCSV::getEscape(void) const {
     return m_csvp->m_escape;
 }
 
-void utils::SlightCSV::setStripChars(set<char> &t_strip_chars) {
+void utils::SlightCSV::setStripChars(const set<char> &t_strip_chars) {
     if (!t_strip_chars.size()) {
         throw slightcsv_strip_error();
     }
@@ -91,7 +91,7 @@ void utils::SlightCSV::getStripChars(set<char> &t_target) const {
     t_target = m_csvp->m_strip_chars;
 }
 
-void utils::SlightCSV::setReplaceChars(map<char, char> &t_rep_chars) {
+void utils::SlightCSV::setReplaceChars(const map<char, char> &t_rep_chars) {
     if (!t_rep_chars.size()) {
         throw slightcsv_replace_error();
     }
@@ -207,7 +207,7 @@ size_t utils::SlightCSV::getRowCount(void) const {
     return m_csvp->m_data_matrix.getRowCount();
 }
 
-void utils::SlightCSV::setHeaderCount(size_t t_header_count) {
+void utils::SlightCSV::setHeaderCount(const size_t t_header_count) {
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
@@ -219,7 +219,7 @@ size_t utils::SlightCSV::getHeaderCount(void) const {
 }
 
 template <class T>
-void utils::SlightCSV::getCell(T &t_value, size_t t_row_index, size_t t_column_index) const {
+void utils::SlightCSV::getCell(T &t_value, const size_t t_row_index, const size_t t_column_index) const {
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
@@ -238,7 +238,7 @@ template void utils::SlightCSV::getCell(float &t_value, size_t t_row_index, size
 template void utils::SlightCSV::getCell(double &t_value, size_t t_row_index, size_t t_column_index) const;
 
 template <class T>
-void utils::SlightCSV::getColumn(vector<T> &t_target_column, size_t t_column_index) const {
+void utils::SlightCSV::getColumn(vector<T> &t_target_column, const size_t t_column_index) const {
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
@@ -248,14 +248,14 @@ void utils::SlightCSV::getColumn(vector<T> &t_target_column, size_t t_column_ind
     m_csvp->m_data_matrix.getColumn(t_target_column, t_column_index);
 }
 
-template void utils::SlightCSV::getColumn(vector<int> &t_target_column, size_t t_column_index) const;
-template void utils::SlightCSV::getColumn(vector<float> &t_target_column, size_t t_column_index) const;
-template void utils::SlightCSV::getColumn(vector<double> &t_target_column, size_t t_column_index) const;
-template void utils::SlightCSV::getColumn(vector<string> &t_target_column, size_t t_column_index) const;
+template void utils::SlightCSV::getColumn(vector<int> &t_target_column, const size_t t_column_index) const;
+template void utils::SlightCSV::getColumn(vector<float> &t_target_column, const size_t t_column_index) const;
+template void utils::SlightCSV::getColumn(vector<double> &t_target_column, const size_t t_column_index) const;
+template void utils::SlightCSV::getColumn(vector<string> &t_target_column, const size_t t_column_index) const;
 
 template <class T>
-void utils::SlightCSV::getColumn(vector<T> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index) const {
+void utils::SlightCSV::getColumn(vector<T> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index) const {
 
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
@@ -269,18 +269,18 @@ void utils::SlightCSV::getColumn(vector<T> &t_target_column, size_t t_column_ind
     m_csvp->m_data_matrix.getColumn(t_target_column, t_column_index, t_start_cell_index);
 }
 
-template void utils::SlightCSV::getColumn(vector<int> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index) const;
-template void utils::SlightCSV::getColumn(vector<float> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index) const;
-template void utils::SlightCSV::getColumn(vector<double> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index) const;
-template void utils::SlightCSV::getColumn(vector<string> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index) const;
+template void utils::SlightCSV::getColumn(vector<int> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index) const;
+template void utils::SlightCSV::getColumn(vector<float> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index) const;
+template void utils::SlightCSV::getColumn(vector<double> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index) const;
+template void utils::SlightCSV::getColumn(vector<string> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index) const;
 
 template <class T>
-void utils::SlightCSV::getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index, 
-    size_t t_cell_count) const {
+void utils::SlightCSV::getColumn(vector<T> &t_target_column, const size_t t_column_index, const size_t t_start_cell_index, 
+    const size_t t_cell_count) const {
 
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
@@ -297,16 +297,16 @@ void utils::SlightCSV::getColumn(vector<T> &t_target_column, size_t t_column_ind
     m_csvp->m_data_matrix.getColumn(t_target_column, t_column_index, t_start_cell_index, t_cell_count);
 }
 
-template void utils::SlightCSV::getColumn(vector<int> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index, size_t t_cell_count) const;
-template void utils::SlightCSV::getColumn(vector<float> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index, size_t t_cell_count) const;
-template void utils::SlightCSV::getColumn(vector<double> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index, size_t t_cell_count) const;
-template void utils::SlightCSV::getColumn(vector<string> &t_target_column, size_t t_column_index, 
-    size_t t_start_cell_index, size_t t_cell_count) const;
+template void utils::SlightCSV::getColumn(vector<int> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index, const size_t t_cell_count) const;
+template void utils::SlightCSV::getColumn(vector<float> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index, const size_t t_cell_count) const;
+template void utils::SlightCSV::getColumn(vector<double> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index, const size_t t_cell_count) const;
+template void utils::SlightCSV::getColumn(vector<string> &t_target_column, const size_t t_column_index, 
+    const size_t t_start_cell_index, const size_t t_cell_count) const;
 
-void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index) const {
+void utils::SlightCSV::getRow(vector<string> &t_target_row, const size_t t_row_index) const {
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
@@ -317,7 +317,7 @@ void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index) 
     m_csvp->m_data_matrix.getRow(t_target_row, t_row_index);
 }
 
-void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index) const {
+void utils::SlightCSV::getRow(vector<string> &t_target_row, const size_t t_row_index, const size_t t_start_cell_index) const {
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
     }
@@ -330,8 +330,8 @@ void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index, 
     m_csvp->m_data_matrix.getRow(t_target_row, t_row_index, t_start_cell_index);
 }
 
-void utils::SlightCSV::getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index, 
-size_t t_cell_count) const {
+void utils::SlightCSV::getRow(vector<string> &t_target_row, const size_t t_row_index, const size_t t_start_cell_index, 
+const size_t t_cell_count) const {
 
     if (!m_csvp->m_data_matrix.getRowCount() || !m_csvp->m_data_matrix.getColumnCount()) {
         throw slightcsv_data_error();
@@ -369,7 +369,7 @@ void utils::SlightCSV::reset(void) {
     m_csvp->m_file_size = 0;
 }
 
-void utils::SlightCSV::processLine(string &t_input, size_t t_row_id) {
+void utils::SlightCSV::processLine(string &t_input, size_t const t_row_id) {
 
     if (!t_input.size()) {
         return;

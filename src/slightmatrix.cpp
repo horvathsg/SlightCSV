@@ -22,13 +22,13 @@ using std::atof;
 using std::atoi;
 
 template <class T>
-void convertCell(string &cell_str, T &cell_value);
+void convertCell(const string &cell_str, T &cell_value);
 
 utils::SlightMatrix::SlightMatrix(void) {
     reset();
 }
 
-void utils::SlightMatrix::setCapacity(size_t t_cell_count) {
+void utils::SlightMatrix::setCapacity(const size_t t_cell_count) {
     if (!t_cell_count) {
         throw slightmatrix_parameter_error();
     }
@@ -39,7 +39,7 @@ size_t utils::SlightMatrix::getCapacity(void) const {
     return m_data.capacity();
 }
 
-void utils::SlightMatrix::setColumnCount(size_t t_column_count) {
+void utils::SlightMatrix::setColumnCount(const size_t t_column_count) {
     m_column_count = t_column_count;
 }
 
@@ -47,19 +47,19 @@ size_t utils::SlightMatrix::getColumnCount(void) const {
     return m_column_count;
 }
 
-void utils::SlightMatrix::addCell(string t_cell) {
+void utils::SlightMatrix::addCell(const string t_cell) {
     m_data.push_back(t_cell);
     // after adding cell, re-calculate row count
     updateRowCount();
 }
 
-void utils::SlightMatrix::addCells(vector<string> &t_cells) {
+void utils::SlightMatrix::addCells(const vector<string> &t_cells) {
     m_data.insert(m_data.end(), t_cells.begin(), t_cells.end());
     // after adding cells, re-calculate row count
     updateRowCount();
 }
 
-void utils::SlightMatrix::setHeaderCount(size_t t_header_count) {
+void utils::SlightMatrix::setHeaderCount(const size_t t_header_count) {
     m_header_count = t_header_count;
 }
 
@@ -82,7 +82,7 @@ size_t utils::SlightMatrix::getRowCount(void) const {
 }
 
 template <class T>
-void utils::SlightMatrix::getCell(T &t_value, size_t t_row_index, size_t t_column_index) const {
+void utils::SlightMatrix::getCell(T &t_value, const size_t t_row_index, const size_t t_column_index) const {
     if (!validate()) {
         throw slightmatrix_matrix_error();
     }
@@ -96,19 +96,24 @@ void utils::SlightMatrix::getCell(T &t_value, size_t t_row_index, size_t t_colum
     convertCell(cell, t_value);
 }
 
-template void utils::SlightMatrix::getCell(string &t_value, size_t t_row_index, size_t t_column_index) const;
-template void utils::SlightMatrix::getCell(int &t_value, size_t t_row_index, size_t t_column_index) const;
-template void utils::SlightMatrix::getCell(float &t_value, size_t t_row_index, size_t t_column_index) const;
-template void utils::SlightMatrix::getCell(double &t_value, size_t t_row_index, size_t t_column_index) const;
+template void utils::SlightMatrix::getCell(string &t_value, const size_t t_row_index, 
+const size_t t_column_index) const;
+template void utils::SlightMatrix::getCell(int &t_value, const size_t t_row_index, 
+const size_t t_column_index) const;
+template void utils::SlightMatrix::getCell(float &t_value, const size_t t_row_index, 
+const size_t t_column_index) const;
+template void utils::SlightMatrix::getCell(double &t_value, const size_t t_row_index, 
+const size_t t_column_index) const;
 
-void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_row_index) const {
+void utils::SlightMatrix::getRow(vector<string> &t_target, const size_t t_row_index) const {
     if (t_row_index >= m_row_count) {
         throw slightmatrix_row_error();
     }
     this->getRow(t_target, t_row_index, 0, m_column_count);
 }
 
-void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_row_index, size_t t_start_cell_index) const {
+void utils::SlightMatrix::getRow(vector<string> &t_target, const size_t t_row_index, 
+const size_t t_start_cell_index) const {
     if (t_row_index >= m_row_count) {
         throw slightmatrix_row_error();
     }
@@ -118,8 +123,8 @@ void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_row_index, s
     this->getRow(t_target, t_row_index, t_start_cell_index, m_column_count - t_start_cell_index);
 }
 
-void utils::SlightMatrix::getRow(vector<string> &t_target, size_t t_row_index, size_t t_start_cell_index, 
-size_t t_cell_count) const {
+void utils::SlightMatrix::getRow(vector<string> &t_target, const size_t t_row_index, 
+const size_t t_start_cell_index, const size_t t_cell_count) const {
 
     if (!validate()) {
         throw slightmatrix_matrix_error();
@@ -153,7 +158,7 @@ size_t t_cell_count) const {
 }
 
 template <class T>
-void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index) const {
+void utils::SlightMatrix::getColumn(vector<T> &t_target, const size_t t_column_index) const {
     if (!validate()) {
         throw slightmatrix_matrix_error();
     }
@@ -163,13 +168,14 @@ void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index) 
     this->getColumn(t_target, t_column_index, 0, m_row_count);
 }
 
-template void utils::SlightMatrix::getColumn(vector<string> &t_target, size_t index) const;
-template void utils::SlightMatrix::getColumn(vector<int> &t_target, size_t index) const;
-template void utils::SlightMatrix::getColumn(vector<float> &t_target, size_t index) const;
-template void utils::SlightMatrix::getColumn(vector<double> &t_target, size_t index) const;
+template void utils::SlightMatrix::getColumn(vector<string> &t_target, const size_t index) const;
+template void utils::SlightMatrix::getColumn(vector<int> &t_target, const size_t index) const;
+template void utils::SlightMatrix::getColumn(vector<float> &t_target, const size_t index) const;
+template void utils::SlightMatrix::getColumn(vector<double> &t_target, const size_t index) const;
 
 template <class T>
-void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index, size_t t_start_cell_index) const {
+void utils::SlightMatrix::getColumn(vector<T> &t_target, const size_t t_column_index, 
+const size_t t_start_cell_index) const {
     if (!validate()) {
         throw slightmatrix_matrix_error();
     }
@@ -182,13 +188,18 @@ void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index, 
     this->getColumn(t_target, t_column_index, t_start_cell_index, m_row_count - t_start_cell_index);
 }
 
-template void utils::SlightMatrix::getColumn(vector<string> &t_target, size_t index, size_t t_start_cell_index) const;
-template void utils::SlightMatrix::getColumn(vector<int> &t_target, size_t index, size_t t_start_cell_index) const;
-template void utils::SlightMatrix::getColumn(vector<float> &t_target, size_t index, size_t t_start_cell_index) const;
-template void utils::SlightMatrix::getColumn(vector<double> &t_target, size_t index, size_t t_start_cell_index) const;
+template void utils::SlightMatrix::getColumn(vector<string> &t_target, const size_t index, 
+const size_t t_start_cell_index) const;
+template void utils::SlightMatrix::getColumn(vector<int> &t_target, const size_t index, 
+const size_t t_start_cell_index) const;
+template void utils::SlightMatrix::getColumn(vector<float> &t_target, const size_t index, 
+const size_t t_start_cell_index) const;
+template void utils::SlightMatrix::getColumn(vector<double> &t_target, const size_t index, 
+const size_t t_start_cell_index) const;
 
 template <class T>
-void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index, size_t t_start_cell_index, size_t t_cell_count) const {
+void utils::SlightMatrix::getColumn(vector<T> &t_target, const size_t t_column_index, 
+const size_t t_start_cell_index, const size_t t_cell_count) const {
     if (!validate()) {
         throw slightmatrix_matrix_error();
     }
@@ -212,10 +223,14 @@ void utils::SlightMatrix::getColumn(vector<T> &t_target, size_t t_column_index, 
     }
 }
 
-template void utils::SlightMatrix::getColumn(vector<string> &t_target, size_t index, size_t t_start_cell_index, size_t t_cell_count) const;
-template void utils::SlightMatrix::getColumn(vector<int> &t_target, size_t index, size_t t_start_cell_index, size_t t_cell_count) const;
-template void utils::SlightMatrix::getColumn(vector<float> &t_target, size_t index, size_t t_start_cell_index, size_t t_cell_count) const;
-template void utils::SlightMatrix::getColumn(vector<double> &t_target, size_t index, size_t t_start_cell_index, size_t t_cell_count) const;
+template void utils::SlightMatrix::getColumn(vector<string> &t_target, const size_t index, 
+const size_t t_start_cell_index, const size_t t_cell_count) const;
+template void utils::SlightMatrix::getColumn(vector<int> &t_target, const size_t index, 
+const size_t t_start_cell_index, const size_t t_cell_count) const;
+template void utils::SlightMatrix::getColumn(vector<float> &t_target, const size_t index, 
+const size_t t_start_cell_index, const size_t t_cell_count) const;
+template void utils::SlightMatrix::getColumn(vector<double> &t_target, const size_t index, 
+const size_t t_start_cell_index, const size_t t_cell_count) const;
 
 void utils::SlightMatrix::reset(void) {
     m_row_count = 0;
@@ -235,21 +250,21 @@ void utils::SlightMatrix::updateRowCount(void) {
 }
 
 template <class T>
-void convertCell(string &cell_str, T &cell_value) {
+void convertCell(const string &cell_str, T &cell_value) {
     cell_value = cell_str;
 }
 
 template <>
-void convertCell(string &cell_str, float &cell_value) {
+void convertCell(const string &cell_str, float &cell_value) {
     cell_value = atof(cell_str.c_str());  
 }
 
 template <>
-void convertCell(string &cell_str, double &cell_value) {
+void convertCell(const string &cell_str, double &cell_value) {
     cell_value = atof(cell_str.c_str());
 }
 
 template <>
-void convertCell(string &cell_str, int &cell_value) {
+void convertCell(const string &cell_str, int &cell_value) {
     cell_value = atoi(cell_str.c_str());
 }

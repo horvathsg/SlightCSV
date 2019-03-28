@@ -38,7 +38,7 @@ namespace utils {
             /// results (it is necessary to process the row again before querying results).
             /// \param t_input input string of the row.
             /// \see getInput()
-            void setInput(string &t_input);
+            void setInput(const string &t_input);
             
             /// Method to get the previously set input string of the row.
             /// \return input string of the row.
@@ -50,7 +50,7 @@ namespace utils {
             /// again before querying results).
             /// \param t_sep delimiter character.
             /// \see getSeparator()
-            void setSeparator(char t_sep);
+            void setSeparator(const char t_sep);
 
             /// Method to get the previously set delimiter character to be used when extracting cells from the row.
             /// \return delimiter character.
@@ -62,7 +62,7 @@ namespace utils {
             /// again before querying results).
             /// \param t_esc escape character.
             /// \see getEscape()
-            void setEscape(char t_esc);
+            void setEscape(const char t_esc);
 
             /// Method to get the previously set escape character to be used when extracting cells from the row.
             /// \return escape character.

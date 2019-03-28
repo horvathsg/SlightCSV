@@ -50,7 +50,7 @@ namespace utils {
             /// Method to set the name of the CSV file to be parsed. Required before triggering data loading.
             /// \param t_filename name and relative path of the file.
             /// \see getFileName()
-            void setFileName(string t_filename);
+            void setFileName(const string t_filename);
 
             /// Method to get the previously set name of the CSV file to be parsed.
             /// \return previously set name and relative path of the file.
@@ -61,7 +61,7 @@ namespace utils {
             /// before triggering data loading.
             /// \param t_separator character to use as delimiter.
             /// \see getSeparator()
-            void setSeparator(char t_separator);
+            void setSeparator(const char t_separator);
 
             /// Method to get the previously set delimiter character.
             /// \return previously set delimiter character.
@@ -76,7 +76,7 @@ namespace utils {
             /// Method is optional. If used, set it before triggering data loading.
             /// \param t_escape character to be used to escape a group of characters in the input.
             /// \see getEscape()
-            void setEscape(char t_escape);
+            void setEscape(const char t_escape);
 
             /// Method to get the previously set escape character.
             /// \return previously set escape character.
@@ -89,7 +89,7 @@ namespace utils {
             /// If used, set it before triggering data loading.
             /// \param t_strip_chars a set of characters previously populated with characters to be stripped.
             /// \see getStripChars()
-            void setStripChars(set<char> &t_strip_chars);
+            void setStripChars(const set<char> &t_strip_chars);
 
             /// Method to get the previously defined set of character(s) to be stripped from the input of the parser.
             /// \param t_target set that gets populated with the previously defined set of characters 
@@ -104,7 +104,7 @@ namespace utils {
             /// If used, set it before triggering data loading.
             /// \param t_rep_chars a map of "replacee" and "replacer" characters.
             /// \see getReplaceChars()
-            void setReplaceChars(map<char, char> &t_rep_chars);
+            void setReplaceChars(const map<char, char> &t_rep_chars);
 
             /// Method to get the previously set map of character pair(s) to be replaced in the input of the parser.
             /// \param t_target map that gets populated with the previously defined map of character pair(s)
@@ -131,7 +131,7 @@ namespace utils {
             /// to detect and count header rows automatically.
             /// \param t_header_count the number of header rows at the beginning of the CSV file.
             /// \see getHeaderCount()
-            void setHeaderCount(size_t t_header_count);
+            void setHeaderCount(const size_t t_header_count);
 
             /// Method to get the number of header rows at the beginning of the parsed file. After loading the data 
             /// it returns an automatically detected value which may be overridden by the user.
@@ -149,7 +149,7 @@ namespace utils {
             /// \see getRow()
             /// \see getColumn()
             template <class T>
-            void getCell(T &t_value, size_t t_row_index, size_t t_column_index) const;
+            void getCell(T &t_value, const size_t t_row_index, const size_t t_column_index) const;
 
             /// Method to get the cells of a specific column. The column is represented in the form of a vector.
             /// The internal data structure stores cell values as strings. When using the method, the library tries 
@@ -161,7 +161,7 @@ namespace utils {
             /// \see getRow()
             /// \see getCell()
             template <class T>
-            void getColumn(vector<T> &t_target_column, size_t t_column_index) const;
+            void getColumn(vector<T> &t_target_column, const size_t t_column_index) const;
 
             /// \overload
             /// Method to get the cells of a specific column. The column is represented in the form of a vector.
@@ -175,7 +175,7 @@ namespace utils {
             /// \see getRow()
             /// \see getCell()
             template <class T>
-            void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index) const;
+            void getColumn(vector<T> &t_target_column, const size_t t_column_index, const size_t t_start_cell_index) const;
 
             /// \overload
             /// Method to get the cells of a specific column. The column is represented in the form of a vector.
@@ -190,8 +190,8 @@ namespace utils {
             /// \see getRow()
             /// \see getCell()
             template <class T>
-            void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index, 
-            size_t t_cell_count) const;
+            void getColumn(vector<T> &t_target_column, const size_t t_column_index, const size_t t_start_cell_index, 
+            const size_t t_cell_count) const;
 
             /// Method to get the cells of a specific row. The row is represented in the form of a vector.
             /// The internal data structure stores cell values as strings. When using the method, the library
@@ -200,7 +200,7 @@ namespace utils {
             /// \param t_row_index index (starting from 0) of the row to be returned.
             /// \see getColumn()
             /// \see getCell()
-            void getRow(vector<string> &t_target_row, size_t t_row_index) const;
+            void getRow(vector<string> &t_target_row, const size_t t_row_index) const;
 
             /// \overload
             /// Method to get the cells of a specific row. The row is represented in the form of a vector.
@@ -211,7 +211,7 @@ namespace utils {
             /// \param t_start_cell_index index (starting from 0) of the first horizontal cell (filtering).
             /// \see getColumn()
             /// \see getCell()
-            void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index) const;
+            void getRow(vector<string> &t_target_row, const size_t t_row_index, const size_t t_start_cell_index) const;
 
             /// \overload
             /// Method to get the cells of a specific row. The row is represented in the form of a vector.
@@ -223,8 +223,8 @@ namespace utils {
             /// \param t_cell_count number of cells to return (beginning from the first horizontal cell specified).
             /// \see getColumn()
             /// \see getCell()
-            void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index, size_t 
-            t_cell_count) const;
+            void getRow(vector<string> &t_target_row, const size_t t_row_index, const size_t t_start_cell_index, 
+            const size_t t_cell_count) const;
 
             /// Method to unload data structure from memory. Settings (filename, delimiter, character manipulation
             /// settings) are preserved. Data queries cannot be made until loading a data structure. Optional,
@@ -237,7 +237,7 @@ namespace utils {
             void reset(void);
 
         private:
-            void processLine(string &t_input, size_t t_row_id);
+            void processLine(string &t_input, const size_t t_row_id);
 
             SlightCSVPrivate *m_csvp;
 

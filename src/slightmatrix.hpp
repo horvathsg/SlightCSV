@@ -39,7 +39,7 @@ namespace utils {
             /// only for cells, not for strings representing cell contents.
             /// \param t_cell_count number of cells to reserve memory for.
             /// \see getCapacity()
-            void setCapacity(size_t t_cell_count);
+            void setCapacity(const size_t t_cell_count);
 
             /// Method to query the amount of cells memory is reserved for in the data matrix.
             /// \return number of cells memory is reserved for.
@@ -51,7 +51,7 @@ namespace utils {
             /// rows).
             /// \param t_column_count number of columns the data matrix consists of.
             /// \see getColumnCount()
-            void setColumnCount(size_t t_column_count);
+            void setColumnCount(const size_t t_column_count);
 
             /// Method to get the previously set column count.
             /// \return number of columns the data matrix consists of.
@@ -63,19 +63,19 @@ namespace utils {
             /// \param t_cell string contents of the cell to add.
             /// \see addCells()
             /// \see getCell()
-            void addCell(string t_cell);
+            void addCell(const string t_cell);
 
             /// Method to add multiple cells (vector of cells) to the data matrix. Cells are added at the end of the
             /// vector holding cells. Column and row mapping is determined automatically (based on column count).
             /// \param t_cells contents of the cells to add.
             /// \see addCell()
             /// \see getCell()
-            void addCells(vector<string> &t_cells);
+            void addCells(const vector<string> &t_cells);
 
             /// Method to set the number of header rows the data matrix contains.
             /// \param t_header_count number of header rows the data matrix contains.
             /// \see getHeaderCount()
-            void setHeaderCount(size_t t_header_count);
+            void setHeaderCount(const size_t t_header_count);
 
             /// Method to get the (automatically detected or previously set) number of header rows the data matrix contains.
             /// \return number of header rows the data matrix contains.
@@ -107,7 +107,7 @@ namespace utils {
             /// \see getRow()
             /// \see getColumn()
             template <class T>
-            void getCell(T &t_value, size_t t_row_index, size_t t_column_index) const;
+            void getCell(T &t_value, const size_t t_row_index, const size_t t_column_index) const;
 
             /// Method to get the cells of a specific row. The row is represented in the form of a vector.
             /// The internal data structure stores cell values as strings. When using the method, the library
@@ -116,7 +116,7 @@ namespace utils {
             /// \param t_row_index index (starting from 0) of the row to be returned.
             /// \see getColumn()
             /// \see getCell()            
-            void getRow(vector<string> &t_target_row, size_t t_row_index) const;
+            void getRow(vector<string> &t_target_row, const size_t t_row_index) const;
 
             /// \overload
             /// Method to get the cells of a specific row. The row is represented in the form of a vector.
@@ -127,7 +127,7 @@ namespace utils {
             /// \param t_start_cell_index index (starting from 0) of the first horizontal cell (filtering).
             /// \see getColumn()
             /// \see getCell()
-            void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index) const;
+            void getRow(vector<string> &t_target_row, const size_t t_row_index, const size_t t_start_cell_index) const;
 
             /// \overload
             /// Method to get the cells of a specific row. The row is represented in the form of a vector.
@@ -139,7 +139,8 @@ namespace utils {
             /// \param t_cell_count number of cells to return (beginning from the first horizontal cell specified).
             /// \see getColumn()
             /// \see getCell()
-            void getRow(vector<string> &t_target_row, size_t t_row_index, size_t t_start_cell_index, size_t t_cell_count) const;
+            void getRow(vector<string> &t_target_row, const size_t t_row_index, 
+            const size_t t_start_cell_index, const size_t t_cell_count) const;
             
             /// Method to get the cells of a specific column. The column is represented in the form of a vector.
             /// The internal data structure stores cell values as strings. When using the method, the library tries 
@@ -151,7 +152,7 @@ namespace utils {
             /// \see getRow()
             /// \see getCell()
             template <class T>
-            void getColumn(vector<T> &t_target_column, size_t t_column_index) const;
+            void getColumn(vector<T> &t_target_column, const size_t t_column_index) const;
 
             /// \overload
             /// Method to get the cells of a specific column. The column is represented in the form of a vector.
@@ -165,7 +166,8 @@ namespace utils {
             /// \see getRow()
             /// \see getCell()
             template <class T>
-            void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index) const;
+            void getColumn(vector<T> &t_target_column, const size_t t_column_index, 
+            const size_t t_start_cell_index) const;
 
             /// \overload
             /// Method to get the cells of a specific column. The column is represented in the form of a vector.
@@ -180,7 +182,8 @@ namespace utils {
             /// \see getRow()
             /// \see getCell()
             template <class T>
-            void getColumn(vector<T> &t_target_column, size_t t_column_index, size_t t_start_cell_index, size_t t_cell_count) const;
+            void getColumn(vector<T> &t_target_column, const size_t t_column_index, 
+            const size_t t_start_cell_index, const size_t t_cell_count) const;
             
             /// Method to reset data matrix to its initial state.
             void reset(void);

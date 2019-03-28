@@ -20,7 +20,7 @@ utils::SlightRow::SlightRow(void) {
     this->reset();
 }
 
-void utils::SlightRow::setInput(string &t_input) {
+void utils::SlightRow::setInput(const string &t_input) {
     if (!t_input.size()) {
         throw slightrow_input_error();
     }
@@ -36,7 +36,7 @@ string utils::SlightRow::getInput(void) const {
     return m_input;
 }
 
-void utils::SlightRow::setSeparator(char t_sep) {
+void utils::SlightRow::setSeparator(const char t_sep) {
     if (t_sep == 0) {
         throw slightrow_separator_error();
     }
@@ -52,7 +52,7 @@ char utils::SlightRow::getSeparator(void) const {
     return m_sep;
 }
 
-void utils::SlightRow::setEscape(char t_esc) {
+void utils::SlightRow::setEscape(const char t_esc) {
     if (t_esc == 0) {
         throw slightrow_escape_error();
     }
