@@ -19,3 +19,4 @@
 #include "test_slightrow.cpp"
 #include "test_slightmatrix.cpp"
 #include "test_slightcsv.cpp"
+#include "test_u8char.cpp"

@@ -20,6 +20,7 @@
 #include "slightrow.hpp"
 #include "slightmatrix.hpp"
 #include "slightcsv.hpp"
+#include "u8char.hpp"
 
 #include "CppUTest/TestHarness.h"
 
@@ -32,5 +33,6 @@ using std::exception;
 using utils::SlightRow;
 using utils::SlightMatrix;
 using utils::SlightCSV;
+using utils::U8char;
 
 #endif // _TEST_INCLUDE_HPP

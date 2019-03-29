@@ -45,6 +45,14 @@ target_link_libraries(slightrow_test PRIVATE slightcsv ${CPPUTEST_LIBS})
 target_include_directories(slightrow_test PUBLIC ${CMAKE_SOURCE_DIR}/inc ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_command(TARGET slightrow_test COMMAND ./slightrow_test POST_BUILD)
 
+# u8char_test build
+include_directories(${CPPUTEST_INC_DIR})
+link_directories(${CMAKE_SOURCE_DIR}/lib ${CPPUTEST_LIB_DIR})
+add_executable(u8char_test main.cpp test_u8char.cpp)
+target_link_libraries(u8char_test PRIVATE slightcsv ${CPPUTEST_LIBS})
+target_include_directories(u8char_test PUBLIC ${CMAKE_SOURCE_DIR}/inc ${CMAKE_CURRENT_SOURCE_DIR})
+add_custom_command(TARGET u8char_test COMMAND ./u8char_test POST_BUILD)
+
 # slightcsv code coverage report
 set(OBJECT_DIR ${CMAKE_SOURCE_DIR}/build/src/CMakeFiles/slightcsv.dir)
 add_custom_target(codecov
