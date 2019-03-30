@@ -35,10 +35,18 @@ namespace utils {
             void getChars(char* t_chars, const int t_size) const;
             void clear(void);
             bool operator==(U8char const &t_u8char) const;
+            // TODO: test
             bool operator!=(U8char const &t_u8char) const;
+            // TODO: test
+            bool operator<=(U8char const &t_u8char) const;
             bool operator<(U8char const &t_u8char) const;
+            // TODO: test
+            bool operator>=(U8char const &t_u8char) const;
+            // TODO: test
+            bool operator>(U8char const &t_u8char) const;
+            // TODO: test
             char operator[](int t_index) const;
-            bool operator!(void) const;
+            //bool operator!(void) const;
             operator bool() const;
         
         private:

@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
     SlightCSV scsv;
 
     // set filename
-    scsv.setFileName("../test/utf8.csv");
+    scsv.setFileName("../test/utf8_test.csv");
     
     // set delimiter character (semicolon)
     scsv.setSeparator(U8char(";"));

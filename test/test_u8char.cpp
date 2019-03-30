@@ -441,6 +441,9 @@ TEST(u8char, equals_3) {
 
     try {
         u8c_1.addChar(c1);
+        u8c_1.addChar(c2);
+        u8c_1.addChar(c3);
+        u8c_1.addChar(c4);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -601,4 +604,141 @@ TEST(u8char, overload_construct_check_complete_get_chars_2) {
     CHECK_EQUAL(2, count);
     CHECK_EQUAL('\xe2', result[0]);
     CHECK_EQUAL('\x82', result[1]);
+};
+
+TEST(u8char, less_than_1) {
+    string ex = "";
+    char c1 = '\x10';
+    bool res1;
+    bool res2;
+    U8char u1;
+    U8char u2;
+    try {
+        u1.addChar(c1);
+        u2.addChar(c1);
+        res1 = u1 < u2;
+        res2 = u2 < u1;
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(false, res1);
+    CHECK_EQUAL(false, res2);
+};
+
+TEST(u8char, less_than_2) {
+    string ex = "";
+    char c1 = '\xd0';
+    char c2 = '\x90';
+    bool res1;
+    bool res2;
+    U8char u1;
+    U8char u2;
+    try {
+        u1.addChar(c1);
+        u1.addChar(c2);
+        u2.addChar(c1);
+        u2.addChar(c2);
+        res1 = u1 < u2;
+        res2 = u2 < u1;
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(false, res1);
+    CHECK_EQUAL(false, res2);
+};
+
+TEST(u8char, less_than_3) {
+    string ex = "";
+    char c1 = '\xd0';
+    char c2 = '\x90';
+    char c3 = '\x91';
+    bool res1;
+    bool res2;
+    U8char u1;
+    U8char u2;
+    try {
+        u1.addChar(c1);
+        u1.addChar(c2);
+        u2.addChar(c1);
+        u2.addChar(c3);
+        res1 = u1 < u2;
+        res2 = u2 < u1;
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(true, res1);
+    CHECK_EQUAL(false, res2);
+};
+
+TEST(u8char, less_than_4) {
+    string ex = "";
+    char c1 = '\xd0';
+    char c2 = '\x90';
+    char c3 = '\x91';
+    bool res1;
+    bool res2;
+    U8char u1;
+    U8char u2;
+    try {
+        u1.addChar(c1);
+        u1.addChar(c3);
+        u2.addChar(c1);
+        u2.addChar(c2);
+        res1 = u1 < u2;
+        res2 = u2 < u1;
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(false, res1);
+    CHECK_EQUAL(true, res2);
+};
+
+TEST(u8char, less_than_5) {
+    string ex = "";
+    char c1 = '\x10';
+    char c2 = '\xd0';
+    char c3 = '\x90';
+    bool res1;
+    bool res2;
+    U8char u1;
+    U8char u2;
+    try {
+        u1.addChar(c1);
+        u2.addChar(c2);
+        u2.addChar(c3);
+        res1 = u1 < u2;
+        res2 = u2 < u1;
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(true, res1);
+    CHECK_EQUAL(false, res2);
+};
+
+TEST(u8char, less_than_6) {
+    string ex = "";
+    char c1 = '\x10';
+    char c2 = '\xd0';
+    char c3 = '\x90';
+    bool res1;
+    bool res2;
+    U8char u1;
+    U8char u2;
+    try {
+        u1.addChar(c2);
+        u1.addChar(c3);
+        u2.addChar(c1);
+        res1 = u1 < u2;
+        res2 = u2 < u1;
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(false, res1);
+    CHECK_EQUAL(true, res2);
 };

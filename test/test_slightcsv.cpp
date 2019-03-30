@@ -1795,3 +1795,35 @@ TEST(slightcsv, get_row_4p_bad_start_cell_index_ex) {
     }
     CHECK_EQUAL("Bad row or column index.", ex);
 };
+
+TEST(slightcsv, complex_2) {
+    SlightCSV csv_parser;
+    string ex = "";
+    string file = "../../test/utf8_test.csv";
+    U8char sep = ";";
+    U8char esc = "\"";
+    U8char strip = "Z";
+    set<U8char> stripset;
+    stripset.insert(strip);
+    U8char from = "¥";
+    U8char to = "$";
+    map<U8char, U8char> repmap;
+    repmap.insert(pair<U8char, U8char>(from, to));
+    string cell1;
+    string cell2;
+    try {
+        csv_parser.setFileName(file);
+        csv_parser.setSeparator(sep);
+        csv_parser.setEscape(esc);
+        csv_parser.setStripChars(stripset);
+        csv_parser.setReplaceChars(repmap);
+        csv_parser.loadData();
+        csv_parser.getCell(cell1, 2, 2);
+        csv_parser.getCell(cell2, 2, 5);
+    } catch(const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL("\"jack@smith.jp;jack1.smith@jp\"", cell1);
+    CHECK_EQUAL("$", cell2);
+};

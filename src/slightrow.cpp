@@ -88,15 +88,18 @@ void utils::SlightRow::process(void) {
     bool is_escaped = false;
     char c;
     U8char in_u8_char;
+    U8char u8_last_char;
     
     // iterate through all characters of input string
     for(size_t i = 0; i < m_input.size(); ++i) {
+
         c = m_input[i];
+
         in_u8_char.addChar(c);
 
         // if UTF8 character is valid (complete)
         if (in_u8_char) {
-            
+
             // if escape character is defined (not zero)
             if (m_esc) {
                 // if current character is escape character
@@ -110,7 +113,9 @@ void utils::SlightRow::process(void) {
             if (in_u8_char != m_sep || is_escaped) {
                 // add character to cell buffer
                 char char_buff[5] = {0};
+
                 in_u8_char.getChars(char_buff, 4);
+
                 cell += char_buff;
             // if character is delimiter and it is not escaped
             } else {
@@ -127,6 +132,7 @@ void utils::SlightRow::process(void) {
                 }
             }
 
+            u8_last_char = in_u8_char;
             in_u8_char.clear();
 
         }        
@@ -139,9 +145,7 @@ void utils::SlightRow::process(void) {
     }
 
     // if last character in row is separator and it is not escaped
-    U8char u8c;
-    u8c.addChar(m_input[m_input.size() - 1]);
-    if (u8c == m_sep && !is_escaped) {
+    if (u8_last_char == m_sep && !is_escaped) {
         // insert zero at the end of cells vector
         m_cells.push_back("0");
     }

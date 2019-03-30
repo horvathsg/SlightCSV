@@ -38,6 +38,7 @@ void utils::U8char::addChar(const char t_char) {
     }
     if (!m_current_count) {
         m_size = getSizeFromChar(t_char);
+        m_valid = false;
     }
     m_chars[m_current_count] = t_char;
     ++m_current_count;
@@ -86,7 +87,7 @@ void utils::U8char::clear(void) {
     }
     m_size = 0;
     m_current_count = 0;
-    m_valid = false;
+    m_valid = true;
 }
 
 int utils::U8char::getSizeFromChar(const char t_char) {
@@ -143,6 +144,10 @@ void utils::U8char::validate(void) {
 
 bool utils::U8char::operator==(U8char const &t_u8char) const {
     
+    if (!m_valid) {
+        throw u8char_format_error();
+    }
+
     if (m_size != t_u8char.size()) {
         return false;
     }
@@ -157,46 +162,68 @@ bool utils::U8char::operator==(U8char const &t_u8char) const {
 }
 
 bool utils::U8char::operator!=(U8char const &t_u8char) const {
-    
-    if (m_size != t_u8char.size()) {
-        return true;
-    }
-    
-    for (int i = 0; i < m_size; ++i) {
-        if (m_chars[i] != t_u8char[i]) {
-            return true;
-        }
-    }
-    
-    return false;   
+    return !operator==(t_u8char); 
 }
 
-// TODO: add test
 bool utils::U8char::operator<(U8char const &t_u8char) const {
     
+    if (!m_valid) {
+        throw u8char_format_error();
+    }
+
     if (m_size < t_u8char.size()) {
         return true;
+    } else if (m_size > t_u8char.size()) {
+        return false;
     }
     
     for (int i = 0; i < m_size; ++i) {
         if (m_chars[i] < t_u8char[i]) {
             return true;
+        } else if (m_chars[i] > t_u8char[i]) {
+            return false;
         }
     }
     
     return false;
 }
 
+bool utils::U8char::operator<=(U8char const &t_u8char) const {
+    
+    if (!m_valid) {
+        throw u8char_format_error();
+    }
+
+    if (m_size > t_u8char.size()) {
+        return false;
+    }
+    
+    for (int i = 0; i < m_size; ++i) {
+        if (m_chars[i] > t_u8char[i]) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+bool utils::U8char::operator>(U8char const &t_u8char) const {
+    return !operator<=(t_u8char);
+}
+
+bool utils::U8char::operator>=(U8char const &t_u8char) const {
+    return !operator<(t_u8char);
+}
+
 char utils::U8char::operator[](int t_index) const {
     return this->getChar(t_index);
 }
 
-// TODO: add test
-bool utils::U8char::operator! (void) const {
-    return !(this->isValid());
+utils::U8char::operator bool() const {
+    return (m_size > 0) && this->isValid();
 }
 
-// TODO: add test
-utils::U8char::operator bool() const {
-    return this->isValid();
-}
+// // TODO: add test
+// bool utils::U8char::operator! (void) const {
+//     return !operator bool();
+// }

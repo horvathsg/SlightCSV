@@ -142,18 +142,14 @@ size_t utils::SlightCSV::loadData(void) {
     U8char in_u8_char;
     U8char u8_cr = U8char("\r");
     U8char u8_nl = U8char("\n");
-    char char_buff[5];
     string in_line = "";
     bool is_escaped = false;
     size_t row_id = 0;
 
     // parse the file character by character
     while (in_char = fgetc(in_file), in_char != EOF) {
-        
         in_u8_char.addChar(in_char);
-
         if (in_u8_char) {
-
             // if there is at least one character to be stripped
             if (m_csvp->m_strip_chars.size()) {
                     // if the incoming character is present in the strip set
@@ -186,6 +182,7 @@ size_t utils::SlightCSV::loadData(void) {
                     }
                 }
                 // add character to line buffer
+                char char_buff[5] = {0};
                 in_u8_char.getChars(char_buff, 4);
                 in_line += char_buff;
             // if incoming character is newline, and it is not escaped
