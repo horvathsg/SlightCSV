@@ -27,20 +27,21 @@ namespace utils {
 
         public:
             U8char();
-            void addByte(const unsigned char t_char);
-            unsigned short size(void) const;
-            bool validate(void) const;
-            unsigned char getByte(const unsigned short t_index) const;
-            unsigned char getBytes(void) const;
+            U8char(const char* const t_chars);
+            void addChar(const char t_char);
+            int size(void) const;
+            bool isValid(void) const;
+            char getChar(const int t_index) const;
+            void getChars(char* t_chars, const int t_size) const;
             void clear(void);
             bool operator== (U8char const &t_u8char) const;
-            unsigned char operator[] (unsigned short t_index) const;
+            char operator[] (int t_index) const;
         
         private:
-            unsigned short getSizeFromFirstByte(void);
-            unsigned char m_chars[5];
-            unsigned short m_size;
-            unsigned short m_current_count;
+            int getSizeFromChar(const char t_char);
+            char m_chars[5];
+            int m_size;
+            int m_current_count;
     };
 
     class u8char_error: public exception {};

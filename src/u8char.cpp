@@ -25,22 +25,29 @@ utils::U8char::U8char() {
     this->clear();
 }
 
-void utils::U8char::addByte(const unsigned char t_char) {
+utils::U8char::U8char(const char* const t_chars) {
+    this->clear();
+    for (int i = 0; i < strlen(t_chars); ++i) {
+        this->addChar(t_chars[i]);
+    }
+}
+
+void utils::U8char::addChar(const char t_char) {
     if (m_size && m_current_count + 1 > m_size) {
         throw u8char_format_error();
     }
+    if (!m_current_count) {
+        m_size = getSizeFromChar(t_char);
+    }
     m_chars[m_current_count] = t_char;
     ++m_current_count;
-    if (m_current_count == 1) {
-        m_size = getSizeFromFirstByte();
-    }
 }
 
-unsigned short utils::U8char::size(void) const {
+int utils::U8char::size(void) const {
     return m_size;
 }
 
-bool utils::U8char::validate(void) const {  
+bool utils::U8char::isValid(void) const {  
     
     // check remaining bytes of UTF8 character
     for (int i = 1; i < m_size; ++i) {
@@ -61,21 +68,30 @@ bool utils::U8char::validate(void) const {
     return true;
 }
 
-unsigned char utils::U8char::getByte(const unsigned short t_index) const {
+char utils::U8char::getChar(const int t_index) const {
     if (t_index >= m_size || t_index >= m_current_count) {
         throw u8char_index_error();
     }
-    if (!validate()) {
+    if (!isValid()) {
         throw u8char_format_error();
     }
     return m_chars[t_index];
 }
 
-unsigned char utils::U8char::getBytes(void) const {
-    if (!validate()) {
+void utils::U8char::getChars(char* t_chars, const int t_size) const {
+    if (!isValid()) {
         throw u8char_format_error();
     }
-    // TODO: implement
+    // clear result array (at least partially)
+    for (int i = 0; i < t_size; ++i) {
+        t_chars[i] = 0;
+    }
+    // determine limit
+    int lim = t_size >= m_size ? m_size : t_size;
+    // fill result array
+    for (int i = 0; i < lim; ++i) {
+        t_chars[i] = m_chars[i];
+    }
 }
 
 void utils::U8char::clear(void) {
@@ -86,18 +102,16 @@ void utils::U8char::clear(void) {
     m_current_count = 0;
 }
 
-unsigned short utils::U8char::getSizeFromFirstByte(void) {
-    short test_size = -1;
+int utils::U8char::getSizeFromChar(const char t_char) {
+    int test_size = -1;
 
     // find the first most significant 0 in the most significant 5 bits of the first byte
-    for (unsigned short i = 0; i < 5; ++i) {
-        if (!(m_chars[0] & (1 << (7 - i)))) {
+    for (int i = 0; i < 5; ++i) {
+        if (!(t_char & (1 << (7 - i)))) {
             test_size = i;
             break;
         }
     }
-
-    // cout << "Test size: " << test_size << endl;
 
     // if bit with zero not found in the most significant 5 bits of the first byte
     if (test_size == -1) {
@@ -114,7 +128,7 @@ unsigned short utils::U8char::getSizeFromFirstByte(void) {
         test_size = 1;
     }
     
-    return (unsigned short)test_size;
+    return test_size;
 }
 
 bool utils::U8char::operator== (U8char const &t_u8char) const {
@@ -129,6 +143,6 @@ bool utils::U8char::operator== (U8char const &t_u8char) const {
     return retval;
 }
 
-unsigned char utils::U8char::operator[] (unsigned short t_index) const {
+char utils::U8char::operator[] (int t_index) const {
     return m_chars[t_index];
 }
