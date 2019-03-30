@@ -16,6 +16,11 @@
 
 #include "slightrow.hpp"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 utils::SlightRow::SlightRow(void) {
     this->reset();
 }
@@ -36,8 +41,8 @@ string utils::SlightRow::getInput(void) const {
     return m_input;
 }
 
-void utils::SlightRow::setSeparator(const char t_sep) {
-    if (t_sep == 0) {
+void utils::SlightRow::setSeparator(const U8char t_sep) {
+    if (!t_sep) {
         throw slightrow_separator_error();
     }
     // clear processing results related fields
@@ -45,15 +50,16 @@ void utils::SlightRow::setSeparator(const char t_sep) {
     m_sep = t_sep;
 }
 
-char utils::SlightRow::getSeparator(void) const {
-    if (m_sep == 0) {
+void utils::SlightRow::getSeparator(U8char &t_target) const {
+    if (!m_sep) {
         throw slightrow_separator_error();
     }
-    return m_sep;
+    t_target.clear();
+    t_target = m_sep;
 }
 
-void utils::SlightRow::setEscape(const char t_esc) {
-    if (t_esc == 0) {
+void utils::SlightRow::setEscape(const U8char t_esc) {
+    if (!t_esc) {
         throw slightrow_escape_error();
     }
     // clear processing results related fields
@@ -61,18 +67,19 @@ void utils::SlightRow::setEscape(const char t_esc) {
     m_esc = t_esc;
 }
 
-char utils::SlightRow::getEscape(void) const {
-    if (m_esc == 0) {
+void utils::SlightRow::getEscape(U8char &t_target) const {
+    if (!m_esc) {
         throw slightrow_escape_error();
     }
-    return m_esc;
+    t_target.clear();
+    t_target = m_esc;
 }
 
 void utils::SlightRow::process(void) {
     if (!m_input.size()) {
         throw slightrow_input_error();
     }
-    if (m_sep == 0) {
+    if (!m_sep) {
         throw slightrow_separator_error();
     }
 
@@ -80,37 +87,49 @@ void utils::SlightRow::process(void) {
     string cell = "";
     bool is_escaped = false;
     char c;
+    U8char in_u8_char;
     
     // iterate through all characters of input string
     for(size_t i = 0; i < m_input.size(); ++i) {
         c = m_input[i];
-        // if escape character is defined (not zero)
-        if (m_esc) {
-            // if current character is escape character
-            if (c == m_esc) {
-                // set escaped state by a XOR
-                // this is an efficient way of keeping track of escape state without using expensive "maps"
-                is_escaped ^= true;
+        in_u8_char.addChar(c);
+
+        // if UTF8 character is valid (complete)
+        if (in_u8_char) {
+            
+            // if escape character is defined (not zero)
+            if (m_esc) {
+                // if current character is escape character
+                if (in_u8_char == m_esc) {
+                    // set escaped state by a XOR
+                    // this is an efficient way of keeping track of escape state without using expensive "maps"
+                    is_escaped ^= true;
+                }
             }
-        }
-        // if character is not delimiter or it is escaped
-        if (c != m_sep || is_escaped) {
-            // add character to cell buffer
-            cell += c;
-        // if character is delimiter and it is not escaped
-        } else {
-            // if cell buffer size is not zero
-            if (cell.size() != 0) {
-                // insert cell buffer at the end of cells vector
-                m_cells.push_back(cell);
-                // clear cell buffer
-                cell.clear();
-            // if cell buffer size is zero (empty field)
+            // if character is not delimiter or it is escaped
+            if (in_u8_char != m_sep || is_escaped) {
+                // add character to cell buffer
+                char char_buff[5] = {0};
+                in_u8_char.getChars(char_buff, 4);
+                cell += char_buff;
+            // if character is delimiter and it is not escaped
             } else {
-                // insert zero at the end of cells vector
-                m_cells.push_back("0");
+                // if cell buffer size is not zero
+                if (cell.size() != 0) {
+                    // insert cell buffer at the end of cells vector
+                    m_cells.push_back(cell);
+                    // clear cell buffer
+                    cell.clear();
+                // if cell buffer size is zero (empty field)
+                } else {
+                    // insert zero at the end of cells vector
+                    m_cells.push_back("0");
+                }
             }
-        }
+
+            in_u8_char.clear();
+
+        }        
     }
 
     // if there is remainder in cell buffer (row ending characters after last separator)
@@ -120,7 +139,9 @@ void utils::SlightRow::process(void) {
     }
 
     // if last character in row is separator and it is not escaped
-    if (m_input[m_input.size() - 1] == m_sep && !is_escaped) {
+    U8char u8c;
+    u8c.addChar(m_input[m_input.size() - 1]);
+    if (u8c == m_sep && !is_escaped) {
         // insert zero at the end of cells vector
         m_cells.push_back("0");
     }
@@ -162,8 +183,8 @@ void utils::SlightRow::clear(void) {
 void utils::SlightRow::reset(void) {
     this->clear();
     vector<string>().swap(m_cells);
-    m_sep = 0;
-    m_esc = 0;
+    m_sep.clear();
+    m_esc.clear();
 }
 
 bool utils::SlightRow::getIsHeader(void) const {

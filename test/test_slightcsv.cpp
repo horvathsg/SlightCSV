@@ -51,8 +51,9 @@ TEST(slightcsv,set_get_filename) {
 TEST(slightcsv,get_empty_separator) {
     SlightCSV csv_parser;
     string t = "";
+    U8char u8c;
     try {
-        csv_parser.getSeparator();
+        csv_parser.getSeparator(u8c);
     } catch(const exception &e) {
         t = e.what();
     }
@@ -61,7 +62,7 @@ TEST(slightcsv,get_empty_separator) {
 
 TEST(slightcsv,set_empty_separator) {
     SlightCSV csv_parser;
-    char c = 0;
+    U8char c;
     string t = "";
     try {
         csv_parser.setSeparator(c);
@@ -73,9 +74,11 @@ TEST(slightcsv,set_empty_separator) {
 
 TEST(slightcsv,set_get_separator) {
     SlightCSV csv_parser;
-    char t = ';';
+    U8char t = ";";
+    U8char u8c;
     csv_parser.setSeparator(t);
-    CHECK_EQUAL(t, csv_parser.getSeparator());
+    csv_parser.getSeparator(u8c);
+    CHECK_EQUAL(t, u8c);
 };
 
 TEST(slightcsv,load_data_with_no_filename_and_separator) {
@@ -106,7 +109,7 @@ TEST(slightcsv,load_data_with_wrong_filename) {
     string t = "";
     try {
         csv_parser.setFileName("abc.def");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
     } catch(const exception &e) {
         t = e.what();
@@ -119,7 +122,7 @@ TEST(slightcsv,load_data_ok) {
     size_t t;
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         t = csv_parser.loadData();
     } catch(const exception &e) {
     }
@@ -154,7 +157,7 @@ TEST(slightcsv,get_column_count_noload) {
     string t = "";
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         t = csv_parser.getColumnCount();
     } catch(const exception &e) {
         t = e.what();
@@ -167,7 +170,7 @@ TEST(slightcsv,get_column_count_ok) {
     size_t t;
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
         t = csv_parser.getColumnCount();
     } catch(const exception &e) {
@@ -203,7 +206,7 @@ TEST(slightcsv,get_row_count_noload) {
     string t = "";
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         t = csv_parser.getRowCount();
     } catch(const exception &e) {
         t = e.what();
@@ -216,7 +219,7 @@ TEST(slightcsv,get_row_count_ok) {
     size_t t;
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
         t = csv_parser.getRowCount();
     } catch(const exception &e) {
@@ -241,7 +244,7 @@ TEST(slightcsv,get_column_nofile_noload) {
     string t = "";
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.getColumn(vect, 0);
     } catch(const exception &e) {
         t = e.what();
@@ -254,7 +257,7 @@ TEST(slightcsv,get_column_noload) {
     string t = "";
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.getColumn(vect, 0);
     } catch(const exception &e) {
@@ -268,7 +271,7 @@ TEST(slightcsv,get_column_string_ok) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 0);
@@ -282,7 +285,7 @@ TEST(slightcsv,get_column_string_ok_verify_0_0) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 0);
@@ -296,7 +299,7 @@ TEST(slightcsv,get_column_string_ok_verify_0_6000) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 0);
@@ -310,7 +313,7 @@ TEST(slightcsv,get_column_string_ok_verify_0_8639) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 0);
@@ -324,7 +327,7 @@ TEST(slightcsv,get_column_string_ok_verify_29_0) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 29);
@@ -338,7 +341,7 @@ TEST(slightcsv,get_column_string_ok_verify_29_4000) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 29);
@@ -352,7 +355,7 @@ TEST(slightcsv,get_column_string_ok_verify_29_8639) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 29);
@@ -366,7 +369,7 @@ TEST(slightcsv,get_column_float_ok_verify_1_33) {
     string t;
     vector<float> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1);
@@ -380,7 +383,7 @@ TEST(slightcsv,get_column_float_ok_verify_28_8632) {
     string t;
     vector<float> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
@@ -394,7 +397,7 @@ TEST(slightcsv,get_column_double_ok_verify_28_8632) {
     string t;
     vector<double> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
@@ -409,7 +412,7 @@ TEST(slightcsv,get_column_int_ok_verify_28_8632) {
     string t;
     vector<int> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
@@ -423,7 +426,7 @@ TEST(slightcsv,get_column_int_ok_verify_4_11) {
     string t;
     vector<int> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 4);
@@ -437,7 +440,7 @@ TEST(slightcsv,get_column_int_ok_verify_28_12) {
     string t;
     vector<int> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 28);
@@ -451,7 +454,7 @@ TEST(slightcsv,get_column_after_unload) {
     string t = "";
     vector<int> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.unloadData();
@@ -467,7 +470,7 @@ TEST(slightcsv,get_column_after_unload_load) {
     string t;
     vector<int> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.unloadData();
@@ -484,7 +487,7 @@ TEST(slightcsv,get_column_overload_1_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 0);
@@ -505,7 +508,7 @@ TEST(slightcsv,get_column_overload_2_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 864);
@@ -524,7 +527,7 @@ TEST(slightcsv,get_column_overload_3_ex) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 865);
@@ -541,7 +544,7 @@ TEST(slightcsv,get_column_overload_4_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 0, 1);
@@ -560,7 +563,7 @@ TEST(slightcsv,get_column_overload_5_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 0, 5);
@@ -579,7 +582,7 @@ TEST(slightcsv,get_column_overload_6_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 862, 2);
@@ -599,7 +602,7 @@ TEST(slightcsv,get_column_overload_7_ex) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 862, 4);
@@ -616,7 +619,7 @@ TEST(slightcsv,get_column_overload_8_ex) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getColumn(vect, 1, 0, 866);
@@ -644,7 +647,7 @@ TEST(slightcsv,get_filename_after_reset) {
     string t = "";
     vector<int> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.unloadData();
@@ -661,14 +664,15 @@ TEST(slightcsv,get_separator_after_reset) {
     SlightCSV csv_parser;
     string t = "";
     vector<int> vect;
+    U8char u8c;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.unloadData();
         csv_parser.loadData();
         csv_parser.reset();
-        csv_parser.getSeparator();
+        csv_parser.getSeparator(u8c);
     } catch(const exception &e) {
         t = e.what();
     }
@@ -680,7 +684,7 @@ TEST(slightcsv,get_column_after_reset) {
     string t = "";
     vector<int> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.unloadData();
@@ -699,7 +703,7 @@ TEST(slightcsv, header_auto_detect_1) {
     size_t header_cnt = 0;
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
         header_cnt = csv_parser.getHeaderCount();
     } catch(const exception &e) {
@@ -715,7 +719,7 @@ TEST(slightcsv, header_auto_detect_1_override) {
     size_t header_cnt = 0;
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
         csv_parser.setHeaderCount(0);
         header_cnt = csv_parser.getHeaderCount();
@@ -732,7 +736,7 @@ TEST(slightcsv, header_auto_detect_0) {
     size_t header_cnt = 0;
     try {
         csv_parser.setFileName("../../test/env_data_0.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
         header_cnt = csv_parser.getHeaderCount();
     } catch(const exception &e) {
@@ -748,7 +752,7 @@ TEST(slightcsv, header_auto_detect_0_override) {
     size_t header_cnt = 0;
     try {
         csv_parser.setFileName("../../test/env_data_0.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
         csv_parser.setHeaderCount(1);
         header_cnt = csv_parser.getHeaderCount();
@@ -765,7 +769,7 @@ TEST(slightcsv, header_auto_detect_2) {
     size_t header_cnt = 0;
     try {
         csv_parser.setFileName("../../test/env_data_2.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
         header_cnt = csv_parser.getHeaderCount();
     } catch(const exception &e) {
@@ -781,7 +785,7 @@ TEST(slightcsv, header_auto_detect_2_override) {
     size_t header_cnt = 0;
     try {
         csv_parser.setFileName("../../test/env_data_0.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.loadData();
         csv_parser.setHeaderCount(0);
         header_cnt = csv_parser.getHeaderCount();
@@ -797,7 +801,7 @@ TEST(slightcsv,get_row_ok_verify_0_ok) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 0);
@@ -814,7 +818,7 @@ TEST(slightcsv,get_row_ok_verify_0_8641_ex) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         cnt = csv_parser.getRowCount();
@@ -831,7 +835,7 @@ TEST(slightcsv,get_row_ok_verify_last_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         cnt = csv_parser.getRowCount();
@@ -850,7 +854,7 @@ TEST(slightcsv,get_row_ok_verify_4000_ok) {
     string t;
     vector<string> vect;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 400);
@@ -867,7 +871,7 @@ TEST(slightcsv,get_row_overload_1_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 400, 1);
@@ -887,7 +891,7 @@ TEST(slightcsv,get_row_overload_2_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 400, 2, 28);
@@ -907,7 +911,7 @@ TEST(slightcsv,get_row_overload_3_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 400, 1, 1);
@@ -926,7 +930,7 @@ TEST(slightcsv,get_row_overload_4_ok) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 864, 29, 1);
@@ -945,7 +949,7 @@ TEST(slightcsv,get_row_overload_5_ex) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 864, 30);
@@ -962,7 +966,7 @@ TEST(slightcsv,get_row_overload_6_ex) {
     vector<string> vect;
     size_t cnt = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setFileName("../../test/env_data_short.csv");
         csv_parser.loadData();
         csv_parser.getRow(vect, 864, 29, 2);
@@ -986,7 +990,7 @@ TEST(slightcsv,get_cell_noload) {
 
 TEST(slightcsv,get_cell_string_0_0) {
     SlightCSV csv_parser;
-    csv_parser.setSeparator(';');
+    csv_parser.setSeparator(U8char(";"));
     csv_parser.setFileName("../../test/env_data_short.csv");
     csv_parser.loadData();
     string ex = "";
@@ -1002,7 +1006,7 @@ TEST(slightcsv,get_cell_string_0_0) {
 
 TEST(slightcsv,get_cell_int_8640_0) {
     SlightCSV csv_parser;
-    csv_parser.setSeparator(';');
+    csv_parser.setSeparator(U8char(";"));
     csv_parser.setFileName("../../test/env_data_short.csv");
     csv_parser.loadData();
     string ex = "";
@@ -1018,7 +1022,7 @@ TEST(slightcsv,get_cell_int_8640_0) {
 
 TEST(slightcsv,get_cell_int_8640_29) {
     SlightCSV csv_parser;
-    csv_parser.setSeparator(';');
+    csv_parser.setSeparator(U8char(";"));
     csv_parser.setFileName("../../test/env_data_short.csv");
     csv_parser.loadData();
     string ex = "";
@@ -1034,7 +1038,7 @@ TEST(slightcsv,get_cell_int_8640_29) {
 
 TEST(slightcsv,get_cell_float_8628_28) {
     SlightCSV csv_parser;
-    csv_parser.setSeparator(';');
+    csv_parser.setSeparator(U8char(";"));
     csv_parser.setFileName("../../test/env_data_short.csv");
     csv_parser.loadData();
     string ex = "";
@@ -1050,7 +1054,7 @@ TEST(slightcsv,get_cell_float_8628_28) {
 
 TEST(slightcsv,get_cell_double_8628_28) {
     SlightCSV csv_parser;
-    csv_parser.setSeparator(';');
+    csv_parser.setSeparator(U8char(";"));
     csv_parser.setFileName("../../test/env_data_short.csv");
     csv_parser.loadData();
     string ex = "";
@@ -1068,8 +1072,9 @@ TEST(slightcsv,get_cell_double_8628_28) {
 TEST(slightcsv, get_empty_escape_ex) {
     SlightCSV csv_parser;
     string ex = "";
+    U8char u8c;
     try {
-        csv_parser.getEscape();
+        csv_parser.getEscape(u8c);
     } catch(const exception &e) {
         ex = e.what();
     }
@@ -1079,8 +1084,9 @@ TEST(slightcsv, get_empty_escape_ex) {
 TEST(slightcsv, set_empty_escape_ex) {
     SlightCSV csv_parser;
     string ex = "";
+    U8char u8c;
     try {
-        csv_parser.setEscape(0);
+        csv_parser.setEscape(u8c);
     } catch(const exception &e) {
         ex = e.what();
     }
@@ -1090,11 +1096,11 @@ TEST(slightcsv, set_empty_escape_ex) {
 TEST(slightcsv, set_get_escape_ok) {
     SlightCSV csv_parser;
     string ex = "";
-    char esc = '\"';
-    char c = 0;
+    U8char esc = "\"";
+    U8char c;
     try {
         csv_parser.setEscape(esc);
-        c = csv_parser.getEscape();
+        csv_parser.getEscape(c);
     } catch(const exception &e) {
         ex = e.what();
     }
@@ -1105,14 +1111,14 @@ TEST(slightcsv, set_get_escape_ok) {
 TEST(slightcsv, set_escape_process_ok_1) {
     SlightCSV csv_parser;
     string ex = "";
-    char esc = '\"';
-    char c = 0;
+    U8char esc = "\"";
+    U8char c;
     string cell;
     size_t count = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setEscape(esc);
-        c = csv_parser.getEscape();
+        csv_parser.getEscape(c);
         csv_parser.setFileName("../../test/env_data_sli.csv");
         csv_parser.loadData();
         count = csv_parser.getColumnCount();
@@ -1129,14 +1135,14 @@ TEST(slightcsv, set_escape_process_ok_1) {
 TEST(slightcsv, set_escape_process_ok_2) {
     SlightCSV csv_parser;
     string ex = "";
-    char esc = '\"';
-    char c = 0;
+    U8char esc = "\"";
+    U8char c;
     string cell;
     size_t count = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setEscape(esc);
-        c = csv_parser.getEscape();
+        csv_parser.getEscape(c);
         csv_parser.setFileName("../../test/env_data_sli.csv");
         csv_parser.loadData();
         count = csv_parser.getColumnCount();
@@ -1153,14 +1159,14 @@ TEST(slightcsv, set_escape_process_ok_2) {
 TEST(slightcsv, set_escape_process_ok_3) {
     SlightCSV csv_parser;
     string ex = "";
-    char esc = '\"';
-    char c = 0;
+    U8char esc = "\"";
+    U8char c;
     string cell;
     size_t count = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setEscape(esc);
-        c = csv_parser.getEscape();
+        csv_parser.getEscape(c);
         csv_parser.setFileName("../../test/env_data_sli.csv");
         csv_parser.loadData();
         count = csv_parser.getColumnCount();
@@ -1173,17 +1179,18 @@ TEST(slightcsv, set_escape_process_ok_3) {
     CHECK_EQUAL(30, count);
     CHECK_EQUAL("\"14\"", cell);
 };
+
 TEST(slightcsv, set_escape_process_ok_4) {
     SlightCSV csv_parser;
     string ex = "";
-    char esc = '\"';
-    char c = 0;
+    U8char esc = "\"";
+    U8char c;
     string cell;
     size_t count = 0;
     try {
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setEscape(esc);
-        c = csv_parser.getEscape();
+        csv_parser.getEscape(c);
         csv_parser.setFileName("../../test/env_data_sli.csv");
         csv_parser.loadData();
         count = csv_parser.getColumnCount();
@@ -1200,7 +1207,7 @@ TEST(slightcsv, set_escape_process_ok_4) {
 TEST(slightcsv, get_empty_strip_chars_ex) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
+    set<U8char> ss;
     try {
         csv_parser.getStripChars(ss);
     } catch(const exception &e) {
@@ -1212,7 +1219,7 @@ TEST(slightcsv, get_empty_strip_chars_ex) {
 TEST(slightcsv, set_empty_strip_chars_ex) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
+    set<U8char> ss;
     try {
         csv_parser.setStripChars(ss);
     } catch(const exception &e) {
@@ -1224,8 +1231,8 @@ TEST(slightcsv, set_empty_strip_chars_ex) {
 TEST(slightcsv, get_set_strip_chars_ok_1) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
-    char c = 't';
+    set<U8char> ss;
+    U8char c = "t";
     ss.insert(c);
     try {
         csv_parser.setStripChars(ss);
@@ -1240,10 +1247,10 @@ TEST(slightcsv, get_set_strip_chars_ok_1) {
 TEST(slightcsv, get_set_strip_chars_ok_2) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
-    char c = 't';
-    char d = 'z';
-    char e = 'x';
+    set<U8char> ss;
+    U8char c = "t";
+    U8char d = "z";
+    U8char e = "x";
     ss.insert(c);
     ss.insert(d);
     try {
@@ -1261,9 +1268,9 @@ TEST(slightcsv, get_set_strip_chars_ok_2) {
 TEST(slightcsv, get_set_strip_chars_reset_ex) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
-    char c = 't';
-    char d = 'z';
+    set<U8char> ss;
+    U8char c = "t";
+    U8char d = "z";
     ss.insert(c);
     ss.insert(d);
     try {
@@ -1279,13 +1286,13 @@ TEST(slightcsv, get_set_strip_chars_reset_ex) {
 TEST(slightcsv, get_set_strip_process_ok_1) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
-    char c = 't';
+    set<U8char> ss;
+    U8char c = "t";
     ss.insert(c);
     string cell = "";
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setStripChars(ss);
         csv_parser.getStripChars(ss);
         csv_parser.loadData();
@@ -1301,16 +1308,16 @@ TEST(slightcsv, get_set_strip_process_ok_1) {
 TEST(slightcsv, get_set_strip_process_ok_2) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
-    char c = ',';
-    char d = '0';
+    set<U8char> ss;
+    U8char c = ",";
+    U8char d = "0";
     ss.insert(c);
     ss.insert(d);
     string cell = "";
     try {
         csv_parser.setFileName("../../test/env_data_sli.csv");
-        csv_parser.setSeparator(';');
-        csv_parser.setEscape('\"');
+        csv_parser.setSeparator(U8char(";"));
+        csv_parser.setEscape(U8char("\""));
         csv_parser.setStripChars(ss);
         csv_parser.getStripChars(ss);
         csv_parser.loadData();
@@ -1327,14 +1334,14 @@ TEST(slightcsv, get_set_strip_process_ok_2) {
 TEST(slightcsv, get_set_strip_process_ex_3) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
-    char c = '\"';
+    set<U8char> ss;
+    U8char c = "\"";
     ss.insert(c);
     string cell = "";
     try {
         csv_parser.setFileName("../../test/env_data_sli.csv");
-        csv_parser.setSeparator(';');
-        csv_parser.setEscape('\"');
+        csv_parser.setSeparator(U8char(";"));
+        csv_parser.setEscape(U8char("\""));
         csv_parser.setStripChars(ss);
         csv_parser.getStripChars(ss);
         csv_parser.loadData();
@@ -1348,9 +1355,9 @@ TEST(slightcsv, get_set_strip_process_ex_3) {
 TEST(slightcsv, get_set_strip_process_ok_4) {
     SlightCSV csv_parser;
     string ex = "";
-    set<char> ss;
-    char c = '\r';
-    char d = '\n';
+    set<U8char> ss;
+    U8char c = "\r";
+    U8char d = "\n";
     ss.insert(c);
     ss.insert(d);
     string cell = "";
@@ -1358,8 +1365,8 @@ TEST(slightcsv, get_set_strip_process_ok_4) {
     size_t col_cnt = 0;
     try {
         csv_parser.setFileName("../../test/env_data_sli.csv");
-        csv_parser.setSeparator(';');
-        csv_parser.setEscape('\"');
+        csv_parser.setSeparator(U8char(";"));
+        csv_parser.setEscape(U8char("\""));
         csv_parser.setStripChars(ss);
         csv_parser.getStripChars(ss);
         csv_parser.loadData();
@@ -1380,7 +1387,7 @@ TEST(slightcsv, get_set_strip_process_ok_4) {
 TEST(slightcsv, get_empty_rep_chars_ex) {
     SlightCSV csv_parser;
     string ex = "";
-    map<char, char> rmap;
+    map<U8char, U8char> rmap;
     try {
         csv_parser.getReplaceChars(rmap);
     } catch(const exception &e) {
@@ -1392,7 +1399,7 @@ TEST(slightcsv, get_empty_rep_chars_ex) {
 TEST(slightcsv, set_empty_rep_chars_ex) {
     SlightCSV csv_parser;
     string ex = "";
-    map<char, char> rmap;
+    map<U8char, U8char> rmap;
     try {
         csv_parser.setReplaceChars(rmap);
     } catch(const exception &e) {
@@ -1404,13 +1411,13 @@ TEST(slightcsv, set_empty_rep_chars_ex) {
 TEST(slightcsv, get_set_rep_chars_ok_1) {
     SlightCSV csv_parser;
     string ex = "";
-    map<char, char> setmap;
-    char from = 't';
-    char to = 'd';
-    char c = 0;
-    pair<char, char> p(from, to);
+    map<U8char, U8char> setmap;
+    U8char from = "t";
+    U8char to = "d";
+    U8char c;
+    pair<U8char, U8char> p(from, to);
     setmap.insert(p);
-    map<char, char> getmap;
+    map<U8char, U8char> getmap;
     size_t cnt = 0;
     try {
         csv_parser.setReplaceChars(setmap);
@@ -1422,22 +1429,22 @@ TEST(slightcsv, get_set_rep_chars_ok_1) {
     }
     CHECK_EQUAL("", ex);
     CHECK_EQUAL(1, cnt);
-    CHECK_EQUAL('d', c);
+    CHECK_EQUAL(to, c);
 };
 
 TEST(slightcsv, get_set_rep_chars_ok_2) {
     SlightCSV csv_parser;
     string ex = "";
-    map<char, char> setmap;
-    char from1 = 't';
-    char to1 = 'd';
-    setmap.insert(pair<char, char>(from1, to1));
-    char from2 = 's';
-    char to2 = 'r';
-    setmap.insert(pair<char, char>(from2, to2));
-    char c = 0;
-    char d = 0;
-    map<char, char> getmap;
+    map<U8char, U8char> setmap;
+    U8char from1 = "t";
+    U8char to1 = "d";
+    setmap.insert(pair<U8char, U8char>(from1, to1));
+    U8char from2 = "s";
+    U8char to2 = "r";
+    setmap.insert(pair<U8char, U8char>(from2, to2));
+    U8char c;
+    U8char d;
+    map<U8char, U8char> getmap;
     size_t cnt = 0;
     try {
         csv_parser.setReplaceChars(setmap);
@@ -1450,28 +1457,28 @@ TEST(slightcsv, get_set_rep_chars_ok_2) {
     }
     CHECK_EQUAL("", ex);
     CHECK_EQUAL(2, cnt);
-    CHECK_EQUAL('d', c);
-    CHECK_EQUAL('r', d);
+    CHECK_EQUAL(to1, c);
+    CHECK_EQUAL(to2, d);
 };
 
 TEST(slightcsv, get_set_rep_chars_ok_3) {
     SlightCSV csv_parser;
     string ex = "";
-    map<char, char> setmap;
-    char from1 = 't';
-    char to1 = 'd';
-    setmap.insert(pair<char, char>(from1, to1));
-    char from2 = 's';
-    char to2 = 'r';
-    setmap.insert(pair<char, char>(from2, to2));
-    map<char, char> getmap;
+    map<U8char, U8char> setmap;
+    U8char from1 = "t";
+    U8char to1 = "d";
+    setmap.insert(pair<U8char, U8char>(from1, to1));
+    U8char from2 = "s";
+    U8char to2 = "r";
+    setmap.insert(pair<U8char, U8char>(from2, to2));
+    map<U8char, U8char> getmap;
     size_t cnt = 0;
-    char c = 0;
-    char d = 0;
+    U8char c;
+    U8char d;
     string cell = "";
     try {
         csv_parser.setFileName("../../test/env_data_short.csv");
-        csv_parser.setSeparator(';');
+        csv_parser.setSeparator(U8char(";"));
         csv_parser.setReplaceChars(setmap);
         csv_parser.getReplaceChars(getmap);
         csv_parser.loadData();
@@ -1484,8 +1491,8 @@ TEST(slightcsv, get_set_rep_chars_ok_3) {
     }
     CHECK_EQUAL("", ex);
     CHECK_EQUAL(2, cnt);
-    CHECK_EQUAL('d', c);
-    CHECK_EQUAL('r', d);
+    CHECK_EQUAL(to1, c);
+    CHECK_EQUAL(to2, d);
     CHECK_EQUAL("drd", cell);
 };
 
@@ -1493,15 +1500,15 @@ TEST(slightcsv, complex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_sli.csv";
-    char sep = ';';
-    char esc = '\"';
-    set<char> stripset;
-    char strip = 'l';
+    U8char sep = ";";
+    U8char esc = "\"";
+    set<U8char> stripset;
+    U8char strip = "l";
     stripset.insert(strip);
-    map<char, char> setmap;
-    char from1 = 'd';
-    char to1 = 'x';
-    setmap.insert(pair<char, char>(from1, to1));
+    map<U8char, U8char> setmap;
+    U8char from1 = "d";
+    U8char to1 = "x";
+    setmap.insert(pair<U8char, U8char>(from1, to1));
     vector<string> row1;
     vector<string> row2;
     try {
@@ -1525,7 +1532,7 @@ TEST(slightcsv, format_header_err) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short_dh.csv";
-    char sep = ';';
+    U8char sep = ";";
     try {
         csv_parser.setFileName(file);
         csv_parser.setSeparator(sep);
@@ -1540,7 +1547,7 @@ TEST(slightcsv, set_header_count_no_data_loaded_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     try {
         csv_parser.setFileName(file);
         csv_parser.setSeparator(sep);
@@ -1555,7 +1562,7 @@ TEST(slightcsv, get_cell_bad_row_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     string cell = "";
     try {
         csv_parser.setFileName(file);
@@ -1572,7 +1579,7 @@ TEST(slightcsv, get_cell_bad_column_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     string cell = "";
     try {
         csv_parser.setFileName(file);
@@ -1589,7 +1596,7 @@ TEST(slightcsv, get_column_2p_bad_column_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> column;
     try {
         csv_parser.setFileName(file);
@@ -1606,7 +1613,7 @@ TEST(slightcsv, get_column_3p_data_not_loaded_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> column;
     try {
         csv_parser.setFileName(file);
@@ -1623,7 +1630,7 @@ TEST(slightcsv, get_column_3p_bad_column_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> column;
     try {
         csv_parser.setFileName(file);
@@ -1640,7 +1647,7 @@ TEST(slightcsv, get_column_4p_data_not_loaded_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> column;
     try {
         csv_parser.setFileName(file);
@@ -1657,7 +1664,7 @@ TEST(slightcsv, get_column_4p_bad_column_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> column;
     try {
         csv_parser.setFileName(file);
@@ -1674,7 +1681,7 @@ TEST(slightcsv, get_column_4p_bad_start_cell_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> column;
     try {
         csv_parser.setFileName(file);
@@ -1691,7 +1698,7 @@ TEST(slightcsv, get_row_2p_data_not_loaded_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> row;
     try {
         csv_parser.setFileName(file);
@@ -1708,7 +1715,7 @@ TEST(slightcsv, get_row_3p_data_not_loaded_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> row;
     try {
         csv_parser.setFileName(file);
@@ -1725,7 +1732,7 @@ TEST(slightcsv, get_row_4p_data_not_loaded_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> row;
     try {
         csv_parser.setFileName(file);
@@ -1742,7 +1749,7 @@ TEST(slightcsv, get_row_3p_bad_row_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> row;
     try {
         csv_parser.setFileName(file);
@@ -1759,7 +1766,7 @@ TEST(slightcsv, get_row_4p_bad_row_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> row;
     try {
         csv_parser.setFileName(file);
@@ -1776,7 +1783,7 @@ TEST(slightcsv, get_row_4p_bad_start_cell_index_ex) {
     SlightCSV csv_parser;
     string ex = "";
     string file = "../../test/env_data_short.csv";
-    char sep = ';';
+    U8char sep = ";";
     vector<string> row;
     try {
         csv_parser.setFileName(file);

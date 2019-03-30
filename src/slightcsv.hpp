@@ -23,6 +23,8 @@
 #include <set>
 #include <map>
 
+#include "u8char.hpp"
+
 using std::string;
 using std::vector;
 using std::exception;
@@ -61,12 +63,12 @@ namespace utils {
             /// before triggering data loading.
             /// \param t_separator character to use as delimiter.
             /// \see getSeparator()
-            void setSeparator(const char t_separator);
+            void setSeparator(const U8char t_separator);
 
             /// Method to get the previously set delimiter character.
             /// \return previously set delimiter character.
             /// \see setSeparator()
-            char getSeparator(void) const;
+            void getSeparator(U8char &t_target) const;
 
             /// Method to set the escape character. It is used to escape other characters in the file to be processed. 
             /// Escaped delimiter and new line characters are not processed and are propagated to processed "cells". 
@@ -76,12 +78,12 @@ namespace utils {
             /// Method is optional. If used, set it before triggering data loading.
             /// \param t_escape character to be used to escape a group of characters in the input.
             /// \see getEscape()
-            void setEscape(const char t_escape);
+            void setEscape(const U8char t_escape);
 
             /// Method to get the previously set escape character.
             /// \return previously set escape character.
             /// \see getEscape()
-            char getEscape(void) const;
+            void getEscape(U8char &t_target) const;
 
             /// Method to define a set of character(s) to be stripped from the input of the parser. Order of execution: 
             /// strip, escape, replace. Escape characters may be stripped, but characters enclosed between escape characters
@@ -89,13 +91,13 @@ namespace utils {
             /// If used, set it before triggering data loading.
             /// \param t_strip_chars a set of characters previously populated with characters to be stripped.
             /// \see getStripChars()
-            void setStripChars(const set<char> &t_strip_chars);
+            void setStripChars(const set<U8char> &t_strip_chars);
 
             /// Method to get the previously defined set of character(s) to be stripped from the input of the parser.
             /// \param t_target set that gets populated with the previously defined set of characters 
             /// to be stripped.
              /// \see setStripChars()
-            void getStripChars(set<char> &t_target) const;
+            void getStripChars(set<U8char> &t_target) const;
 
             /// Method to define a map of character pair(s) to be replaced in the input of the parser. The map's "key" 
             /// character is replaced by the "value" character in the input. Order of execution: strip, escape, 
@@ -104,13 +106,13 @@ namespace utils {
             /// If used, set it before triggering data loading.
             /// \param t_rep_chars a map of "replacee" and "replacer" characters.
             /// \see getReplaceChars()
-            void setReplaceChars(const map<char, char> &t_rep_chars);
+            void setReplaceChars(const map<U8char, U8char> &t_rep_chars);
 
             /// Method to get the previously set map of character pair(s) to be replaced in the input of the parser.
             /// \param t_target map that gets populated with the previously defined map of character pair(s)
             /// to be replaced.
             /// \see setReplaceChars()
-            void getReplaceChars(map<char, char> &t_target) const;
+            void getReplaceChars(map<U8char, U8char> &t_target) const;
 
             /// Method to trigger data loading. Requires filename and delimiter to be set before calling it.
             /// \return the number of records loaded.

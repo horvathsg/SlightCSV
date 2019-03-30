@@ -21,6 +21,8 @@
 #include <vector>
 #include <exception>
 
+#include "u8char.hpp"
+
 using std::string;
 using std::vector;
 using std::exception;
@@ -50,24 +52,24 @@ namespace utils {
             /// again before querying results).
             /// \param t_sep delimiter character.
             /// \see getSeparator()
-            void setSeparator(const char t_sep);
+            void setSeparator(const U8char t_sep);
 
             /// Method to get the previously set delimiter character to be used when extracting cells from the row.
             /// \return delimiter character.
             /// \see setSeparator()
-            char getSeparator(void) const;
+            void getSeparator(U8char &t_target) const;
 
             /// Method to set the escape character to be used when extracting cells from the row. Changing the 
             /// escape character invalidates any previous processins results (it is necessary to process the row 
             /// again before querying results).
             /// \param t_esc escape character.
             /// \see getEscape()
-            void setEscape(const char t_esc);
+            void setEscape(const U8char t_esc);
 
             /// Method to get the previously set escape character to be used when extracting cells from the row.
             /// \return escape character.
             /// \see setEscape()
-            char getEscape(void) const;
+            void getEscape(U8char &t_target) const;
 
             /// Method to process the row input string and export contents to cells. Input string and delimiter character
             /// settings are required before triggering processing. If those settings are not provided, an excpetion is 
@@ -110,8 +112,8 @@ namespace utils {
         private:
             bool checkIsHeader(void) const;
             string m_input;
-            char m_sep;
-            char m_esc;
+            U8char m_sep;
+            U8char m_esc;
             bool m_processed;
             vector<string> m_cells;
             size_t m_cell_count;

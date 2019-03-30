@@ -20,6 +20,11 @@
 
 #include <cstdio>
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 utils::SlightCSV::SlightCSV(void) {
     // allocate object holding data members dynamically
     m_csvp = new SlightCSVPrivate;
@@ -45,7 +50,7 @@ string utils::SlightCSV::getFileName(void) const {
     return m_csvp->m_filename;
 }
 
-void utils::SlightCSV::setSeparator(const char t_separator) {
+void utils::SlightCSV::setSeparator(const U8char t_separator) {
     if (!t_separator) {
         throw slightcsv_separator_error();
     }
@@ -54,14 +59,15 @@ void utils::SlightCSV::setSeparator(const char t_separator) {
     m_csvp->m_row.setSeparator(t_separator);
 }
 
-char utils::SlightCSV::getSeparator(void) const {
+void utils::SlightCSV::getSeparator(U8char &t_target) const {
     if (!m_csvp->m_separator) {
         throw slightcsv_separator_error();
     }
-    return m_csvp->m_separator;
+    t_target.clear();
+    t_target = m_csvp->m_separator;
 }
 
-void utils::SlightCSV::setEscape(const char t_escape) {
+void utils::SlightCSV::setEscape(const U8char t_escape) {
     if (!t_escape) {
         throw slightcsv_escape_error();
     }
@@ -70,38 +76,41 @@ void utils::SlightCSV::setEscape(const char t_escape) {
     m_csvp->m_row.setEscape(t_escape);
 }
 
-char utils::SlightCSV::getEscape(void) const {
+void utils::SlightCSV::getEscape(U8char &t_target) const {
     if (!m_csvp->m_escape) {
         throw slightcsv_escape_error();
     }
-    return m_csvp->m_escape;
+    t_target.clear();
+    t_target = m_csvp->m_escape;
 }
 
-void utils::SlightCSV::setStripChars(const set<char> &t_strip_chars) {
+void utils::SlightCSV::setStripChars(const set<U8char> &t_strip_chars) {
     if (!t_strip_chars.size()) {
         throw slightcsv_strip_error();
     }
     m_csvp->m_strip_chars = t_strip_chars;
 }
 
-void utils::SlightCSV::getStripChars(set<char> &t_target) const {
+void utils::SlightCSV::getStripChars(set<U8char> &t_target) const {
     if (!m_csvp->m_strip_chars.size()) {
         throw slightcsv_strip_error();
     }
+    t_target.clear();
     t_target = m_csvp->m_strip_chars;
 }
 
-void utils::SlightCSV::setReplaceChars(const map<char, char> &t_rep_chars) {
+void utils::SlightCSV::setReplaceChars(const map<U8char, U8char> &t_rep_chars) {
     if (!t_rep_chars.size()) {
         throw slightcsv_replace_error();
     }
     m_csvp->m_rep_chars = t_rep_chars;
 }
 
-void utils::SlightCSV::getReplaceChars(map<char, char> &t_target) const {
+void utils::SlightCSV::getReplaceChars(map<U8char, U8char> &t_target) const {
     if (!m_csvp->m_rep_chars.size()) {
         throw slightcsv_replace_error();
     }
+    t_target.clear();
     t_target = m_csvp->m_rep_chars;
 }
 
@@ -111,7 +120,7 @@ size_t utils::SlightCSV::loadData(void) {
         throw slightcsv_filename_error();
     }
 
-    if (m_csvp->m_separator == 0) {
+    if (!m_csvp->m_separator) {
         throw slightcsv_separator_error();
     }
 
@@ -130,56 +139,74 @@ size_t utils::SlightCSV::loadData(void) {
     
     // set up variables to be used in parsing cycle
     char in_char;
+    U8char in_u8_char;
+    U8char u8_cr = U8char("\r");
+    U8char u8_nl = U8char("\n");
+    char char_buff[5];
     string in_line = "";
     bool is_escaped = false;
     size_t row_id = 0;
 
     // parse the file character by character
     while (in_char = fgetc(in_file), in_char != EOF) {
-        // if there is at least one character to be stripped
-        if (m_csvp->m_strip_chars.size()) {
-                // if the incoming character is present in the strip set
-                if (m_csvp->m_strip_chars.count(in_char)) {
-                    // don't put it in the buffer
-                    continue;
+        
+        in_u8_char.addChar(in_char);
+
+        if (in_u8_char) {
+
+            // if there is at least one character to be stripped
+            if (m_csvp->m_strip_chars.size()) {
+                    // if the incoming character is present in the strip set
+                    if (m_csvp->m_strip_chars.count(in_u8_char)) {
+                        // don't put it in the buffer
+                        // clear UTF8 character
+                        in_u8_char.clear();
+                        continue;
+                    }
+                }
+            // if the escape character is set
+            if (m_csvp->m_escape) {
+                // if the incoming character matches the escape character
+                if (in_u8_char == m_csvp->m_escape) {
+                    // set escaped state by a XOR
+                    // this is an efficient way of keeping track of escape state without using expensive "maps"
+                    is_escaped ^= true;
                 }
             }
-        // if the escape character is set
-        if (m_csvp->m_escape) {
-            // if the incoming character matches the escape character
-            if (in_char == m_csvp->m_escape) {
-                // set escaped state by a XOR
-                // this is an efficient way of keeping track of escape state without using expensive "maps"
-                is_escaped ^= true;
-            }
-        }
-        // if incoming character is not newline, or if the character is escaped
-        if ((in_char != '\r' && in_char != '\n') || is_escaped) {
-            // if there are any characters to be replaced
-            if (m_csvp->m_rep_chars.size()) {
-                // check if the incoming character needs to be replaced
-                map<char, char>::const_iterator it = m_csvp->m_rep_chars.find(in_char);
-                // if incoming character needs to be replaced
-                if (it != m_csvp->m_rep_chars.end()) {
-                    // replace "replacee" with "replacer"
-                    in_char = it->second;
+            // if incoming character is not newline, or if the character is escaped
+            if ((in_u8_char != u8_cr && in_u8_char != u8_nl) || is_escaped) {
+                // if there are any characters to be replaced
+                if (m_csvp->m_rep_chars.size()) {
+                    // check if the incoming character needs to be replaced
+                    map<U8char, U8char>::const_iterator it = m_csvp->m_rep_chars.find(in_u8_char);
+                    // if incoming character needs to be replaced
+                    if (it != m_csvp->m_rep_chars.end()) {
+                        // replace "replacee" with "replacer"
+                        in_u8_char = it->second;
+                    }
+                }
+                // add character to line buffer
+                in_u8_char.getChars(char_buff, 4);
+                in_line += char_buff;
+            // if incoming character is newline, and it is not escaped
+            } else {
+                // if incoming line is not empty (might be if two new lines follow each other, e.g. \r\n)
+                if (in_line.size()) {
+                    // submit line for processing with row id
+                    processLine(in_line, row_id);
+                    // clear line buffer
+                    in_line.clear();
+                    // increment row id
+                    ++row_id;
                 }
             }
-            // add character to line buffer
-            in_line += in_char;
-        // if incoming character is newline, and it is not escaped
-        } else {
-            // if incoming line is not empty (might be if two new lines follow each other, e.g. \r\n)
-            if (in_line.size()) {
-                // submit line for processing with row id
-                processLine(in_line, row_id);
-                // clear line buffer
-                in_line.clear();
-                // increment row id
-                ++row_id;
-            }
+
+            in_u8_char.clear();
+        
         }
+
     }
+    
     // submit remaining characters for processing with row id (needed because there might be no new line character at the 
     // end of the last row to trigger processing)
     processLine(in_line, row_id);
@@ -361,8 +388,8 @@ void utils::SlightCSV::unloadData(void) {
 void utils::SlightCSV::reset(void) {
     m_csvp->m_data_matrix.reset();
     m_csvp->m_filename.clear();
-    m_csvp->m_separator = 0;
-    m_csvp->m_escape = 0;
+    m_csvp->m_separator.clear();
+    m_csvp->m_escape.clear();
     m_csvp->m_strip_chars.clear();
     m_csvp->m_csv_format_detect_done = false;
     m_csvp->m_row.reset();

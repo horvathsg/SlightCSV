@@ -24,6 +24,7 @@
 
 #include "slightmatrix.hpp"
 #include "slightrow.hpp"
+#include "u8char.hpp"
 
 using std::string;
 using std::vector;
@@ -38,12 +39,12 @@ namespace utils {
 
         public:
             string m_filename;
-            char m_separator;
-            char m_escape;
+            U8char m_separator;
+            U8char m_escape;
             bool m_csv_format_detect_done;
             SlightMatrix m_data_matrix;
-            set<char> m_strip_chars;
-            map<char, char> m_rep_chars;
+            set<U8char> m_strip_chars;
+            map<U8char, U8char> m_rep_chars;
             SlightRow m_row;
             size_t m_file_size;
 

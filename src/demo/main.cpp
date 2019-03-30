@@ -28,6 +28,7 @@ using std::set;
 using std::pair;
 using std::map;
 using utils::SlightCSV;
+using utils::U8char;
 
 int main(int argc, char *argv[]) {
 
@@ -38,24 +39,24 @@ int main(int argc, char *argv[]) {
     scsv.setFileName("../test/utf8.csv");
     
     // set delimiter character (semicolon)
-    scsv.setSeparator(';');
+    scsv.setSeparator(U8char(";"));
     
-    // // set escape character (double quote)
-    // scsv.setEscape('\"');
+    // set escape character (double quote)
+    scsv.setEscape(U8char("\""));
     
-    // // set characters to be stripped (stip spaces and underscores)
-    // set<char> to_strip;
-    // to_strip.insert(' ');
-    // to_strip.insert('_');
-    // scsv.setStripChars(to_strip);
+    // set characters to be stripped (stip spaces and underscores)
+    set<U8char> to_strip;
+    to_strip.insert(U8char(" "));
+    to_strip.insert(U8char("_"));
+    scsv.setStripChars(to_strip);
     
-    // // set characters to be replaced (replace 'a' with 'b' and 'c' with 'd')
-    // map<char, char> to_replace;
-    // pair<char, char> to_replace1('a', 'b');
-    // pair<char, char> to_replace2('c', 'd');
-    // to_replace.insert(to_replace1);
-    // to_replace.insert(to_replace2);
-    // scsv.setReplaceChars(to_replace);
+    // set characters to be replaced (replace 'a' with 'b' and 'c' with 'd')
+    map<U8char, U8char> to_replace;
+    pair<U8char, U8char> to_replace1(U8char("a"), U8char("b"));
+    pair<U8char, U8char> to_replace2(U8char("c"), U8char("d"));
+    to_replace.insert(to_replace1);
+    to_replace.insert(to_replace2);
+    scsv.setReplaceChars(to_replace);
 
     // load data
     scsv.loadData();

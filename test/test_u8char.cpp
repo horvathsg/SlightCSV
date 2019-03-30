@@ -465,6 +465,12 @@ TEST(u8char, equals_4) {
     try {
         u8c_1.addChar(c1);
         u8c_2.addChar(c1);
+        u8c_1.addChar(c2);
+        u8c_2.addChar(c2);
+        u8c_1.addChar(c3);
+        u8c_2.addChar(c3);
+        u8c_1.addChar(c4);
+        u8c_2.addChar(c4);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -491,6 +497,10 @@ TEST(u8char, equals_5) {
         u8c_2.addChar(c1);
         u8c_1.addChar(c2);
         u8c_2.addChar(c2 + 1);
+        u8c_1.addChar(c3);
+        u8c_2.addChar(c3);
+        u8c_1.addChar(c4);
+        u8c_2.addChar(c4);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -500,12 +510,10 @@ TEST(u8char, equals_5) {
 
 TEST(u8char, equals_clear_6) {
     string ex = "";
-    // 11110101 (starting byte beginning with 11110 - only valid as first byte of 4 bytes sequence)
-    char c1 = '\xf5';
+    // 11001101 (starting byte beginning with 110 - only valid as first byte of 2 bytes sequence)
+    char c1 = '\xcd';
     // 10101000 (continuation byte beginning with 10 - not valid as first byte)
     char c2 = '\xa8';
-    // 10000001 (continuation byte beginning with 10 - not valid as first byte)
-    char c3 = '\x81';
 
     U8char u8c_1;
     U8char u8c_2;

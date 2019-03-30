@@ -58,9 +58,9 @@ TEST(slightrow, set_get_input) {
 TEST(slightrow, get_separator_wo_set) {
     SlightRow row;
     string exs = "";
-    char c = 0;
+    U8char c;
     try {
-        c = row.getSeparator();
+        row.getSeparator(c);
     } catch (const exception &e) {
         exs = e.what();
     }
@@ -70,7 +70,7 @@ TEST(slightrow, get_separator_wo_set) {
 TEST(slightrow, set_separator_empty) {
     SlightRow row;
     string exs = "";
-    char c = 0;
+    U8char c;
     try {
         row.setSeparator(c);
     } catch (const exception &e) {
@@ -82,14 +82,15 @@ TEST(slightrow, set_separator_empty) {
 TEST(slightrow, set_get_separator) {
     SlightRow row;
     string exs = "";
-    char c = ',';
+    U8char c = ",";
+    U8char d;
     try {
         row.setSeparator(c);
-        c = row.getSeparator();
+        row.getSeparator(d);
     } catch (const exception &e) {
         exs = e.what();
     }
-    CHECK_EQUAL(',', c);
+    CHECK_EQUAL(d, c);
 }
 
 TEST(slightrow, process_noin_nosep) {
@@ -119,7 +120,7 @@ TEST(slightrow, process_nosep) {
 TEST(slightrow, process_noin) {
     SlightRow row;
     string exs = "";
-    char sep = ';';
+    U8char sep = ";";
     try {
         row.setSeparator(sep);
         row.process();
@@ -133,7 +134,7 @@ TEST(slightrow, process_ok) {
     SlightRow row;
     string exs = "";
     string str = "this;is;a;test";
-    char sep = ';';
+    U8char sep = ";";
     try {
         row.setInput(str);
         row.setSeparator(sep);
@@ -148,7 +149,7 @@ TEST(slightrow, get_cell_cnt_noproc_noin_nosep) {
     SlightRow row;
     string exs = "";
     string str = "this;is;a;test";
-    char sep = ';';
+    U8char sep = ";";
     try {
         row.getCellCount();
     } catch (const exception &e) {
@@ -161,7 +162,7 @@ TEST(slightrow, get_cell_cnt_noin_nosep) {
     SlightRow row;
     string exs = "";
     string str = "this;is;a;test";
-    char sep = ';';
+    U8char sep = ";";
     try {
         row.process();
         row.getCellCount();
@@ -175,7 +176,7 @@ TEST(slightrow, get_cell_cnt_nosep) {
     SlightRow row;
     string exs = "";
     string str = "this;is;a;test";
-    char sep = ';';
+    U8char sep = ";";
     try {
         row.setInput(str);
         row.process();
@@ -190,7 +191,7 @@ TEST(slightrow, get_cell_cnt_ok_4_lenok_hassep_noendsep) {
     SlightRow row;
     string exs = "";
     string str = "this;is;a;test";
-    char sep = ';';
+    U8char sep = ";";
     size_t cnt;
     try {
         row.setInput(str);
@@ -207,7 +208,7 @@ TEST(slightrow, get_cell_cnt_ok_4_lenok_hassep_hasendsep) {
     SlightRow row;
     string exs = "";
     string str = "this;is;a;test;";
-    char sep = ';';
+    U8char sep = ";";
     size_t cnt;
     try {
         row.setInput(str);
@@ -224,7 +225,7 @@ TEST(slightrow, get_cell_cnt_ok_18_lenok_hassep_hasendsep) {
     SlightRow row;
     string exs = "";
     string str = "another,example,of,a,string,with,a,slightly,different,line,ending,character,.,will,it,blend?,";
-    char sep = ',';
+    U8char sep = ",";
     size_t cnt;
     try {
         row.setInput(str);
@@ -241,7 +242,7 @@ TEST(slightrow, get_cell_cnt_ok_19_lenok_hassep_hasendsep) {
     SlightRow row;
     string exs = "";
     string str = "another,example,of,a,string,with,a,slightly,different,line,ending,character,.,will,it,work,or,not?,a,";
-    char sep = ',';
+    U8char sep = ",";
     size_t cnt;
     try {
         row.setInput(str);
@@ -258,7 +259,7 @@ TEST(slightrow, get_cell_cnt_ok_22_lenok_hasssep_noendsep) {
     SlightRow row;
     string exs = "";
     string str = "12345678987654345676543234567897654212345621391288654321234567898654312345676543212345678976776566543212343221234545678976786565421234567898654321";
-    char sep = '5';
+    U8char sep = "5";
     size_t cnt;
     try {
         row.setInput(str);
@@ -275,7 +276,7 @@ TEST(slightrow, get_cell_cnt_ok_22_lenok_hasssep_hasendsep) {
     SlightRow row;
     string exs = "";
     string str = "123456789876543456765432345678976542123456213912886543212345678986543123456765432123456789767765665432123432212345456789767865654212345678986543215";
-    char sep = '5';
+    U8char sep = "5";
     size_t cnt;
     try {
         row.setInput(str);
@@ -292,7 +293,7 @@ TEST(slightrow, get_cell_cnt_ok_1_lenok_nosep_noendsep_1) {
     SlightRow row;
     string exs = "";
     string str = "dfhsdbfjhdsbfjshbfshjbhjsbffhjdsbj hdshbfjhsdbfhjb dsjhfbshdjbfjhsbdjfjds";
-    char sep = ';';
+    U8char sep = ";";
     size_t cnt;
     try {
         row.setInput(str);
@@ -309,7 +310,7 @@ TEST(slightrow, get_cell_cnt_ok_0_nolen_hassep_hasendsep) {
     SlightRow row;
     string exs = "";
     string str = ";;;;;;;;;;;;;;;;;;";
-    char sep = ';';
+    U8char sep = ";";
     size_t cnt;
     try {
         row.setInput(str);
@@ -326,7 +327,7 @@ TEST(slightrow, get_cell_cnt_ok_0_nolen_hassep_noendsep) {
     SlightRow row;
     string exs = "";
     string str = ";;;;;;;;;;;;;;;;;;1";
-    char sep = ';';
+    U8char sep = ";";
     size_t cnt;
     try {
         row.setInput(str);
@@ -343,7 +344,7 @@ TEST(slightrow, get_cell_cnt_ok_0_nolen_hassep_noend_hasendsep) {
     SlightRow row;
     string exs = "";
     string str = ";";
-    char sep = ';';
+    U8char sep = ";";
     size_t cnt;
     try {
         row.setInput(str);
@@ -360,7 +361,7 @@ TEST(slightrow, get_cell_cnt_ok_1_lenok_nosep_noendsep_2) {
     SlightRow row;
     string exs = "";
     string str = "A";
-    char sep = ';';
+    U8char sep = ";";
     size_t cnt;
     try {
         row.setInput(str);
@@ -377,7 +378,7 @@ TEST(slightrow, getcells_noin_nosep_noproc) {
     SlightRow row;
     string exs = "";
     string str = "";
-    char sep;
+    U8char sep;
     bool b;
     vector<string> vect;
     try {
@@ -392,7 +393,7 @@ TEST(slightrow, getcells_nosep_noproc) {
     SlightRow row;
     string exs = "";
     string str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
-    char sep;
+    U8char sep;
     bool b;
     vector<string> vect;
     try {
@@ -408,7 +409,7 @@ TEST(slightrow, getcells_noproc) {
     SlightRow row;
     string exs = "";
     string str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
-    char sep = ';';
+    U8char sep = ";";
     bool b;
     vector<string> vect;
     try {
@@ -425,7 +426,7 @@ TEST(slightrow, getcells_ok_1) {
     SlightRow row;
     string exs = "";
     string str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
-    char sep = ';';
+    U8char sep = ";";
     bool b;
     vector<string> vect;
     try {
@@ -444,7 +445,7 @@ TEST(slightrow, getcells_ok_2) {
     SlightRow row;
     string exs = "";
     string str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
-    char sep = 't';
+    U8char sep = "t";
     bool b;
     vector<string> vect;
     try {
@@ -468,7 +469,7 @@ TEST(slightrow, reset_1) {
     SlightRow row;
     string exs = "";
     string str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
-    char sep = 't';
+    U8char sep = "t";
     bool b;
     vector<string> vect;
     try {
@@ -487,7 +488,7 @@ TEST(slightrow, reset_2) {
     SlightRow row;
     string exs = "";
     string str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
-    char sep = 't';
+    U8char sep = "t";
     bool b;
     vector<string> vect;
     try {
@@ -508,7 +509,7 @@ TEST(slightrow, reset_3) {
     string exs = "";
     string str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
     string str2 = "now;try;with;another;input;string";
-    char sep = 't';
+    U8char sep = "t";
     bool b;
     vector<string> vect;
     try {
@@ -530,8 +531,8 @@ TEST(slightrow, reset_4) {
     string exs = "";
     string str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
     string str2 = "now;try;with;another;input;string";
-    char sep = 't';
-    char sep2 = ';';
+    U8char sep = "t";
+    U8char sep2 = ";";
     bool b;
     vector<string> vect;
     try {
@@ -554,8 +555,8 @@ TEST(slightrow, reset_4) {
 TEST(slightrow, escape_quotes_1) {
     SlightRow row;
     string str = "test,test,\"test,test\"";
-    char sep = ',';
-    char esc = '\"';
+    U8char sep = ",";
+    U8char esc = "\"";
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
@@ -571,8 +572,8 @@ TEST(slightrow, escape_quotes_1) {
 TEST(slightrow, escape_quotes_2) {
     SlightRow row;
     string str = "test,test,\"test,test\",";
-    char sep = ',';
-    char esc = '\"';
+    U8char sep = ",";
+    U8char esc = "\"";
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
@@ -589,8 +590,8 @@ TEST(slightrow, escape_quotes_2) {
 TEST(slightrow, escape_quotes_3) {
     SlightRow row;
     string str = "test,,test,\"test,,test\",,";
-    char sep = ',';
-    char esc = '\"';
+    U8char sep = ",";
+    U8char esc = "\"";
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
@@ -609,8 +610,8 @@ TEST(slightrow, escape_quotes_3) {
 TEST(slightrow, escape_quotes_4) {
     SlightRow row;
     string str = "test,,test,\"test,,test,,";
-    char sep = ',';
-    char esc = '\"';
+    U8char sep = ",";
+    U8char esc = "\"";
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
@@ -627,8 +628,8 @@ TEST(slightrow, escape_quotes_4) {
 TEST(slightrow, escape_quotes_5) {
     SlightRow row;
     string str = "\"test,,test,\"test,\",test,\",";
-    char sep = ',';
-    char esc = '\"';
+    U8char sep = ",";
+    U8char esc = "\"";
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
@@ -644,8 +645,8 @@ TEST(slightrow, escape_quotes_5) {
 TEST(slightrow, escape_quotes_6) {
     SlightRow row;
     string str = "11241824,JB166932,03/07/2016 09:00:00 AM,053XX W IRVING PARK RD,1130,DECEPTIVE PRACTICE,FRAUD OR CONFIDENCE GAME,AUTO / BOAT / RV DEALERSHIP,false,false,1634,016,38,15,11,,,2016,02/28/2018 04:16:24 PM,,,";
-    char sep = ',';
-    char esc = '\"';
+    U8char sep = ",";
+    U8char esc = "\"";
     vector<string> vect;
     row.setInput(str);
     row.setSeparator(sep);
@@ -673,7 +674,7 @@ TEST(slightrow, get_is_header_true_alpha_only) {
     try {
         SlightRow row;
         row.setInput(str);
-        row.setSeparator(',');
+        row.setSeparator(U8char(","));
         row.process();
         is_header = row.getIsHeader();
     } catch (const exception &e) {
@@ -689,7 +690,7 @@ TEST(slightrow, get_is_header_true_mixed_1) {
     try {
         SlightRow row;
         row.setInput(str);
-        row.setSeparator(',');
+        row.setSeparator(U8char(","));
         row.process();
         is_header = row.getIsHeader();
     } catch (const exception &e) {
@@ -705,7 +706,7 @@ TEST(slightrow, get_is_header_false_mixed_2) {
     try {
         SlightRow row;
         row.setInput(str);
-        row.setSeparator(',');
+        row.setSeparator(U8char(","));
         row.process();
         is_header = row.getIsHeader();
     } catch (const exception &e) {
@@ -721,7 +722,7 @@ TEST(slightrow, get_is_header_false_nums_only) {
     try {
         SlightRow row;
         row.setInput(str);
-        row.setSeparator(',');
+        row.setSeparator(U8char(","));
         row.process();
         is_header = row.getIsHeader();
     } catch (const exception &e) {
@@ -732,9 +733,10 @@ TEST(slightrow, get_is_header_false_nums_only) {
 
 TEST(slightrow, get_escape_empty) {
     string ex = "";
+    U8char u8c;
     try {
         SlightRow row;
-        row.getEscape();
+        row.getEscape(u8c);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -743,9 +745,10 @@ TEST(slightrow, get_escape_empty) {
 
 TEST(slightrow, set_escape_empty) {
     string ex = "";
+    U8char u8c;
     try {
         SlightRow row;
-        row.setEscape(0);
+        row.setEscape(u8c);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -754,22 +757,24 @@ TEST(slightrow, set_escape_empty) {
 
 TEST(slightrow, set_get_escape_ok) {
     string ex = "";
-    char esc;
+    U8char esc = "\"";
+    U8char u8c;
     try {
         SlightRow row;
-        row.setEscape('\"');
-        esc = row.getEscape();
+        row.setEscape(esc);
+        row.getEscape(u8c);
     } catch (const exception &e) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
-    CHECK_EQUAL('\"', esc);
+    CHECK_EQUAL(esc, u8c);
 }
 
 TEST(slightrow, set_escape_process_ok_1) {
     string ex = "";
-    char esc = '\'';
-    char sep = ',';
+    U8char esc = "\'";
+    U8char sep = ",";
+    U8char res;
     string str = "this,is,a,test,row,with\',escaped,\'characters";
     size_t cnt = 0;
     vector<string> cells;
@@ -780,7 +785,7 @@ TEST(slightrow, set_escape_process_ok_1) {
         row.setSeparator(sep);
         row.setEscape(esc);
         row.process();
-        esc = row.getEscape();
+        row.getEscape(res);
         cnt = row.getCellCount();
         row.getCells(cells);
         cell = cells.at(5);
@@ -788,15 +793,16 @@ TEST(slightrow, set_escape_process_ok_1) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
-    CHECK_EQUAL('\'', esc);
+    CHECK_EQUAL(esc, res);
     CHECK_EQUAL(6, cnt);
     CHECK_EQUAL("with\',escaped,\'characters", cell);
 }
 
 TEST(slightrow, set_escape_process_ok_2) {
     string ex = "";
-    char esc = '\'';
-    char sep = ',';
+    U8char esc = "\'";
+    U8char sep = ",";
+    U8char res;
     string str = "this,is,a,test,row,with,\'escaped,\'characters";
     size_t cnt = 0;
     vector<string> cells;
@@ -807,7 +813,7 @@ TEST(slightrow, set_escape_process_ok_2) {
         row.setSeparator(sep);
         row.setEscape(esc);
         row.process();
-        esc = row.getEscape();
+        row.getEscape(res);
         cnt = row.getCellCount();
         row.getCells(cells);
         cell = cells.at(6);
@@ -815,15 +821,16 @@ TEST(slightrow, set_escape_process_ok_2) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
-    CHECK_EQUAL('\'', esc);
+    CHECK_EQUAL(esc, res);
     CHECK_EQUAL(7, cnt);
     CHECK_EQUAL("\'escaped,\'characters", cell);
 }
 
 TEST(slightrow, set_escape_process_ok_3) {
     string ex = "";
-    char esc = '\"';
-    char sep = ',';
+    U8char esc = "\"";
+    U8char sep = ",";
+    U8char res;
     string str = "this,is,a,test,\"row,with\",escaped,characters";
     size_t cnt = 0;
     vector<string> cells;
@@ -834,7 +841,7 @@ TEST(slightrow, set_escape_process_ok_3) {
         row.setSeparator(sep);
         row.setEscape(esc);
         row.process();
-        esc = row.getEscape();
+        row.getEscape(res);
         cnt = row.getCellCount();
         row.getCells(cells);
         cell = cells.at(4);
@@ -842,10 +849,8 @@ TEST(slightrow, set_escape_process_ok_3) {
         ex = e.what();
     }
     CHECK_EQUAL("", ex);
-    CHECK_EQUAL('\"', esc);
+    CHECK_EQUAL(esc, res);
     CHECK_EQUAL(7, cnt);
     CHECK_EQUAL("\"row,with\"", cell);
 }
-
-
 

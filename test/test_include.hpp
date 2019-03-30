@@ -25,6 +25,7 @@
 #include "CppUTest/TestHarness.h"
 
 #include <cstring>
+#include <iostream>
 
 using std::string;
 using std::vector;
@@ -32,6 +33,8 @@ using std::set;
 using std::map;
 using std::pair;
 using std::exception;
+using std::cout;
+using std::endl;
 using utils::SlightRow;
 using utils::SlightMatrix;
 using utils::SlightCSV;
