@@ -16,19 +16,20 @@
 
 #include "../../inc/slightcsv/slightcsv.hpp"
 
-#include <iostream>
 #include <string>
 #include <vector>
+#include <set>
+#include <map>
+#include <iostream>
 
-using std::cout;
-using std::endl;
 using std::string;
 using std::vector;
 using std::set;
 using std::pair;
 using std::map;
+using std::cout;
+using std::endl;
 using utils::SlightCSV;
-using utils::U8char;
 
 int main(int argc, char *argv[]) {
 
@@ -39,21 +40,21 @@ int main(int argc, char *argv[]) {
     scsv.setFileName("../test/utf8_test.csv");
     
     // set delimiter character (semicolon)
-    scsv.setSeparator(U8char(";"));
+    scsv.setSeparator(";");
     
     // set escape character (double quote)
-    scsv.setEscape(U8char("\""));
+    scsv.setEscape("\"");
     
     // set characters to be stripped (stip spaces and underscores)
-    set<U8char> to_strip;
-    to_strip.insert(U8char(" "));
-    to_strip.insert(U8char("_"));
+    set<string> to_strip;
+    to_strip.insert(" ");
+    to_strip.insert("_");
     scsv.setStripChars(to_strip);
     
     // set characters to be replaced (replace 'a' with 'b' and 'c' with 'd')
-    map<U8char, U8char> to_replace;
-    pair<U8char, U8char> to_replace1(U8char("a"), U8char("b"));
-    pair<U8char, U8char> to_replace2(U8char("c"), U8char("d"));
+    map<string, string> to_replace;
+    pair<string, string> to_replace1("a", "b");
+    pair<string, string> to_replace2("c", "d");
     to_replace.insert(to_replace1);
     to_replace.insert(to_replace2);
     scsv.setReplaceChars(to_replace);
@@ -69,7 +70,7 @@ int main(int argc, char *argv[]) {
     // output row 1 (at index 0)
     vector<string> row0;
     scsv.getRow(row0, 0);
-    cout << "Row 501 is: " << endl;
+    cout << "Row 1 is: " << endl;
     for (vector<string>::iterator it = row0.begin(); it != row0.end(); ++it) {
         cout << *it << " ";
     }
@@ -78,19 +79,19 @@ int main(int argc, char *argv[]) {
     // output row 2 (at index 1)
     vector<string> row1;
     scsv.getRow(row1, 1);
-    cout << "Row 501 is: " << endl;
+    cout << "Row 2 is: " << endl;
     for (vector<string>::iterator it = row1.begin(); it != row1.end(); ++it) {
         cout << *it << " ";
     }
     cout << endl;
 
-    // // output column 22 (at index 21)
-    // vector<string> column;
-    // scsv.getColumn(column, 21);
-    // cout << "Column 22 is: " << endl;
-    // for (vector<string>::iterator it = column.begin(); it != column.end(); ++it) {
-    //     cout << *it << endl;
-    // }
+    // output column 1 (at index 0)
+    vector<string> column;
+    scsv.getColumn(column, 0);
+    cout << "Column 1 is: " << endl;
+    for (vector<string>::iterator it = column.begin(); it != column.end(); ++it) {
+        cout << *it << endl;
+    }
 
     // reset object to initial state (before reuse, e.g. loading another file)
     scsv.reset();

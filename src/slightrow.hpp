@@ -26,6 +26,7 @@
 using std::string;
 using std::vector;
 using std::exception;
+using utils::U8char;
 
 namespace utils {
 
@@ -111,6 +112,7 @@ namespace utils {
 
         private:
             bool checkIsHeader(void) const;
+
             string m_input;
             U8char m_sep;
             U8char m_esc;

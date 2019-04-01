@@ -190,6 +190,7 @@ namespace utils {
 
         private:
             void updateRowCount(void);
+            
             vector<string> m_data;
             size_t m_row_count;
             size_t m_column_count;

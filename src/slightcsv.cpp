@@ -17,13 +17,14 @@
 #include "slightcsv.hpp"
 #include "slightcsvprivate.hpp"
 #include "slightrow.hpp"
+#include "u8char.hpp"
 
 #include <cstdio>
 
-#include <iostream>
-
-using std::cout;
-using std::endl;
+using std::set;
+using std::map;
+using std::pair;
+using utils::U8char;
 
 utils::SlightCSV::SlightCSV(void) {
     // allocate object holding data members dynamically
@@ -50,68 +51,104 @@ string utils::SlightCSV::getFileName(void) const {
     return m_csvp->m_filename;
 }
 
-void utils::SlightCSV::setSeparator(const U8char t_separator) {
-    if (!t_separator) {
+void utils::SlightCSV::setSeparator(const string t_separator) {
+    if (t_separator.size() != 1) {
         throw slightcsv_separator_error();
     }
     // TODO: store value in one place only (SlightRow would be a more logical choice as it directly needs the delimiter) 
-    m_csvp->m_separator = t_separator;
-    m_csvp->m_row.setSeparator(t_separator);
+    m_csvp->m_separator = t_separator.c_str();
+    m_csvp->m_row.setSeparator(t_separator.c_str());
 }
 
-void utils::SlightCSV::getSeparator(U8char &t_target) const {
+void utils::SlightCSV::getSeparator(string &t_target) const {
     if (!m_csvp->m_separator) {
         throw slightcsv_separator_error();
     }
-    t_target.clear();
-    t_target = m_csvp->m_separator;
+    t_target = m_csvp->m_separator.getString();
 }
 
-void utils::SlightCSV::setEscape(const U8char t_escape) {
-    if (!t_escape) {
+void utils::SlightCSV::setEscape(const string t_escape) {
+    if (t_escape.size() != 1) {
         throw slightcsv_escape_error();
     }
     // TODO: store value in one place only (even though it is needed for file and row-level parsing as well)
-    m_csvp->m_escape = t_escape;
-    m_csvp->m_row.setEscape(t_escape);
+    m_csvp->m_escape = t_escape.c_str();
+    m_csvp->m_row.setEscape(t_escape.c_str());
 }
 
-void utils::SlightCSV::getEscape(U8char &t_target) const {
+void utils::SlightCSV::getEscape(string &t_target) const {
     if (!m_csvp->m_escape) {
         throw slightcsv_escape_error();
     }
-    t_target.clear();
-    t_target = m_csvp->m_escape;
+    t_target = m_csvp->m_escape.getString();
 }
 
-void utils::SlightCSV::setStripChars(const set<U8char> &t_strip_chars) {
+void utils::SlightCSV::setStripChars(const set<string> &t_strip_chars) {
     if (!t_strip_chars.size()) {
         throw slightcsv_strip_error();
     }
-    m_csvp->m_strip_chars = t_strip_chars;
+    // convert string set to U8char set
+    set<U8char> u8_strip_chars;
+    // iterate through set
+    for (set<string>::const_iterator it = t_strip_chars.begin(); it != t_strip_chars.end(); ++it) {
+        // try to create U8char from character supplied as string
+        U8char u8c;
+        try {
+            u8c = (*it).c_str();
+        } catch (const u8char_format_error &e) {
+            // conversion failed because of invalid string input
+            throw slightcsv_strip_error();
+        }
+        // insert converted U8char into set
+        u8_strip_chars.insert(u8c);
+    }
+    m_csvp->m_strip_chars = u8_strip_chars;
 }
 
-void utils::SlightCSV::getStripChars(set<U8char> &t_target) const {
+void utils::SlightCSV::getStripChars(set<string> &t_target) const {
     if (!m_csvp->m_strip_chars.size()) {
         throw slightcsv_strip_error();
     }
     t_target.clear();
-    t_target = m_csvp->m_strip_chars;
+    // convert U8char set to string set
+    for (set<U8char>::const_iterator it = m_csvp->m_strip_chars.begin(); it != m_csvp->m_strip_chars.end(); ++it) {
+        t_target.insert((*it).getString());
+    }
 }
 
-void utils::SlightCSV::setReplaceChars(const map<U8char, U8char> &t_rep_chars) {
+void utils::SlightCSV::setReplaceChars(const map<string, string> &t_rep_chars) {
     if (!t_rep_chars.size()) {
         throw slightcsv_replace_error();
     }
-    m_csvp->m_rep_chars = t_rep_chars;
+    // convert string map to U8char map
+    map<U8char, U8char> u8_rep_chars;
+    // iterate through map
+    for (map<string, string>::const_iterator it = t_rep_chars.begin(); it != t_rep_chars.end(); ++it) {
+        pair<U8char, U8char> p;
+        // try to create U8chars from characters supplied as strings
+        try {
+            p.first = U8char((*it).first.c_str());
+            p.second = U8char((*it).second.c_str());
+        } catch (const u8char_format_error &e) {
+            // conversion failed because of invalid string input
+            throw slightcsv_replace_error();
+        }
+        // insert converted pair into map
+        u8_rep_chars.insert(p);
+    }
+    m_csvp->m_rep_chars = u8_rep_chars;
 }
 
-void utils::SlightCSV::getReplaceChars(map<U8char, U8char> &t_target) const {
+void utils::SlightCSV::getReplaceChars(map<string, string> &t_target) const {
     if (!m_csvp->m_rep_chars.size()) {
         throw slightcsv_replace_error();
     }
     t_target.clear();
-    t_target = m_csvp->m_rep_chars;
+    // convert U8char map to string map
+    for(map<U8char, U8char>::const_iterator it = m_csvp->m_rep_chars.begin(); it != m_csvp->m_rep_chars.end(); ++it) {
+        pair<string, string> p((*it).first.getString(), (*it).second.getString());
+        t_target.insert(p);
+    }
 }
 
 size_t utils::SlightCSV::loadData(void) {
@@ -145,11 +182,23 @@ size_t utils::SlightCSV::loadData(void) {
     string in_line = "";
     bool is_escaped = false;
     size_t row_id = 0;
+    U8char u8_bom = U8char("\xef\xbb\xbf");
+    bool bom_found = false;
 
     // parse the file character by character
     while (in_char = fgetc(in_file), in_char != EOF) {
-        in_u8_char.addChar(in_char);
+        in_u8_char.addByte(in_char);
         if (in_u8_char) {
+            // if processing first row and BOM not found yet
+            if (!row_id && !bom_found) {
+                // if found BOM
+                if (in_u8_char == u8_bom) {
+                    // set found variable, strip it off and continue
+                    bom_found = true;
+                    in_u8_char.clear();
+                    continue;
+                }
+            }
             // if there is at least one character to be stripped
             if (m_csvp->m_strip_chars.size()) {
                     // if the incoming character is present in the strip set
@@ -183,14 +232,14 @@ size_t utils::SlightCSV::loadData(void) {
                 }
                 // add character to line buffer
                 char char_buff[5] = {0};
-                in_u8_char.getChars(char_buff, 4);
+                in_u8_char.getBytes(char_buff, 4);
                 in_line += char_buff;
             // if incoming character is newline, and it is not escaped
             } else {
                 // if incoming line is not empty (might be if two new lines follow each other, e.g. \r\n)
                 if (in_line.size()) {
                     // submit line for processing with row id
-                    processLine(in_line, row_id);
+                    processRow(in_line, row_id);
                     // clear line buffer
                     in_line.clear();
                     // increment row id
@@ -206,7 +255,7 @@ size_t utils::SlightCSV::loadData(void) {
     
     // submit remaining characters for processing with row id (needed because there might be no new line character at the 
     // end of the last row to trigger processing)
-    processLine(in_line, row_id);
+    processRow(in_line, row_id);
 
     // close file
     fclose(in_file);
@@ -393,7 +442,7 @@ void utils::SlightCSV::reset(void) {
     m_csvp->m_file_size = 0;
 }
 
-void utils::SlightCSV::processLine(string &t_input, size_t const t_row_id) {
+void utils::SlightCSV::processRow(string &t_input, size_t const t_row_id) {
 
     if (!t_input.size()) {
         return;

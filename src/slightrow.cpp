@@ -16,11 +16,6 @@
 
 #include "slightrow.hpp"
 
-#include <iostream>
-
-using std::cout;
-using std::endl;
-
 utils::SlightRow::SlightRow(void) {
     this->reset();
 }
@@ -95,7 +90,7 @@ void utils::SlightRow::process(void) {
 
         c = m_input[i];
 
-        in_u8_char.addChar(c);
+        in_u8_char.addByte(c);
 
         // if UTF8 character is valid (complete)
         if (in_u8_char) {
@@ -114,7 +109,7 @@ void utils::SlightRow::process(void) {
                 // add character to cell buffer
                 char char_buff[5] = {0};
 
-                in_u8_char.getChars(char_buff, 4);
+                in_u8_char.getBytes(char_buff, 4);
 
                 cell += char_buff;
             // if character is delimiter and it is not escaped

@@ -11,7 +11,8 @@
  * Customizable delimiter and escape characters.
  * Flexible character manipulation capabilities (stripping, replacement).
  * Automatic handling of macOS, Linux and Windows line endings.
- * Query methods for getting cell, row and column data with automatic type conversion capabilities.
+ * Support for UTF-8 character encoding (parsing and character manipulation as well).
+ * Query methods for getting cell, row and column data with template-based automatic type conversion capabilities.
  * Able to load large files (> 1 GB) in reasonable time.
  * Custom exception classes inheriting from std::exception.
 
@@ -39,7 +40,7 @@
 
  It is recommended to install those missing before proceeding.
 
-## Platform
+ ## Platform
 
   Binaries for 32/64 bit Linux/Windows are supplied in the dist directory. At the present time, the development platform is Linux. While it is possible to build and use the library on other platforms, various stages of the build pipeline might fail because of missing headers and/or libraries (namely automated testing, documentation generation and code coverage report generation). Those issues may be resolved by building and/or installing missing components.
 
@@ -91,18 +92,21 @@
 The following simple example provides an overview of the usage of the library. For additional methods and parameters, please refer to the Doxygen documentation located in the distribution's doc folder.
 
 ```cpp
-#include "slightcsv.hpp"
-#include <iostream>
+#include "../../inc/slightcsv/slightcsv.hpp"
+
 #include <string>
 #include <vector>
+#include <set>
+#include <map>
+#include <iostream>
 
-using std::cout;
-using std::endl;
 using std::string;
 using std::vector;
 using std::set;
 using std::pair;
 using std::map;
+using std::cout;
+using std::endl;
 using utils::SlightCSV;
 
 int main(int argc, char *argv[]) {
@@ -111,24 +115,24 @@ int main(int argc, char *argv[]) {
     SlightCSV scsv;
 
     // set filename
-    scsv.setFileName("../test/env_data.csv");
-
+    scsv.setFileName("../test/utf8_test.csv");
+    
     // set delimiter character (semicolon)
-    scsv.setSeparator(';');
+    scsv.setSeparator(";");
     
     // set escape character (double quote)
-    scsv.setEscape('\"');
+    scsv.setEscape("\"");
     
     // set characters to be stripped (stip spaces and underscores)
-    set<char> to_strip;
-    to_strip.insert(' ');
-    to_strip.insert('_');
+    set<string> to_strip;
+    to_strip.insert(" ");
+    to_strip.insert("_");
     scsv.setStripChars(to_strip);
     
     // set characters to be replaced (replace 'a' with 'b' and 'c' with 'd')
-    map<char, char> to_replace;
-    pair<char, char> to_replace1('a', 'b');
-    pair<char, char> to_replace2('c', 'd');
+    map<string, string> to_replace;
+    pair<string, string> to_replace1("a", "b");
+    pair<string, string> to_replace2("c", "d");
     to_replace.insert(to_replace1);
     to_replace.insert(to_replace2);
     scsv.setReplaceChars(to_replace);
@@ -141,18 +145,28 @@ int main(int argc, char *argv[]) {
     cout << "File contains " << scsv.getRowCount() << " rows." << endl;
     cout << "Header count: " << scsv.getHeaderCount() << " rows." << endl;
 
-    // output row 501 (at index 500)
-    vector<string> row;
-    scsv.getRow(row, 500);
-    cout << "Row 501 is: " << endl;
-    for (vector<string>::iterator it = row.begin(); it != row.end(); ++it) {
+    // output row 1 (at index 0)
+    vector<string> row0;
+    scsv.getRow(row0, 0);
+    cout << "Row 1 is: " << endl;
+    for (vector<string>::iterator it = row0.begin(); it != row0.end(); ++it) {
         cout << *it << " ";
     }
+    cout << endl;
 
-    // output column 22 (at index 21)
+    // output row 2 (at index 1)
+    vector<string> row1;
+    scsv.getRow(row1, 1);
+    cout << "Row 2 is: " << endl;
+    for (vector<string>::iterator it = row1.begin(); it != row1.end(); ++it) {
+        cout << *it << " ";
+    }
+    cout << endl;
+
+    // output column 1 (at index 0)
     vector<string> column;
-    scsv.getColumn(column, 21);
-    cout << "Column 22 is: " << endl;
+    scsv.getColumn(column, 0);
+    cout << "Column 1 is: " << endl;
     for (vector<string>::iterator it = column.begin(); it != column.end(); ++it) {
         cout << *it << endl;
     }
@@ -168,7 +182,6 @@ int main(int argc, char *argv[]) {
 Features to be implemented in the future:
 
  * C++11 compliant multithreading for even faster processing.
- * Support for UTF-8 character encoding.
  * Extended transformation and conversion support for rows and columns.
 
  Ideas, contributions, issues and comments are welcome!

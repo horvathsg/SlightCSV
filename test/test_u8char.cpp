@@ -36,7 +36,7 @@ TEST(u8char, add_byte_1) {
     char c;
     try {
         U8char u8c;
-        u8c.addChar(u8c_first);
+        u8c.addByte(u8c_first);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -50,7 +50,7 @@ TEST(u8char, add_get_byte_1) {
     char c;
     try {
         U8char u8c;
-        u8c.addChar(u8c_first);
+        u8c.addByte(u8c_first);
         c = u8c[0];
     } catch (const exception &e) {
         ex = e.what();
@@ -66,8 +66,8 @@ TEST(u8char, add_get_byte_2) {
     char c;
     try {
         U8char u8c;
-        u8c.addChar(u8c_first);
-        c = u8c.getChar(0);
+        u8c.addByte(u8c_first);
+        c = u8c.getByte(0);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -83,8 +83,8 @@ TEST(u8char, add_get_byte_3) {
     bool valid;
     try {
         U8char u8c;
-        u8c.addChar(u8c_first);
-        c = u8c.getChar(0);
+        u8c.addByte(u8c_first);
+        c = u8c.getByte(0);
         valid = u8c.isValid();
     } catch (const exception &e) {
         ex = e.what();
@@ -103,8 +103,8 @@ TEST(u8char, add_get_byte_4) {
     int size;
     try {
         U8char u8c;
-        u8c.addChar(u8c_first);
-        c = u8c.getChar(0);
+        u8c.addByte(u8c_first);
+        c = u8c.getByte(0);
         valid = u8c.isValid();
         size = u8c.size();
     } catch (const exception &e) {
@@ -122,11 +122,11 @@ TEST(u8char, add_get_byte_4) {
     char u8c_first = '\xa8';
     try {
         U8char u8c;
-        u8c.addChar(u8c_first);
+        u8c.addByte(u8c_first);
     } catch (const exception &e) {
         ex = e.what();
     }
-    CHECK_EQUAL("UTF8 format error.", ex);
+    CHECK_EQUAL("UTF-8 format error.", ex);
 };
 
 TEST(u8char, add_get_byte_5) {
@@ -141,16 +141,16 @@ TEST(u8char, add_get_byte_5) {
     int size;
     try {
         U8char u8c;
-        u8c.addChar(u8c_first);
-        u8c.addChar(u8c_second);
-        c = u8c.getChar(0);
-        d = u8c.getChar(1);
+        u8c.addByte(u8c_first);
+        u8c.addByte(u8c_second);
+        c = u8c.getByte(0);
+        d = u8c.getByte(1);
         valid = u8c.isValid();
         size = u8c.size();
     } catch (const exception &e) {
         ex = e.what();
     }
-    CHECK_EQUAL("UTF8 format error.", ex);
+    CHECK_EQUAL("UTF-8 format error.", ex);
 };
 
 TEST(u8char, add_get_byte_6) {
@@ -165,8 +165,8 @@ TEST(u8char, add_get_byte_6) {
     int size;
     try {
         U8char u8c;
-        u8c.addChar(u8c_first);
-        u8c.addChar(u8c_second);
+        u8c.addByte(u8c_first);
+        u8c.addByte(u8c_second);
         c = u8c[0];
         d = u8c[1];
         valid = u8c.isValid();
@@ -187,7 +187,7 @@ TEST(u8char, add_get_byte_7) {
     char u8c_1 = '\xcd';
     // 10101000 (continuation byte beginning with 10 - not valid as first byte)
     char u8c_2 = '\xa8';
-    // 00000001 (invalid UTF8 byte)
+    // 00000001 (invalid UTF-8 byte)
     char u8c_3 = '\x01';
     char c;
     char d;
@@ -196,9 +196,9 @@ TEST(u8char, add_get_byte_7) {
     int size;
     try {
         U8char u8c;
-        u8c.addChar(u8c_1);
-        u8c.addChar(u8c_2);
-        u8c.addChar(u8c_3);
+        u8c.addByte(u8c_1);
+        u8c.addByte(u8c_2);
+        u8c.addByte(u8c_3);
         c = u8c[0];
         d = u8c[1];
         e = u8c[2];
@@ -207,7 +207,7 @@ TEST(u8char, add_get_byte_7) {
     } catch (const exception &e) {
         ex = e.what();
     }
-    CHECK_EQUAL("UTF8 format error.", ex);
+    CHECK_EQUAL("UTF-8 format error.", ex);
 };
 
 TEST(u8char, add_get_byte_8) {
@@ -216,19 +216,19 @@ TEST(u8char, add_get_byte_8) {
     char u8c_1 = '\xed';
     // 10101000 (continuation byte beginning with 10 - not valid as first byte)
     char u8c_2 = '\xa8';
-    // 00000001 (invalid UTF8 byte)
+    // 00000001 (invalid UTF-8 byte)
     char u8c_3 = '\x01';
     char c;
     try {
         U8char u8c;
-        u8c.addChar(u8c_1);
-        u8c.addChar(u8c_2);
-        u8c.addChar(u8c_3);
-        c = u8c.getChar(0);
+        u8c.addByte(u8c_1);
+        u8c.addByte(u8c_2);
+        u8c.addByte(u8c_3);
+        c = u8c.getByte(0);
     } catch (const exception &e) {
         ex = e.what();
     }
-    CHECK_EQUAL("UTF8 format error.", ex);
+    CHECK_EQUAL("UTF-8 format error.", ex);
 };
 
 TEST(u8char, add_get_byte_9) {
@@ -246,12 +246,12 @@ TEST(u8char, add_get_byte_9) {
     int size;
     try {
         U8char u8c;
-        u8c.addChar(u8c_1);
-        u8c.addChar(u8c_2);
-        u8c.addChar(u8c_3);
-        c = u8c.getChar(0);
-        d = u8c.getChar(1);
-        e = u8c.getChar(2);
+        u8c.addByte(u8c_1);
+        u8c.addByte(u8c_2);
+        u8c.addByte(u8c_3);
+        c = u8c.getByte(0);
+        d = u8c.getByte(1);
+        e = u8c.getByte(2);
         valid = u8c.isValid();
         size = u8c.size();
     } catch (const exception &e) {
@@ -268,17 +268,17 @@ TEST(u8char, add_get_byte_9) {
 
 TEST(u8char, add_get_byte_10) {
     string ex = "";
-    // 11111101 (invalid UTF8 byte)
+    // 11111101 (invalid UTF-8 byte)
     char u8c_1 = '\xfd';
     bool valid;
     int size;
     try {
         U8char u8c;
-        u8c.addChar(u8c_1);
+        u8c.addByte(u8c_1);
     } catch (const exception &e) {
         ex = e.what();
     }
-    CHECK_EQUAL("UTF8 format error.", ex);
+    CHECK_EQUAL("UTF-8 format error.", ex);
 };
 
 TEST(u8char, add_get_byte_11) {
@@ -299,14 +299,14 @@ TEST(u8char, add_get_byte_11) {
     int size;
     try {
         U8char u8c;
-        u8c.addChar(u8c_1);
-        u8c.addChar(u8c_2);
-        u8c.addChar(u8c_3);
-        u8c.addChar(u8c_4);
-        c = u8c.getChar(0);
-        d = u8c.getChar(1);
-        e = u8c.getChar(2);
-        f = u8c.getChar(3);
+        u8c.addByte(u8c_1);
+        u8c.addByte(u8c_2);
+        u8c.addByte(u8c_3);
+        u8c.addByte(u8c_4);
+        c = u8c.getByte(0);
+        d = u8c.getByte(1);
+        e = u8c.getByte(2);
+        f = u8c.getByte(3);
         valid = u8c.isValid();
         size = u8c.size();
     } catch (const exception &e) {
@@ -332,14 +332,14 @@ TEST(u8char, add_get_byte_12) {
     char c;
     try {
         U8char u8c;
-        u8c.addChar(u8c_1);
-        u8c.addChar(u8c_2);
-        u8c.addChar(u8c_3);
-        c = u8c.getChar(0);
+        u8c.addByte(u8c_1);
+        u8c.addByte(u8c_2);
+        u8c.addByte(u8c_3);
+        c = u8c.getByte(0);
     } catch (const exception &e) {
         ex = e.what();
     }
-    CHECK_EQUAL("UTF8 format error.", ex);
+    CHECK_EQUAL("UTF-8 format error.", ex);
 };
 
 TEST(u8char, equals_0) {
@@ -357,14 +357,14 @@ TEST(u8char, equals_0) {
     U8char u8c_2;
 
     try {
-        u8c_1.addChar(c1);
-        u8c_1.addChar(c2);
-        u8c_1.addChar(c3);
-        u8c_1.addChar(c4);
-        u8c_2.addChar(c1);
-        u8c_2.addChar(c2);
-        u8c_2.addChar(c3);
-        u8c_2.addChar(c4);
+        u8c_1.addByte(c1);
+        u8c_1.addByte(c2);
+        u8c_1.addByte(c3);
+        u8c_1.addByte(c4);
+        u8c_2.addByte(c1);
+        u8c_2.addByte(c2);
+        u8c_2.addByte(c3);
+        u8c_2.addByte(c4);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -388,14 +388,14 @@ TEST(u8char, equals_1) {
     U8char u8c_2;
 
     try {
-        u8c_1.addChar(c1);
-        u8c_1.addChar(c3);
-        u8c_1.addChar(c2);
-        u8c_1.addChar(c4);
-        u8c_2.addChar(c1);
-        u8c_2.addChar(c2);
-        u8c_2.addChar(c3);
-        u8c_2.addChar(c4);
+        u8c_1.addByte(c1);
+        u8c_1.addByte(c3);
+        u8c_1.addByte(c2);
+        u8c_1.addByte(c4);
+        u8c_2.addByte(c1);
+        u8c_2.addByte(c2);
+        u8c_2.addByte(c3);
+        u8c_2.addByte(c4);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -443,10 +443,10 @@ TEST(u8char, equals_3) {
     U8char u8c_2;
 
     try {
-        u8c_1.addChar(c1);
-        u8c_1.addChar(c2);
-        u8c_1.addChar(c3);
-        u8c_1.addChar(c4);
+        u8c_1.addByte(c1);
+        u8c_1.addByte(c2);
+        u8c_1.addByte(c3);
+        u8c_1.addByte(c4);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -470,14 +470,14 @@ TEST(u8char, equals_4) {
     U8char u8c_2;
 
     try {
-        u8c_1.addChar(c1);
-        u8c_2.addChar(c1);
-        u8c_1.addChar(c2);
-        u8c_2.addChar(c2);
-        u8c_1.addChar(c3);
-        u8c_2.addChar(c3);
-        u8c_1.addChar(c4);
-        u8c_2.addChar(c4);
+        u8c_1.addByte(c1);
+        u8c_2.addByte(c1);
+        u8c_1.addByte(c2);
+        u8c_2.addByte(c2);
+        u8c_1.addByte(c3);
+        u8c_2.addByte(c3);
+        u8c_1.addByte(c4);
+        u8c_2.addByte(c4);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -501,14 +501,14 @@ TEST(u8char, equals_5) {
     U8char u8c_2;
 
     try {
-        u8c_1.addChar(c1);
-        u8c_2.addChar(c1);
-        u8c_1.addChar(c2);
-        u8c_2.addChar(c2 + 1);
-        u8c_1.addChar(c3);
-        u8c_2.addChar(c3);
-        u8c_1.addChar(c4);
-        u8c_2.addChar(c4);
+        u8c_1.addByte(c1);
+        u8c_2.addByte(c1);
+        u8c_1.addByte(c2);
+        u8c_2.addByte(c2 + 1);
+        u8c_1.addByte(c3);
+        u8c_2.addByte(c3);
+        u8c_1.addByte(c4);
+        u8c_2.addByte(c4);
     } catch (const exception &e) {
         ex = e.what();
     }
@@ -533,18 +533,18 @@ TEST(u8char, equals_clear_6) {
     bool sec_comp2;
 
     try {
-        u8c_1.addChar(c1);
-        u8c_2.addChar(c1);
-        u8c_1.addChar(c2);
-        u8c_2.addChar(c2 + 1);
+        u8c_1.addByte(c1);
+        u8c_2.addByte(c1);
+        u8c_1.addByte(c2);
+        u8c_2.addByte(c2 + 1);
         first_comp1 = u8c_1 == u8c_2;
         first_comp2 = u8c_1 != u8c_2;
         u8c_1.clear();
         u8c_2.clear();
-        u8c_1.addChar(c1);
-        u8c_2.addChar(c1);
-        u8c_1.addChar(c2);
-        u8c_2.addChar(c2);
+        u8c_1.addByte(c1);
+        u8c_2.addByte(c1);
+        u8c_1.addByte(c2);
+        u8c_2.addByte(c2);
         sec_comp1 = u8c_1 == u8c_2;
         sec_comp2 = u8c_1 != u8c_2;
     } catch (const exception &e) {
@@ -586,7 +586,7 @@ TEST(u8char, overload_construct_check_complete_get_chars_1) {
 
     try {
         u8c = U8char(input);
-        u8c.getChars(result, 4);
+        u8c.getBytes(result, 4);
         count = strlen(result);
     } catch (const exception &e) {
         ex = e.what();
@@ -607,7 +607,7 @@ TEST(u8char, overload_construct_check_complete_get_chars_2) {
 
     try {
         u8c = U8char(input);
-        u8c.getChars(result, 2);
+        u8c.getBytes(result, 2);
         count = strlen(result);
     } catch (const exception &e) {
         ex = e.what();
@@ -626,8 +626,8 @@ TEST(u8char, less_than_1) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u2.addChar(c1);
+        u1.addByte(c1);
+        u2.addByte(c1);
         res1 = u1 < u2;
         res2 = u2 < u1;
     } catch (const exception &e) {
@@ -647,10 +647,10 @@ TEST(u8char, less_than_2) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c2);
-        u2.addChar(c1);
-        u2.addChar(c2);
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u2.addByte(c1);
+        u2.addByte(c2);
         res1 = u1 < u2;
         res2 = u2 < u1;
     } catch (const exception &e) {
@@ -671,10 +671,10 @@ TEST(u8char, less_than_3) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c2);
-        u2.addChar(c1);
-        u2.addChar(c3);
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u2.addByte(c1);
+        u2.addByte(c3);
         res1 = u1 < u2;
         res2 = u2 < u1;
     } catch (const exception &e) {
@@ -695,10 +695,10 @@ TEST(u8char, less_than_4) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c3);
-        u2.addChar(c1);
-        u2.addChar(c2);
+        u1.addByte(c1);
+        u1.addByte(c3);
+        u2.addByte(c1);
+        u2.addByte(c2);
         res1 = u1 < u2;
         res2 = u2 < u1;
     } catch (const exception &e) {
@@ -719,9 +719,9 @@ TEST(u8char, less_than_5) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u2.addChar(c2);
-        u2.addChar(c3);
+        u1.addByte(c1);
+        u2.addByte(c2);
+        u2.addByte(c3);
         res1 = u1 < u2;
         res2 = u2 < u1;
     } catch (const exception &e) {
@@ -742,9 +742,9 @@ TEST(u8char, less_than_6) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c2);
-        u1.addChar(c3);
-        u2.addChar(c1);
+        u1.addByte(c2);
+        u1.addByte(c3);
+        u2.addByte(c1);
         res1 = u1 < u2;
         res2 = u2 < u1;
     } catch (const exception &e) {
@@ -763,8 +763,8 @@ TEST(u8char, less_than_eq_1) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u2.addChar(c1);
+        u1.addByte(c1);
+        u2.addByte(c1);
         res1 = u1 <= u2;
         res2 = u2 <= u1;
     } catch (const exception &e) {
@@ -784,10 +784,10 @@ TEST(u8char, less_than_eq_2) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c2);
-        u2.addChar(c1);
-        u2.addChar(c2);
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u2.addByte(c1);
+        u2.addByte(c2);
         res1 = u1 <= u2;
         res2 = u2 <= u1;
     } catch (const exception &e) {
@@ -808,10 +808,10 @@ TEST(u8char, less_than_eq_3) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c2);
-        u2.addChar(c1);
-        u2.addChar(c3);
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u2.addByte(c1);
+        u2.addByte(c3);
         res1 = u1 <= u2;
         res2 = u2 <= u1;
     } catch (const exception &e) {
@@ -832,10 +832,10 @@ TEST(u8char, less_than_eq_4) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c3);
-        u2.addChar(c1);
-        u2.addChar(c2);
+        u1.addByte(c1);
+        u1.addByte(c3);
+        u2.addByte(c1);
+        u2.addByte(c2);
         res1 = u1 <= u2;
         res2 = u2 <= u1;
     } catch (const exception &e) {
@@ -856,9 +856,9 @@ TEST(u8char, less_than_eq_5) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u2.addChar(c2);
-        u2.addChar(c3);
+        u1.addByte(c1);
+        u2.addByte(c2);
+        u2.addByte(c3);
         res1 = u1 <= u2;
         res2 = u2 <= u1;
     } catch (const exception &e) {
@@ -879,9 +879,9 @@ TEST(u8char, less_than_eq_6) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c2);
-        u1.addChar(c3);
-        u2.addChar(c1);
+        u1.addByte(c2);
+        u1.addByte(c3);
+        u2.addByte(c1);
         res1 = u1 <= u2;
         res2 = u2 <= u1;
     } catch (const exception &e) {
@@ -900,8 +900,8 @@ TEST(u8char, greater_than_1) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u2.addChar(c1);
+        u1.addByte(c1);
+        u2.addByte(c1);
         res1 = u1 > u2;
         res2 = u2 > u1;
     } catch (const exception &e) {
@@ -921,10 +921,10 @@ TEST(u8char, greater_than_2) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c2);
-        u2.addChar(c1);
-        u2.addChar(c2);
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u2.addByte(c1);
+        u2.addByte(c2);
         res1 = u1 > u2;
         res2 = u2 > u1;
     } catch (const exception &e) {
@@ -945,10 +945,10 @@ TEST(u8char, greater_than_3) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c2);
-        u2.addChar(c1);
-        u2.addChar(c3);
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u2.addByte(c1);
+        u2.addByte(c3);
         res1 = u1 > u2;
         res2 = u2 > u1;
     } catch (const exception &e) {
@@ -969,10 +969,10 @@ TEST(u8char, greater_than_4) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c3);
-        u2.addChar(c1);
-        u2.addChar(c2);
+        u1.addByte(c1);
+        u1.addByte(c3);
+        u2.addByte(c1);
+        u2.addByte(c2);
         res1 = u1 > u2;
         res2 = u2 > u1;
     } catch (const exception &e) {
@@ -993,9 +993,9 @@ TEST(u8char, greater_than_5) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u2.addChar(c2);
-        u2.addChar(c3);
+        u1.addByte(c1);
+        u2.addByte(c2);
+        u2.addByte(c3);
         res1 = u1 > u2;
         res2 = u2 > u1;
     } catch (const exception &e) {
@@ -1016,9 +1016,9 @@ TEST(u8char, greater_than_6) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c2);
-        u1.addChar(c3);
-        u2.addChar(c1);
+        u1.addByte(c2);
+        u1.addByte(c3);
+        u2.addByte(c1);
         res1 = u1 > u2;
         res2 = u2 > u1;
     } catch (const exception &e) {
@@ -1037,8 +1037,8 @@ TEST(u8char, greater_than_eq_1) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u2.addChar(c1);
+        u1.addByte(c1);
+        u2.addByte(c1);
         res1 = u1 >= u2;
         res2 = u2 >= u1;
     } catch (const exception &e) {
@@ -1058,10 +1058,10 @@ TEST(u8char, greater_than_eq_2) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c2);
-        u2.addChar(c1);
-        u2.addChar(c2);
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u2.addByte(c1);
+        u2.addByte(c2);
         res1 = u1 >= u2;
         res2 = u2 >= u1;
     } catch (const exception &e) {
@@ -1082,10 +1082,10 @@ TEST(u8char, greater_than_eq_3) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c2);
-        u2.addChar(c1);
-        u2.addChar(c3);
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u2.addByte(c1);
+        u2.addByte(c3);
         res1 = u1 >= u2;
         res2 = u2 >= u1;
     } catch (const exception &e) {
@@ -1106,10 +1106,10 @@ TEST(u8char, greater_than_eq_4) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u1.addChar(c3);
-        u2.addChar(c1);
-        u2.addChar(c2);
+        u1.addByte(c1);
+        u1.addByte(c3);
+        u2.addByte(c1);
+        u2.addByte(c2);
         res1 = u1 >= u2;
         res2 = u2 >= u1;
     } catch (const exception &e) {
@@ -1130,9 +1130,9 @@ TEST(u8char, greater_than_eq_5) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c1);
-        u2.addChar(c2);
-        u2.addChar(c3);
+        u1.addByte(c1);
+        u2.addByte(c2);
+        u2.addByte(c3);
         res1 = u1 >= u2;
         res2 = u2 >= u1;
     } catch (const exception &e) {
@@ -1153,9 +1153,9 @@ TEST(u8char, greater_than_eq_6) {
     U8char u1;
     U8char u2;
     try {
-        u1.addChar(c2);
-        u1.addChar(c3);
-        u2.addChar(c1);
+        u1.addByte(c2);
+        u1.addByte(c3);
+        u2.addByte(c1);
         res1 = u1 >= u2;
         res2 = u2 >= u1;
     } catch (const exception &e) {
@@ -1164,4 +1164,46 @@ TEST(u8char, greater_than_eq_6) {
     CHECK_EQUAL("", ex);
     CHECK_EQUAL(true, res1);
     CHECK_EQUAL(false, res2);
+};
+
+TEST(u8char, to_bool) {
+    string ex = "";
+    char c2 = '\xd0';
+    char c3 = '\x90';
+    bool res1;
+    bool res2;
+    bool res3;
+    U8char u1;
+    try {
+        res1 = u1;
+        u1.addByte(c2);
+        res2 = u1;
+        u1.addByte(c3);
+        res3 = u1;
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL(false, res1);
+    CHECK_EQUAL(false, res2);
+    CHECK_EQUAL(true, res3);
+};
+
+TEST(u8char, get_string) {
+    string ex = "";
+    char c1 = '\xe2';
+    char c2 = '\x82';
+    char c3 = '\xac';
+    U8char u1;
+    string res;
+    try {
+        u1.addByte(c1);
+        u1.addByte(c2);
+        u1.addByte(c3);
+        res = u1.getString();
+    } catch (const exception &e) {
+        ex = e.what();
+    }
+    CHECK_EQUAL("", ex);
+    CHECK_EQUAL("€", res);
 };
