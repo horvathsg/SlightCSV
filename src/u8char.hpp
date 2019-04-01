@@ -49,7 +49,7 @@ namespace utils {
         private:
             int getSizeFromChar(const char t_char);
             void validate(void);
-            bool compare(U8char const &t_u8char, bool final) const;
+            int compare(U8char const &t_u8char) const;
             char m_chars[5];
             int m_size;
             int m_current_count;

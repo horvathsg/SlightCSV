@@ -142,67 +142,52 @@ void utils::U8char::validate(void) {
 
 }
 
-bool utils::U8char::compare(U8char const &t_u8char, bool final) const {
+int utils::U8char::compare(U8char const &t_u8char) const {
     
     if (!m_valid) {
         throw u8char_format_error();
     }
 
     if (m_size < t_u8char.size()) {
-        return true;
+        return -1;
     } else if (m_size > t_u8char.size()) {
-        return false;
+        return 1;
     }
     
     for (int i = 0; i < m_size; ++i) {
         if (m_chars[i] < t_u8char[i]) {
-            return true;
+            return -1;
         } else if (m_chars[i] > t_u8char[i]) {
-            return false;
+            return 1;
         }
     }
-    return final;
+    return 0;
 }
 
 bool utils::U8char::operator==(U8char const &t_u8char) const {
-    
-    if (!m_valid) {
-        throw u8char_format_error();
-    }
-
-    if (m_size != t_u8char.size()) {
-        return false;
-    }
-    
-    for (int i = 0; i < m_size; ++i) {
-        if (m_chars[i] != t_u8char[i]) {
-            return false;
-        }
-    }
-    
-    return true;
+    return compare(t_u8char) == 0;
 }
 
 bool utils::U8char::operator!=(U8char const &t_u8char) const {
-    return !operator==(t_u8char); 
+    return compare(t_u8char) != 0; 
 }
 
 bool utils::U8char::operator<(U8char const &t_u8char) const {
-    
-    return compare(t_u8char, false);
+    return compare(t_u8char) == -1;
 }
 
 bool utils::U8char::operator<=(U8char const &t_u8char) const {
-    
-    return compare(t_u8char, true);
+    int comp = compare(t_u8char);
+    return comp == -1 || comp == 0;
 }
 
 bool utils::U8char::operator>(U8char const &t_u8char) const {
-    return !operator<=(t_u8char);
+    return compare(t_u8char) == 1;
 }
 
 bool utils::U8char::operator>=(U8char const &t_u8char) const {
-    return !operator<(t_u8char);
+    int comp = compare(t_u8char);
+    return comp == 1 || comp == 0;
 }
 
 char utils::U8char::operator[](int t_index) const {
