@@ -1,0 +1,430 @@
+\hypertarget{classutils_1_1SlightCSV}{}\section{utils\+:\+:Slight\+C\+SV Class Reference}
+\label{classutils_1_1SlightCSV}\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+
+
+{\ttfamily \#include $<$slightcsv.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a9f30e030dd5eff9f7df564c9cd7a81e8}\label{classutils_1_1SlightCSV_a9f30e030dd5eff9f7df564c9cd7a81e8}} 
+\hyperlink{classutils_1_1SlightCSV_a9f30e030dd5eff9f7df564c9cd7a81e8}{Slight\+C\+SV} (void)
+\begin{DoxyCompactList}\small\item\em The class\textquotesingle{}s default constructor. Takes care of allocating memory for the class\textquotesingle{}s private data members. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classutils_1_1SlightCSV_abeb9790f681d93c6f8a8ba210678565b}\label{classutils_1_1SlightCSV_abeb9790f681d93c6f8a8ba210678565b}} 
+\hyperlink{classutils_1_1SlightCSV_abeb9790f681d93c6f8a8ba210678565b}{$\sim$\+Slight\+C\+SV} (void)
+\begin{DoxyCompactList}\small\item\em The class\textquotesingle{}s default destructor. Takes care of de-\/allocating memory held by the class\textquotesingle{}s private data members. \end{DoxyCompactList}\item 
+void \hyperlink{classutils_1_1SlightCSV_aba4b71a4a4bfa2317985a1a9cd53fc85}{set\+File\+Name} (const string t\+\_\+filename)
+\item 
+string \hyperlink{classutils_1_1SlightCSV_ad689937346e0d6dd37597e7c3458e164}{get\+File\+Name} (void) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_a1192b4987bbe595ee893ac8fdc7ebd45}{set\+Separator} (const string t\+\_\+separator)
+\item 
+void \hyperlink{classutils_1_1SlightCSV_ac5a81169c5da9aade5d96935428c73ea}{get\+Separator} (string \&t\+\_\+target) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_adea39a71336eeacd17b66326deb92544}{set\+Escape} (const string t\+\_\+escape)
+\item 
+void \hyperlink{classutils_1_1SlightCSV_aca0cbc1e472dbe7b7a774d6add7c482f}{get\+Escape} (string \&t\+\_\+target) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_ad432022553ea99a4719f618378abe586}{set\+Strip\+Chars} (const set$<$ string $>$ \&t\+\_\+strip\+\_\+chars)
+\item 
+void \hyperlink{classutils_1_1SlightCSV_aa6b302e67d367daab0dc806624a627da}{get\+Strip\+Chars} (set$<$ string $>$ \&t\+\_\+target) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_a53c0ef807f8b40b124ffcda2df863b5f}{set\+Replace\+Chars} (const map$<$ string, string $>$ \&t\+\_\+rep\+\_\+chars)
+\item 
+void \hyperlink{classutils_1_1SlightCSV_a4223375a011075fe889fc82db2babe4e}{get\+Replace\+Chars} (map$<$ string, string $>$ \&t\+\_\+target) const
+\item 
+size\+\_\+t \hyperlink{classutils_1_1SlightCSV_adea079ec76c9ee67d096f8fd39946380}{load\+Data} (void)
+\item 
+size\+\_\+t \hyperlink{classutils_1_1SlightCSV_a5dcd159ef127b63942bce5498beb8dae}{get\+Column\+Count} (void) const
+\item 
+size\+\_\+t \hyperlink{classutils_1_1SlightCSV_a5286060190553fe7eceb973bba22ae22}{get\+Row\+Count} (void) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_aae3c78a070879263d270a494e1dfcbca}{set\+Header\+Count} (const size\+\_\+t t\+\_\+header\+\_\+count)
+\item 
+size\+\_\+t \hyperlink{classutils_1_1SlightCSV_a781ae99927f2b8d704add6a2a53e0051}{get\+Header\+Count} (void) const
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}{get\+Cell} (T \&t\+\_\+value, const size\+\_\+t t\+\_\+row\+\_\+index, const size\+\_\+t t\+\_\+column\+\_\+index) const
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightCSV_aef948e3ae1b8ef76cf9e29a8f4344264}{get\+Column} (vector$<$ T $>$ \&t\+\_\+target\+\_\+column, const size\+\_\+t t\+\_\+column\+\_\+index) const
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightCSV_aecaf786a3d34fe2354257eba9fd9afb1}{get\+Column} (vector$<$ T $>$ \&t\+\_\+target\+\_\+column, const size\+\_\+t t\+\_\+column\+\_\+index, const size\+\_\+t t\+\_\+start\+\_\+cell\+\_\+index) const
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightCSV_aac3086b7b5dcb402f03d7748c090a354}{get\+Column} (vector$<$ T $>$ \&t\+\_\+target\+\_\+column, const size\+\_\+t t\+\_\+column\+\_\+index, const size\+\_\+t t\+\_\+start\+\_\+cell\+\_\+index, const size\+\_\+t t\+\_\+cell\+\_\+count) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_a5c01d4b065101c784daf05b8916307b1}{get\+Row} (vector$<$ string $>$ \&t\+\_\+target\+\_\+row, const size\+\_\+t t\+\_\+row\+\_\+index) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_ac7ec9d6277e7c7e2cfa96782596dc6d6}{get\+Row} (vector$<$ string $>$ \&t\+\_\+target\+\_\+row, const size\+\_\+t t\+\_\+row\+\_\+index, const size\+\_\+t t\+\_\+start\+\_\+cell\+\_\+index) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_a95578bbb02cbc476e62814b1983da56a}{get\+Row} (vector$<$ string $>$ \&t\+\_\+target\+\_\+row, const size\+\_\+t t\+\_\+row\+\_\+index, const size\+\_\+t t\+\_\+start\+\_\+cell\+\_\+index, const size\+\_\+t t\+\_\+cell\+\_\+count) const
+\item 
+void \hyperlink{classutils_1_1SlightCSV_aaa9c8042d6231660cb08ada7c1a8dccb}{unload\+Data} (void)
+\item 
+void \hyperlink{classutils_1_1SlightCSV_abc28f1e33cc67dd5d4380254070ecf97}{reset} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \char`\"{}main\char`\"{} class of the library. Provides methods for setting up the library, triggering data processing and getting the results. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}\label{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Cell@{get\+Cell}}
+\index{get\+Cell@{get\+Cell}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Cell()}{getCell()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template void utils\+::\+Slight\+C\+S\+V\+::get\+Cell (\begin{DoxyParamCaption}\item[{T \&}]{t\+\_\+value,  }\item[{const size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+index }\end{DoxyParamCaption}) const}
+
+Method to get the contents of a specific cell. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type supplied as the first parameter of the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+value} & variable to hold the value of the cell. \\
+\hline
+{\em t\+\_\+row\+\_\+index} & index (starting from 0) of the row the cell queried. \\
+\hline
+{\em t\+\_\+column\+\_\+index} & index (starting from 0) of the column holding the cell queried. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a5c01d4b065101c784daf05b8916307b1}{get\+Row()} 
+
+\hyperlink{classutils_1_1SlightCSV_aef948e3ae1b8ef76cf9e29a8f4344264}{get\+Column()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_aef948e3ae1b8ef76cf9e29a8f4344264}\label{classutils_1_1SlightCSV_aef948e3ae1b8ef76cf9e29a8f4344264}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Column@{get\+Column}}
+\index{get\+Column@{get\+Column}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Column()}{getColumn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void utils\+::\+Slight\+C\+S\+V\+::get\+Column (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{t\+\_\+target\+\_\+column,  }\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+index }\end{DoxyParamCaption}) const}
+
+Method to get the cells of a specific column. The column is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type held by the vector supplied as the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+column} & vector to hold the values of the cells in the column. \\
+\hline
+{\em t\+\_\+column\+\_\+index} & index (starting from 0) of the column to be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a5c01d4b065101c784daf05b8916307b1}{get\+Row()} 
+
+\hyperlink{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_aecaf786a3d34fe2354257eba9fd9afb1}\label{classutils_1_1SlightCSV_aecaf786a3d34fe2354257eba9fd9afb1}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Column@{get\+Column}}
+\index{get\+Column@{get\+Column}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Column()}{getColumn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void utils\+::\+Slight\+C\+S\+V\+::get\+Column (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{t\+\_\+target\+\_\+column,  }\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+start\+\_\+cell\+\_\+index }\end{DoxyParamCaption}) const}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Method to get the cells of a specific column. The column is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type held by the vector supplied as the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+column} & vector to hold the values of the cells in the column. \\
+\hline
+{\em t\+\_\+column\+\_\+index} & index (starting from 0) of the column to be returned. \\
+\hline
+{\em t\+\_\+start\+\_\+cell\+\_\+index} & index (starting from 0) of the first vertical cell (filtering). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a5c01d4b065101c784daf05b8916307b1}{get\+Row()} 
+
+\hyperlink{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_aac3086b7b5dcb402f03d7748c090a354}\label{classutils_1_1SlightCSV_aac3086b7b5dcb402f03d7748c090a354}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Column@{get\+Column}}
+\index{get\+Column@{get\+Column}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Column()}{getColumn()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void utils\+::\+Slight\+C\+S\+V\+::get\+Column (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{t\+\_\+target\+\_\+column,  }\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+start\+\_\+cell\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+cell\+\_\+count }\end{DoxyParamCaption}) const}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Method to get the cells of a specific column. The column is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type held by the vector supplied as the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+column} & vector to hold the values of the cells in the column. \\
+\hline
+{\em t\+\_\+column\+\_\+index} & index (starting from 0) of the column to be returned. \\
+\hline
+{\em t\+\_\+start\+\_\+cell\+\_\+index} & index (starting from 0) of the first vertical cell (filtering) \\
+\hline
+{\em t\+\_\+cell\+\_\+count} & number of cells to return (beginning from the first vertical cell specified). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a5c01d4b065101c784daf05b8916307b1}{get\+Row()} 
+
+\hyperlink{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a5dcd159ef127b63942bce5498beb8dae}\label{classutils_1_1SlightCSV_a5dcd159ef127b63942bce5498beb8dae}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Column\+Count@{get\+Column\+Count}}
+\index{get\+Column\+Count@{get\+Column\+Count}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Column\+Count()}{getColumnCount()}}
+{\footnotesize\ttfamily size\+\_\+t utils\+::\+Slight\+C\+S\+V\+::get\+Column\+Count (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to get the number of columns in the parsed data structure. Data is held in memory. \begin{DoxyReturn}{Returns}
+column count in the parsed data structure. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a5286060190553fe7eceb973bba22ae22}{get\+Row\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_aca0cbc1e472dbe7b7a774d6add7c482f}\label{classutils_1_1SlightCSV_aca0cbc1e472dbe7b7a774d6add7c482f}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Escape@{get\+Escape}}
+\index{get\+Escape@{get\+Escape}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Escape()}{getEscape()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::get\+Escape (\begin{DoxyParamCaption}\item[{string \&}]{t\+\_\+target }\end{DoxyParamCaption}) const}
+
+Method to get the previously set escape character. \begin{DoxyReturn}{Returns}
+previously set escape character. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aca0cbc1e472dbe7b7a774d6add7c482f}{get\+Escape()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_ad689937346e0d6dd37597e7c3458e164}\label{classutils_1_1SlightCSV_ad689937346e0d6dd37597e7c3458e164}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+File\+Name@{get\+File\+Name}}
+\index{get\+File\+Name@{get\+File\+Name}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+File\+Name()}{getFileName()}}
+{\footnotesize\ttfamily string utils\+::\+Slight\+C\+S\+V\+::get\+File\+Name (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to get the previously set name of the C\+SV file to be parsed. \begin{DoxyReturn}{Returns}
+previously set name and relative path of the file. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aba4b71a4a4bfa2317985a1a9cd53fc85}{set\+File\+Name()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a781ae99927f2b8d704add6a2a53e0051}\label{classutils_1_1SlightCSV_a781ae99927f2b8d704add6a2a53e0051}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Header\+Count@{get\+Header\+Count}}
+\index{get\+Header\+Count@{get\+Header\+Count}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Header\+Count()}{getHeaderCount()}}
+{\footnotesize\ttfamily size\+\_\+t utils\+::\+Slight\+C\+S\+V\+::get\+Header\+Count (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to get the number of header rows at the beginning of the parsed file. After loading the data it returns an automatically detected value which may be overridden by the user. \begin{DoxyReturn}{Returns}
+number of header rows at the beginning of the parsed file. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aae3c78a070879263d270a494e1dfcbca}{set\+Header\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a4223375a011075fe889fc82db2babe4e}\label{classutils_1_1SlightCSV_a4223375a011075fe889fc82db2babe4e}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Replace\+Chars@{get\+Replace\+Chars}}
+\index{get\+Replace\+Chars@{get\+Replace\+Chars}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Replace\+Chars()}{getReplaceChars()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::get\+Replace\+Chars (\begin{DoxyParamCaption}\item[{map$<$ string, string $>$ \&}]{t\+\_\+target }\end{DoxyParamCaption}) const}
+
+Method to get the previously set map of character pair(s) to be replaced in the input of the parser. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target} & map that gets populated with the previously defined map of character pair(s) to be replaced. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a53c0ef807f8b40b124ffcda2df863b5f}{set\+Replace\+Chars()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a5c01d4b065101c784daf05b8916307b1}\label{classutils_1_1SlightCSV_a5c01d4b065101c784daf05b8916307b1}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Row@{get\+Row}}
+\index{get\+Row@{get\+Row}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Row()}{getRow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::get\+Row (\begin{DoxyParamCaption}\item[{vector$<$ string $>$ \&}]{t\+\_\+target\+\_\+row,  }\item[{const size\+\_\+t}]{t\+\_\+row\+\_\+index }\end{DoxyParamCaption}) const}
+
+Method to get the cells of a specific row. The row is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library returns cells in a row as strings. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+row} & vector to hold the values of the cells in the row. \\
+\hline
+{\em t\+\_\+row\+\_\+index} & index (starting from 0) of the row to be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aef948e3ae1b8ef76cf9e29a8f4344264}{get\+Column()} 
+
+\hyperlink{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_ac7ec9d6277e7c7e2cfa96782596dc6d6}\label{classutils_1_1SlightCSV_ac7ec9d6277e7c7e2cfa96782596dc6d6}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Row@{get\+Row}}
+\index{get\+Row@{get\+Row}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Row()}{getRow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::get\+Row (\begin{DoxyParamCaption}\item[{vector$<$ string $>$ \&}]{t\+\_\+target\+\_\+row,  }\item[{const size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+start\+\_\+cell\+\_\+index }\end{DoxyParamCaption}) const}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Method to get the cells of a specific row. The row is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library returns cells in a row as strings. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+row} & vector to hold the values of the cells in the row. \\
+\hline
+{\em t\+\_\+row\+\_\+index} & index (starting from 0) of the row to be returned. \\
+\hline
+{\em t\+\_\+start\+\_\+cell\+\_\+index} & index (starting from 0) of the first horizontal cell (filtering). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aef948e3ae1b8ef76cf9e29a8f4344264}{get\+Column()} 
+
+\hyperlink{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a95578bbb02cbc476e62814b1983da56a}\label{classutils_1_1SlightCSV_a95578bbb02cbc476e62814b1983da56a}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Row@{get\+Row}}
+\index{get\+Row@{get\+Row}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Row()}{getRow()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::get\+Row (\begin{DoxyParamCaption}\item[{vector$<$ string $>$ \&}]{t\+\_\+target\+\_\+row,  }\item[{const size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+start\+\_\+cell\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+cell\+\_\+count }\end{DoxyParamCaption}) const}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Method to get the cells of a specific row. The row is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library returns cells in a row as strings. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+row} & vector to hold the values of the cells in the row. \\
+\hline
+{\em t\+\_\+row\+\_\+index} & index (starting from 0) of the row to be returned. \\
+\hline
+{\em t\+\_\+start\+\_\+cell\+\_\+index} & index (starting from 0) of the first horizontal cell (filtering). \\
+\hline
+{\em t\+\_\+cell\+\_\+count} & number of cells to return (beginning from the first horizontal cell specified). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aef948e3ae1b8ef76cf9e29a8f4344264}{get\+Column()} 
+
+\hyperlink{classutils_1_1SlightCSV_a1a95207d5d490c2c7d2ff74fab65ec1d}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a5286060190553fe7eceb973bba22ae22}\label{classutils_1_1SlightCSV_a5286060190553fe7eceb973bba22ae22}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Row\+Count@{get\+Row\+Count}}
+\index{get\+Row\+Count@{get\+Row\+Count}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Row\+Count()}{getRowCount()}}
+{\footnotesize\ttfamily size\+\_\+t utils\+::\+Slight\+C\+S\+V\+::get\+Row\+Count (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to get the number of rows in the parsed data structure. Data is held in memory. \begin{DoxyReturn}{Returns}
+row count in the parsed data structure. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a5dcd159ef127b63942bce5498beb8dae}{get\+Column\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_ac5a81169c5da9aade5d96935428c73ea}\label{classutils_1_1SlightCSV_ac5a81169c5da9aade5d96935428c73ea}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Separator@{get\+Separator}}
+\index{get\+Separator@{get\+Separator}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Separator()}{getSeparator()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::get\+Separator (\begin{DoxyParamCaption}\item[{string \&}]{t\+\_\+target }\end{DoxyParamCaption}) const}
+
+Method to get the previously set delimiter character. \begin{DoxyReturn}{Returns}
+previously set delimiter character. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a1192b4987bbe595ee893ac8fdc7ebd45}{set\+Separator()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_aa6b302e67d367daab0dc806624a627da}\label{classutils_1_1SlightCSV_aa6b302e67d367daab0dc806624a627da}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!get\+Strip\+Chars@{get\+Strip\+Chars}}
+\index{get\+Strip\+Chars@{get\+Strip\+Chars}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{get\+Strip\+Chars()}{getStripChars()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::get\+Strip\+Chars (\begin{DoxyParamCaption}\item[{set$<$ string $>$ \&}]{t\+\_\+target }\end{DoxyParamCaption}) const}
+
+Method to get the previously defined set of character(s) to be stripped from the input of the parser. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target} & set that gets populated with the previously defined set of characters to be stripped.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_ad432022553ea99a4719f618378abe586}{set\+Strip\+Chars()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_adea079ec76c9ee67d096f8fd39946380}\label{classutils_1_1SlightCSV_adea079ec76c9ee67d096f8fd39946380}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!load\+Data@{load\+Data}}
+\index{load\+Data@{load\+Data}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{load\+Data()}{loadData()}}
+{\footnotesize\ttfamily size\+\_\+t utils\+::\+Slight\+C\+S\+V\+::load\+Data (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Method to trigger data loading. Requires filename and delimiter to be set before calling it. \begin{DoxyReturn}{Returns}
+the number of records loaded. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aaa9c8042d6231660cb08ada7c1a8dccb}{unload\+Data()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_abc28f1e33cc67dd5d4380254070ecf97}\label{classutils_1_1SlightCSV_abc28f1e33cc67dd5d4380254070ecf97}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!reset@{reset}}
+\index{reset@{reset}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::reset (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Method to reset the library to its initial state. Unloads any data structure loaded previously and resets settings to their initial state. Optional, library will not leak if not used. \mbox{\Hypertarget{classutils_1_1SlightCSV_adea39a71336eeacd17b66326deb92544}\label{classutils_1_1SlightCSV_adea39a71336eeacd17b66326deb92544}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!set\+Escape@{set\+Escape}}
+\index{set\+Escape@{set\+Escape}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{set\+Escape()}{setEscape()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::set\+Escape (\begin{DoxyParamCaption}\item[{const string}]{t\+\_\+escape }\end{DoxyParamCaption})}
+
+Method to set the escape character. It is used to escape other characters in the file to be processed. Escaped delimiter and new line characters are not processed and are propagated to processed \char`\"{}cells\char`\"{}. Setting (or not setting) the escape character not in accordance with the file format may trigger exceptions (e.\+g. cell count mismatch in row). Order of execution\+: strip, escape, replace. Characters enclosed between escape characters will be escaped even if escape characters are stripped or replaced. Method is optional. If used, set it before triggering data loading. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+escape} & character to be used to escape a group of characters in the input. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aca0cbc1e472dbe7b7a774d6add7c482f}{get\+Escape()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_aba4b71a4a4bfa2317985a1a9cd53fc85}\label{classutils_1_1SlightCSV_aba4b71a4a4bfa2317985a1a9cd53fc85}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!set\+File\+Name@{set\+File\+Name}}
+\index{set\+File\+Name@{set\+File\+Name}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{set\+File\+Name()}{setFileName()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::set\+File\+Name (\begin{DoxyParamCaption}\item[{const string}]{t\+\_\+filename }\end{DoxyParamCaption})}
+
+Method to set the name of the C\+SV file to be parsed. Required before triggering data loading. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+filename} & name and relative path of the file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_ad689937346e0d6dd37597e7c3458e164}{get\+File\+Name()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_aae3c78a070879263d270a494e1dfcbca}\label{classutils_1_1SlightCSV_aae3c78a070879263d270a494e1dfcbca}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!set\+Header\+Count@{set\+Header\+Count}}
+\index{set\+Header\+Count@{set\+Header\+Count}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{set\+Header\+Count()}{setHeaderCount()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::set\+Header\+Count (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{t\+\_\+header\+\_\+count }\end{DoxyParamCaption})}
+
+Method to override and set the number of header rows in the output of the parser. The library tries to detect and count header rows automatically. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+header\+\_\+count} & the number of header rows at the beginning of the C\+SV file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a781ae99927f2b8d704add6a2a53e0051}{get\+Header\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a53c0ef807f8b40b124ffcda2df863b5f}\label{classutils_1_1SlightCSV_a53c0ef807f8b40b124ffcda2df863b5f}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!set\+Replace\+Chars@{set\+Replace\+Chars}}
+\index{set\+Replace\+Chars@{set\+Replace\+Chars}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{set\+Replace\+Chars()}{setReplaceChars()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::set\+Replace\+Chars (\begin{DoxyParamCaption}\item[{const map$<$ string, string $>$ \&}]{t\+\_\+rep\+\_\+chars }\end{DoxyParamCaption})}
+
+Method to define a map of character pair(s) to be replaced in the input of the parser. The map\textquotesingle{}s \char`\"{}key\char`\"{} character is replaced by the \char`\"{}value\char`\"{} character in the input. Order of execution\+: strip, escape, replace. Escape characters may be replaced, but characters enclosed between escape characters will be escaped and present in the output. Stripped characters won\textquotesingle{}t be seen by the method. Optional method. If used, set it before triggering data loading. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+rep\+\_\+chars} & a map of \char`\"{}replacee\char`\"{} and \char`\"{}replacer\char`\"{} characters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_a4223375a011075fe889fc82db2babe4e}{get\+Replace\+Chars()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_a1192b4987bbe595ee893ac8fdc7ebd45}\label{classutils_1_1SlightCSV_a1192b4987bbe595ee893ac8fdc7ebd45}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!set\+Separator@{set\+Separator}}
+\index{set\+Separator@{set\+Separator}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{set\+Separator()}{setSeparator()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::set\+Separator (\begin{DoxyParamCaption}\item[{const string}]{t\+\_\+separator }\end{DoxyParamCaption})}
+
+Method to set the delimiter character. It is used as a separator between \char`\"{}cells\char`\"{} in a row. Required before triggering data loading. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+separator} & character to use as delimiter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_ac5a81169c5da9aade5d96935428c73ea}{get\+Separator()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_ad432022553ea99a4719f618378abe586}\label{classutils_1_1SlightCSV_ad432022553ea99a4719f618378abe586}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!set\+Strip\+Chars@{set\+Strip\+Chars}}
+\index{set\+Strip\+Chars@{set\+Strip\+Chars}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{set\+Strip\+Chars()}{setStripChars()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::set\+Strip\+Chars (\begin{DoxyParamCaption}\item[{const set$<$ string $>$ \&}]{t\+\_\+strip\+\_\+chars }\end{DoxyParamCaption})}
+
+Method to define a set of character(s) to be stripped from the input of the parser. Order of execution\+: strip, escape, replace. Escape characters may be stripped, but characters enclosed between escape characters will be escaped and present in the output. Stripped characters won\textquotesingle{}t be seen by replace. Optional method. If used, set it before triggering data loading. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+strip\+\_\+chars} & a set of characters previously populated with characters to be stripped. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_aa6b302e67d367daab0dc806624a627da}{get\+Strip\+Chars()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightCSV_aaa9c8042d6231660cb08ada7c1a8dccb}\label{classutils_1_1SlightCSV_aaa9c8042d6231660cb08ada7c1a8dccb}} 
+\index{utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}!unload\+Data@{unload\+Data}}
+\index{unload\+Data@{unload\+Data}!utils\+::\+Slight\+C\+SV@{utils\+::\+Slight\+C\+SV}}
+\subsubsection{\texorpdfstring{unload\+Data()}{unloadData()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+C\+S\+V\+::unload\+Data (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Method to unload data structure from memory. Settings (filename, delimiter, character manipulation settings) are preserved. Data queries cannot be made until loading a data structure. Optional, library will not leak if not used. \begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightCSV_adea079ec76c9ee67d096f8fd39946380}{load\+Data()} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/hsg/\+Documents/projects/slightcsv/src/slightcsv.\+hpp\item 
+/home/hsg/\+Documents/projects/slightcsv/src/slightcsv.\+cpp\end{DoxyCompactItemize}

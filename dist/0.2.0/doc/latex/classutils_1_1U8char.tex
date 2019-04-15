@@ -1,0 +1,296 @@
+\hypertarget{classutils_1_1U8char}{}\section{utils\+:\+:U8char Class Reference}
+\label{classutils_1_1U8char}\index{utils\+::\+U8char@{utils\+::\+U8char}}
+
+
+The U\+T\+F-\/8 character class of the library.  
+
+
+
+
+{\ttfamily \#include $<$u8char.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classutils_1_1U8char_a2d500aa5e968fd99c6bd4012f63c54c5}{U8char} (void)
+\item 
+\hyperlink{classutils_1_1U8char_a68db482bb7267ce30adff8e5ae8e18ad}{U8char} (const \hyperlink{namespaceutils_a6ec9293c5f79998946269edb0f6bc028}{byte} $\ast$const t\+\_\+bytes)
+\item 
+void \hyperlink{classutils_1_1U8char_a749ac883897f455715be1083ed1c80dd}{add\+Byte} (const \hyperlink{namespaceutils_a6ec9293c5f79998946269edb0f6bc028}{byte} t\+\_\+char)
+\item 
+int \hyperlink{classutils_1_1U8char_a493954b5b9a0bcad32f55a67ec2c4de1}{size} (void) const
+\item 
+bool \hyperlink{classutils_1_1U8char_af33db5c6613954da27e484af82217feb}{is\+Valid} (void) const
+\item 
+\hyperlink{namespaceutils_a6ec9293c5f79998946269edb0f6bc028}{byte} \hyperlink{classutils_1_1U8char_af23db23219f81cfcc9424a7dbde981d9}{get\+Byte} (const int t\+\_\+index) const
+\item 
+void \hyperlink{classutils_1_1U8char_a9bf39a597d04b56faac3325eebf49b39}{get\+Bytes} (char $\ast$t\+\_\+bytes, const int t\+\_\+size) const
+\item 
+string \hyperlink{classutils_1_1U8char_a234c21cc7b616c9d5f249badf1ba33b2}{get\+String} (void) const
+\item 
+void \hyperlink{classutils_1_1U8char_a682d09b6d41f3127f9da3be977aba230}{clear} (void)
+\item 
+bool \hyperlink{classutils_1_1U8char_a469ba19fd42df808d0fc4927bb33d81b}{operator==} (\hyperlink{classutils_1_1U8char}{U8char} const \&t\+\_\+u8char) const
+\item 
+bool \hyperlink{classutils_1_1U8char_ae51350fc92e66cfb9ac5784e483f4c59}{operator!=} (\hyperlink{classutils_1_1U8char}{U8char} const \&t\+\_\+u8char) const
+\item 
+bool \hyperlink{classutils_1_1U8char_aadba92f7615944b5a56e1c741b4e1d14}{operator$<$=} (\hyperlink{classutils_1_1U8char}{U8char} const \&t\+\_\+u8char) const
+\item 
+bool \hyperlink{classutils_1_1U8char_aafa1ab43156a534f3d450772b0833b98}{operator$<$} (\hyperlink{classutils_1_1U8char}{U8char} const \&t\+\_\+u8char) const
+\item 
+bool \hyperlink{classutils_1_1U8char_a5b7e27b12e6ff45253996414d4fc77fa}{operator$>$=} (\hyperlink{classutils_1_1U8char}{U8char} const \&t\+\_\+u8char) const
+\item 
+bool \hyperlink{classutils_1_1U8char_a768633a36d10be09756cd66c6346b609}{operator$>$} (\hyperlink{classutils_1_1U8char}{U8char} const \&t\+\_\+u8char) const
+\item 
+\hyperlink{namespaceutils_a6ec9293c5f79998946269edb0f6bc028}{byte} \hyperlink{classutils_1_1U8char_ae161e7637c19413fbc0a639fb5e43e45}{operator\mbox{[}$\,$\mbox{]}} (int t\+\_\+index) const
+\item 
+\hyperlink{classutils_1_1U8char_a09e51153dd354d8c33607401a52caf71}{operator bool} () const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The U\+T\+F-\/8 character class of the library. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classutils_1_1U8char_a2d500aa5e968fd99c6bd4012f63c54c5}\label{classutils_1_1U8char_a2d500aa5e968fd99c6bd4012f63c54c5}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!U8char@{U8char}}
+\index{U8char@{U8char}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{U8char()}{U8char()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily utils\+::\+U8char\+::\+U8char (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Default constructor of the class. \begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1U8char_a68db482bb7267ce30adff8e5ae8e18ad}{U8char(const byte$\ast$ const t\+\_\+bytes)} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1U8char_a68db482bb7267ce30adff8e5ae8e18ad}\label{classutils_1_1U8char_a68db482bb7267ce30adff8e5ae8e18ad}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!U8char@{U8char}}
+\index{U8char@{U8char}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{U8char()}{U8char()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily utils\+::\+U8char\+::\+U8char (\begin{DoxyParamCaption}\item[{const \hyperlink{namespaceutils_a6ec9293c5f79998946269edb0f6bc028}{byte} $\ast$const}]{t\+\_\+bytes }\end{DoxyParamCaption})}
+
+Overloaded constructor of the class. Creates an U\+T\+F-\/8 character from the incoming bytes. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+bytes} & incoming bytes (1-\/4, depending on the U\+T\+F-\/8 character encoded). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1U8char_a2d500aa5e968fd99c6bd4012f63c54c5}{U8char(void)} 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classutils_1_1U8char_a749ac883897f455715be1083ed1c80dd}\label{classutils_1_1U8char_a749ac883897f455715be1083ed1c80dd}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!add\+Byte@{add\+Byte}}
+\index{add\+Byte@{add\+Byte}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{add\+Byte()}{addByte()}}
+{\footnotesize\ttfamily void utils\+::\+U8char\+::add\+Byte (\begin{DoxyParamCaption}\item[{const \hyperlink{namespaceutils_a6ec9293c5f79998946269edb0f6bc028}{byte}}]{t\+\_\+char }\end{DoxyParamCaption})}
+
+Method to add an incoming byte to an U\+T\+F-\/8 character. The consistence of the byte to add with the bytes already added is checked. In case an invalid byte is added, an exception will be thrown. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+char} & byte to be added to the U\+T\+F-\/8 character object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1U8char_af23db23219f81cfcc9424a7dbde981d9}{get\+Byte()} 
+
+\hyperlink{classutils_1_1U8char_a9bf39a597d04b56faac3325eebf49b39}{get\+Bytes()} 
+
+\hyperlink{classutils_1_1U8char_a234c21cc7b616c9d5f249badf1ba33b2}{get\+String()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1U8char_a682d09b6d41f3127f9da3be977aba230}\label{classutils_1_1U8char_a682d09b6d41f3127f9da3be977aba230}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!clear@{clear}}
+\index{clear@{clear}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void utils\+::\+U8char\+::clear (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Method to clear the U\+T\+F-\/8 character object. After calling the method, the object can be reused to represent another U\+T\+F-\/8 character. \mbox{\Hypertarget{classutils_1_1U8char_af23db23219f81cfcc9424a7dbde981d9}\label{classutils_1_1U8char_af23db23219f81cfcc9424a7dbde981d9}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!get\+Byte@{get\+Byte}}
+\index{get\+Byte@{get\+Byte}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{get\+Byte()}{getByte()}}
+{\footnotesize\ttfamily \hyperlink{namespaceutils_a6ec9293c5f79998946269edb0f6bc028}{byte} utils\+::\+U8char\+::get\+Byte (\begin{DoxyParamCaption}\item[{const int}]{t\+\_\+index }\end{DoxyParamCaption}) const}
+
+Method to get a byte from the bytes representing the U\+T\+F-\/8 character. Calling the method to get a byte of an invalid U\+T\+F-\/8 character results in an exception. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+index} & the index of the byte to get. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the byte at the given index. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1U8char_a749ac883897f455715be1083ed1c80dd}{add\+Byte()} 
+
+\hyperlink{classutils_1_1U8char_a9bf39a597d04b56faac3325eebf49b39}{get\+Bytes()} 
+
+\hyperlink{classutils_1_1U8char_a234c21cc7b616c9d5f249badf1ba33b2}{get\+String()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1U8char_a9bf39a597d04b56faac3325eebf49b39}\label{classutils_1_1U8char_a9bf39a597d04b56faac3325eebf49b39}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!get\+Bytes@{get\+Bytes}}
+\index{get\+Bytes@{get\+Bytes}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{get\+Bytes()}{getBytes()}}
+{\footnotesize\ttfamily void utils\+::\+U8char\+::get\+Bytes (\begin{DoxyParamCaption}\item[{char $\ast$}]{t\+\_\+bytes,  }\item[{const int}]{t\+\_\+size }\end{DoxyParamCaption}) const}
+
+Method to get multiple bytes from the bytes representing the U\+T\+F-\/8 character. Calling the method to get bytes of an invalid U\+T\+F-\/8 character results in an exception. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+bytes} & the buffer to store the bytes in (with a length of at least 5 to hold a maximum of 4 bytes and a closing byte). \\
+\hline
+{\em t\+\_\+size} & number of bytes to get. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1U8char_a749ac883897f455715be1083ed1c80dd}{add\+Byte()} 
+
+\hyperlink{classutils_1_1U8char_af23db23219f81cfcc9424a7dbde981d9}{get\+Byte()} 
+
+\hyperlink{classutils_1_1U8char_a234c21cc7b616c9d5f249badf1ba33b2}{get\+String()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1U8char_a234c21cc7b616c9d5f249badf1ba33b2}\label{classutils_1_1U8char_a234c21cc7b616c9d5f249badf1ba33b2}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!get\+String@{get\+String}}
+\index{get\+String@{get\+String}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{get\+String()}{getString()}}
+{\footnotesize\ttfamily string utils\+::\+U8char\+::get\+String (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to get U\+T\+F-\/8 character represented by the object. \begin{DoxyReturn}{Returns}
+string representation of U\+T\+F-\/8 character. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1U8char_a749ac883897f455715be1083ed1c80dd}{add\+Byte()} 
+
+\hyperlink{classutils_1_1U8char_af23db23219f81cfcc9424a7dbde981d9}{get\+Byte()} 
+
+\hyperlink{classutils_1_1U8char_a9bf39a597d04b56faac3325eebf49b39}{get\+Bytes()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1U8char_af33db5c6613954da27e484af82217feb}\label{classutils_1_1U8char_af33db5c6613954da27e484af82217feb}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!is\+Valid@{is\+Valid}}
+\index{is\+Valid@{is\+Valid}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{is\+Valid()}{isValid()}}
+{\footnotesize\ttfamily bool utils\+::\+U8char\+::is\+Valid (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to get the validity status of the U\+T\+F-\/8 character object. A valid U\+T\+F-\/8 character\+:
+\begin{DoxyItemize}
+\item has valid length indication in its first byte (e.\+g. binary 110xxxxx for an U\+T\+F-\/8 character consisting of 2 bytes)
+\item has valid continuation bytes (in the form of binary 10xxxxxx)
+\item consists of the exact same number of bytes as it\textquotesingle{}s indicated by its first byte
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+validation status of the U\+T\+F-\/8 object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1U8char_a09e51153dd354d8c33607401a52caf71}\label{classutils_1_1U8char_a09e51153dd354d8c33607401a52caf71}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily utils\+::\+U8char\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Method to convert an U\+T\+F-\/8 character object to bool type. Calling it on an U\+T\+F-\/8 character object evaluates to true if the object contains at least one byte and the object is a valid U\+T\+F-\/8 character. \mbox{\Hypertarget{classutils_1_1U8char_ae51350fc92e66cfb9ac5784e483f4c59}\label{classutils_1_1U8char_ae51350fc92e66cfb9ac5784e483f4c59}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool utils\+::\+U8char\+::operator!= (\begin{DoxyParamCaption}\item[{\hyperlink{classutils_1_1U8char}{U8char} const \&}]{t\+\_\+u8char }\end{DoxyParamCaption}) const}
+
+Comparison method to evaluate a \textquotesingle{}not equal\textquotesingle{} relation of two U\+T\+F-\/8 character objects. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+u8char} & U\+T\+F-\/8 character object to compare the current U\+T\+F-\/8 character object to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the outcome of the comparison. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1U8char_aafa1ab43156a534f3d450772b0833b98}\label{classutils_1_1U8char_aafa1ab43156a534f3d450772b0833b98}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool utils\+::\+U8char\+::operator$<$ (\begin{DoxyParamCaption}\item[{\hyperlink{classutils_1_1U8char}{U8char} const \&}]{t\+\_\+u8char }\end{DoxyParamCaption}) const}
+
+Comparison method to evaluate an \textquotesingle{}less\textquotesingle{} relation of two U\+T\+F-\/8 character objects. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+u8char} & U\+T\+F-\/8 character object to compare the current U\+T\+F-\/8 character object to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the outcome of the comparison. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1U8char_aadba92f7615944b5a56e1c741b4e1d14}\label{classutils_1_1U8char_aadba92f7615944b5a56e1c741b4e1d14}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily bool utils\+::\+U8char\+::operator$<$= (\begin{DoxyParamCaption}\item[{\hyperlink{classutils_1_1U8char}{U8char} const \&}]{t\+\_\+u8char }\end{DoxyParamCaption}) const}
+
+Comparison method to evaluate an \textquotesingle{}less or equal\textquotesingle{} relation of two U\+T\+F-\/8 character objects. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+u8char} & U\+T\+F-\/8 character object to compare the current U\+T\+F-\/8 character object to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the outcome of the comparison. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1U8char_a469ba19fd42df808d0fc4927bb33d81b}\label{classutils_1_1U8char_a469ba19fd42df808d0fc4927bb33d81b}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!operator==@{operator==}}
+\index{operator==@{operator==}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool utils\+::\+U8char\+::operator== (\begin{DoxyParamCaption}\item[{\hyperlink{classutils_1_1U8char}{U8char} const \&}]{t\+\_\+u8char }\end{DoxyParamCaption}) const}
+
+Comparison method to evaluate an \textquotesingle{}equal\textquotesingle{} relation of two U\+T\+F-\/8 character objects. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+u8char} & U\+T\+F-\/8 character object to compare the current U\+T\+F-\/8 character object to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the outcome of the comparison. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1U8char_a768633a36d10be09756cd66c6346b609}\label{classutils_1_1U8char_a768633a36d10be09756cd66c6346b609}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool utils\+::\+U8char\+::operator$>$ (\begin{DoxyParamCaption}\item[{\hyperlink{classutils_1_1U8char}{U8char} const \&}]{t\+\_\+u8char }\end{DoxyParamCaption}) const}
+
+Comparison method to evaluate an \textquotesingle{}greater\textquotesingle{} relation of two U\+T\+F-\/8 character objects. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+u8char} & U\+T\+F-\/8 character object to compare the current U\+T\+F-\/8 character object to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the outcome of the comparison. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1U8char_a5b7e27b12e6ff45253996414d4fc77fa}\label{classutils_1_1U8char_a5b7e27b12e6ff45253996414d4fc77fa}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily bool utils\+::\+U8char\+::operator$>$= (\begin{DoxyParamCaption}\item[{\hyperlink{classutils_1_1U8char}{U8char} const \&}]{t\+\_\+u8char }\end{DoxyParamCaption}) const}
+
+Comparison method to evaluate an \textquotesingle{}greater or equal\textquotesingle{} relation of two U\+T\+F-\/8 character objects. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+u8char} & U\+T\+F-\/8 character object to compare the current U\+T\+F-\/8 character object to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the outcome of the comparison. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1U8char_ae161e7637c19413fbc0a639fb5e43e45}\label{classutils_1_1U8char_ae161e7637c19413fbc0a639fb5e43e45}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \hyperlink{namespaceutils_a6ec9293c5f79998946269edb0f6bc028}{byte} utils\+::\+U8char\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{t\+\_\+index }\end{DoxyParamCaption}) const}
+
+Method to get a byte from the bytes representing the U\+T\+F-\/8 character. Calling the method to get a byte of an invalid U\+T\+F-\/8 character results in an exception. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+index} & the index of the byte to get. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the byte at the given index. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1U8char_a493954b5b9a0bcad32f55a67ec2c4de1}\label{classutils_1_1U8char_a493954b5b9a0bcad32f55a67ec2c4de1}} 
+\index{utils\+::\+U8char@{utils\+::\+U8char}!size@{size}}
+\index{size@{size}!utils\+::\+U8char@{utils\+::\+U8char}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int utils\+::\+U8char\+::size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method the get the number of bytes the U\+T\+F-\/8 character consists of. It is determined after adding the first byte of the U\+T\+F-\/8 character. \begin{DoxyReturn}{Returns}
+the number of bytes the U\+T\+F-\/8 character consists of. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/hsg/\+Documents/projects/slightcsv/src/u8char.\+hpp\item 
+/home/hsg/\+Documents/projects/slightcsv/src/u8char.\+cpp\end{DoxyCompactItemize}

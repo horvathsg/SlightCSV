@@ -1,0 +1,203 @@
+Slight\+C\+SV is a C\+SV parser library written in C++. Its main purpose is to facilitate the programmatic processing of C\+SV files.
+
+\subsection*{Features}
+
+
+\begin{DoxyItemize}
+\item Customizable delimiter and escape characters.
+\item Flexible character manipulation capabilities (stripping, replacement).
+\item Automatic handling of mac\+OS, Linux and Windows line endings.
+\item Support for U\+T\+F-\/8 character encoding (parsing, character manipulation and B\+OM as well).
+\item Query methods for getting cell, row and column data with template-\/based automatic type conversion capabilities.
+\item Able to load large files ($>$ 1 GB) in reasonable time.
+\item Custom exception classes inheriting from std\+::exception.
+\end{DoxyItemize}
+
+\subsection*{In addition}
+
+
+\begin{DoxyItemize}
+\item Detailed documentation (Doxygen).
+\item Automated unit and integration testing (Cpp\+U\+Test, gcov, lcov).
+\item Pre-\/compiled binaries for multiple platforms.
+\item Example code.
+\end{DoxyItemize}
+
+\section*{Getting started}
+
+\subsection*{Operation}
+
+After constructing the Slight\+C\+SV object (and before loading data from C\+SV file), parameters need to be set up through Slight\+C\+SV\textquotesingle{}s setter methods. File loading and processing doesn\textquotesingle{}t happen until triggering data loading through the A\+PI. If a mandatory parameter is not set, an exception will be thrown. After loading finished, data is accessible through data getter methods. Data may be unloaded later and the object can be resetted to its initial state. However, this is not mandatory as the library is only using dynamic memory with appropriate release technique (R\+A\+II).
+
+\subsection*{Dependencies}
+
+Slight\+C\+SV has no external dependencies. However, the following tools are used in the build pipeline to support build management, code quality and documentation.
+
+
+\begin{DoxyItemize}
+\item C\+Make.
+\item Cpp\+U\+Test.
+\item gcov, lcov.
+\item Doxygen.
+\end{DoxyItemize}
+
+It is recommended to install those missing before proceeding.
+
+\subsection*{Platform}
+
+Binaries for 32/64 bit Linux/\+Windows are supplied in the dist directory. At the present time, the development platform is Linux. While it is possible to build and use the library on other platforms, various stages of the build pipeline might fail because of missing headers and/or libraries (namely automated testing, documentation generation and code coverage report generation). Those issues may be resolved by building and/or installing missing components.
+
+\subsection*{Project structure}
+
+The structure inside the project root directory is as follows.
+
+
+\begin{DoxyItemize}
+\item bin\+: demo application output directory.
+\item build\+: build directory.
+\item dist\+: distribution directory.
+\item doc\+: Doxygen configuration and output directory.
+\item inc\+: public header output directory.
+\item lib\+: shared library output directory.
+\item platform\+: platform toolchains directory.
+\item src\+: library and demo application source directory.
+\item test\+: unit and integration tests directory.
+\end{DoxyItemize}
+
+In order to use the pre-\/built shared library, you need to include the public header (\hyperlink{slightcsv_8hpp_source}{slightcsv.\+hpp}) from inc and the library (libslightcsv.\+so or libslightcsv.\+dll on Windows) from lib.
+
+\subsection*{Usage}
+
+\subsubsection*{Using the supplied binaries}
+
+Binaries for the following platforms are located in the dist directory\+:
+
+
+\begin{DoxyItemize}
+\item Linux 32 bit x86 (Linux32)
+\item Linux 64 bit x86-\/64 (Linux64)
+\item Windows 32 bit x86 (Windows32)
+\item Windows 64 bit x86-\/64 (Windows64)
+\end{DoxyItemize}
+
+Public header and documentation are also available in the dist folder. Using the library is a matter of including the public header in your source file(s) and linking your application to the appropriate platform binary.
+
+\subsubsection*{Building from source}
+
+For building the library from source\+:
+
+
+\begin{DoxyItemize}
+\item Have dependencies installed and available in your environment.
+\item Edit C\+Make config file (C\+Make\+Lists.\+txt) in test and set Cpp\+U\+Test path variables.
+\item Run \char`\"{}cmake .. -\/\+D\+C\+M\+A\+K\+E\+\_\+\+B\+U\+I\+L\+D\+\_\+\+T\+Y\+P\+E=\+D\+E\+B\+U\+G\char`\"{} or \char`\"{}cmake .. -\/\+D\+C\+M\+A\+K\+E\+\_\+\+B\+U\+I\+L\+D\+\_\+\+T\+Y\+P\+E=\+R\+E\+L\+E\+A\+S\+E\char`\"{} in build directory for C\+Make to generate build configuration files. In D\+E\+B\+UG, the library is built with debug symbols included while in R\+E\+L\+E\+A\+SE, those are not present (R\+E\+L\+E\+A\+SE builds use compiler optimization as well).
+\item Run \char`\"{}make clean\char`\"{} in build directory to cleanup.
+\item Run \char`\"{}make\char`\"{} in build directory to build all artifacts. After issuing the command, artifacts are built and/or run in the following order\+: Slight\+C\+SV build, tests build, tests run, demo build. At the end of each stage, output files are placed in their respective target directories (shared library file in lib, public header file in inc/slightcsv and executable demo application in bin).
+\item Install sections are commented out in C\+Make\textquotesingle{}s config files. If you would like to use \char`\"{}make install\char`\"{}, uncomment those rows and set target paths according to your preference.
+\item Documentation may be generated by issuing command \char`\"{}make docs\char`\"{}. Documentation is generated into the doc folder.
+\item Code coverage report may be generated by issuing command \char`\"{}make codecov\char`\"{}. Report index file can be found at\+: build/src/\+C\+Make\+Files/slightcsv.\+dir/codecov/index.html.
+\end{DoxyItemize}
+
+\subsubsection*{Code example}
+
+The following simple example provides an overview of the usage of the library. For additional methods and parameters, please refer to the Doxygen documentation located in the distribution\textquotesingle{}s doc folder.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include "../../inc/slightcsv/slightcsv.hpp"}
+
+\textcolor{preprocessor}{#include <string>}
+\textcolor{preprocessor}{#include <vector>}
+\textcolor{preprocessor}{#include <set>}
+\textcolor{preprocessor}{#include <map>}
+\textcolor{preprocessor}{#include <iostream>}
+
+\textcolor{keyword}{using} std::string;
+\textcolor{keyword}{using} std::vector;
+\textcolor{keyword}{using} std::set;
+\textcolor{keyword}{using} std::pair;
+\textcolor{keyword}{using} std::map;
+\textcolor{keyword}{using} std::cout;
+\textcolor{keyword}{using} std::endl;
+\textcolor{keyword}{using} \hyperlink{classutils_1_1SlightCSV}{utils::SlightCSV};
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+
+    \textcolor{comment}{// construct object}
+    SlightCSV scsv;
+
+    \textcolor{comment}{// set filename}
+    scsv.\hyperlink{classutils_1_1SlightCSV_aba4b71a4a4bfa2317985a1a9cd53fc85}{setFileName}(\textcolor{stringliteral}{"../test/utf8\_test.csv"});
+
+    \textcolor{comment}{// set delimiter character (semicolon)}
+    scsv.setSeparator(\textcolor{stringliteral}{";"});
+
+    \textcolor{comment}{// set escape character (double quote)}
+    scsv.setEscape(\textcolor{stringliteral}{"\(\backslash\)""});
+
+    \textcolor{comment}{// set characters to be stripped (stip spaces and underscores)}
+    set<string> to\_strip;
+    to\_strip.insert(\textcolor{stringliteral}{" "});
+    to\_strip.insert(\textcolor{stringliteral}{"\_"});
+    scsv.setStripChars(to\_strip);
+
+    \textcolor{comment}{// set characters to be replaced (replace 'a' with 'b' and 'c' with 'd')}
+    map<string, string> to\_replace;
+    pair<string, string> to\_replace1(\textcolor{stringliteral}{"a"}, \textcolor{stringliteral}{"b"});
+    pair<string, string> to\_replace2(\textcolor{stringliteral}{"c"}, \textcolor{stringliteral}{"d"});
+    to\_replace.insert(to\_replace1);
+    to\_replace.insert(to\_replace2);
+    scsv.setReplaceChars(to\_replace);
+
+    \textcolor{comment}{// load data}
+    scsv.loadData();
+
+    \textcolor{comment}{// output entity counts}
+    cout << \textcolor{stringliteral}{"File contains "} << scsv.getColumnCount() << \textcolor{stringliteral}{" columns."} << endl;
+    cout << \textcolor{stringliteral}{"File contains "} << scsv.getRowCount() << \textcolor{stringliteral}{" rows."} << endl;
+    cout << \textcolor{stringliteral}{"Header count: "} << scsv.getHeaderCount() << \textcolor{stringliteral}{" rows."} << endl;
+
+    \textcolor{comment}{// output row 1 (at index 0)}
+    vector<string> row0;
+    scsv.getRow(row0, 0);
+    cout << \textcolor{stringliteral}{"Row 1 is: "} << endl;
+    \textcolor{keywordflow}{for} (vector<string>::iterator it = row0.begin(); it != row0.end(); ++it) \{
+        cout << *it << \textcolor{stringliteral}{" "};
+    \}
+    cout << endl;
+
+    \textcolor{comment}{// output row 2 (at index 1)}
+    vector<string> row1;
+    scsv.getRow(row1, 1);
+    cout << \textcolor{stringliteral}{"Row 2 is: "} << endl;
+    \textcolor{keywordflow}{for} (vector<string>::iterator it = row1.begin(); it != row1.end(); ++it) \{
+        cout << *it << \textcolor{stringliteral}{" "};
+    \}
+    cout << endl;
+
+    \textcolor{comment}{// output column 1 (at index 0)}
+    vector<string> column;
+    scsv.getColumn(column, 0);
+    cout << \textcolor{stringliteral}{"Column 1 is: "} << endl;
+    \textcolor{keywordflow}{for} (vector<string>::iterator it = column.begin(); it != column.end(); ++it) \{
+        cout << *it << endl;
+    \}
+
+    \textcolor{comment}{// reset object to initial state (before reuse, e.g. loading another file)}
+    scsv.reset();
+
+\}
+\end{DoxyCode}
+
+
+\section*{Future development}
+
+Features to be implemented in the future\+:
+
+
+\begin{DoxyItemize}
+\item C++11 compliant multithreading for even faster processing.
+\item Extended transformation and conversion support for rows and columns.
+\end{DoxyItemize}
+
+Ideas, contributions, issues and comments are welcome! 

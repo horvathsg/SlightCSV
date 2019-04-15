@@ -1,0 +1,339 @@
+\hypertarget{classutils_1_1SlightMatrix}{}\section{utils\+:\+:Slight\+Matrix Class Reference}
+\label{classutils_1_1SlightMatrix}\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+
+
+{\ttfamily \#include $<$slightmatrix.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a2c2eb567ef914ecde524b3af725258fd}\label{classutils_1_1SlightMatrix_a2c2eb567ef914ecde524b3af725258fd}} 
+\hyperlink{classutils_1_1SlightMatrix_a2c2eb567ef914ecde524b3af725258fd}{Slight\+Matrix} (void)
+\begin{DoxyCompactList}\small\item\em The class\textquotesingle{}s default constructor. \end{DoxyCompactList}\item 
+void \hyperlink{classutils_1_1SlightMatrix_ac0c6859041a90cfdf39d6c4f5a668814}{set\+Capacity} (const size\+\_\+t t\+\_\+cell\+\_\+count)
+\item 
+size\+\_\+t \hyperlink{classutils_1_1SlightMatrix_addbfd1ec641100a7cda0b4f6e39ae676}{get\+Capacity} (void) const
+\item 
+void \hyperlink{classutils_1_1SlightMatrix_a5f633b5225716e60a69cdca3b43f380c}{set\+Column\+Count} (const size\+\_\+t t\+\_\+column\+\_\+count)
+\item 
+size\+\_\+t \hyperlink{classutils_1_1SlightMatrix_aa08a3c2d096ac82b1688b1edc5bb71fd}{get\+Column\+Count} (void) const
+\item 
+void \hyperlink{classutils_1_1SlightMatrix_ac2d5111e5a9865886f5370bf1487d04c}{add\+Cell} (const string t\+\_\+cell)
+\item 
+void \hyperlink{classutils_1_1SlightMatrix_ad8874298dd54748b660fe9546ff9b332}{add\+Cells} (const vector$<$ string $>$ \&t\+\_\+cells)
+\item 
+void \hyperlink{classutils_1_1SlightMatrix_abe914aa8f3178afae99ec31502ba2d35}{set\+Header\+Count} (const size\+\_\+t t\+\_\+header\+\_\+count)
+\item 
+size\+\_\+t \hyperlink{classutils_1_1SlightMatrix_ac3ba42c47509027bd1c4a07055f347b9}{get\+Header\+Count} (void) const
+\item 
+bool \hyperlink{classutils_1_1SlightMatrix_a536e733a179ee3eaeb5c75986cc477d3}{validate} (void) const
+\item 
+size\+\_\+t \hyperlink{classutils_1_1SlightMatrix_af171e463492b423251369cd7b8799a97}{get\+Row\+Count} (void) const
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell} (T \&t\+\_\+value, const size\+\_\+t t\+\_\+row\+\_\+index, const size\+\_\+t t\+\_\+column\+\_\+index) const
+\item 
+void \hyperlink{classutils_1_1SlightMatrix_a7368ae91d7ba0607273ad008bec653e3}{get\+Row} (vector$<$ string $>$ \&t\+\_\+target\+\_\+row, const size\+\_\+t t\+\_\+row\+\_\+index) const
+\item 
+void \hyperlink{classutils_1_1SlightMatrix_aa5c46b5638563789f5a7bbea90782ffc}{get\+Row} (vector$<$ string $>$ \&t\+\_\+target\+\_\+row, const size\+\_\+t t\+\_\+row\+\_\+index, const size\+\_\+t t\+\_\+start\+\_\+cell\+\_\+index) const
+\item 
+void \hyperlink{classutils_1_1SlightMatrix_a730e8d6d9762491a8c5189ae6bd04ca7}{get\+Row} (vector$<$ string $>$ \&t\+\_\+target\+\_\+row, const size\+\_\+t t\+\_\+row\+\_\+index, const size\+\_\+t t\+\_\+start\+\_\+cell\+\_\+index, const size\+\_\+t t\+\_\+cell\+\_\+count) const
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightMatrix_a21c334bd89d48d122a34fc1122c5fc5a}{get\+Column} (vector$<$ T $>$ \&t\+\_\+target\+\_\+column, const size\+\_\+t t\+\_\+column\+\_\+index) const
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightMatrix_a6d00c191a13e4a2b2d018b79acfb7235}{get\+Column} (vector$<$ T $>$ \&t\+\_\+target\+\_\+column, const size\+\_\+t t\+\_\+column\+\_\+index, const size\+\_\+t t\+\_\+start\+\_\+cell\+\_\+index) const
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classutils_1_1SlightMatrix_ac6da4f6f4531dd68680ec586c2609273}{get\+Column} (vector$<$ T $>$ \&t\+\_\+target\+\_\+column, const size\+\_\+t t\+\_\+column\+\_\+index, const size\+\_\+t t\+\_\+start\+\_\+cell\+\_\+index, const size\+\_\+t t\+\_\+cell\+\_\+count) const
+\item 
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a9fa5e54d8c43cc967596f708a37aab50}\label{classutils_1_1SlightMatrix_a9fa5e54d8c43cc967596f708a37aab50}} 
+void \hyperlink{classutils_1_1SlightMatrix_a9fa5e54d8c43cc967596f708a37aab50}{reset} (void)
+\begin{DoxyCompactList}\small\item\em Method to reset data matrix to its initial state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The data storege class of the library. It is storing data in a single vector and mapping cells, rows and columns based on matrix format data. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_ac2d5111e5a9865886f5370bf1487d04c}\label{classutils_1_1SlightMatrix_ac2d5111e5a9865886f5370bf1487d04c}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!add\+Cell@{add\+Cell}}
+\index{add\+Cell@{add\+Cell}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{add\+Cell()}{addCell()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+Matrix\+::add\+Cell (\begin{DoxyParamCaption}\item[{const string}]{t\+\_\+cell }\end{DoxyParamCaption})}
+
+Method to add single cells (in a continuous manner) to the data matrix. The cell is added at the end of the vector holding cells. Column and row mapping is determined automatically (based on column count). 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+cell} & string contents of the cell to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_ad8874298dd54748b660fe9546ff9b332}{add\+Cells()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_ad8874298dd54748b660fe9546ff9b332}\label{classutils_1_1SlightMatrix_ad8874298dd54748b660fe9546ff9b332}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!add\+Cells@{add\+Cells}}
+\index{add\+Cells@{add\+Cells}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{add\+Cells()}{addCells()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+Matrix\+::add\+Cells (\begin{DoxyParamCaption}\item[{const vector$<$ string $>$ \&}]{t\+\_\+cells }\end{DoxyParamCaption})}
+
+Method to add multiple cells (vector of cells) to the data matrix. Cells are added at the end of the vector holding cells. Column and row mapping is determined automatically (based on column count). 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+cells} & contents of the cells to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_ac2d5111e5a9865886f5370bf1487d04c}{add\+Cell()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_addbfd1ec641100a7cda0b4f6e39ae676}\label{classutils_1_1SlightMatrix_addbfd1ec641100a7cda0b4f6e39ae676}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Capacity@{get\+Capacity}}
+\index{get\+Capacity@{get\+Capacity}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Capacity()}{getCapacity()}}
+{\footnotesize\ttfamily size\+\_\+t utils\+::\+Slight\+Matrix\+::get\+Capacity (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to query the amount of cells memory is reserved for in the data matrix. \begin{DoxyReturn}{Returns}
+number of cells memory is reserved for. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_ac0c6859041a90cfdf39d6c4f5a668814}{set\+Capacity()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}\label{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Cell@{get\+Cell}}
+\index{get\+Cell@{get\+Cell}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Cell()}{getCell()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template void utils\+::\+Slight\+Matrix\+::get\+Cell (\begin{DoxyParamCaption}\item[{T \&}]{t\+\_\+value,  }\item[{const size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+index }\end{DoxyParamCaption}) const}
+
+Method to get the contents of a specific cell. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type supplied as the first parameter of the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+value} & variable to hold the value of the cell. \\
+\hline
+{\em t\+\_\+row\+\_\+index} & index (starting from 0) of the row the cell queried. \\
+\hline
+{\em t\+\_\+column\+\_\+index} & index (starting from 0) of the column holding the cell queried. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_ac2d5111e5a9865886f5370bf1487d04c}{add\+Cell()} 
+
+\hyperlink{classutils_1_1SlightMatrix_ad8874298dd54748b660fe9546ff9b332}{add\+Cells()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a7368ae91d7ba0607273ad008bec653e3}{get\+Row()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a21c334bd89d48d122a34fc1122c5fc5a}{get\+Column()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a21c334bd89d48d122a34fc1122c5fc5a}\label{classutils_1_1SlightMatrix_a21c334bd89d48d122a34fc1122c5fc5a}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Column@{get\+Column}}
+\index{get\+Column@{get\+Column}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Column()}{getColumn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void utils\+::\+Slight\+Matrix\+::get\+Column (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{t\+\_\+target\+\_\+column,  }\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+index }\end{DoxyParamCaption}) const}
+
+Method to get the cells of a specific column. The column is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type held by the vector supplied as the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+column} & vector to hold the values of the cells in the column. \\
+\hline
+{\em t\+\_\+column\+\_\+index} & index (starting from 0) of the column to be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_a7368ae91d7ba0607273ad008bec653e3}{get\+Row()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a6d00c191a13e4a2b2d018b79acfb7235}\label{classutils_1_1SlightMatrix_a6d00c191a13e4a2b2d018b79acfb7235}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Column@{get\+Column}}
+\index{get\+Column@{get\+Column}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Column()}{getColumn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void utils\+::\+Slight\+Matrix\+::get\+Column (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{t\+\_\+target\+\_\+column,  }\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+start\+\_\+cell\+\_\+index }\end{DoxyParamCaption}) const}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Method to get the cells of a specific column. The column is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type held by the vector supplied as the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+column} & vector to hold the values of the cells in the column. \\
+\hline
+{\em t\+\_\+column\+\_\+index} & index (starting from 0) of the column to be returned. \\
+\hline
+{\em t\+\_\+start\+\_\+cell\+\_\+index} & index (starting from 0) of the first vertical cell (filtering). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_a7368ae91d7ba0607273ad008bec653e3}{get\+Row()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_ac6da4f6f4531dd68680ec586c2609273}\label{classutils_1_1SlightMatrix_ac6da4f6f4531dd68680ec586c2609273}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Column@{get\+Column}}
+\index{get\+Column@{get\+Column}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Column()}{getColumn()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void utils\+::\+Slight\+Matrix\+::get\+Column (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{t\+\_\+target\+\_\+column,  }\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+start\+\_\+cell\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+cell\+\_\+count }\end{DoxyParamCaption}) const}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Method to get the cells of a specific column. The column is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library tries to convert the string contents to the type held by the vector supplied as the method. Supported types\+: int, float, double, string. If conversion fails, the value returned will be 0. In this case, it is always possible to get the value as string. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+column} & vector to hold the values of the cells in the column. \\
+\hline
+{\em t\+\_\+column\+\_\+index} & index (starting from 0) of the column to be returned. \\
+\hline
+{\em t\+\_\+start\+\_\+cell\+\_\+index} & index (starting from 0) of the first vertical cell (filtering) \\
+\hline
+{\em t\+\_\+cell\+\_\+count} & number of cells to return (beginning from the first vertical cell specified). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_a7368ae91d7ba0607273ad008bec653e3}{get\+Row()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_aa08a3c2d096ac82b1688b1edc5bb71fd}\label{classutils_1_1SlightMatrix_aa08a3c2d096ac82b1688b1edc5bb71fd}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Column\+Count@{get\+Column\+Count}}
+\index{get\+Column\+Count@{get\+Column\+Count}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Column\+Count()}{getColumnCount()}}
+{\footnotesize\ttfamily size\+\_\+t utils\+::\+Slight\+Matrix\+::get\+Column\+Count (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to get the previously set column count. \begin{DoxyReturn}{Returns}
+number of columns the data matrix consists of. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_a5f633b5225716e60a69cdca3b43f380c}{set\+Column\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_ac3ba42c47509027bd1c4a07055f347b9}\label{classutils_1_1SlightMatrix_ac3ba42c47509027bd1c4a07055f347b9}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Header\+Count@{get\+Header\+Count}}
+\index{get\+Header\+Count@{get\+Header\+Count}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Header\+Count()}{getHeaderCount()}}
+{\footnotesize\ttfamily size\+\_\+t utils\+::\+Slight\+Matrix\+::get\+Header\+Count (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to get the (automatically detected or previously set) number of header rows the data matrix contains. \begin{DoxyReturn}{Returns}
+number of header rows the data matrix contains. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_abe914aa8f3178afae99ec31502ba2d35}{set\+Header\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a7368ae91d7ba0607273ad008bec653e3}\label{classutils_1_1SlightMatrix_a7368ae91d7ba0607273ad008bec653e3}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Row@{get\+Row}}
+\index{get\+Row@{get\+Row}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Row()}{getRow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+Matrix\+::get\+Row (\begin{DoxyParamCaption}\item[{vector$<$ string $>$ \&}]{t\+\_\+target\+\_\+row,  }\item[{const size\+\_\+t}]{t\+\_\+row\+\_\+index }\end{DoxyParamCaption}) const}
+
+Method to get the cells of a specific row. The row is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library returns cells in a row as strings. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+row} & vector to hold the values of the cells in the row. \\
+\hline
+{\em t\+\_\+row\+\_\+index} & index (starting from 0) of the row to be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_a21c334bd89d48d122a34fc1122c5fc5a}{get\+Column()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_aa5c46b5638563789f5a7bbea90782ffc}\label{classutils_1_1SlightMatrix_aa5c46b5638563789f5a7bbea90782ffc}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Row@{get\+Row}}
+\index{get\+Row@{get\+Row}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Row()}{getRow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+Matrix\+::get\+Row (\begin{DoxyParamCaption}\item[{vector$<$ string $>$ \&}]{t\+\_\+target\+\_\+row,  }\item[{const size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+start\+\_\+cell\+\_\+index }\end{DoxyParamCaption}) const}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Method to get the cells of a specific row. The row is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library returns cells in a row as strings. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+row} & vector to hold the values of the cells in the row. \\
+\hline
+{\em t\+\_\+row\+\_\+index} & index (starting from 0) of the row to be returned. \\
+\hline
+{\em t\+\_\+start\+\_\+cell\+\_\+index} & index (starting from 0) of the first horizontal cell (filtering). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_a21c334bd89d48d122a34fc1122c5fc5a}{get\+Column()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a730e8d6d9762491a8c5189ae6bd04ca7}\label{classutils_1_1SlightMatrix_a730e8d6d9762491a8c5189ae6bd04ca7}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Row@{get\+Row}}
+\index{get\+Row@{get\+Row}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Row()}{getRow()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+Matrix\+::get\+Row (\begin{DoxyParamCaption}\item[{vector$<$ string $>$ \&}]{t\+\_\+target\+\_\+row,  }\item[{const size\+\_\+t}]{t\+\_\+row\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+start\+\_\+cell\+\_\+index,  }\item[{const size\+\_\+t}]{t\+\_\+cell\+\_\+count }\end{DoxyParamCaption}) const}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Method to get the cells of a specific row. The row is represented in the form of a vector. The internal data structure stores cell values as strings. When using the method, the library returns cells in a row as strings. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+target\+\_\+row} & vector to hold the values of the cells in the row. \\
+\hline
+{\em t\+\_\+row\+\_\+index} & index (starting from 0) of the row to be returned. \\
+\hline
+{\em t\+\_\+start\+\_\+cell\+\_\+index} & index (starting from 0) of the first horizontal cell (filtering). \\
+\hline
+{\em t\+\_\+cell\+\_\+count} & number of cells to return (beginning from the first horizontal cell specified). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_a21c334bd89d48d122a34fc1122c5fc5a}{get\+Column()} 
+
+\hyperlink{classutils_1_1SlightMatrix_a38fb4bf075982a520ebc400296c737b8}{get\+Cell()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_af171e463492b423251369cd7b8799a97}\label{classutils_1_1SlightMatrix_af171e463492b423251369cd7b8799a97}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!get\+Row\+Count@{get\+Row\+Count}}
+\index{get\+Row\+Count@{get\+Row\+Count}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Row\+Count()}{getRowCount()}}
+{\footnotesize\ttfamily size\+\_\+t utils\+::\+Slight\+Matrix\+::get\+Row\+Count (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method the get the number of rows the data matrix consists of. The value depends on the number of columns set and the number of cells added. \begin{DoxyReturn}{Returns}
+the number of rows the data matrix consists of. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_a5f633b5225716e60a69cdca3b43f380c}{set\+Column\+Count()} 
+
+\hyperlink{classutils_1_1SlightMatrix_aa08a3c2d096ac82b1688b1edc5bb71fd}{get\+Column\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_ac0c6859041a90cfdf39d6c4f5a668814}\label{classutils_1_1SlightMatrix_ac0c6859041a90cfdf39d6c4f5a668814}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!set\+Capacity@{set\+Capacity}}
+\index{set\+Capacity@{set\+Capacity}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{set\+Capacity()}{setCapacity()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+Matrix\+::set\+Capacity (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{t\+\_\+cell\+\_\+count }\end{DoxyParamCaption})}
+
+Method to allocate and reserve memory for the given number of cells in the data store. It reserves memory only for cells, not for strings representing cell contents. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+cell\+\_\+count} & number of cells to reserve memory for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_addbfd1ec641100a7cda0b4f6e39ae676}{get\+Capacity()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a5f633b5225716e60a69cdca3b43f380c}\label{classutils_1_1SlightMatrix_a5f633b5225716e60a69cdca3b43f380c}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!set\+Column\+Count@{set\+Column\+Count}}
+\index{set\+Column\+Count@{set\+Column\+Count}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{set\+Column\+Count()}{setColumnCount()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+Matrix\+::set\+Column\+Count (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{t\+\_\+column\+\_\+count }\end{DoxyParamCaption})}
+
+Method to set the number of columns the data matrix consists of. Without this, the format of the matrix is undetermined, thus invalid (if the column count is not known, it is not possible to map the cells and rows). 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+column\+\_\+count} & number of columns the data matrix consists of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_aa08a3c2d096ac82b1688b1edc5bb71fd}{get\+Column\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_abe914aa8f3178afae99ec31502ba2d35}\label{classutils_1_1SlightMatrix_abe914aa8f3178afae99ec31502ba2d35}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!set\+Header\+Count@{set\+Header\+Count}}
+\index{set\+Header\+Count@{set\+Header\+Count}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{set\+Header\+Count()}{setHeaderCount()}}
+{\footnotesize\ttfamily void utils\+::\+Slight\+Matrix\+::set\+Header\+Count (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{t\+\_\+header\+\_\+count }\end{DoxyParamCaption})}
+
+Method to set the number of header rows the data matrix contains. 
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+header\+\_\+count} & number of header rows the data matrix contains. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classutils_1_1SlightMatrix_ac3ba42c47509027bd1c4a07055f347b9}{get\+Header\+Count()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classutils_1_1SlightMatrix_a536e733a179ee3eaeb5c75986cc477d3}\label{classutils_1_1SlightMatrix_a536e733a179ee3eaeb5c75986cc477d3}} 
+\index{utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}!validate@{validate}}
+\index{validate@{validate}!utils\+::\+Slight\+Matrix@{utils\+::\+Slight\+Matrix}}
+\subsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily bool utils\+::\+Slight\+Matrix\+::validate (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+Method to validate cell format and contents. Data query methods automatically call this method and only return results on valid data matrices. A valid matrix (1) has its column count set, (2) has less header rows than total rows and (3) does not contain a last row which has missing cells (all rows are filled with cells). 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/hsg/\+Documents/projects/slightcsv/src/slightmatrix.\+hpp\item 
+/home/hsg/\+Documents/projects/slightcsv/src/slightmatrix.\+cpp\end{DoxyCompactItemize}

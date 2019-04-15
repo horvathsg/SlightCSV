@@ -1,0 +1,26 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classutils_1_1slightcsv__format__header__error.html" title="utils::slightcsv_format\l_header_error" alt="" coords="5,692,156,733"/>
+<area shape="rect" id="node2" href="$classutils_1_1slightcsv__error.html" title="Base exception of the class (never gets thrown). Inheriting from std::exception. " alt="" coords="204,339,343,366"/>
+<area shape="rect" id="node12" href="$classutils_1_1slightmatrix__error.html" title="Base exception of the class (never gets thrown). Inheriting from std::exception. " alt="" coords="213,692,334,733"/>
+<area shape="rect" id="node17" href="$classutils_1_1slightrow__error.html" title="Base exception of the class (never gets thrown). Inheriting from std::exception. " alt="" coords="204,927,343,954"/>
+<area shape="rect" id="node22" href="$classutils_1_1u8char__error.html" title="Base exception of the class (never gets thrown). Inheriting from std::exception. " alt="" coords="210,1123,337,1150"/>
+<area shape="rect" id="node3" href="$classutils_1_1slightcsv__data__error.html" title="utils::slightcsv_data\l_error" alt="" coords="405,5,543,47"/>
+<area shape="rect" id="node4" href="$classutils_1_1slightcsv__escape__error.html" title="utils::slightcsv_escape\l_error" alt="" coords="397,71,551,112"/>
+<area shape="rect" id="node5" href="$classutils_1_1slightcsv__filename__error.html" title="utils::slightcsv_filename\l_error" alt="" coords="393,136,555,177"/>
+<area shape="rect" id="node6" href="$classutils_1_1slightcsv__format__cellcnt__error.html" title="utils::slightcsv_format\l_cellcnt_error" alt="" coords="399,201,549,243"/>
+<area shape="rect" id="node7" href="$classutils_1_1slightcsv__index__error.html" title="utils::slightcsv_index\l_error" alt="" coords="402,267,546,308"/>
+<area shape="rect" id="node8" href="$classutils_1_1slightcsv__read__error.html" title="utils::slightcsv_read\l_error" alt="" coords="405,332,543,373"/>
+<area shape="rect" id="node9" href="$classutils_1_1slightcsv__replace__error.html" title="utils::slightcsv_replace\l_error" alt="" coords="397,397,551,439"/>
+<area shape="rect" id="node10" href="$classutils_1_1slightcsv__separator__error.html" title="utils::slightcsv_separator\l_error" alt="" coords="391,463,557,504"/>
+<area shape="rect" id="node11" href="$classutils_1_1slightcsv__strip__error.html" title="utils::slightcsv_strip\l_error" alt="" coords="405,528,543,569"/>
+<area shape="rect" id="node13" href="$classutils_1_1slightmatrix__column__error.html" title="utils::slightmatrix\l_column_error" alt="" coords="413,593,535,635"/>
+<area shape="rect" id="node14" href="$classutils_1_1slightmatrix__matrix__error.html" title="utils::slightmatrix\l_matrix_error" alt="" coords="413,659,535,700"/>
+<area shape="rect" id="node15" href="$classutils_1_1slightmatrix__parameter__error.html" title="utils::slightmatrix\l_parameter_error" alt="" coords="413,724,535,765"/>
+<area shape="rect" id="node16" href="$classutils_1_1slightmatrix__row__error.html" title="utils::slightmatrix\l_row_error" alt="" coords="413,789,535,831"/>
+<area shape="rect" id="node18" href="$classutils_1_1slightrow__escape__error.html" title="utils::slightrow_escape\l_error" alt="" coords="397,855,551,896"/>
+<area shape="rect" id="node19" href="$classutils_1_1slightrow__input__error.html" title="utils::slightrow_input\l_error" alt="" coords="403,920,545,961"/>
+<area shape="rect" id="node20" href="$classutils_1_1slightrow__process__error.html" title="utils::slightrow_process\l_error" alt="" coords="395,985,553,1027"/>
+<area shape="rect" id="node21" href="$classutils_1_1slightrow__separator__error.html" title="utils::slightrow_separator\l_error" alt="" coords="391,1051,557,1092"/>
+<area shape="rect" id="node23" href="$classutils_1_1u8char__format__error.html" title="utils::u8char_format\l_error" alt="" coords="405,1116,543,1157"/>
+<area shape="rect" id="node24" href="$classutils_1_1u8char__index__error.html" title="utils::u8char_index\l_error" alt="" coords="409,1181,539,1223"/>
+</map>
