@@ -11,7 +11,7 @@
  * Customizable delimiter and escape characters.
  * Flexible character manipulation capabilities (stripping, replacement).
  * Automatic handling of macOS, Linux and Windows line endings.
- * Support for UTF-8 character encoding (parsing and character manipulation as well).
+ * Support for UTF-8 character encoding (parsing, character manipulation and BOM as well).
  * Query methods for getting cell, row and column data with template-based automatic type conversion capabilities.
  * Able to load large files (> 1 GB) in reasonable time.
  * Custom exception classes inheriting from std::exception.
